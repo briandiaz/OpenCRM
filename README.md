@@ -9,43 +9,38 @@ Features
  
 * Marketing
 	* Contacts Management
-	* Campaign Management - Manejo y Tracking de Todo tipo de Campañas (Telemarketing, Advertisement
+	* Campaign Management
 	* Prospect (Leads) Management
 	* Social Data Integration: Facebook, Twitter, LinkedIn y Google+
-	* Tickets (Problems) Management
+	* Cases (Problems) Management
 
 * Personal Administration
-	* Delegation Management - Asociaciones y Tareas del personal a Proyectos
+	* Delegation Management
 	* Users Access Rights Management
 	* Users Management
 
 * Inventory/Inventario
-	* Product Management - Manejo de Productos
-	* Invoice Management - Venta de Articulos
-	* Orders Management - Compra de Articulos
-
-* Accounting/Contabilidad
-	* Payments Management - Manejo de Pagos
-	* Accounts - Cuentas Contables
-	* Reportes de Contabilidad
+	* Product Management
+	* Inventory Management
 
 * Reporting
 	* Dynamic Reports (Dashboards)
 	* Export to: Doc, Excel, PDF
 
 * Others/Otros:
-	* Candelar - Eventos o Fechas Importantes, Visibilidad Compartida para los Users.
-	* Tracking Goals - Tracking de Metas y Objetivos de una Empresa
-	* Multi-lenguaje (Español, Inglés)
+	* Multi-Shared Candelar
+	* Tracking Goals
+	* Multi-lenguage (Español, Inglés)
 	* Email Management - Gestor de Correo
-	* Chat and Video Conference
+	* Chat and Audio Conference
 
-* Technologies/Tecnologías
-	* -C# Core
-	* -Database: MySql o SQL Server
-	* -Reporting Tool: Crystal Reports o Reporting Service (SSRS)
-	* -WPF - GUI
-	* -ORM Tool: NHibernate (Por Verificar)
+* Technologies
+	* -Core: C#
+	* -IDE: Visual Studio 2012
+	* -Database: SQL Server 2012 Express Edition
+	* -Reporting Tool: Crystal Reports or Reporting Service (SSRS) (to be verified)
+	* -GUI: WPF
+	* -ORM Tool: Entity Framework
 
 Creators
 =======
@@ -53,4 +48,3 @@ Creators
 * [Freddy Mesa](https://github.com/freddy-mesa "Freddy's Github")
 * [José Ismael Reyes](https://github.com/joseReyes28 "José's Github")
 * [Yandri Puello](https://github.com/YandriPuello "Yandri's Github")
-
