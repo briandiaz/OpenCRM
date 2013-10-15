@@ -16,3 +16,5 @@ C:\Users\Brian Diaz\Desktop\Ingenieria de Software\Proyecto\OpenCRM\OpenCRM\Open
 C:\Users\Brian Diaz\Desktop\Ingenieria de Software\Proyecto\OpenCRM\OpenCRM\OpenCRM\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\Brian Diaz\Desktop\Ingenieria de Software\Proyecto\OpenCRM\OpenCRM\OpenCRM\obj\Debug\OpenCRM.exe
 C:\Users\Brian Diaz\Desktop\Ingenieria de Software\Proyecto\OpenCRM\OpenCRM\OpenCRM\obj\Debug\OpenCRM.pdb
+C:\Users\Brian Diaz\Desktop\Ingenieria de Software\Proyecto\OpenCRM\OpenCRM\OpenCRM\obj\Debug\Views\Settings\Settings.baml
+C:\Users\Brian Diaz\Desktop\Ingenieria de Software\Proyecto\OpenCRM\OpenCRM\OpenCRM\obj\Debug\Views\Settings\Settings.g.cs
