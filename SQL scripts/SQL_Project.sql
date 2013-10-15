@@ -455,35 +455,28 @@ create table [dbo].[Inventory_Products](
 ---------
 --Cases--
 ---------
-
-create table [dbo].[Case_Status](
-	CaseStatusId int,
-	Name nvarchar(50),
-	Constraint [PK Case_Status] Primary Key(CaseStatusId)
-);
-
 create table [dbo].[Case_Type](
 	CaseTypeId int,
 	Name nvarchar(50),
-	Constraint [PK Case_Status] Primary Key(CaseTypeId)
+	Constraint [PK Case_Type] Primary Key(CaseTypeId)
 );
 
 create table [dbo].[Case_Reason](
 	CaseReasonId int,
 	Name nvarchar(50),
-	Constraint [PK Case_Status] Primary Key(CaseReasonId)
+	Constraint [PK Case_Reason] Primary Key(CaseReasonId)
 );
 
 create table [dbo].[Case_Origin](
 	CaseOriginId int,
 	Name nvarchar(50),
-	Constraint [PK Case_Status] Primary Key(CaseOriginId)
+	Constraint [PK Case_Origin] Primary Key(CaseOriginId)
 );
 
 create table [dbo].[Case_Priority](
 	CasePriorityId int,
 	Name nvarchar(50),
-	Constraint [PK Case_Status] Primary Key(CasePriorityId)
+	Constraint [PK Case_Priority] Primary Key(CasePriorityId)
 );
 
 create table [dbo].[Cases](
