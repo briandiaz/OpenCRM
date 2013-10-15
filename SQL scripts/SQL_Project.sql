@@ -455,6 +455,13 @@ create table [dbo].[Inventory_Products](
 ---------
 --Cases--
 ---------
+create table [dbo].[Case_Status](
+	CaseStatusId int,
+  	Name nvarchar(50),
+  	Constraint [PK Case_Status] Primary Key(CaseStatusId)
+);
+
+
 create table [dbo].[Case_Type](
 	CaseTypeId int,
 	Name nvarchar(50),
