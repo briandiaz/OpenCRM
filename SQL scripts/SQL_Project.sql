@@ -1,5 +1,6 @@
-#Internal Database
+--Internal Database--
 ----------------------------------------------------------------
+
 create table [dbo].[Profile](
 	ProfileId int,
 	Name nvarchar(50),
@@ -34,9 +35,9 @@ create table [dbo].[Profile_Object_Fields](
 	ProfileObjectFieldsId int,
 	ProfileObjectId int,
 	ObjectFieldsId int,
-	Read bit,
-	Write bit,
-	Create bit,
+	[Read] bit,
+	[Write] bit,
+	[Create] bit,
 	Constraint [PK Profile_Object_Fields] Primary Key(ProfileObjectFieldsId),
 	Constraint [FK Profile_Object_Fields Profile_Object] Foreign Key(ProfileObjectId) References [dbo].[Profile_Object](ProfileObjectId),
 	Constraint [FK Profile_Object_Fields Object_Fields] Foreign Key(ObjectFieldsId) References [dbo].[Object_Fields](ObjectFieldsId)
@@ -57,8 +58,7 @@ create table [dbo].[User](
 	Constraint [PK User Profile] Foreign Key(ProfileId) References [dbo].[Profile](ProfileId)
 );
 
----------------------
-##External Database##
+--External Database--
 -----------------------------------------------------------------------------
 create table [dbo].[Industry](
 	IndustryId int,
@@ -69,7 +69,7 @@ create table [dbo].[Industry](
 create table [dbo].[Rating](
 	RatingId int,
 	Name nvarchar(50),
-	Value decimal,
+	Value numeric(2,2),
 	Constraint [PK Rating] Primary Key(RatingId)
 );
 
@@ -88,10 +88,10 @@ create table [dbo].[State](
 	Constraint [FK State Country] Foreign Key(countryId) References [dbo].[Country](CountryId)
 );
 
-create table [dbo].[Salution](
-	SalutionId int,
+create table [dbo].[Salutation](
+	SalutationId int,
 	Name nvarchar(50),
-	Constraint [PK Salution] Primary Key(SalutionId)
+	Constraint [PK Salutation] Primary Key(SalutationId)
 );
 
 create table [dbo].[Lead_Source](
@@ -118,7 +118,7 @@ create table [dbo].[All_Address](
     City nvarchar(50),
 	ZipCode numeric(5),
     StateId int,
-    Constraint [PK All_Address] Primary Key(AllAddressId),
+    Constraint [PK All_Address] Primary Key(SingleAddressId),
 	Constraint [FK All_Address State] Foreign Key(StateId) References [dbo].[State](StateId)
 );
 
@@ -138,7 +138,7 @@ create table [dbo].[Address](
 );
 
 -----------
-##Account##
+--Account--
 -----------
 
 create table [dbo].[Account_Ownership](
@@ -156,7 +156,7 @@ create table [dbo].[Account_Priority](
 create table [dbo].[Account_SLA](
 	AccountSLAId int,
 	Name nvarchar(50),
-	Value decimal,
+	Value numeric(2,2),
 	Constraint [PK Account_SLA] Primary Key(AccountSLAId)
 );
 
@@ -185,7 +185,7 @@ create table [dbo].[Account](
     AccountUpSellOpportunityId int,
     AccountSite nvarchar(50),
     Active bit,
-    AnualRevenue decimal,
+    AnualRevenue real,
     [Description] nvarchar(max),
     Employees int,
     FaxNumber nvarchar(20),
@@ -202,17 +202,17 @@ create table [dbo].[Account](
 	Constraint [FK Account Rating] Foreign Key(RatingId) References [dbo].[Rating](RatingId),
 	Constraint [FK Account Industry] Foreign Key(IndustryId) References [dbo].[Industry](IndustryId),
 	Constraint [FK Account User] Foreign Key(UserId) References [dbo].[User](UserId),
-	Constraint [FK Account Address] Foreign Key(accountShippingid) References [dbo].[Address](AddressId),
-	Constraint [FK Account Address] Foreign Key(accountBillingid) References [dbo].[Address](AddressId),
+	Constraint [FK Account Address_Shipping] Foreign Key(accountShippingid) References [dbo].[Address](AddressId),
+	Constraint [FK Account Address_Billing] Foreign Key(accountBillingid) References [dbo].[Address](AddressId),
 	Constraint [FK Account Account_Ownership] Foreign Key(accountOwnerShipid) References [dbo].[Account_Ownership](accountOwnerShipid),
-	Constraint [FK Account Account_Priority] Foreign Key(accountPriorityoid) References [dbo].[Account_Priority](accountPriorityid),
+	Constraint [FK Account Account_Priority] Foreign Key(AccountPriorityId) References [dbo].[Account_Priority](AccountPriorityId),
 	Constraint [FK Account Account_SLA] Foreign Key(accountSLAid) References [dbo].[Account_SLA](accountSLAid),
 	Constraint [FK Account Account_Type] Foreign Key(accountTypeid) References [dbo].[Account_Type](accountTypeid),
 	Constraint [FK Account Account_Up_Sell_Opportunity] Foreign Key(accountUpSellOpportunityid) References [dbo].[Account_Up_Sell_Opportunity](accountUpSellOpportunityid)
 );
 
 ------------
-##Contacts##
+--Contacts--
 ------------
 
 create table [dbo].[Contact_Level_Languages](
@@ -221,7 +221,7 @@ create table [dbo].[Contact_Level_Languages](
 	LevelLanguageId int,
 	Constraint [PK Contact_Level_Languages] Primary Key(ContactLevelLanguagesId),
 	Constraint [FK Contact_Level_Languages Language] Foreign Key(LanguageId) References [dbo].[Language](LanguageId),
-	Constraint [FK Contact_Level_Languages Level_Language] Foreign Key(LevelLanguageId) [dbo].[Level_Language](LevelLanguageId)
+	Constraint [FK Contact_Level_Languages Level_Language] Foreign Key(LevelLanguageId) References [dbo].[Level_Language](LevelLanguageId)
 );
 
 create table [dbo].[Contact](
@@ -252,52 +252,17 @@ create table [dbo].[Contact](
 	UpdateDate datetime,
 	Constraint [PK Contact] Primary Key(ContactId),
 	Constraint [FK Contact User] Foreign Key(UserId) References [dbo].[User](UserId),
-	Constraint [FK Contact Salution] Foreign Key(SalutionId) References [dbo].[Salution](SalutionId),
+	Constraint [FK Contact Salution] Foreign Key(SalutationId) References [dbo].[Salutation](SalutationId),
 	Constraint [FK Contact Account] Foreign Key(AccountId) References [dbo].[Account](AccountId),
-	Constraint [FK Contact Contact] Foreign Key(ContactReportToId) References [dbo].[Contacts](ContactId),
+	Constraint [FK Contact Contact] Foreign Key(ContactReportToId) References [dbo].[Contact](ContactId),
 	Constraint [FK Contact Lead_Source] Foreign Key(LeadSourceId) References [dbo].[Lead_Source](LeadSourceId),
-	Constraint [FK Contact Address] Foreign Key(ContactMailingAddressId) References [dbo].[Address](AddressId),
-	Constraint [FK Contact Address] Foreign Key(ContactOtherAddressId) References [dbo].[Address](AddressId),
+	Constraint [FK Contact Address_Mailing] Foreign Key(ContactMailingAddressId) References [dbo].[Address](AddressId),
+	Constraint [FK Contact Address_Other] Foreign Key(ContactOtherAddressId) References [dbo].[Address](AddressId),
 	Constraint [FK Contact Contact_Level_Languages] Foreign Key(ContactLevelLanguagesId) References [dbo].[Contact_Level_Languages](ContactLevelLanguagesId)
 );
 
----------
-##Leads##
----------
-
-create table [dbo].[Leads](
-	LeadId int,
-	UserId int,
-	Name nvarchar(50),
-	LastName nvarchar(50),
-	Company nvarchar(255),
-	Title nvarchar(255),
-	PhoneNumber nvarchar(20),
-	HomePhoneNumber nvarchar(20),
-	MobileNumber nvarchar(20),
-	OtherPhoneMobile nvarchar(20),
-	FaxNumber nvarchar(20),
-	Email nvarchar(100),
-	Employees int,
-	[Description] nvarchar(max),
-	LeadSourceId int,
-	RatingId int,
-	CampaignId int,
-	IndustryId int,
-	AddressId int
-	CreateDate datetime,
-	UpdateDate datetime,
-	Constraint [PK Leads] Primary Key(LeadId),
-	Constraint [FK Leads User] Foreign Key(UserId) References [dbo].[User](UserId),
-	Constraint [FK Leads Lead_Source] Foreign Key(LeadSourceId) References [dbo].[Lead_Source](LeadSourceId),
-	Constraint [FK Leads Industry] Foreign Key(IndustryId) References [dbo].[Industry](IndustryId),
-	Constraint [FK Leads Address] Foreign Key(AddressId) References [dbo].[Address](AddressId),
-	Constraint [FK Leads Rating] Foreign Key(RatingId) References [dbo].[Rating](RatingId),
-	Constraint [FK Leads Campaign] Foreign Key(CampaignId) References [dbo].[Campaign](CampaignId)
-);
-
 ------------
-##Campaign##
+--Campaign--
 ------------
 
 create table [dbo].[Campaign_Type](
@@ -330,15 +295,50 @@ create table [dbo].[Campaign](
 	[Description] nvarchar(max),
 	CreateDate datetime,
 	UpdateDate datetime,
-	Constraint [PK Campaign] Primary Key(CampaignId),
+	Constraint [PK Campaign] Primary Key(CompaignId),
 	Constraint [FK Campaign User] Foreign Key(UserId) References [dbo].[User](UserId),
-	Constraint [FK Campaign Campaign] Foreign Key(CampaignParent) References [dbo].[Campaign](CompaignId),
+	Constraint [FK Campaign Campaign_Parent] Foreign Key(CampaignParent) References [dbo].[Campaign](CompaignId),
 	Constraint [FK Campaign Campaign_Type] Foreign Key(CampaignTypeId) References [dbo].[Campaign_Type](CampaignTypeId),
 	Constraint [FK Campaign Campaign_Status] Foreign Key(CampaignStatusId) References [dbo].[Campaign_Status](CampaignStatusId)
 );
 
+---------
+--Leads--
+---------
+
+create table [dbo].[Leads](
+	LeadId int,
+	UserId int,
+	Name nvarchar(50),
+	LastName nvarchar(50),
+	Company nvarchar(255),
+	Title nvarchar(255),
+	PhoneNumber nvarchar(20),
+	HomePhoneNumber nvarchar(20),
+	MobileNumber nvarchar(20),
+	OtherPhoneMobile nvarchar(20),
+	FaxNumber nvarchar(20),
+	Email nvarchar(100),
+	Employees int,
+	[Description] nvarchar(max),
+	LeadSourceId int,
+	RatingId int,
+	CampaignId int,
+	IndustryId int,
+	AddressId int,
+	CreateDate datetime,
+	UpdateDate datetime,
+	Constraint [PK Leads] Primary Key(LeadId),
+	Constraint [FK Leads User] Foreign Key(UserId) References [dbo].[User](UserId),
+	Constraint [FK Leads Lead_Source] Foreign Key(LeadSourceId) References [dbo].[Lead_Source](LeadSourceId),
+	Constraint [FK Leads Industry] Foreign Key(IndustryId) References [dbo].[Industry](IndustryId),
+	Constraint [FK Leads Address] Foreign Key(AddressId) References [dbo].[Address](AddressId),
+	Constraint [FK Leads Rating] Foreign Key(RatingId) References [dbo].[Rating](RatingId),
+	Constraint [FK Leads Campaign] Foreign Key(CampaignId) References [dbo].[Campaign](CampaignId)
+);
+
 -----------------
-##Opportunities##
+--Opportunities--
 -----------------
 
 create table [dbo].[Opportunities_Type](
@@ -350,7 +350,7 @@ create table [dbo].[Opportunities_Type](
 create table [dbo].[Opportunities_Status](
 	OpportunityStatusId int,
 	Name nvarchar(50),
-	Constraint [PK Opportunities_Status] Primary Key(OpportunityStageId)
+	Constraint [PK Opportunities_Status] Primary Key(OpportunityStatusId)
 );
 
 create table [dbo].[Opportunities_Stage](
@@ -388,11 +388,11 @@ create table [dbo].[Opportunities](
 	CampaignPrimarySourceId int,
 	OrderNumber nvarchar(255),
 	CurrentGenerator nvarchar(255),
-	TrackingNumber nvarchar nvarchar(255),
+	TrackingNumber nvarchar(255),
 	OpportunityDeliveryStatusId int,
 	OpportunityStatusId int,
 	OpportunityCompetidorId int,
-	CreateDate datime,
+	CreateDate datetime,
 	UpdateDate datetime,
 	Constraint [PK Opportunities] Primary Key(OpportunityId),
 	Constraint [FK Opportunities User] Foreign Key(UserId) References [dbo].[User](UserId),
@@ -408,7 +408,7 @@ create table [dbo].[Opportunities](
 
 
 ------------
-##Products##
+--Products--
 ------------
 
 create table [dbo].[Products](
@@ -431,7 +431,7 @@ create table [dbo].[Opportunities_Products](
 
 
 -------------
-##Inventory##
+--Inventory--
 -------------
 
 create table [dbo].[Inventory](
@@ -453,7 +453,7 @@ create table [dbo].[Inventory_Products](
 );
 
 ---------
-##Cases##
+--Cases--
 ---------
 
 create table [dbo].[Case_Status](
