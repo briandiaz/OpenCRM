@@ -278,7 +278,7 @@ create table [dbo].[Campaign_Status](
 );
 
 create table [dbo].[Campaign](
-	CompaignId int,
+	CampaignId int,
 	UserId int,
 	Name nvarchar(50),
 	Active bit,
@@ -295,9 +295,9 @@ create table [dbo].[Campaign](
 	[Description] nvarchar(max),
 	CreateDate datetime,
 	UpdateDate datetime,
-	Constraint [PK Campaign] Primary Key(CompaignId),
+	Constraint [PK Campaign] Primary Key(CampaignId),
 	Constraint [FK Campaign User] Foreign Key(UserId) References [dbo].[User](UserId),
-	Constraint [FK Campaign Campaign_Parent] Foreign Key(CampaignParent) References [dbo].[Campaign](CompaignId),
+	Constraint [FK Campaign Campaign_Parent] Foreign Key(CampaignParent) References [dbo].[Campaign](CampaignId),
 	Constraint [FK Campaign Campaign_Type] Foreign Key(CampaignTypeId) References [dbo].[Campaign_Type](CampaignTypeId),
 	Constraint [FK Campaign Campaign_Status] Foreign Key(CampaignStatusId) References [dbo].[Campaign_Status](CampaignStatusId)
 );
@@ -500,7 +500,7 @@ create table [dbo].[Cases](
 	[Description] nvarchar(max),
 	Constraint [PK Cases] Primary Key(CaseId),
 	Constraint [FK Cases User] Foreign Key(UserId) References [dbo].[User](UserId),
-	Constraint [FK Cases Contacts] Foreign Key(ContactId) References [dbo].[Contacts](ContactId),
+	Constraint [FK Cases Contacts] Foreign Key(ContactId) References [dbo].[Contact](ContactId),
 	Constraint [FK Cases Account] Foreign Key(AccountId) References [dbo].[Account](AccountId),
 	Constraint [FK Cases Case_Type] Foreign Key(CaseTypeId) References [dbo].[Case_Type](CaseTypeId),
 	Constraint [FK Cases Case_Reason] Foreign Key(CaseReasonId) References [dbo].[Case_Reason](CaseReasonId),
