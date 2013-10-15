@@ -1,0 +1,42 @@
+﻿<Controls:MetroWindow x:Class="OpenCRM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        Title="OpenCRM" Height="768" Width="1024" MinWidth="1024" MinHeight="768"
+                      ShowTitleBar="True" ShowIconOnTitleBar="True">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <i:Interaction.Behaviors>
+        <Behaviours:BorderlessWindowBehavior/>
+    </i:Interaction.Behaviors>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Home" Name="btnHome" Click="btnHome_Click" />
+            <Button Content="Settings" Name="btnSettings" Click="btnSettings_Click"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+
+    <Grid Name="gridHome">
+        <Grid Name="gridSplash">
+            <TextBlock Margin="67,88,53,128" FontSize="29" Foreground="LightBlue">Welcome to</TextBlock>
+            <Image Source="Assets/Img/opencrm_logo_blue.png" Margin="245,134,271,237" Width="500" Height="145"/>
+            <Button Name="btnLoginShow" Margin="407,436,437,256" Width="150" Height="45" Style="{DynamicResource SquareButtonStyle}" FontSize="19" Click="btnLoginShow_Click">Login</Button>
+        </Grid>
+        <Frame Name="frmSource" Visibility="Hidden"/>
+    </Grid>
+
+</Controls:MetroWindow>
