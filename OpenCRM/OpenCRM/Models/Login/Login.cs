@@ -16,30 +16,35 @@ namespace OpenCRM
         }
         public bool ValidateFields()
         {
-            if (this.Username == null || this.Password == null)
+            try
             {
-                throw new ArgumentNullException("You must instance this object");
+                if (this.Username.Equals("") && this.Password.Equals(""))
+                {
+                    ShowMessage("You must enter your username and password");
+                    return false;
+                }
+                else if (this.Password.Equals(""))
+                {
+                    ShowMessage("You must enter your password.");
+                    return false;
+                }
+                else if (this.Username.Equals(""))
+                {
+                    ShowMessage("You must enter your username.");
+                    return false;
+                }
+                else
+                {
+                    ShowMessage("Correct!\n" + this.Username + "\n" + this.Password);
+                    return true;
+                }
             }
-            if (this.Username.Equals("") && this.Password.Equals(""))
+            catch (Exception ex)
             {
-                ShowMessage("You must enter your username and password");
+                System.Windows.MessageBox.Show(ex.ToString(),"Error",System.Windows.MessageBoxButton.OK,System.Windows.MessageBoxImage.Error);
                 return false;
             }
-            else if (this.Password.Equals(""))
-            {
-                ShowMessage("You must enter your password.");
-                return false;
-            }
-            else if (this.Username.Equals(""))
-            {
-                ShowMessage("You must enter your username.");
-                return false;
-            }
-            else
-            {
-                ShowMessage("Correct!\n" + this.Username + "\n" + this.Password);
-                return true;
-            }
+            
         }
         public void ShowMessage(String message)
         {

@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Models\Login\Login.cs" />
     <Compile Include="Views\Login\LoginRegister.xaml.cs">
       <DependentUpon>LoginRegister.xaml</DependentUpon>
@@ -116,9 +117,7 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\Img\opencrm_logo_blue.png" />
   </ItemGroup>
