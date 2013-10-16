@@ -63,8 +63,8 @@
     <Compile Include="Controllers\Register\RegisterController.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Register\RegisterModel.cs" />
-    <Compile Include="Views\Login\LoginRegister.xaml.cs">
-      <DependentUpon>LoginRegister.xaml</DependentUpon>
+    <Compile Include="Views\Login\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -85,7 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Login\LoginRegister.xaml">
+    <Page Include="Views\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
