@@ -12,11 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCRM.Models.Login;
 
 namespace OpenCRM
 {
     /// <summary>
-    /// Lógica de interacción para Login.xaml
+    /// Lógica de interacción para LoginRegister.xaml
     /// </summary>
 
     public partial class Login
@@ -28,7 +29,7 @@ namespace OpenCRM
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            ValidateLogin();
+            LoginModel.ValidateFields(tbxUsername.Text, tbxPassword.Password);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -36,17 +37,11 @@ namespace OpenCRM
             tbxUsername.Text = "";
             tbxPassword.Password = "";
         }
-        private void ValidateLogin()
-        {
-            LoginModel login = new LoginModel(tbxUsername.Text, tbxPassword.Password);
-            login.ValidateFields();
-        }
+
         private void LoginKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            {
-                ValidateLogin();
-            }
+                LoginModel.ValidateFields(tbxUsername.Text, tbxPassword.Password);
         }
         private void tbxPassword_KeyDown(object sender, KeyEventArgs e)
         {

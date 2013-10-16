@@ -1,54 +1,64 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OpenCRM.Database;
 
-namespace OpenCRM
+namespace OpenCRM.Models.Login
 {
-    class LoginModel
+    static class LoginModel
     {
-        public String Username { get; set; }
-        public String Password { get; set; }
-        public LoginModel(String username, String password)
+        static public bool ValidateFields(String username, String password)
         {
-            this.Username = username;
-            this.Password = password;
-        }
-        public bool ValidateFields()
-        {
+            OpenCRMEntities db;
             try
             {
-                if (this.Username.Equals("") && this.Password.Equals(""))
+                if (username.Equals("") && password.Equals(""))
                 {
-                    ShowMessage("You must enter your username and password");
+                    MessageBox.Show("You must enter your username and password");
                     return false;
                 }
-                else if (this.Password.Equals(""))
+                else if (password.Equals(""))
                 {
-                    ShowMessage("You must enter your password.");
+                    MessageBox.Show("You must enter your password.");
                     return false;
                 }
-                else if (this.Username.Equals(""))
+                else if (username.Equals(""))
                 {
-                    ShowMessage("You must enter your username.");
+                    MessageBox.Show("You must enter your username.");
                     return false;
                 }
                 else
                 {
-                    ShowMessage("Correct!\n" + this.Username + "\n" + this.Password);
-                    return true;
+                    using (db = new OpenCRMEntities())
+                    {
+                        string hashpassword = password.GetHashCode().ToString();
+
+                        var query = from user in db.User
+                                    where user.UserName == username
+                                        && user.HashPassword == hashpassword
+                                    select user;
+
+                        if (query.Any())
+                        {
+                            MessageBox.Show("Correct!\n" + username + "\n" + password);
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("username or password are incorrect.");
+                            return false;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString(),"Error",System.Windows.MessageBoxButton.OK,System.Windows.MessageBoxImage.Error);
+                System.Windows.MessageBox.Show(ex.ToString(), "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return false;
             }
-            
-        }
-        public void ShowMessage(String message)
-        {
-            System.Windows.MessageBox.Show(message);
+
         }
     }
 }

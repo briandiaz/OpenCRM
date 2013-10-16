@@ -38,3 +38,5 @@ C:\Users\Yandri\Documents\GitHub\OpenCRM\OpenCRM\OpenCRM\bin\Debug\OpenCRM.exe
 C:\Users\Yandri\Documents\GitHub\OpenCRM\OpenCRM\OpenCRM\bin\Debug\OpenCRM.pdb
 C:\Users\Yandri\Documents\GitHub\OpenCRM\OpenCRM\OpenCRM\bin\Debug\MahApps.Metro.dll
 C:\Users\Yandri\Documents\GitHub\OpenCRM\OpenCRM\OpenCRM\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Yandri\Documents\GitHub\OpenCRM\OpenCRM\OpenCRM\bin\Debug\EntityFramework.dll
+C:\Users\Yandri\Documents\GitHub\OpenCRM\OpenCRM\OpenCRM\bin\Debug\EntityFramework.xml

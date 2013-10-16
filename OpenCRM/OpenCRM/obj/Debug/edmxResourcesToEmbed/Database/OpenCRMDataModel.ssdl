@@ -1,0 +1,1498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="OpenCRMModelStoreContainer">
+    <EntitySet Name="Account" EntityType="OpenCRMModel.Store.Account" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Account_Ownership" EntityType="OpenCRMModel.Store.Account_Ownership" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Account_Priority" EntityType="OpenCRMModel.Store.Account_Priority" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Account_SLA" EntityType="OpenCRMModel.Store.Account_SLA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Account_Type" EntityType="OpenCRMModel.Store.Account_Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Account_Up_Sell_Opportunity" EntityType="OpenCRMModel.Store.Account_Up_Sell_Opportunity" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Address" EntityType="OpenCRMModel.Store.Address" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Address_Type" EntityType="OpenCRMModel.Store.Address_Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="All_Address" EntityType="OpenCRMModel.Store.All_Address" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Campaign" EntityType="OpenCRMModel.Store.Campaign" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Campaign_Status" EntityType="OpenCRMModel.Store.Campaign_Status" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Campaign_Type" EntityType="OpenCRMModel.Store.Campaign_Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Case_Origin" EntityType="OpenCRMModel.Store.Case_Origin" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Case_Priority" EntityType="OpenCRMModel.Store.Case_Priority" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Case_Reason" EntityType="OpenCRMModel.Store.Case_Reason" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Case_Status" EntityType="OpenCRMModel.Store.Case_Status" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Case_Type" EntityType="OpenCRMModel.Store.Case_Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cases" EntityType="OpenCRMModel.Store.Cases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contact" EntityType="OpenCRMModel.Store.Contact" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contact_Level_Languages" EntityType="OpenCRMModel.Store.Contact_Level_Languages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Country" EntityType="OpenCRMModel.Store.Country" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Industry" EntityType="OpenCRMModel.Store.Industry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Inventory" EntityType="OpenCRMModel.Store.Inventory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Inventory_Products" EntityType="OpenCRMModel.Store.Inventory_Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Language" EntityType="OpenCRMModel.Store.Language" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lead_Source" EntityType="OpenCRMModel.Store.Lead_Source" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Leads" EntityType="OpenCRMModel.Store.Leads" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Level_Language" EntityType="OpenCRMModel.Store.Level_Language" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Object" EntityType="OpenCRMModel.Store.Object" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Object_Fields" EntityType="OpenCRMModel.Store.Object_Fields" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities" EntityType="OpenCRMModel.Store.Opportunities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities_Competidor" EntityType="OpenCRMModel.Store.Opportunities_Competidor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities_Delivery_Status" EntityType="OpenCRMModel.Store.Opportunities_Delivery_Status" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities_Products" EntityType="OpenCRMModel.Store.Opportunities_Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities_Stage" EntityType="OpenCRMModel.Store.Opportunities_Stage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities_Status" EntityType="OpenCRMModel.Store.Opportunities_Status" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities_Type" EntityType="OpenCRMModel.Store.Opportunities_Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="OpenCRMModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profile" EntityType="OpenCRMModel.Store.Profile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profile_Object" EntityType="OpenCRMModel.Store.Profile_Object" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profile_Object_Fields" EntityType="OpenCRMModel.Store.Profile_Object_Fields" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rating" EntityType="OpenCRMModel.Store.Rating" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Salutation" EntityType="OpenCRMModel.Store.Salutation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="State" EntityType="OpenCRMModel.Store.State" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="OpenCRMModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK Account Account_Ownership" Association="OpenCRMModel.Store.FK Account Account_Ownership">
+      <End Role="Account_Ownership" EntitySet="Account_Ownership" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Account_Priority" Association="OpenCRMModel.Store.FK Account Account_Priority">
+      <End Role="Account_Priority" EntitySet="Account_Priority" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Account_SLA" Association="OpenCRMModel.Store.FK Account Account_SLA">
+      <End Role="Account_SLA" EntitySet="Account_SLA" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Account_Type" Association="OpenCRMModel.Store.FK Account Account_Type">
+      <End Role="Account_Type" EntitySet="Account_Type" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Account_Up_Sell_Opportunity" Association="OpenCRMModel.Store.FK Account Account_Up_Sell_Opportunity">
+      <End Role="Account_Up_Sell_Opportunity" EntitySet="Account_Up_Sell_Opportunity" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Address_Billing" Association="OpenCRMModel.Store.FK Account Address_Billing">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Address_Shipping" Association="OpenCRMModel.Store.FK Account Address_Shipping">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Industry" Association="OpenCRMModel.Store.FK Account Industry">
+      <End Role="Industry" EntitySet="Industry" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account Rating" Association="OpenCRMModel.Store.FK Account Rating">
+      <End Role="Rating" EntitySet="Rating" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Account User" Association="OpenCRMModel.Store.FK Account User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK Address Address_Type" Association="OpenCRMModel.Store.FK Address Address_Type">
+      <End Role="Address_Type" EntitySet="Address_Type" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK Address All_Address" Association="OpenCRMModel.Store.FK Address All_Address">
+      <End Role="All_Address" EntitySet="All_Address" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK All_Address State" Association="OpenCRMModel.Store.FK All_Address State">
+      <End Role="State" EntitySet="State" />
+      <End Role="All_Address" EntitySet="All_Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK Campaign Campaign_Parent" Association="OpenCRMModel.Store.FK Campaign Campaign_Parent">
+      <End Role="Campaign" EntitySet="Campaign" />
+      <End Role="Campaign1" EntitySet="Campaign" />
+    </AssociationSet>
+    <AssociationSet Name="FK Campaign Campaign_Status" Association="OpenCRMModel.Store.FK Campaign Campaign_Status">
+      <End Role="Campaign_Status" EntitySet="Campaign_Status" />
+      <End Role="Campaign" EntitySet="Campaign" />
+    </AssociationSet>
+    <AssociationSet Name="FK Campaign Campaign_Type" Association="OpenCRMModel.Store.FK Campaign Campaign_Type">
+      <End Role="Campaign_Type" EntitySet="Campaign_Type" />
+      <End Role="Campaign" EntitySet="Campaign" />
+    </AssociationSet>
+    <AssociationSet Name="FK Campaign User" Association="OpenCRMModel.Store.FK Campaign User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Campaign" EntitySet="Campaign" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Account" Association="OpenCRMModel.Store.FK Cases Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Case_Origin" Association="OpenCRMModel.Store.FK Cases Case_Origin">
+      <End Role="Case_Origin" EntitySet="Case_Origin" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Case_Priority" Association="OpenCRMModel.Store.FK Cases Case_Priority">
+      <End Role="Case_Priority" EntitySet="Case_Priority" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Case_Reason" Association="OpenCRMModel.Store.FK Cases Case_Reason">
+      <End Role="Case_Reason" EntitySet="Case_Reason" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Case_Status" Association="OpenCRMModel.Store.FK Cases Case_Status">
+      <End Role="Case_Status" EntitySet="Case_Status" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Case_Type" Association="OpenCRMModel.Store.FK Cases Case_Type">
+      <End Role="Case_Type" EntitySet="Case_Type" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Contacts" Association="OpenCRMModel.Store.FK Cases Contacts">
+      <End Role="Contact" EntitySet="Contact" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases Products" Association="OpenCRMModel.Store.FK Cases Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Cases User" Association="OpenCRMModel.Store.FK Cases User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Cases" EntitySet="Cases" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact Account" Association="OpenCRMModel.Store.FK Contact Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact Address_Mailing" Association="OpenCRMModel.Store.FK Contact Address_Mailing">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact Address_Other" Association="OpenCRMModel.Store.FK Contact Address_Other">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact Contact" Association="OpenCRMModel.Store.FK Contact Contact">
+      <End Role="Contact" EntitySet="Contact" />
+      <End Role="Contact1" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact Contact_Level_Languages" Association="OpenCRMModel.Store.FK Contact Contact_Level_Languages">
+      <End Role="Contact_Level_Languages" EntitySet="Contact_Level_Languages" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact Lead_Source" Association="OpenCRMModel.Store.FK Contact Lead_Source">
+      <End Role="Lead_Source" EntitySet="Lead_Source" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact Salution" Association="OpenCRMModel.Store.FK Contact Salution">
+      <End Role="Salutation" EntitySet="Salutation" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact User" Association="OpenCRMModel.Store.FK Contact User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact_Level_Languages Language" Association="OpenCRMModel.Store.FK Contact_Level_Languages Language">
+      <End Role="Language" EntitySet="Language" />
+      <End Role="Contact_Level_Languages" EntitySet="Contact_Level_Languages" />
+    </AssociationSet>
+    <AssociationSet Name="FK Contact_Level_Languages Level_Language" Association="OpenCRMModel.Store.FK Contact_Level_Languages Level_Language">
+      <End Role="Level_Language" EntitySet="Level_Language" />
+      <End Role="Contact_Level_Languages" EntitySet="Contact_Level_Languages" />
+    </AssociationSet>
+    <AssociationSet Name="FK Inventory Address" Association="OpenCRMModel.Store.FK Inventory Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK Inventory_Products Inventory" Association="OpenCRMModel.Store.FK Inventory_Products Inventory">
+      <End Role="Inventory" EntitySet="Inventory" />
+      <End Role="Inventory_Products" EntitySet="Inventory_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK Inventory_Products Products" Association="OpenCRMModel.Store.FK Inventory_Products Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Inventory_Products" EntitySet="Inventory_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK Leads Address" Association="OpenCRMModel.Store.FK Leads Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Leads" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="FK Leads Campaign" Association="OpenCRMModel.Store.FK Leads Campaign">
+      <End Role="Campaign" EntitySet="Campaign" />
+      <End Role="Leads" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="FK Leads Industry" Association="OpenCRMModel.Store.FK Leads Industry">
+      <End Role="Industry" EntitySet="Industry" />
+      <End Role="Leads" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="FK Leads Lead_Source" Association="OpenCRMModel.Store.FK Leads Lead_Source">
+      <End Role="Lead_Source" EntitySet="Lead_Source" />
+      <End Role="Leads" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="FK Leads Rating" Association="OpenCRMModel.Store.FK Leads Rating">
+      <End Role="Rating" EntitySet="Rating" />
+      <End Role="Leads" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="FK Leads User" Association="OpenCRMModel.Store.FK Leads User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Leads" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="FK Object_Fields Object" Association="OpenCRMModel.Store.FK Object_Fields Object">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="Object_Fields" EntitySet="Object_Fields" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities Account" Association="OpenCRMModel.Store.FK Opportunities Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities Campaign" Association="OpenCRMModel.Store.FK Opportunities Campaign">
+      <End Role="Campaign" EntitySet="Campaign" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities Opportunities_Competidor" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Competidor">
+      <End Role="Opportunities_Competidor" EntitySet="Opportunities_Competidor" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities Opportunities_Delivery_Status" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Delivery_Status">
+      <End Role="Opportunities_Delivery_Status" EntitySet="Opportunities_Delivery_Status" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities Opportunities_Stage" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Stage">
+      <End Role="Opportunities_Stage" EntitySet="Opportunities_Stage" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities Opportunities_Status" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Status">
+      <End Role="Opportunities_Status" EntitySet="Opportunities_Status" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities Opportunities_Type" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Type">
+      <End Role="Opportunities_Type" EntitySet="Opportunities_Type" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities User" Association="OpenCRMModel.Store.FK Opportunities User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Opportunities" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities_Products Opportunities" Association="OpenCRMModel.Store.FK Opportunities_Products Opportunities">
+      <End Role="Opportunities" EntitySet="Opportunities" />
+      <End Role="Opportunities_Products" EntitySet="Opportunities_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK Opportunities_Products Products" Association="OpenCRMModel.Store.FK Opportunities_Products Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Opportunities_Products" EntitySet="Opportunities_Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK Profile_Object Object" Association="OpenCRMModel.Store.FK Profile_Object Object">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="Profile_Object" EntitySet="Profile_Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK Profile_Object Profile" Association="OpenCRMModel.Store.FK Profile_Object Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="Profile_Object" EntitySet="Profile_Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK Profile_Object_Fields Object_Fields" Association="OpenCRMModel.Store.FK Profile_Object_Fields Object_Fields">
+      <End Role="Object_Fields" EntitySet="Object_Fields" />
+      <End Role="Profile_Object_Fields" EntitySet="Profile_Object_Fields" />
+    </AssociationSet>
+    <AssociationSet Name="FK Profile_Object_Fields Profile_Object" Association="OpenCRMModel.Store.FK Profile_Object_Fields Profile_Object">
+      <End Role="Profile_Object" EntitySet="Profile_Object" />
+      <End Role="Profile_Object_Fields" EntitySet="Profile_Object_Fields" />
+    </AssociationSet>
+    <AssociationSet Name="FK State Country" Association="OpenCRMModel.Store.FK State Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="State" EntitySet="State" />
+    </AssociationSet>
+    <AssociationSet Name="PK User Profile" Association="OpenCRMModel.Store.PK User Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountBillingId" Type="int" />
+    <Property Name="AccountOwnerShipId" Type="int" />
+    <Property Name="AccountShippingId" Type="int" />
+    <Property Name="AccountTypeId" Type="int" />
+    <Property Name="AccountPriorityId" Type="int" />
+    <Property Name="AccountSLAId" Type="int" />
+    <Property Name="AccountUpSellOpportunityId" Type="int" />
+    <Property Name="AccountSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="AnualRevenue" Type="real" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Employees" Type="int" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="IndustryId" Type="int" />
+    <Property Name="NumberOfLocation" Type="int" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="SlaSerialNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="RatingId" Type="int" />
+    <Property Name="TickerSymbol" Type="nvarchar" MaxLength="255" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Account_Ownership">
+    <Key>
+      <PropertyRef Name="AccountOwnershipId" />
+    </Key>
+    <Property Name="AccountOwnershipId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Account_Priority">
+    <Key>
+      <PropertyRef Name="AccountPriorityId" />
+    </Key>
+    <Property Name="AccountPriorityId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Account_SLA">
+    <Key>
+      <PropertyRef Name="AccountSLAId" />
+    </Key>
+    <Property Name="AccountSLAId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Value" Type="numeric" Precision="2" Scale="2" />
+  </EntityType>
+  <EntityType Name="Account_Type">
+    <Key>
+      <PropertyRef Name="AccountTypeId" />
+    </Key>
+    <Property Name="AccountTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Account_Up_Sell_Opportunity">
+    <Key>
+      <PropertyRef Name="AccountUpSellOpportunityId" />
+    </Key>
+    <Property Name="AccountUpSellOpportunityId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="int" Nullable="false" />
+    <Property Name="SingleAddressId" Type="int" />
+    <Property Name="AddressTypeId" Type="int" />
+  </EntityType>
+  <EntityType Name="Address_Type">
+    <Key>
+      <PropertyRef Name="AddressTypeId" />
+    </Key>
+    <Property Name="AddressTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="All_Address">
+    <Key>
+      <PropertyRef Name="SingleAddressId" />
+    </Key>
+    <Property Name="SingleAddressId" Type="int" Nullable="false" />
+    <Property Name="Street" Type="nvarchar" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="ZipCode" Type="numeric" Precision="5" />
+    <Property Name="StateId" Type="int" />
+  </EntityType>
+  <EntityType Name="Campaign">
+    <Key>
+      <PropertyRef Name="CampaignId" />
+    </Key>
+    <Property Name="CampaignId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CampaignTypeId" Type="int" />
+    <Property Name="CampaignStatusId" Type="int" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="ExpectedRevenue" Type="money" />
+    <Property Name="BudgetedCost" Type="money" />
+    <Property Name="ActualCost" Type="money" />
+    <Property Name="ExpectedResponse" Type="numeric" Precision="2" Scale="2" />
+    <Property Name="NumberSent" Type="int" />
+    <Property Name="CampaignParent" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Campaign_Status">
+    <Key>
+      <PropertyRef Name="CampaignStatusId" />
+    </Key>
+    <Property Name="CampaignStatusId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Campaign_Type">
+    <Key>
+      <PropertyRef Name="CampaignTypeId" />
+    </Key>
+    <Property Name="CampaignTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Case_Origin">
+    <Key>
+      <PropertyRef Name="CaseOriginId" />
+    </Key>
+    <Property Name="CaseOriginId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Case_Priority">
+    <Key>
+      <PropertyRef Name="CasePriorityId" />
+    </Key>
+    <Property Name="CasePriorityId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Case_Reason">
+    <Key>
+      <PropertyRef Name="CaseReasonId" />
+    </Key>
+    <Property Name="CaseReasonId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Case_Status">
+    <Key>
+      <PropertyRef Name="CaseStatusId" />
+    </Key>
+    <Property Name="CaseStatusId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Case_Type">
+    <Key>
+      <PropertyRef Name="CaseTypeId" />
+    </Key>
+    <Property Name="CaseTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Cases">
+    <Key>
+      <PropertyRef Name="CaseId" />
+    </Key>
+    <Property Name="CaseId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="ContactId" Type="int" />
+    <Property Name="AccountId" Type="int" />
+    <Property Name="CaseTypeId" Type="int" />
+    <Property Name="CaseReasonId" Type="int" />
+    <Property Name="CaseOriginId" Type="int" />
+    <Property Name="CaseStatusId" Type="int" />
+    <Property Name="CasePriorityId" Type="int" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="SalutationId" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountId" Type="int" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="date" />
+    <Property Name="ContactReportToId" Type="int" />
+    <Property Name="LeadSourceId" Type="int" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="HomePhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="OtherPhoneMobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Assitant" Type="nvarchar" MaxLength="50" />
+    <Property Name="AssitantPhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="ContactMailingAddressId" Type="int" />
+    <Property Name="ContactOtherAddressId" Type="int" />
+    <Property Name="ContactLevelLanguagesId" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Contact_Level_Languages">
+    <Key>
+      <PropertyRef Name="ContactLevelLanguagesId" />
+    </Key>
+    <Property Name="ContactLevelLanguagesId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" />
+    <Property Name="LevelLanguageId" Type="int" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="AbbrevationName" Type="char" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="IndustryId" />
+    </Key>
+    <Property Name="IndustryId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="InventoryId" />
+    </Key>
+    <Property Name="InventoryId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddressId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Inventory_Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="InventoryId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="InventoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Lead_Source">
+    <Key>
+      <PropertyRef Name="LeadSourceId" />
+    </Key>
+    <Property Name="LeadSourceId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Leads">
+    <Key>
+      <PropertyRef Name="LeadId" />
+    </Key>
+    <Property Name="LeadId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Company" Type="nvarchar" MaxLength="255" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="HomePhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="OtherPhoneMobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Employees" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="LeadSourceId" Type="int" />
+    <Property Name="RatingId" Type="int" />
+    <Property Name="CampaignId" Type="int" />
+    <Property Name="IndustryId" Type="int" />
+    <Property Name="AddressId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Level_Language">
+    <Key>
+      <PropertyRef Name="LevelLanguageId" />
+    </Key>
+    <Property Name="LevelLanguageId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Object">
+    <Key>
+      <PropertyRef Name="ObjectId" />
+    </Key>
+    <Property Name="ObjectId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Object_Fields">
+    <Key>
+      <PropertyRef Name="ObjectFieldsId" />
+    </Key>
+    <Property Name="ObjectFieldsId" Type="int" Nullable="false" />
+    <Property Name="ObjectId" Type="int" />
+  </EntityType>
+  <EntityType Name="Opportunities">
+    <Key>
+      <PropertyRef Name="OpportunityId" />
+    </Key>
+    <Property Name="OpportunityId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="AccountId" Type="int" />
+    <Property Name="OpportunityTypeId" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="CloseDate" Type="date" />
+    <Property Name="NextStep" Type="nvarchar(max)" />
+    <Property Name="OpportunityStageId" Type="int" />
+    <Property Name="Probability" Type="numeric" Precision="2" Scale="2" />
+    <Property Name="CampaignPrimarySourceId" Type="int" />
+    <Property Name="OrderNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="CurrentGenerator" Type="nvarchar" MaxLength="255" />
+    <Property Name="TrackingNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="OpportunityDeliveryStatusId" Type="int" />
+    <Property Name="OpportunityStatusId" Type="int" />
+    <Property Name="OpportunityCompetidorId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Opportunities_Competidor">
+    <Key>
+      <PropertyRef Name="OpportunityCompetidorId" />
+    </Key>
+    <Property Name="OpportunityCompetidorId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Strenghts" Type="nvarchar" MaxLength="255" />
+    <Property Name="Weakness" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Opportunities_Delivery_Status">
+    <Key>
+      <PropertyRef Name="OpportunityDeliveryStatusId" />
+    </Key>
+    <Property Name="OpportunityDeliveryStatusId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Opportunities_Products">
+    <Key>
+      <PropertyRef Name="OpportunityProductId" />
+    </Key>
+    <Property Name="OpportunityProductId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="OpportunityId" Type="int" />
+  </EntityType>
+  <EntityType Name="Opportunities_Stage">
+    <Key>
+      <PropertyRef Name="OpportunityStageId" />
+    </Key>
+    <Property Name="OpportunityStageId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Opportunities_Status">
+    <Key>
+      <PropertyRef Name="OpportunityStatusId" />
+    </Key>
+    <Property Name="OpportunityStatusId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Opportunities_Type">
+    <Key>
+      <PropertyRef Name="OpportunityTypeId" />
+    </Key>
+    <Property Name="OpportunityTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="ProfileId" />
+    </Key>
+    <Property Name="ProfileId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Profile_Object">
+    <Key>
+      <PropertyRef Name="ProfileObjectId" />
+    </Key>
+    <Property Name="ProfileObjectId" Type="int" Nullable="false" />
+    <Property Name="ProfileId" Type="int" />
+    <Property Name="ObjectId" Type="int" />
+  </EntityType>
+  <EntityType Name="Profile_Object_Fields">
+    <Key>
+      <PropertyRef Name="ProfileObjectFieldsId" />
+    </Key>
+    <Property Name="ProfileObjectFieldsId" Type="int" Nullable="false" />
+    <Property Name="ProfileObjectId" Type="int" />
+    <Property Name="ObjectFieldsId" Type="int" />
+    <Property Name="Read" Type="bit" />
+    <Property Name="Write" Type="bit" />
+    <Property Name="Create" Type="bit" />
+  </EntityType>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="RatingId" />
+    </Key>
+    <Property Name="RatingId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Value" Type="numeric" Precision="2" Scale="2" />
+  </EntityType>
+  <EntityType Name="Salutation">
+    <Key>
+      <PropertyRef Name="SalutationId" />
+    </Key>
+    <Property Name="SalutationId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryId" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="date" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="HashPassword" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProfileId" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK Account Account_Ownership">
+    <End Role="Account_Ownership" Type="OpenCRMModel.Store.Account_Ownership" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account_Ownership">
+        <PropertyRef Name="AccountOwnershipId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountOwnerShipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Account_Priority">
+    <End Role="Account_Priority" Type="OpenCRMModel.Store.Account_Priority" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account_Priority">
+        <PropertyRef Name="AccountPriorityId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountPriorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Account_SLA">
+    <End Role="Account_SLA" Type="OpenCRMModel.Store.Account_SLA" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account_SLA">
+        <PropertyRef Name="AccountSLAId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountSLAId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Account_Type">
+    <End Role="Account_Type" Type="OpenCRMModel.Store.Account_Type" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account_Type">
+        <PropertyRef Name="AccountTypeId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Account_Up_Sell_Opportunity">
+    <End Role="Account_Up_Sell_Opportunity" Type="OpenCRMModel.Store.Account_Up_Sell_Opportunity" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account_Up_Sell_Opportunity">
+        <PropertyRef Name="AccountUpSellOpportunityId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountUpSellOpportunityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Address_Billing">
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountBillingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Address_Shipping">
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AccountShippingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Industry">
+    <End Role="Industry" Type="OpenCRMModel.Store.Industry" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="IndustryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account Rating">
+    <End Role="Rating" Type="OpenCRMModel.Store.Rating" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rating">
+        <PropertyRef Name="RatingId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="RatingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Account User">
+    <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="0..1" />
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Address Address_Type">
+    <End Role="Address_Type" Type="OpenCRMModel.Store.Address_Type" Multiplicity="0..1" />
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address_Type">
+        <PropertyRef Name="AddressTypeId" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="AddressTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Address All_Address">
+    <End Role="All_Address" Type="OpenCRMModel.Store.All_Address" Multiplicity="0..1" />
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="All_Address">
+        <PropertyRef Name="SingleAddressId" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="SingleAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK All_Address State">
+    <End Role="State" Type="OpenCRMModel.Store.State" Multiplicity="0..1" />
+    <End Role="All_Address" Type="OpenCRMModel.Store.All_Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="All_Address">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Campaign Campaign_Parent">
+    <End Role="Campaign" Type="OpenCRMModel.Store.Campaign" Multiplicity="0..1" />
+    <End Role="Campaign1" Type="OpenCRMModel.Store.Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campaign">
+        <PropertyRef Name="CampaignId" />
+      </Principal>
+      <Dependent Role="Campaign1">
+        <PropertyRef Name="CampaignParent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Campaign Campaign_Status">
+    <End Role="Campaign_Status" Type="OpenCRMModel.Store.Campaign_Status" Multiplicity="0..1" />
+    <End Role="Campaign" Type="OpenCRMModel.Store.Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campaign_Status">
+        <PropertyRef Name="CampaignStatusId" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="CampaignStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Campaign Campaign_Type">
+    <End Role="Campaign_Type" Type="OpenCRMModel.Store.Campaign_Type" Multiplicity="0..1" />
+    <End Role="Campaign" Type="OpenCRMModel.Store.Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campaign_Type">
+        <PropertyRef Name="CampaignTypeId" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="CampaignTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Campaign User">
+    <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="0..1" />
+    <End Role="Campaign" Type="OpenCRMModel.Store.Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Account">
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Case_Origin">
+    <End Role="Case_Origin" Type="OpenCRMModel.Store.Case_Origin" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Case_Origin">
+        <PropertyRef Name="CaseOriginId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="CaseOriginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Case_Priority">
+    <End Role="Case_Priority" Type="OpenCRMModel.Store.Case_Priority" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Case_Priority">
+        <PropertyRef Name="CasePriorityId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="CasePriorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Case_Reason">
+    <End Role="Case_Reason" Type="OpenCRMModel.Store.Case_Reason" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Case_Reason">
+        <PropertyRef Name="CaseReasonId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="CaseReasonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Case_Status">
+    <End Role="Case_Status" Type="OpenCRMModel.Store.Case_Status" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Case_Status">
+        <PropertyRef Name="CaseStatusId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="CaseStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Case_Type">
+    <End Role="Case_Type" Type="OpenCRMModel.Store.Case_Type" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Case_Type">
+        <PropertyRef Name="CaseTypeId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="CaseTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Contacts">
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contact">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="ContactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases Products">
+    <End Role="Products" Type="OpenCRMModel.Store.Products" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Cases User">
+    <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="0..1" />
+    <End Role="Cases" Type="OpenCRMModel.Store.Cases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Cases">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact Account">
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="0..1" />
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact Address_Mailing">
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="0..1" />
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="ContactMailingAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact Address_Other">
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="0..1" />
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="ContactOtherAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact Contact">
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="0..1" />
+    <End Role="Contact1" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contact">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="Contact1">
+        <PropertyRef Name="ContactReportToId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact Contact_Level_Languages">
+    <End Role="Contact_Level_Languages" Type="OpenCRMModel.Store.Contact_Level_Languages" Multiplicity="0..1" />
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contact_Level_Languages">
+        <PropertyRef Name="ContactLevelLanguagesId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="ContactLevelLanguagesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact Lead_Source">
+    <End Role="Lead_Source" Type="OpenCRMModel.Store.Lead_Source" Multiplicity="0..1" />
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lead_Source">
+        <PropertyRef Name="LeadSourceId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="LeadSourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact Salution">
+    <End Role="Salutation" Type="OpenCRMModel.Store.Salutation" Multiplicity="0..1" />
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salutation">
+        <PropertyRef Name="SalutationId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="SalutationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact User">
+    <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="0..1" />
+    <End Role="Contact" Type="OpenCRMModel.Store.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact_Level_Languages Language">
+    <End Role="Language" Type="OpenCRMModel.Store.Language" Multiplicity="0..1" />
+    <End Role="Contact_Level_Languages" Type="OpenCRMModel.Store.Contact_Level_Languages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="Contact_Level_Languages">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Contact_Level_Languages Level_Language">
+    <End Role="Level_Language" Type="OpenCRMModel.Store.Level_Language" Multiplicity="0..1" />
+    <End Role="Contact_Level_Languages" Type="OpenCRMModel.Store.Contact_Level_Languages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level_Language">
+        <PropertyRef Name="LevelLanguageId" />
+      </Principal>
+      <Dependent Role="Contact_Level_Languages">
+        <PropertyRef Name="LevelLanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Inventory Address">
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="0..1" />
+    <End Role="Inventory" Type="OpenCRMModel.Store.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Inventory_Products Inventory">
+    <End Role="Inventory" Type="OpenCRMModel.Store.Inventory" Multiplicity="1" />
+    <End Role="Inventory_Products" Type="OpenCRMModel.Store.Inventory_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory">
+        <PropertyRef Name="InventoryId" />
+      </Principal>
+      <Dependent Role="Inventory_Products">
+        <PropertyRef Name="InventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Inventory_Products Products">
+    <End Role="Products" Type="OpenCRMModel.Store.Products" Multiplicity="1" />
+    <End Role="Inventory_Products" Type="OpenCRMModel.Store.Inventory_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Inventory_Products">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Leads Address">
+    <End Role="Address" Type="OpenCRMModel.Store.Address" Multiplicity="0..1" />
+    <End Role="Leads" Type="OpenCRMModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Leads">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Leads Campaign">
+    <End Role="Campaign" Type="OpenCRMModel.Store.Campaign" Multiplicity="0..1" />
+    <End Role="Leads" Type="OpenCRMModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campaign">
+        <PropertyRef Name="CampaignId" />
+      </Principal>
+      <Dependent Role="Leads">
+        <PropertyRef Name="CampaignId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Leads Industry">
+    <End Role="Industry" Type="OpenCRMModel.Store.Industry" Multiplicity="0..1" />
+    <End Role="Leads" Type="OpenCRMModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryId" />
+      </Principal>
+      <Dependent Role="Leads">
+        <PropertyRef Name="IndustryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Leads Lead_Source">
+    <End Role="Lead_Source" Type="OpenCRMModel.Store.Lead_Source" Multiplicity="0..1" />
+    <End Role="Leads" Type="OpenCRMModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lead_Source">
+        <PropertyRef Name="LeadSourceId" />
+      </Principal>
+      <Dependent Role="Leads">
+        <PropertyRef Name="LeadSourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Leads Rating">
+    <End Role="Rating" Type="OpenCRMModel.Store.Rating" Multiplicity="0..1" />
+    <End Role="Leads" Type="OpenCRMModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rating">
+        <PropertyRef Name="RatingId" />
+      </Principal>
+      <Dependent Role="Leads">
+        <PropertyRef Name="RatingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Leads User">
+    <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="0..1" />
+    <End Role="Leads" Type="OpenCRMModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Leads">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Object_Fields Object">
+    <End Role="Object" Type="OpenCRMModel.Store.Object" Multiplicity="0..1" />
+    <End Role="Object_Fields" Type="OpenCRMModel.Store.Object_Fields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="ObjectId" />
+      </Principal>
+      <Dependent Role="Object_Fields">
+        <PropertyRef Name="ObjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities Account">
+    <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities Campaign">
+    <End Role="Campaign" Type="OpenCRMModel.Store.Campaign" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campaign">
+        <PropertyRef Name="CampaignId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="CampaignPrimarySourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities Opportunities_Competidor">
+    <End Role="Opportunities_Competidor" Type="OpenCRMModel.Store.Opportunities_Competidor" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opportunities_Competidor">
+        <PropertyRef Name="OpportunityCompetidorId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="OpportunityCompetidorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities Opportunities_Delivery_Status">
+    <End Role="Opportunities_Delivery_Status" Type="OpenCRMModel.Store.Opportunities_Delivery_Status" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opportunities_Delivery_Status">
+        <PropertyRef Name="OpportunityDeliveryStatusId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="OpportunityDeliveryStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities Opportunities_Stage">
+    <End Role="Opportunities_Stage" Type="OpenCRMModel.Store.Opportunities_Stage" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opportunities_Stage">
+        <PropertyRef Name="OpportunityStageId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="OpportunityStageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities Opportunities_Status">
+    <End Role="Opportunities_Status" Type="OpenCRMModel.Store.Opportunities_Status" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opportunities_Status">
+        <PropertyRef Name="OpportunityStatusId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="OpportunityStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities Opportunities_Type">
+    <End Role="Opportunities_Type" Type="OpenCRMModel.Store.Opportunities_Type" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opportunities_Type">
+        <PropertyRef Name="OpportunityTypeId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="OpportunityTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities User">
+    <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="0..1" />
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Opportunities">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities_Products Opportunities">
+    <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="0..1" />
+    <End Role="Opportunities_Products" Type="OpenCRMModel.Store.Opportunities_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opportunities">
+        <PropertyRef Name="OpportunityId" />
+      </Principal>
+      <Dependent Role="Opportunities_Products">
+        <PropertyRef Name="OpportunityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Opportunities_Products Products">
+    <End Role="Products" Type="OpenCRMModel.Store.Products" Multiplicity="0..1" />
+    <End Role="Opportunities_Products" Type="OpenCRMModel.Store.Opportunities_Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Opportunities_Products">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Profile_Object Object">
+    <End Role="Object" Type="OpenCRMModel.Store.Object" Multiplicity="0..1" />
+    <End Role="Profile_Object" Type="OpenCRMModel.Store.Profile_Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="ObjectId" />
+      </Principal>
+      <Dependent Role="Profile_Object">
+        <PropertyRef Name="ObjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Profile_Object Profile">
+    <End Role="Profile" Type="OpenCRMModel.Store.Profile" Multiplicity="0..1" />
+    <End Role="Profile_Object" Type="OpenCRMModel.Store.Profile_Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileId" />
+      </Principal>
+      <Dependent Role="Profile_Object">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Profile_Object_Fields Object_Fields">
+    <End Role="Object_Fields" Type="OpenCRMModel.Store.Object_Fields" Multiplicity="0..1" />
+    <End Role="Profile_Object_Fields" Type="OpenCRMModel.Store.Profile_Object_Fields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object_Fields">
+        <PropertyRef Name="ObjectFieldsId" />
+      </Principal>
+      <Dependent Role="Profile_Object_Fields">
+        <PropertyRef Name="ObjectFieldsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Profile_Object_Fields Profile_Object">
+    <End Role="Profile_Object" Type="OpenCRMModel.Store.Profile_Object" Multiplicity="0..1" />
+    <End Role="Profile_Object_Fields" Type="OpenCRMModel.Store.Profile_Object_Fields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile_Object">
+        <PropertyRef Name="ProfileObjectId" />
+      </Principal>
+      <Dependent Role="Profile_Object_Fields">
+        <PropertyRef Name="ProfileObjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK State Country">
+    <End Role="Country" Type="OpenCRMModel.Store.Country" Multiplicity="0..1" />
+    <End Role="State" Type="OpenCRMModel.Store.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PK User Profile">
+    <End Role="Profile" Type="OpenCRMModel.Store.Profile" Multiplicity="0..1" />
+    <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
