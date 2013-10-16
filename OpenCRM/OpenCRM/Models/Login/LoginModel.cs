@@ -35,10 +35,11 @@ namespace OpenCRM.Models.Login
                     {
                         string hashpassword = password.GetHashCode().ToString();
 
-                        var query = from user in db.User
-                                    where user.UserName == username
-                                        && user.HashPassword == hashpassword
-                                    select user;
+                        var query = ( 
+                            from user in db.User
+                            where user.UserName == username && user.HashPassword == hashpassword
+                            select user
+                        );
 
                         if (query.Any())
                         {
