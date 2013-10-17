@@ -1,14 +1,24 @@
 ﻿using System;
+using System.CodeDom;
 using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 using OpenCRM.Database;
+using OpenCRM.Views.Login;
 
 namespace OpenCRM.Models.Login
 {
-    static class LoginModel
+    public class LoginModel
     {
+        private Label ErrorLabel ;
+
+        public LoginModel(Label errorLabel )
+        {
+            this.ErrorLabel = errorLabel;
+        }
+
         /// <summary>
         /// This function can validate de <paramref name="password"/>
         /// and the <paramref name="username"/>
@@ -19,30 +29,18 @@ namespace OpenCRM.Models.Login
         ///     If is true, the validation is correct.
         ///     Otherwise, it's incorrect.
         /// </returns>
-        public static bool ValidateFields(String username, String password)
-        {
-            OpenCRMEntities db;
-            
+        public bool ValidateFields(String username, String password)
+        {           
             try
             {
                 if (username.Equals("") && password.Equals(""))
-                {
-                    MessageBox.Show("You must enter your username and password");
-                    return false;
-                }
+                    ErrorLabel.Content = "You must enter your username and password.";
                 else if (password.Equals(""))
-                {
-                    MessageBox.Show("You must enter your password.");
-                    return false;
-                }
+                    ErrorLabel.Content = "You must enter your password.";
                 else if (username.Equals(""))
-                {
-                    MessageBox.Show("You must enter your username.");
-                    return false;
-                }
+                    ErrorLabel.Content = "You must enter your username.";
                 else
-                {
-                    using (db = new OpenCRMEntities())
+                    using (var db = new OpenCRMEntities())
                     {
                         var hashpassword = password.GetHashCode().ToString();
 
@@ -53,24 +51,16 @@ namespace OpenCRM.Models.Login
                         );
 
                         if (query.Any())
-                        {
-                            MessageBox.Show("Correct!\n" + username + "\n" + password);
                             return true;
-                        }
-                        else
-                        {
-                            MessageBox.Show("username or password are incorrect.");
-                            return false;
-                        }
+
+                        ErrorLabel.Content = "Username or password are incorrect.";
                     }
-                }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString(), "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                return false;
+                System.Windows.MessageBox.Show("There was an error.");
             }
-
+            return false;
         }
     }
 }

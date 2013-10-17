@@ -19,6 +19,7 @@ create table [dbo].[Object](
 create table [dbo].[Object_Fields](
 	ObjectFieldsId int,
 	ObjectId int,
+	Name nvarchar(50),
 	Constraint [PK Object_Fields] Primary Key(ObjectFieldsId),
 	Constraint [FK Object_Fields Object] Foreign Key(ObjectId) References [dbo].[Object](ObjectId)
 );
@@ -37,7 +38,7 @@ create table [dbo].[Profile_Object_Fields](
 	ProfileObjectId int,
 	ObjectFieldsId int,
 	[Read] bit,
-	[Write] bit,
+	[Modify] bit,
 	[Create] bit,
 	Constraint [PK Profile_Object_Fields] Primary Key(ProfileObjectFieldsId),
 	Constraint [FK Profile_Object_Fields Profile_Object] Foreign Key(ProfileObjectId) References [dbo].[Profile_Object](ProfileObjectId),
@@ -113,29 +114,22 @@ create table [dbo].[Level_Language](
 	Constraint [PK Level_Language] Primary Key(LevelLanguageId)
 );
 
-create table [dbo].[All_Address](
-	SingleAddressId int,
+create table [dbo].[Address](
+	AddressId int,
 	Street nvarchar(50),
     City nvarchar(50),
 	ZipCode numeric(5),
     StateId int,
-    Constraint [PK All_Address] Primary Key(SingleAddressId),
-	Constraint [FK All_Address State] Foreign Key(StateId) References [dbo].[State](StateId)
+    AddressTypeId int,
+    Constraint [PK Address] Primary Key(AddressId),
+	Constraint [FK Address State] Foreign Key(StateId) References [dbo].[State](StateId)
+	Constraint [FK Address Address_Type] Foreign Key(AddressTypeId) References [dbo].[Address_Type](AddressTypeId)
 );
 
 create table [dbo].[Address_Type](
 	AddressTypeId int,
 	Name nvarchar(50),
 	Constraint [PK Address_Type] Primary Key(AddressTypeId)
-);
-
-create table [dbo].[Address](
-	AddressId int,
-	SingleAddressId int,
-	AddressTypeId int,
-	Constraint [PK Address] Primary Key(AddressId),
-	Constraint [FK Address All_Address] Foreign Key(SingleAddressId) References [dbo].[All_Address](SingleAddressId),
-	Constraint [FK Address Address_Type] Foreign Key(AddressTypeId) References [dbo].[Address_Type](AddressTypeId)
 );
 
 -----------
