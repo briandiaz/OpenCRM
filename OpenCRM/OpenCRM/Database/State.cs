@@ -16,14 +16,14 @@ namespace OpenCRM.Database
     {
         public State()
         {
-            this.All_Address = new HashSet<All_Address>();
+            this.Address = new HashSet<Address>();
         }
     
         public int StateId { get; set; }
         public string Name { get; set; }
         public Nullable<int> CountryId { get; set; }
     
-        public virtual ICollection<All_Address> All_Address { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
         public virtual Country Country { get; set; }
     }
 }

@@ -16,13 +16,13 @@ namespace OpenCRM.Database
     {
         public Account_SLA()
         {
-            this.Accounts = new HashSet<Account>();
+            this.Account = new HashSet<Account>();
         }
     
         public int AccountSLAId { get; set; }
         public string Name { get; set; }
         public Nullable<decimal> Value { get; set; }
     
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
     }
 }

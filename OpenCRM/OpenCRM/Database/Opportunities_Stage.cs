@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public Opportunities_Stage()
         {
-            this.Opportunities = new HashSet<Opportunity>();
+            this.Opportunities = new HashSet<Opportunities>();
         }
     
         public int OpportunityStageId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Opportunity> Opportunities { get; set; }
+        public virtual ICollection<Opportunities> Opportunities { get; set; }
     }
 }

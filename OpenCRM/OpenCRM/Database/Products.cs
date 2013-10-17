@@ -12,16 +12,23 @@ namespace OpenCRM.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Case_Priority
+    public partial class Products
     {
-        public Case_Priority()
+        public Products()
         {
             this.Cases = new HashSet<Cases>();
+            this.Opportunities_Products = new HashSet<Opportunities_Products>();
+            this.Inventory = new HashSet<Inventory>();
         }
     
-        public int CasePriorityId { get; set; }
+        public int ProductId { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
     
         public virtual ICollection<Cases> Cases { get; set; }
+        public virtual ICollection<Opportunities_Products> Opportunities_Products { get; set; }
+        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

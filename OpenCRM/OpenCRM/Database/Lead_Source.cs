@@ -16,14 +16,14 @@ namespace OpenCRM.Database
     {
         public Lead_Source()
         {
-            this.Contacts = new HashSet<Contact>();
-            this.Leads = new HashSet<Lead>();
+            this.Contact = new HashSet<Contact>();
+            this.Leads = new HashSet<Leads>();
         }
     
         public int LeadSourceId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<Lead> Leads { get; set; }
+        public virtual ICollection<Contact> Contact { get; set; }
+        public virtual ICollection<Leads> Leads { get; set; }
     }
 }

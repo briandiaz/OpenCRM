@@ -12,7 +12,7 @@ namespace OpenCRM.Models.Login
 {
     public class LoginModel
     {
-        private Label ErrorLabel ;
+        private Label ErrorLabel;
 
         public LoginModel(Label errorLabel )
         {
@@ -45,7 +45,7 @@ namespace OpenCRM.Models.Login
                         var hashpassword = password.GetHashCode().ToString();
 
                         var query = ( 
-                            from user in db.Users
+                            from user in db.User
                             where user.UserName == username && user.HashPassword == hashpassword
                             select user
                         );
@@ -56,7 +56,7 @@ namespace OpenCRM.Models.Login
                         ErrorLabel.Content = "Username or password are incorrect.";
                     }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 System.Windows.MessageBox.Show("There was an error.");
             }

@@ -16,15 +16,15 @@ namespace OpenCRM.Database
     {
         public Rating()
         {
-            this.Accounts = new HashSet<Account>();
-            this.Leads = new HashSet<Lead>();
+            this.Account = new HashSet<Account>();
+            this.Leads = new HashSet<Leads>();
         }
     
         public int RatingId { get; set; }
         public string Name { get; set; }
         public Nullable<decimal> Value { get; set; }
     
-        public virtual ICollection<Account> Accounts { get; set; }
-        public virtual ICollection<Lead> Leads { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
+        public virtual ICollection<Leads> Leads { get; set; }
     }
 }

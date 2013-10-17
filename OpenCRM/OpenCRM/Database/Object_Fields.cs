@@ -21,6 +21,7 @@ namespace OpenCRM.Database
     
         public int ObjectFieldsId { get; set; }
         public Nullable<int> ObjectId { get; set; }
+        public string Name { get; set; }
     
         public virtual Object Object { get; set; }
         public virtual ICollection<Profile_Object_Fields> Profile_Object_Fields { get; set; }

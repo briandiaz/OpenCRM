@@ -114,6 +114,12 @@ create table [dbo].[Level_Language](
 	Constraint [PK Level_Language] Primary Key(LevelLanguageId)
 );
 
+create table [dbo].[Address_Type](
+	AddressTypeId int,
+	Name nvarchar(50),
+	Constraint [PK Address_Type] Primary Key(AddressTypeId)
+);
+
 create table [dbo].[Address](
 	AddressId int,
 	Street nvarchar(50),
@@ -122,14 +128,8 @@ create table [dbo].[Address](
     StateId int,
     AddressTypeId int,
     Constraint [PK Address] Primary Key(AddressId),
-	Constraint [FK Address State] Foreign Key(StateId) References [dbo].[State](StateId)
+	Constraint [FK Address State] Foreign Key(StateId) References [dbo].[State](StateId),
 	Constraint [FK Address Address_Type] Foreign Key(AddressTypeId) References [dbo].[Address_Type](AddressTypeId)
-);
-
-create table [dbo].[Address_Type](
-	AddressTypeId int,
-	Name nvarchar(50),
-	Constraint [PK Address_Type] Primary Key(AddressTypeId)
 );
 
 -----------

@@ -18,7 +18,7 @@ namespace OpenCRM.Database
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> OpportunityId { get; set; }
     
-        public virtual Opportunity Opportunity { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Opportunities Opportunities { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

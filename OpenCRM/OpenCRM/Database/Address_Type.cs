@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public Address_Type()
         {
-            this.Addresses = new HashSet<Address>();
+            this.Address = new HashSet<Address>();
         }
     
         public int AddressTypeId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
     }
 }

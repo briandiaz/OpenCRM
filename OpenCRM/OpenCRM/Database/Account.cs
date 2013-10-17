@@ -16,9 +16,9 @@ namespace OpenCRM.Database
     {
         public Account()
         {
-            this.Cases = new HashSet<Case>();
-            this.Contacts = new HashSet<Contact>();
-            this.Opportunities = new HashSet<Opportunity>();
+            this.Cases = new HashSet<Cases>();
+            this.Contact = new HashSet<Contact>();
+            this.Opportunities = new HashSet<Opportunities>();
         }
     
         public int AccountId { get; set; }
@@ -57,8 +57,8 @@ namespace OpenCRM.Database
         public virtual Industry Industry { get; set; }
         public virtual Rating Rating { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<Case> Cases { get; set; }
-        public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<Opportunity> Opportunities { get; set; }
+        public virtual ICollection<Cases> Cases { get; set; }
+        public virtual ICollection<Contact> Contact { get; set; }
+        public virtual ICollection<Opportunities> Opportunities { get; set; }
     }
 }

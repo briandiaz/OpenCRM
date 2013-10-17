@@ -16,25 +16,28 @@ namespace OpenCRM.Database
     {
         public Address()
         {
-            this.Accounts = new HashSet<Account>();
-            this.Accounts1 = new HashSet<Account>();
-            this.Contacts = new HashSet<Contact>();
-            this.Contacts1 = new HashSet<Contact>();
-            this.Inventories = new HashSet<Inventory>();
-            this.Leads = new HashSet<Lead>();
+            this.Account = new HashSet<Account>();
+            this.Account1 = new HashSet<Account>();
+            this.Contact = new HashSet<Contact>();
+            this.Contact1 = new HashSet<Contact>();
+            this.Inventory = new HashSet<Inventory>();
+            this.Leads = new HashSet<Leads>();
         }
     
         public int AddressId { get; set; }
-        public Nullable<int> SingleAddressId { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public Nullable<decimal> ZipCode { get; set; }
+        public Nullable<int> StateId { get; set; }
         public Nullable<int> AddressTypeId { get; set; }
     
-        public virtual ICollection<Account> Accounts { get; set; }
-        public virtual ICollection<Account> Accounts1 { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
+        public virtual ICollection<Account> Account1 { get; set; }
         public virtual Address_Type Address_Type { get; set; }
-        public virtual All_Address All_Address { get; set; }
-        public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<Contact> Contacts1 { get; set; }
-        public virtual ICollection<Inventory> Inventories { get; set; }
-        public virtual ICollection<Lead> Leads { get; set; }
+        public virtual State State { get; set; }
+        public virtual ICollection<Contact> Contact { get; set; }
+        public virtual ICollection<Contact> Contact1 { get; set; }
+        public virtual ICollection<Inventory> Inventory { get; set; }
+        public virtual ICollection<Leads> Leads { get; set; }
     }
 }
