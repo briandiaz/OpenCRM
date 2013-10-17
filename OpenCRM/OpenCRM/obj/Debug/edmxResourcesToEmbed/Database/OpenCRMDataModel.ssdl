@@ -693,6 +693,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="AbbrevationName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Profile_Object">
     <Key>

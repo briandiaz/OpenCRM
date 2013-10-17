@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OpenCRMModelStoreContainer" CdmEntityContainer="OpenCRMEntities">
-    <EntitySetMapping Name="Account">
+    <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="OpenCRMModel.Account">
         <MappingFragment StoreEntitySet="Account">
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
@@ -73,7 +73,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Address">
+    <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="OpenCRMModel.Address">
         <MappingFragment StoreEntitySet="Address">
           <ScalarProperty Name="AddressId" ColumnName="AddressId" />
@@ -101,7 +101,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Campaign">
+    <EntitySetMapping Name="Campaigns">
       <EntityTypeMapping TypeName="OpenCRMModel.Campaign">
         <MappingFragment StoreEntitySet="Campaign">
           <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
@@ -181,7 +181,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cases">
-      <EntityTypeMapping TypeName="OpenCRMModel.Cases">
+      <EntityTypeMapping TypeName="OpenCRMModel.Case">
         <MappingFragment StoreEntitySet="Cases">
           <ScalarProperty Name="CaseId" ColumnName="CaseId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -197,7 +197,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Contact">
+    <EntitySetMapping Name="Contacts">
       <EntityTypeMapping TypeName="OpenCRMModel.Contact">
         <MappingFragment StoreEntitySet="Contact">
           <ScalarProperty Name="ContactId" ColumnName="ContactId" />
@@ -237,7 +237,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Country">
+    <EntitySetMapping Name="Countries">
       <EntityTypeMapping TypeName="OpenCRMModel.Country">
         <MappingFragment StoreEntitySet="Country">
           <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -246,7 +246,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Industry">
+    <EntitySetMapping Name="Industries">
       <EntityTypeMapping TypeName="OpenCRMModel.Industry">
         <MappingFragment StoreEntitySet="Industry">
           <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
@@ -254,7 +254,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Inventory">
+    <EntitySetMapping Name="Inventories">
       <EntityTypeMapping TypeName="OpenCRMModel.Inventory">
         <MappingFragment StoreEntitySet="Inventory">
           <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
@@ -265,7 +265,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Language">
+    <EntitySetMapping Name="Languages">
       <EntityTypeMapping TypeName="OpenCRMModel.Language">
         <MappingFragment StoreEntitySet="Language">
           <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
@@ -282,7 +282,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Leads">
-      <EntityTypeMapping TypeName="OpenCRMModel.Leads">
+      <EntityTypeMapping TypeName="OpenCRMModel.Lead">
         <MappingFragment StoreEntitySet="Leads">
           <ScalarProperty Name="LeadId" ColumnName="LeadId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -316,7 +316,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Object">
+    <EntitySetMapping Name="Objects">
       <EntityTypeMapping TypeName="OpenCRMModel.Object">
         <MappingFragment StoreEntitySet="Object">
           <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
@@ -333,7 +333,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Opportunities">
-      <EntityTypeMapping TypeName="OpenCRMModel.Opportunities">
+      <EntityTypeMapping TypeName="OpenCRMModel.Opportunity">
         <MappingFragment StoreEntitySet="Opportunities">
           <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -410,7 +410,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="OpenCRMModel.Products">
+      <EntityTypeMapping TypeName="OpenCRMModel.Product">
         <MappingFragment StoreEntitySet="Products">
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -420,13 +420,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Profile">
+    <EntitySetMapping Name="Profiles">
       <EntityTypeMapping TypeName="OpenCRMModel.Profile">
         <MappingFragment StoreEntitySet="Profile">
           <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="AbbrevationName" ColumnName="AbbrevationName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -451,7 +452,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Rating">
+    <EntitySetMapping Name="Ratings">
       <EntityTypeMapping TypeName="OpenCRMModel.Rating">
         <MappingFragment StoreEntitySet="Rating">
           <ScalarProperty Name="RatingId" ColumnName="RatingId" />
@@ -460,7 +461,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Salutation">
+    <EntitySetMapping Name="Salutations">
       <EntityTypeMapping TypeName="OpenCRMModel.Salutation">
         <MappingFragment StoreEntitySet="Salutation">
           <ScalarProperty Name="SalutationId" ColumnName="SalutationId" />
@@ -468,7 +469,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="State">
+    <EntitySetMapping Name="States">
       <EntityTypeMapping TypeName="OpenCRMModel.State">
         <MappingFragment StoreEntitySet="State">
           <ScalarProperty Name="StateId" ColumnName="StateId" />
@@ -477,7 +478,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="User">
+    <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="OpenCRMModel.User">
         <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
