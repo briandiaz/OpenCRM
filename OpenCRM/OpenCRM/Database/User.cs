@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public User()
         {
-            this.Account = new HashSet<Account>();
-            this.Campaign = new HashSet<Campaign>();
-            this.Cases = new HashSet<Cases>();
-            this.Contact = new HashSet<Contact>();
-            this.Leads = new HashSet<Leads>();
-            this.Opportunities = new HashSet<Opportunities>();
+            this.Accounts = new HashSet<Account>();
+            this.Campaigns = new HashSet<Campaign>();
+            this.Cases = new HashSet<Case>();
+            this.Contacts = new HashSet<Contact>();
+            this.Leads = new HashSet<Lead>();
+            this.Opportunities = new HashSet<Opportunity>();
         }
     
         public int UserId { get; set; }
@@ -35,12 +35,12 @@ namespace OpenCRM.Database
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
-        public virtual ICollection<Account> Account { get; set; }
-        public virtual ICollection<Campaign> Campaign { get; set; }
-        public virtual ICollection<Cases> Cases { get; set; }
-        public virtual ICollection<Contact> Contact { get; set; }
-        public virtual ICollection<Leads> Leads { get; set; }
-        public virtual ICollection<Opportunities> Opportunities { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Campaign> Campaigns { get; set; }
+        public virtual ICollection<Case> Cases { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
+        public virtual ICollection<Lead> Leads { get; set; }
+        public virtual ICollection<Opportunity> Opportunities { get; set; }
         public virtual Profile Profile { get; set; }
     }
 }

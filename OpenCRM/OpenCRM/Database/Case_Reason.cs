@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public Case_Reason()
         {
-            this.Cases = new HashSet<Cases>();
+            this.Cases = new HashSet<Case>();
         }
     
         public int CaseReasonId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Cases> Cases { get; set; }
+        public virtual ICollection<Case> Cases { get; set; }
     }
 }

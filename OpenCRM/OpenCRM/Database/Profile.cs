@@ -17,15 +17,16 @@ namespace OpenCRM.Database
         public Profile()
         {
             this.Profile_Object = new HashSet<Profile_Object>();
-            this.User = new HashSet<User>();
+            this.Users = new HashSet<User>();
         }
     
         public int ProfileId { get; set; }
         public string Name { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string AbbrevationName { get; set; }
     
         public virtual ICollection<Profile_Object> Profile_Object { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

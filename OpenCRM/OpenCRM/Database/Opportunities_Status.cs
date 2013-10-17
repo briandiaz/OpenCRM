@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public Opportunities_Status()
         {
-            this.Opportunities = new HashSet<Opportunities>();
+            this.Opportunities = new HashSet<Opportunity>();
         }
     
         public int OpportunityStatusId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Opportunities> Opportunities { get; set; }
+        public virtual ICollection<Opportunity> Opportunities { get; set; }
     }
 }

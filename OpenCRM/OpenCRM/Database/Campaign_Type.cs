@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public Campaign_Type()
         {
-            this.Campaign = new HashSet<Campaign>();
+            this.Campaigns = new HashSet<Campaign>();
         }
     
         public int CampaignTypeId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Campaign> Campaign { get; set; }
+        public virtual ICollection<Campaign> Campaigns { get; set; }
     }
 }

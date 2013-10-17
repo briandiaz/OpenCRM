@@ -104,7 +104,7 @@
     <Compile Include="Database\Campaign_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Cases.cs">
+    <Compile Include="Database\Case.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Case_Origin.cs">
@@ -140,7 +140,7 @@
     <Compile Include="Database\Language.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Leads.cs">
+    <Compile Include="Database\Lead.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Lead_Source.cs">
@@ -170,9 +170,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\Opportunities_Competidor.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -191,7 +188,10 @@
     <Compile Include="Database\Opportunities_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Products.cs">
+    <Compile Include="Database\Opportunity.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Product.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Profile.cs">

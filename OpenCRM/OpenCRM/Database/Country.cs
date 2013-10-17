@@ -16,13 +16,13 @@ namespace OpenCRM.Database
     {
         public Country()
         {
-            this.State = new HashSet<State>();
+            this.States = new HashSet<State>();
         }
     
         public int CountryId { get; set; }
         public string Name { get; set; }
         public string AbbrevationName { get; set; }
     
-        public virtual ICollection<State> State { get; set; }
+        public virtual ICollection<State> States { get; set; }
     }
 }

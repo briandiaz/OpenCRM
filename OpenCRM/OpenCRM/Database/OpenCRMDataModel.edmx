@@ -698,6 +698,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="AbbrevationName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Profile_Object">
           <Key>
@@ -1506,16 +1507,16 @@
     <edmx:ConceptualModels>
       <Schema Namespace="OpenCRMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="OpenCRMEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Account" EntityType="OpenCRMModel.Account" />
+          <EntitySet Name="Accounts" EntityType="OpenCRMModel.Account" />
           <EntitySet Name="Account_Ownership" EntityType="OpenCRMModel.Account_Ownership" />
           <EntitySet Name="Account_Priority" EntityType="OpenCRMModel.Account_Priority" />
           <EntitySet Name="Account_SLA" EntityType="OpenCRMModel.Account_SLA" />
           <EntitySet Name="Account_Type" EntityType="OpenCRMModel.Account_Type" />
           <EntitySet Name="Account_Up_Sell_Opportunity" EntityType="OpenCRMModel.Account_Up_Sell_Opportunity" />
-          <EntitySet Name="Address" EntityType="OpenCRMModel.Address" />
+          <EntitySet Name="Addresses" EntityType="OpenCRMModel.Address" />
           <EntitySet Name="Address_Type" EntityType="OpenCRMModel.Address_Type" />
           <EntitySet Name="All_Address" EntityType="OpenCRMModel.All_Address" />
-          <EntitySet Name="Campaign" EntityType="OpenCRMModel.Campaign" />
+          <EntitySet Name="Campaigns" EntityType="OpenCRMModel.Campaign" />
           <EntitySet Name="Campaign_Status" EntityType="OpenCRMModel.Campaign_Status" />
           <EntitySet Name="Campaign_Type" EntityType="OpenCRMModel.Campaign_Type" />
           <EntitySet Name="Case_Origin" EntityType="OpenCRMModel.Case_Origin" />
@@ -1523,135 +1524,135 @@
           <EntitySet Name="Case_Reason" EntityType="OpenCRMModel.Case_Reason" />
           <EntitySet Name="Case_Status" EntityType="OpenCRMModel.Case_Status" />
           <EntitySet Name="Case_Type" EntityType="OpenCRMModel.Case_Type" />
-          <EntitySet Name="Cases" EntityType="OpenCRMModel.Cases" />
-          <EntitySet Name="Contact" EntityType="OpenCRMModel.Contact" />
+          <EntitySet Name="Cases" EntityType="OpenCRMModel.Case" />
+          <EntitySet Name="Contacts" EntityType="OpenCRMModel.Contact" />
           <EntitySet Name="Contact_Level_Languages" EntityType="OpenCRMModel.Contact_Level_Languages" />
-          <EntitySet Name="Country" EntityType="OpenCRMModel.Country" />
-          <EntitySet Name="Industry" EntityType="OpenCRMModel.Industry" />
-          <EntitySet Name="Inventory" EntityType="OpenCRMModel.Inventory" />
-          <EntitySet Name="Language" EntityType="OpenCRMModel.Language" />
+          <EntitySet Name="Countries" EntityType="OpenCRMModel.Country" />
+          <EntitySet Name="Industries" EntityType="OpenCRMModel.Industry" />
+          <EntitySet Name="Inventories" EntityType="OpenCRMModel.Inventory" />
+          <EntitySet Name="Languages" EntityType="OpenCRMModel.Language" />
           <EntitySet Name="Lead_Source" EntityType="OpenCRMModel.Lead_Source" />
-          <EntitySet Name="Leads" EntityType="OpenCRMModel.Leads" />
+          <EntitySet Name="Leads" EntityType="OpenCRMModel.Lead" />
           <EntitySet Name="Level_Language" EntityType="OpenCRMModel.Level_Language" />
-          <EntitySet Name="Object" EntityType="OpenCRMModel.Object" />
+          <EntitySet Name="Objects" EntityType="OpenCRMModel.Object" />
           <EntitySet Name="Object_Fields" EntityType="OpenCRMModel.Object_Fields" />
-          <EntitySet Name="Opportunities" EntityType="OpenCRMModel.Opportunities" />
+          <EntitySet Name="Opportunities" EntityType="OpenCRMModel.Opportunity" />
           <EntitySet Name="Opportunities_Competidor" EntityType="OpenCRMModel.Opportunities_Competidor" />
           <EntitySet Name="Opportunities_Delivery_Status" EntityType="OpenCRMModel.Opportunities_Delivery_Status" />
           <EntitySet Name="Opportunities_Products" EntityType="OpenCRMModel.Opportunities_Products" />
           <EntitySet Name="Opportunities_Stage" EntityType="OpenCRMModel.Opportunities_Stage" />
           <EntitySet Name="Opportunities_Status" EntityType="OpenCRMModel.Opportunities_Status" />
           <EntitySet Name="Opportunities_Type" EntityType="OpenCRMModel.Opportunities_Type" />
-          <EntitySet Name="Products" EntityType="OpenCRMModel.Products" />
-          <EntitySet Name="Profile" EntityType="OpenCRMModel.Profile" />
+          <EntitySet Name="Products" EntityType="OpenCRMModel.Product" />
+          <EntitySet Name="Profiles" EntityType="OpenCRMModel.Profile" />
           <EntitySet Name="Profile_Object" EntityType="OpenCRMModel.Profile_Object" />
           <EntitySet Name="Profile_Object_Fields" EntityType="OpenCRMModel.Profile_Object_Fields" />
-          <EntitySet Name="Rating" EntityType="OpenCRMModel.Rating" />
-          <EntitySet Name="Salutation" EntityType="OpenCRMModel.Salutation" />
-          <EntitySet Name="State" EntityType="OpenCRMModel.State" />
-          <EntitySet Name="User" EntityType="OpenCRMModel.User" />
+          <EntitySet Name="Ratings" EntityType="OpenCRMModel.Rating" />
+          <EntitySet Name="Salutations" EntityType="OpenCRMModel.Salutation" />
+          <EntitySet Name="States" EntityType="OpenCRMModel.State" />
+          <EntitySet Name="Users" EntityType="OpenCRMModel.User" />
           <AssociationSet Name="FK_Account_Account_Ownership" Association="OpenCRMModel.FK_Account_Account_Ownership">
             <End Role="Account_Ownership" EntitySet="Account_Ownership" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Account_Priority" Association="OpenCRMModel.FK_Account_Account_Priority">
             <End Role="Account_Priority" EntitySet="Account_Priority" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Account_SLA" Association="OpenCRMModel.FK_Account_Account_SLA">
             <End Role="Account_SLA" EntitySet="Account_SLA" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Account_Type" Association="OpenCRMModel.FK_Account_Account_Type">
             <End Role="Account_Type" EntitySet="Account_Type" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Account_Up_Sell_Opportunity" Association="OpenCRMModel.FK_Account_Account_Up_Sell_Opportunity">
             <End Role="Account_Up_Sell_Opportunity" EntitySet="Account_Up_Sell_Opportunity" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Address_Billing" Association="OpenCRMModel.FK_Account_Address_Billing">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Address_Shipping" Association="OpenCRMModel.FK_Account_Address_Shipping">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Industry" Association="OpenCRMModel.FK_Account_Industry">
-            <End Role="Industry" EntitySet="Industry" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_Rating" Association="OpenCRMModel.FK_Account_Rating">
-            <End Role="Rating" EntitySet="Rating" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Rating" EntitySet="Ratings" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Account_User" Association="OpenCRMModel.FK_Account_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Account" EntitySet="Account" />
+            <End Role="User" EntitySet="Users" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Cases_Account" Association="OpenCRMModel.FK_Cases_Account">
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Account" EntitySet="Accounts" />
             <End Role="Cases" EntitySet="Cases" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Account" Association="OpenCRMModel.FK_Contact_Account">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Opportunities_Account" Association="OpenCRMModel.FK_Opportunities_Account">
-            <End Role="Account" EntitySet="Account" />
+            <End Role="Account" EntitySet="Accounts" />
             <End Role="Opportunities" EntitySet="Opportunities" />
           </AssociationSet>
           <AssociationSet Name="FK_Address_Address_Type" Association="OpenCRMModel.FK_Address_Address_Type">
             <End Role="Address_Type" EntitySet="Address_Type" />
-            <End Role="Address" EntitySet="Address" />
+            <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
           <AssociationSet Name="FK_Address_All_Address" Association="OpenCRMModel.FK_Address_All_Address">
             <End Role="All_Address" EntitySet="All_Address" />
-            <End Role="Address" EntitySet="Address" />
+            <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Address_Mailing" Association="OpenCRMModel.FK_Contact_Address_Mailing">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Address_Other" Association="OpenCRMModel.FK_Contact_Address_Other">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Inventory_Address" Association="OpenCRMModel.FK_Inventory_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Inventory" EntitySet="Inventories" />
           </AssociationSet>
           <AssociationSet Name="FK_Leads_Address" Association="OpenCRMModel.FK_Leads_Address">
-            <End Role="Address" EntitySet="Address" />
+            <End Role="Address" EntitySet="Addresses" />
             <End Role="Leads" EntitySet="Leads" />
           </AssociationSet>
           <AssociationSet Name="FK_All_Address_State" Association="OpenCRMModel.FK_All_Address_State">
-            <End Role="State" EntitySet="State" />
+            <End Role="State" EntitySet="States" />
             <End Role="All_Address" EntitySet="All_Address" />
           </AssociationSet>
           <AssociationSet Name="FK_Campaign_Campaign_Parent" Association="OpenCRMModel.FK_Campaign_Campaign_Parent">
-            <End Role="Campaign" EntitySet="Campaign" />
-            <End Role="Campaign1" EntitySet="Campaign" />
+            <End Role="Campaign" EntitySet="Campaigns" />
+            <End Role="Campaign1" EntitySet="Campaigns" />
           </AssociationSet>
           <AssociationSet Name="FK_Campaign_Campaign_Status" Association="OpenCRMModel.FK_Campaign_Campaign_Status">
             <End Role="Campaign_Status" EntitySet="Campaign_Status" />
-            <End Role="Campaign" EntitySet="Campaign" />
+            <End Role="Campaign" EntitySet="Campaigns" />
           </AssociationSet>
           <AssociationSet Name="FK_Campaign_Campaign_Type" Association="OpenCRMModel.FK_Campaign_Campaign_Type">
             <End Role="Campaign_Type" EntitySet="Campaign_Type" />
-            <End Role="Campaign" EntitySet="Campaign" />
+            <End Role="Campaign" EntitySet="Campaigns" />
           </AssociationSet>
           <AssociationSet Name="FK_Campaign_User" Association="OpenCRMModel.FK_Campaign_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Campaign" EntitySet="Campaign" />
+            <End Role="User" EntitySet="Users" />
+            <End Role="Campaign" EntitySet="Campaigns" />
           </AssociationSet>
           <AssociationSet Name="FK_Leads_Campaign" Association="OpenCRMModel.FK_Leads_Campaign">
-            <End Role="Campaign" EntitySet="Campaign" />
+            <End Role="Campaign" EntitySet="Campaigns" />
             <End Role="Leads" EntitySet="Leads" />
           </AssociationSet>
           <AssociationSet Name="FK_Opportunities_Campaign" Association="OpenCRMModel.FK_Opportunities_Campaign">
-            <End Role="Campaign" EntitySet="Campaign" />
+            <End Role="Campaign" EntitySet="Campaigns" />
             <End Role="Opportunities" EntitySet="Opportunities" />
           </AssociationSet>
           <AssociationSet Name="FK_Cases_Case_Origin" Association="OpenCRMModel.FK_Cases_Case_Origin">
@@ -1675,7 +1676,7 @@
             <End Role="Cases" EntitySet="Cases" />
           </AssociationSet>
           <AssociationSet Name="FK_Cases_Contacts" Association="OpenCRMModel.FK_Cases_Contacts">
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Contact" EntitySet="Contacts" />
             <End Role="Cases" EntitySet="Cases" />
           </AssociationSet>
           <AssociationSet Name="FK_Cases_Products" Association="OpenCRMModel.FK_Cases_Products">
@@ -1683,31 +1684,31 @@
             <End Role="Cases" EntitySet="Cases" />
           </AssociationSet>
           <AssociationSet Name="FK_Cases_User" Association="OpenCRMModel.FK_Cases_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="Cases" EntitySet="Cases" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Contact" Association="OpenCRMModel.FK_Contact_Contact">
-            <End Role="Contact" EntitySet="Contact" />
-            <End Role="Contact1" EntitySet="Contact" />
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Contact1" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Contact_Level_Languages" Association="OpenCRMModel.FK_Contact_Contact_Level_Languages">
             <End Role="Contact_Level_Languages" EntitySet="Contact_Level_Languages" />
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Lead_Source" Association="OpenCRMModel.FK_Contact_Lead_Source">
             <End Role="Lead_Source" EntitySet="Lead_Source" />
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Salution" Association="OpenCRMModel.FK_Contact_Salution">
-            <End Role="Salutation" EntitySet="Salutation" />
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Salutation" EntitySet="Salutations" />
+            <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_User" Association="OpenCRMModel.FK_Contact_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Contact" EntitySet="Contact" />
+            <End Role="User" EntitySet="Users" />
+            <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Level_Languages_Language" Association="OpenCRMModel.FK_Contact_Level_Languages_Language">
-            <End Role="Language" EntitySet="Language" />
+            <End Role="Language" EntitySet="Languages" />
             <End Role="Contact_Level_Languages" EntitySet="Contact_Level_Languages" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Level_Languages_Level_Language" Association="OpenCRMModel.FK_Contact_Level_Languages_Level_Language">
@@ -1715,11 +1716,11 @@
             <End Role="Contact_Level_Languages" EntitySet="Contact_Level_Languages" />
           </AssociationSet>
           <AssociationSet Name="FK_State_Country" Association="OpenCRMModel.FK_State_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="State" EntitySet="State" />
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
           </AssociationSet>
           <AssociationSet Name="FK_Leads_Industry" Association="OpenCRMModel.FK_Leads_Industry">
-            <End Role="Industry" EntitySet="Industry" />
+            <End Role="Industry" EntitySet="Industries" />
             <End Role="Leads" EntitySet="Leads" />
           </AssociationSet>
           <AssociationSet Name="FK_Leads_Lead_Source" Association="OpenCRMModel.FK_Leads_Lead_Source">
@@ -1727,19 +1728,19 @@
             <End Role="Leads" EntitySet="Leads" />
           </AssociationSet>
           <AssociationSet Name="FK_Leads_Rating" Association="OpenCRMModel.FK_Leads_Rating">
-            <End Role="Rating" EntitySet="Rating" />
+            <End Role="Rating" EntitySet="Ratings" />
             <End Role="Leads" EntitySet="Leads" />
           </AssociationSet>
           <AssociationSet Name="FK_Leads_User" Association="OpenCRMModel.FK_Leads_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="Leads" EntitySet="Leads" />
           </AssociationSet>
           <AssociationSet Name="FK_Object_Fields_Object" Association="OpenCRMModel.FK_Object_Fields_Object">
-            <End Role="Object" EntitySet="Object" />
+            <End Role="Object" EntitySet="Objects" />
             <End Role="Object_Fields" EntitySet="Object_Fields" />
           </AssociationSet>
           <AssociationSet Name="FK_Profile_Object_Object" Association="OpenCRMModel.FK_Profile_Object_Object">
-            <End Role="Object" EntitySet="Object" />
+            <End Role="Object" EntitySet="Objects" />
             <End Role="Profile_Object" EntitySet="Profile_Object" />
           </AssociationSet>
           <AssociationSet Name="FK_Profile_Object_Fields_Object_Fields" Association="OpenCRMModel.FK_Profile_Object_Fields_Object_Fields">
@@ -1767,7 +1768,7 @@
             <End Role="Opportunities" EntitySet="Opportunities" />
           </AssociationSet>
           <AssociationSet Name="FK_Opportunities_User" Association="OpenCRMModel.FK_Opportunities_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="Opportunities" EntitySet="Opportunities" />
           </AssociationSet>
           <AssociationSet Name="FK_Opportunities_Products_Opportunities" Association="OpenCRMModel.FK_Opportunities_Products_Opportunities">
@@ -1779,19 +1780,19 @@
             <End Role="Opportunities_Products" EntitySet="Opportunities_Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Profile_Object_Profile" Association="OpenCRMModel.FK_Profile_Object_Profile">
-            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Profile" EntitySet="Profiles" />
             <End Role="Profile_Object" EntitySet="Profile_Object" />
           </AssociationSet>
           <AssociationSet Name="PK_User_Profile" Association="OpenCRMModel.PK_User_Profile">
-            <End Role="Profile" EntitySet="Profile" />
-            <End Role="User" EntitySet="User" />
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_Profile_Object_Fields_Profile_Object" Association="OpenCRMModel.FK_Profile_Object_Fields_Profile_Object">
             <End Role="Profile_Object" EntitySet="Profile_Object" />
             <End Role="Profile_Object_Fields" EntitySet="Profile_Object_Fields" />
           </AssociationSet>
           <AssociationSet Name="Inventory_Products" Association="OpenCRMModel.Inventory_Products">
-            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="Inventory" EntitySet="Inventories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
@@ -1835,7 +1836,7 @@
           <NavigationProperty Name="Rating" Relationship="OpenCRMModel.FK_Account_Rating" FromRole="Account" ToRole="Rating" />
           <NavigationProperty Name="User" Relationship="OpenCRMModel.FK_Account_User" FromRole="Account" ToRole="User" />
           <NavigationProperty Name="Cases" Relationship="OpenCRMModel.FK_Cases_Account" FromRole="Account" ToRole="Cases" />
-          <NavigationProperty Name="Contact" Relationship="OpenCRMModel.FK_Contact_Account" FromRole="Account" ToRole="Contact" />
+          <NavigationProperty Name="Contacts" Relationship="OpenCRMModel.FK_Contact_Account" FromRole="Account" ToRole="Contact" />
           <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Account" FromRole="Account" ToRole="Opportunities" />
         </EntityType>
         <EntityType Name="Account_Ownership">
@@ -1844,7 +1845,7 @@
           </Key>
           <Property Name="AccountOwnershipId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Account_Ownership" FromRole="Account_Ownership" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Account_Ownership" FromRole="Account_Ownership" ToRole="Account" />
         </EntityType>
         <EntityType Name="Account_Priority">
           <Key>
@@ -1852,7 +1853,7 @@
           </Key>
           <Property Name="AccountPriorityId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Account_Priority" FromRole="Account_Priority" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Account_Priority" FromRole="Account_Priority" ToRole="Account" />
         </EntityType>
         <EntityType Name="Account_SLA">
           <Key>
@@ -1861,7 +1862,7 @@
           <Property Name="AccountSLAId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Value" Type="Decimal" Precision="2" Scale="2" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Account_SLA" FromRole="Account_SLA" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Account_SLA" FromRole="Account_SLA" ToRole="Account" />
         </EntityType>
         <EntityType Name="Account_Type">
           <Key>
@@ -1869,7 +1870,7 @@
           </Key>
           <Property Name="AccountTypeId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Account_Type" FromRole="Account_Type" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Account_Type" FromRole="Account_Type" ToRole="Account" />
         </EntityType>
         <EntityType Name="Account_Up_Sell_Opportunity">
           <Key>
@@ -1877,7 +1878,7 @@
           </Key>
           <Property Name="AccountUpSellOpportunityId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Account_Up_Sell_Opportunity" FromRole="Account_Up_Sell_Opportunity" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Account_Up_Sell_Opportunity" FromRole="Account_Up_Sell_Opportunity" ToRole="Account" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
@@ -1886,13 +1887,13 @@
           <Property Name="AddressId" Type="Int32" Nullable="false" />
           <Property Name="SingleAddressId" Type="Int32" />
           <Property Name="AddressTypeId" Type="Int32" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Address_Billing" FromRole="Address" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="OpenCRMModel.FK_Account_Address_Shipping" FromRole="Address" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Address_Billing" FromRole="Address" ToRole="Account" />
+          <NavigationProperty Name="Accounts1" Relationship="OpenCRMModel.FK_Account_Address_Shipping" FromRole="Address" ToRole="Account" />
           <NavigationProperty Name="Address_Type" Relationship="OpenCRMModel.FK_Address_Address_Type" FromRole="Address" ToRole="Address_Type" />
           <NavigationProperty Name="All_Address" Relationship="OpenCRMModel.FK_Address_All_Address" FromRole="Address" ToRole="All_Address" />
-          <NavigationProperty Name="Contact" Relationship="OpenCRMModel.FK_Contact_Address_Mailing" FromRole="Address" ToRole="Contact" />
-          <NavigationProperty Name="Contact1" Relationship="OpenCRMModel.FK_Contact_Address_Other" FromRole="Address" ToRole="Contact" />
-          <NavigationProperty Name="Inventory" Relationship="OpenCRMModel.FK_Inventory_Address" FromRole="Address" ToRole="Inventory" />
+          <NavigationProperty Name="Contacts" Relationship="OpenCRMModel.FK_Contact_Address_Mailing" FromRole="Address" ToRole="Contact" />
+          <NavigationProperty Name="Contacts1" Relationship="OpenCRMModel.FK_Contact_Address_Other" FromRole="Address" ToRole="Contact" />
+          <NavigationProperty Name="Inventories" Relationship="OpenCRMModel.FK_Inventory_Address" FromRole="Address" ToRole="Inventory" />
           <NavigationProperty Name="Leads" Relationship="OpenCRMModel.FK_Leads_Address" FromRole="Address" ToRole="Leads" />
         </EntityType>
         <EntityType Name="Address_Type">
@@ -1901,7 +1902,7 @@
           </Key>
           <Property Name="AddressTypeId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Address" Relationship="OpenCRMModel.FK_Address_Address_Type" FromRole="Address_Type" ToRole="Address" />
+          <NavigationProperty Name="Addresses" Relationship="OpenCRMModel.FK_Address_Address_Type" FromRole="Address_Type" ToRole="Address" />
         </EntityType>
         <EntityType Name="All_Address">
           <Key>
@@ -1912,7 +1913,7 @@
           <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="ZipCode" Type="Decimal" Precision="5" Scale="0" />
           <Property Name="StateId" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="OpenCRMModel.FK_Address_All_Address" FromRole="All_Address" ToRole="Address" />
+          <NavigationProperty Name="Addresses" Relationship="OpenCRMModel.FK_Address_All_Address" FromRole="All_Address" ToRole="Address" />
           <NavigationProperty Name="State" Relationship="OpenCRMModel.FK_All_Address_State" FromRole="All_Address" ToRole="State" />
         </EntityType>
         <EntityType Name="Campaign">
@@ -1950,7 +1951,7 @@
           </Key>
           <Property Name="CampaignStatusId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Campaign" Relationship="OpenCRMModel.FK_Campaign_Campaign_Status" FromRole="Campaign_Status" ToRole="Campaign" />
+          <NavigationProperty Name="Campaigns" Relationship="OpenCRMModel.FK_Campaign_Campaign_Status" FromRole="Campaign_Status" ToRole="Campaign" />
         </EntityType>
         <EntityType Name="Campaign_Type">
           <Key>
@@ -1958,7 +1959,7 @@
           </Key>
           <Property Name="CampaignTypeId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Campaign" Relationship="OpenCRMModel.FK_Campaign_Campaign_Type" FromRole="Campaign_Type" ToRole="Campaign" />
+          <NavigationProperty Name="Campaigns" Relationship="OpenCRMModel.FK_Campaign_Campaign_Type" FromRole="Campaign_Type" ToRole="Campaign" />
         </EntityType>
         <EntityType Name="Case_Origin">
           <Key>
@@ -2000,7 +2001,7 @@
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Cases" Relationship="OpenCRMModel.FK_Cases_Case_Type" FromRole="Case_Type" ToRole="Cases" />
         </EntityType>
-        <EntityType Name="Cases">
+        <EntityType Name="Case">
           <Key>
             <PropertyRef Name="CaseId" />
           </Key>
@@ -2022,7 +2023,7 @@
           <NavigationProperty Name="Case_Status" Relationship="OpenCRMModel.FK_Cases_Case_Status" FromRole="Cases" ToRole="Case_Status" />
           <NavigationProperty Name="Case_Type" Relationship="OpenCRMModel.FK_Cases_Case_Type" FromRole="Cases" ToRole="Case_Type" />
           <NavigationProperty Name="Contact" Relationship="OpenCRMModel.FK_Cases_Contacts" FromRole="Cases" ToRole="Contact" />
-          <NavigationProperty Name="Products" Relationship="OpenCRMModel.FK_Cases_Products" FromRole="Cases" ToRole="Products" />
+          <NavigationProperty Name="Product" Relationship="OpenCRMModel.FK_Cases_Products" FromRole="Cases" ToRole="Products" />
           <NavigationProperty Name="User" Relationship="OpenCRMModel.FK_Cases_User" FromRole="Cases" ToRole="User" />
         </EntityType>
         <EntityType Name="Contact">
@@ -2072,7 +2073,7 @@
           <Property Name="ContactLevelLanguagesId" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Int32" />
           <Property Name="LevelLanguageId" Type="Int32" />
-          <NavigationProperty Name="Contact" Relationship="OpenCRMModel.FK_Contact_Contact_Level_Languages" FromRole="Contact_Level_Languages" ToRole="Contact" />
+          <NavigationProperty Name="Contacts" Relationship="OpenCRMModel.FK_Contact_Contact_Level_Languages" FromRole="Contact_Level_Languages" ToRole="Contact" />
           <NavigationProperty Name="Language" Relationship="OpenCRMModel.FK_Contact_Level_Languages_Language" FromRole="Contact_Level_Languages" ToRole="Language" />
           <NavigationProperty Name="Level_Language" Relationship="OpenCRMModel.FK_Contact_Level_Languages_Level_Language" FromRole="Contact_Level_Languages" ToRole="Level_Language" />
         </EntityType>
@@ -2083,7 +2084,7 @@
           <Property Name="CountryId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="AbbrevationName" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
-          <NavigationProperty Name="State" Relationship="OpenCRMModel.FK_State_Country" FromRole="Country" ToRole="State" />
+          <NavigationProperty Name="States" Relationship="OpenCRMModel.FK_State_Country" FromRole="Country" ToRole="State" />
         </EntityType>
         <EntityType Name="Industry">
           <Key>
@@ -2091,7 +2092,7 @@
           </Key>
           <Property Name="IndustryId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Industry" FromRole="Industry" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Industry" FromRole="Industry" ToRole="Account" />
           <NavigationProperty Name="Leads" Relationship="OpenCRMModel.FK_Leads_Industry" FromRole="Industry" ToRole="Leads" />
         </EntityType>
         <EntityType Name="Inventory">
@@ -2120,10 +2121,10 @@
           </Key>
           <Property Name="LeadSourceId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Contact" Relationship="OpenCRMModel.FK_Contact_Lead_Source" FromRole="Lead_Source" ToRole="Contact" />
+          <NavigationProperty Name="Contacts" Relationship="OpenCRMModel.FK_Contact_Lead_Source" FromRole="Lead_Source" ToRole="Contact" />
           <NavigationProperty Name="Leads" Relationship="OpenCRMModel.FK_Leads_Lead_Source" FromRole="Lead_Source" ToRole="Leads" />
         </EntityType>
-        <EntityType Name="Leads">
+        <EntityType Name="Lead">
           <Key>
             <PropertyRef Name="LeadId" />
           </Key>
@@ -2181,7 +2182,7 @@
           <NavigationProperty Name="Object" Relationship="OpenCRMModel.FK_Object_Fields_Object" FromRole="Object_Fields" ToRole="Object" />
           <NavigationProperty Name="Profile_Object_Fields" Relationship="OpenCRMModel.FK_Profile_Object_Fields_Object_Fields" FromRole="Object_Fields" ToRole="Profile_Object_Fields" />
         </EntityType>
-        <EntityType Name="Opportunities">
+        <EntityType Name="Opportunity">
           <Key>
             <PropertyRef Name="OpportunityId" />
           </Key>
@@ -2240,8 +2241,8 @@
           <Property Name="OpportunityProductId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="OpportunityId" Type="Int32" />
-          <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Products_Opportunities" FromRole="Opportunities_Products" ToRole="Opportunities" />
-          <NavigationProperty Name="Products" Relationship="OpenCRMModel.FK_Opportunities_Products_Products" FromRole="Opportunities_Products" ToRole="Products" />
+          <NavigationProperty Name="Opportunity" Relationship="OpenCRMModel.FK_Opportunities_Products_Opportunities" FromRole="Opportunities_Products" ToRole="Opportunities" />
+          <NavigationProperty Name="Product" Relationship="OpenCRMModel.FK_Opportunities_Products_Products" FromRole="Opportunities_Products" ToRole="Products" />
         </EntityType>
         <EntityType Name="Opportunities_Stage">
           <Key>
@@ -2267,7 +2268,7 @@
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Type" FromRole="Opportunities_Type" ToRole="Opportunities" />
         </EntityType>
-        <EntityType Name="Products">
+        <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductId" />
           </Key>
@@ -2278,7 +2279,7 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Cases" Relationship="OpenCRMModel.FK_Cases_Products" FromRole="Products" ToRole="Cases" />
           <NavigationProperty Name="Opportunities_Products" Relationship="OpenCRMModel.FK_Opportunities_Products_Products" FromRole="Products" ToRole="Opportunities_Products" />
-          <NavigationProperty Name="Inventory" Relationship="OpenCRMModel.Inventory_Products" FromRole="Products" ToRole="Inventory" />
+          <NavigationProperty Name="Inventories" Relationship="OpenCRMModel.Inventory_Products" FromRole="Products" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -2288,8 +2289,9 @@
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="AbbrevationName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Profile_Object" Relationship="OpenCRMModel.FK_Profile_Object_Profile" FromRole="Profile" ToRole="Profile_Object" />
-          <NavigationProperty Name="User" Relationship="OpenCRMModel.PK_User_Profile" FromRole="Profile" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="OpenCRMModel.PK_User_Profile" FromRole="Profile" ToRole="User" />
         </EntityType>
         <EntityType Name="Profile_Object">
           <Key>
@@ -2322,7 +2324,7 @@
           <Property Name="RatingId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Value" Type="Decimal" Precision="2" Scale="2" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_Rating" FromRole="Rating" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_Rating" FromRole="Rating" ToRole="Account" />
           <NavigationProperty Name="Leads" Relationship="OpenCRMModel.FK_Leads_Rating" FromRole="Rating" ToRole="Leads" />
         </EntityType>
         <EntityType Name="Salutation">
@@ -2331,7 +2333,7 @@
           </Key>
           <Property Name="SalutationId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Contact" Relationship="OpenCRMModel.FK_Contact_Salution" FromRole="Salutation" ToRole="Contact" />
+          <NavigationProperty Name="Contacts" Relationship="OpenCRMModel.FK_Contact_Salution" FromRole="Salutation" ToRole="Contact" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -2357,10 +2359,10 @@
           <Property Name="ProfileId" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Account_User" FromRole="User" ToRole="Account" />
-          <NavigationProperty Name="Campaign" Relationship="OpenCRMModel.FK_Campaign_User" FromRole="User" ToRole="Campaign" />
+          <NavigationProperty Name="Accounts" Relationship="OpenCRMModel.FK_Account_User" FromRole="User" ToRole="Account" />
+          <NavigationProperty Name="Campaigns" Relationship="OpenCRMModel.FK_Campaign_User" FromRole="User" ToRole="Campaign" />
           <NavigationProperty Name="Cases" Relationship="OpenCRMModel.FK_Cases_User" FromRole="User" ToRole="Cases" />
-          <NavigationProperty Name="Contact" Relationship="OpenCRMModel.FK_Contact_User" FromRole="User" ToRole="Contact" />
+          <NavigationProperty Name="Contacts" Relationship="OpenCRMModel.FK_Contact_User" FromRole="User" ToRole="Contact" />
           <NavigationProperty Name="Leads" Relationship="OpenCRMModel.FK_Leads_User" FromRole="User" ToRole="Leads" />
           <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_User" FromRole="User" ToRole="Opportunities" />
           <NavigationProperty Name="Profile" Relationship="OpenCRMModel.PK_User_Profile" FromRole="User" ToRole="Profile" />
@@ -2487,7 +2489,7 @@
         </Association>
         <Association Name="FK_Cases_Account">
           <End Role="Account" Type="OpenCRMModel.Account" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="AccountId" />
@@ -2511,7 +2513,7 @@
         </Association>
         <Association Name="FK_Opportunities_Account">
           <End Role="Account" Type="OpenCRMModel.Account" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="AccountId" />
@@ -2583,7 +2585,7 @@
         </Association>
         <Association Name="FK_Leads_Address">
           <End Role="Address" Type="OpenCRMModel.Address" Multiplicity="0..1" />
-          <End Role="Leads" Type="OpenCRMModel.Leads" Multiplicity="*" />
+          <End Role="Leads" Type="OpenCRMModel.Lead" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="AddressId" />
@@ -2655,7 +2657,7 @@
         </Association>
         <Association Name="FK_Leads_Campaign">
           <End Role="Campaign" Type="OpenCRMModel.Campaign" Multiplicity="0..1" />
-          <End Role="Leads" Type="OpenCRMModel.Leads" Multiplicity="*" />
+          <End Role="Leads" Type="OpenCRMModel.Lead" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Campaign">
               <PropertyRef Name="CampaignId" />
@@ -2667,7 +2669,7 @@
         </Association>
         <Association Name="FK_Opportunities_Campaign">
           <End Role="Campaign" Type="OpenCRMModel.Campaign" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Campaign">
               <PropertyRef Name="CampaignId" />
@@ -2679,7 +2681,7 @@
         </Association>
         <Association Name="FK_Cases_Case_Origin">
           <End Role="Case_Origin" Type="OpenCRMModel.Case_Origin" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Case_Origin">
               <PropertyRef Name="CaseOriginId" />
@@ -2691,7 +2693,7 @@
         </Association>
         <Association Name="FK_Cases_Case_Priority">
           <End Role="Case_Priority" Type="OpenCRMModel.Case_Priority" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Case_Priority">
               <PropertyRef Name="CasePriorityId" />
@@ -2703,7 +2705,7 @@
         </Association>
         <Association Name="FK_Cases_Case_Reason">
           <End Role="Case_Reason" Type="OpenCRMModel.Case_Reason" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Case_Reason">
               <PropertyRef Name="CaseReasonId" />
@@ -2715,7 +2717,7 @@
         </Association>
         <Association Name="FK_Cases_Case_Status">
           <End Role="Case_Status" Type="OpenCRMModel.Case_Status" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Case_Status">
               <PropertyRef Name="CaseStatusId" />
@@ -2727,7 +2729,7 @@
         </Association>
         <Association Name="FK_Cases_Case_Type">
           <End Role="Case_Type" Type="OpenCRMModel.Case_Type" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Case_Type">
               <PropertyRef Name="CaseTypeId" />
@@ -2739,7 +2741,7 @@
         </Association>
         <Association Name="FK_Cases_Contacts">
           <End Role="Contact" Type="OpenCRMModel.Contact" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contact">
               <PropertyRef Name="ContactId" />
@@ -2750,8 +2752,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cases_Products">
-          <End Role="Products" Type="OpenCRMModel.Products" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Products" Type="OpenCRMModel.Product" Multiplicity="0..1" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductId" />
@@ -2763,7 +2765,7 @@
         </Association>
         <Association Name="FK_Cases_User">
           <End Role="User" Type="OpenCRMModel.User" Multiplicity="0..1" />
-          <End Role="Cases" Type="OpenCRMModel.Cases" Multiplicity="*" />
+          <End Role="Cases" Type="OpenCRMModel.Case" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -2871,7 +2873,7 @@
         </Association>
         <Association Name="FK_Leads_Industry">
           <End Role="Industry" Type="OpenCRMModel.Industry" Multiplicity="0..1" />
-          <End Role="Leads" Type="OpenCRMModel.Leads" Multiplicity="*" />
+          <End Role="Leads" Type="OpenCRMModel.Lead" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Industry">
               <PropertyRef Name="IndustryId" />
@@ -2883,7 +2885,7 @@
         </Association>
         <Association Name="FK_Leads_Lead_Source">
           <End Role="Lead_Source" Type="OpenCRMModel.Lead_Source" Multiplicity="0..1" />
-          <End Role="Leads" Type="OpenCRMModel.Leads" Multiplicity="*" />
+          <End Role="Leads" Type="OpenCRMModel.Lead" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lead_Source">
               <PropertyRef Name="LeadSourceId" />
@@ -2895,7 +2897,7 @@
         </Association>
         <Association Name="FK_Leads_Rating">
           <End Role="Rating" Type="OpenCRMModel.Rating" Multiplicity="0..1" />
-          <End Role="Leads" Type="OpenCRMModel.Leads" Multiplicity="*" />
+          <End Role="Leads" Type="OpenCRMModel.Lead" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rating">
               <PropertyRef Name="RatingId" />
@@ -2907,7 +2909,7 @@
         </Association>
         <Association Name="FK_Leads_User">
           <End Role="User" Type="OpenCRMModel.User" Multiplicity="0..1" />
-          <End Role="Leads" Type="OpenCRMModel.Leads" Multiplicity="*" />
+          <End Role="Leads" Type="OpenCRMModel.Lead" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -2955,7 +2957,7 @@
         </Association>
         <Association Name="FK_Opportunities_Opportunities_Competidor">
           <End Role="Opportunities_Competidor" Type="OpenCRMModel.Opportunities_Competidor" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Opportunities_Competidor">
               <PropertyRef Name="OpportunityCompetidorId" />
@@ -2967,7 +2969,7 @@
         </Association>
         <Association Name="FK_Opportunities_Opportunities_Delivery_Status">
           <End Role="Opportunities_Delivery_Status" Type="OpenCRMModel.Opportunities_Delivery_Status" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Opportunities_Delivery_Status">
               <PropertyRef Name="OpportunityDeliveryStatusId" />
@@ -2979,7 +2981,7 @@
         </Association>
         <Association Name="FK_Opportunities_Opportunities_Stage">
           <End Role="Opportunities_Stage" Type="OpenCRMModel.Opportunities_Stage" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Opportunities_Stage">
               <PropertyRef Name="OpportunityStageId" />
@@ -2991,7 +2993,7 @@
         </Association>
         <Association Name="FK_Opportunities_Opportunities_Status">
           <End Role="Opportunities_Status" Type="OpenCRMModel.Opportunities_Status" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Opportunities_Status">
               <PropertyRef Name="OpportunityStatusId" />
@@ -3003,7 +3005,7 @@
         </Association>
         <Association Name="FK_Opportunities_Opportunities_Type">
           <End Role="Opportunities_Type" Type="OpenCRMModel.Opportunities_Type" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Opportunities_Type">
               <PropertyRef Name="OpportunityTypeId" />
@@ -3015,7 +3017,7 @@
         </Association>
         <Association Name="FK_Opportunities_User">
           <End Role="User" Type="OpenCRMModel.User" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -3026,7 +3028,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Opportunities_Products_Opportunities">
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="OpenCRMModel.Opportunity" Multiplicity="0..1" />
           <End Role="Opportunities_Products" Type="OpenCRMModel.Opportunities_Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Opportunities">
@@ -3038,7 +3040,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Opportunities_Products_Products">
-          <End Role="Products" Type="OpenCRMModel.Products" Multiplicity="0..1" />
+          <End Role="Products" Type="OpenCRMModel.Product" Multiplicity="0..1" />
           <End Role="Opportunities_Products" Type="OpenCRMModel.Opportunities_Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
@@ -3087,7 +3089,7 @@
         </Association>
         <Association Name="Inventory_Products">
           <End Role="Inventory" Type="OpenCRMModel.Inventory" Multiplicity="*" />
-          <End Role="Products" Type="OpenCRMModel.Products" Multiplicity="*" />
+          <End Role="Products" Type="OpenCRMModel.Product" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -3095,7 +3097,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OpenCRMModelStoreContainer" CdmEntityContainer="OpenCRMEntities">
-          <EntitySetMapping Name="Account">
+          <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="OpenCRMModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
@@ -3167,7 +3169,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Address">
+          <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="OpenCRMModel.Address">
               <MappingFragment StoreEntitySet="Address">
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
@@ -3195,7 +3197,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Campaign">
+          <EntitySetMapping Name="Campaigns">
             <EntityTypeMapping TypeName="OpenCRMModel.Campaign">
               <MappingFragment StoreEntitySet="Campaign">
                 <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
@@ -3275,7 +3277,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cases">
-            <EntityTypeMapping TypeName="OpenCRMModel.Cases">
+            <EntityTypeMapping TypeName="OpenCRMModel.Case">
               <MappingFragment StoreEntitySet="Cases">
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -3291,7 +3293,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Contact">
+          <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="OpenCRMModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
@@ -3331,7 +3333,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Country">
+          <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="OpenCRMModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -3340,7 +3342,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Industry">
+          <EntitySetMapping Name="Industries">
             <EntityTypeMapping TypeName="OpenCRMModel.Industry">
               <MappingFragment StoreEntitySet="Industry">
                 <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
@@ -3348,7 +3350,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Inventory">
+          <EntitySetMapping Name="Inventories">
             <EntityTypeMapping TypeName="OpenCRMModel.Inventory">
               <MappingFragment StoreEntitySet="Inventory">
                 <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
@@ -3359,7 +3361,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Language">
+          <EntitySetMapping Name="Languages">
             <EntityTypeMapping TypeName="OpenCRMModel.Language">
               <MappingFragment StoreEntitySet="Language">
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
@@ -3376,7 +3378,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Leads">
-            <EntityTypeMapping TypeName="OpenCRMModel.Leads">
+            <EntityTypeMapping TypeName="OpenCRMModel.Lead">
               <MappingFragment StoreEntitySet="Leads">
                 <ScalarProperty Name="LeadId" ColumnName="LeadId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -3410,7 +3412,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Object">
+          <EntitySetMapping Name="Objects">
             <EntityTypeMapping TypeName="OpenCRMModel.Object">
               <MappingFragment StoreEntitySet="Object">
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
@@ -3427,7 +3429,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Opportunities">
-            <EntityTypeMapping TypeName="OpenCRMModel.Opportunities">
+            <EntityTypeMapping TypeName="OpenCRMModel.Opportunity">
               <MappingFragment StoreEntitySet="Opportunities">
                 <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -3504,7 +3506,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="OpenCRMModel.Products">
+            <EntityTypeMapping TypeName="OpenCRMModel.Product">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3514,13 +3516,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Profile">
+          <EntitySetMapping Name="Profiles">
             <EntityTypeMapping TypeName="OpenCRMModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
                 <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="AbbrevationName" ColumnName="AbbrevationName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3545,7 +3548,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rating">
+          <EntitySetMapping Name="Ratings">
             <EntityTypeMapping TypeName="OpenCRMModel.Rating">
               <MappingFragment StoreEntitySet="Rating">
                 <ScalarProperty Name="RatingId" ColumnName="RatingId" />
@@ -3554,7 +3557,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Salutation">
+          <EntitySetMapping Name="Salutations">
             <EntityTypeMapping TypeName="OpenCRMModel.Salutation">
               <MappingFragment StoreEntitySet="Salutation">
                 <ScalarProperty Name="SalutationId" ColumnName="SalutationId" />
@@ -3562,7 +3565,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="State">
+          <EntitySetMapping Name="States">
             <EntityTypeMapping TypeName="OpenCRMModel.State">
               <MappingFragment StoreEntitySet="State">
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
@@ -3571,7 +3574,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="User">
+          <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="OpenCRMModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -3609,7 +3612,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

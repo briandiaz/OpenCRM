@@ -16,7 +16,7 @@ namespace OpenCRM.Database
     {
         public All_Address()
         {
-            this.Address = new HashSet<Address>();
+            this.Addresses = new HashSet<Address>();
         }
     
         public int SingleAddressId { get; set; }
@@ -25,7 +25,7 @@ namespace OpenCRM.Database
         public Nullable<decimal> ZipCode { get; set; }
         public Nullable<int> StateId { get; set; }
     
-        public virtual ICollection<Address> Address { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
         public virtual State State { get; set; }
     }
 }

@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public Salutation()
         {
-            this.Contact = new HashSet<Contact>();
+            this.Contacts = new HashSet<Contact>();
         }
     
         public int SalutationId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Contact> Contact { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
     }
 }

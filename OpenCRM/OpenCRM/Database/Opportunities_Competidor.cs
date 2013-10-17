@@ -16,7 +16,7 @@ namespace OpenCRM.Database
     {
         public Opportunities_Competidor()
         {
-            this.Opportunities = new HashSet<Opportunities>();
+            this.Opportunities = new HashSet<Opportunity>();
         }
     
         public int OpportunityCompetidorId { get; set; }
@@ -24,6 +24,6 @@ namespace OpenCRM.Database
         public string Strenghts { get; set; }
         public string Weakness { get; set; }
     
-        public virtual ICollection<Opportunities> Opportunities { get; set; }
+        public virtual ICollection<Opportunity> Opportunities { get; set; }
     }
 }

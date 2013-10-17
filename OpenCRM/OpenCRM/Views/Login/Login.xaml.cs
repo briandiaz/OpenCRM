@@ -17,9 +17,8 @@ using OpenCRM.Models.Login;
 namespace OpenCRM
 {
     /// <summary>
-    /// Lógica de interacción para LoginRegister.xaml
+    /// Controller del Login.xaml
     /// </summary>
-
     public partial class Login
     {
         public Login()

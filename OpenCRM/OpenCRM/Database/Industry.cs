@@ -16,14 +16,14 @@ namespace OpenCRM.Database
     {
         public Industry()
         {
-            this.Account = new HashSet<Account>();
-            this.Leads = new HashSet<Leads>();
+            this.Accounts = new HashSet<Account>();
+            this.Leads = new HashSet<Lead>();
         }
     
         public int IndustryId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Account> Account { get; set; }
-        public virtual ICollection<Leads> Leads { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Lead> Leads { get; set; }
     }
 }

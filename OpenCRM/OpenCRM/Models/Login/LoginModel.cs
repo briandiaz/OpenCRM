@@ -9,9 +9,20 @@ namespace OpenCRM.Models.Login
 {
     static class LoginModel
     {
-        static public bool ValidateFields(String username, String password)
+        /// <summary>
+        /// This function can validate de <paramref name="password"/>
+        /// and the <paramref name="username"/>
+        /// </summary>
+        /// <param name="username">The username for login</param>
+        /// <param name="password">The password for login</param>
+        /// <returns>
+        ///     If is true, the validation is correct.
+        ///     Otherwise, it's incorrect.
+        /// </returns>
+        public static bool ValidateFields(String username, String password)
         {
             OpenCRMEntities db;
+            
             try
             {
                 if (username.Equals("") && password.Equals(""))
@@ -33,10 +44,10 @@ namespace OpenCRM.Models.Login
                 {
                     using (db = new OpenCRMEntities())
                     {
-                        string hashpassword = password.GetHashCode().ToString();
+                        var hashpassword = password.GetHashCode().ToString();
 
                         var query = ( 
-                            from user in db.User
+                            from user in db.Users
                             where user.UserName == username && user.HashPassword == hashpassword
                             select user
                         );

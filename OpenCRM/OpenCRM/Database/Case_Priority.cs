@@ -16,12 +16,12 @@ namespace OpenCRM.Database
     {
         public Case_Priority()
         {
-            this.Cases = new HashSet<Cases>();
+            this.Cases = new HashSet<Case>();
         }
     
         public int CasePriorityId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Cases> Cases { get; set; }
+        public virtual ICollection<Case> Cases { get; set; }
     }
 }
