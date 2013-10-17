@@ -4,6 +4,7 @@
 create table [dbo].[Profile](
 	ProfileId int,
 	Name nvarchar(50),
+	AbbrevationName nvarchar(50),
 	CreateDate datetime,
 	UpdateDate datetime,
 	Constraint [Pk Profile] Primary Key(ProfileId)
