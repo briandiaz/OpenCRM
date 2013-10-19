@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-using OpenCRM.Database;
+using OpenCRM.DataBase;
 using OpenCRM.Views.Login;
 
 namespace OpenCRM.Models.Login
@@ -46,7 +46,7 @@ namespace OpenCRM.Models.Login
                         var hashpassword = password.GetHashCode().ToString();
 
                         var query = ( 
-                            from user in db.User
+                            from user in db.Users
                             where user.UserName == username && user.HashPassword == hashpassword
                             select user
                         );
