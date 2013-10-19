@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Linq;
 using MahApps.Metro.Controls;
 using MahApps.Metro.SampleData.MusicStore;
 using ReactiveUI;

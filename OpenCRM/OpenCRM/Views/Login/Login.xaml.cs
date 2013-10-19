@@ -20,18 +20,16 @@ namespace OpenCRM.Views.Login
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-           /* if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password)) 
+            if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password)) 
             {
- 
-            }*/
-            try
-            {
-                frmSource.Navigate(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
+                MainWindow mg = new MainWindow();
+                mg.gridSplash.Visibility = System.Windows.Visibility.Hidden;
+                mg.frmSource.Visibility = System.Windows.Visibility.Visible;
+                mg.frmSource.Navigate(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
+                
+                mg.Show();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+           
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
