@@ -37,13 +37,25 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="GrayscaleEffect">
+      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\lib\GrayscaleEffect.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.10.1.1\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.SampleData">
+      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\src\Panorama\bin\Debug\MahApps.Metro.SampleData.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveUI">
+      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\src\Panorama\bin\Debug\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\src\Panorama\bin\Debug\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity">
@@ -216,6 +228,7 @@
     <Compile Include="Views\Home\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Home\ShellViewModel.cs" />
     <Compile Include="Views\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -292,6 +305,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Views\Home\Fody.targets">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -306,7 +322,15 @@
   <ItemGroup>
     <Resource Include="Assets\Img\opencrm_logo_blue.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\Home\FodyWeavers.xml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Home\images\blank-cd.png" />
+    <Resource Include="Views\Home\images\placeholder_person.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

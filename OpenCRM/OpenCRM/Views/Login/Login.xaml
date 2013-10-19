@@ -98,7 +98,7 @@
                             Name="lblForgotPassword"/>
                     </Grid>
                     <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="340,377,0,0" VerticalAlignment="Top" Foreground="Red" Width="462" Grid.ColumnSpan="2"/>
-
+                    <Frame Name="frmSource" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
 

@@ -23,6 +23,7 @@ namespace OpenCRM.Views.Home
         public HomeView()
         {
             InitializeComponent();
+            DataContext = new ShellViewModel();
         }
     }
 }

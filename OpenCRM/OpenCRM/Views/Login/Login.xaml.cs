@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using OpenCRM.Models.Login;
 
@@ -19,9 +20,17 @@ namespace OpenCRM.Views.Login
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password)) 
+           /* if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password)) 
             {
  
+            }*/
+            try
+            {
+                frmSource.Navigate(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
