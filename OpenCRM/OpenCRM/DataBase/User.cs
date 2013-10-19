@@ -16,26 +16,26 @@ namespace OpenCRM.DataBase
     {
         public User()
         {
-            this.Accounts = new HashSet<Account>();
-            this.Accounts1 = new HashSet<Account>();
-            this.Accounts2 = new HashSet<Account>();
-            this.Campaigns = new HashSet<Campaign>();
-            this.Campaigns1 = new HashSet<Campaign>();
-            this.Campaigns2 = new HashSet<Campaign>();
-            this.Cases = new HashSet<Case>();
-            this.Cases1 = new HashSet<Case>();
-            this.Cases2 = new HashSet<Case>();
-            this.Contacts = new HashSet<Contact>();
-            this.Contacts1 = new HashSet<Contact>();
-            this.Contacts2 = new HashSet<Contact>();
-            this.Leads = new HashSet<Lead>();
-            this.Leads1 = new HashSet<Lead>();
-            this.Leads2 = new HashSet<Lead>();
-            this.Opportunities = new HashSet<Opportunity>();
-            this.Opportunities1 = new HashSet<Opportunity>();
-            this.Opportunities2 = new HashSet<Opportunity>();
-            this.Products = new HashSet<Product>();
-            this.Products1 = new HashSet<Product>();
+            this.Account = new HashSet<Account>();
+            this.Account1 = new HashSet<Account>();
+            this.Account2 = new HashSet<Account>();
+            this.Campaign = new HashSet<Campaign>();
+            this.Campaign1 = new HashSet<Campaign>();
+            this.Campaign2 = new HashSet<Campaign>();
+            this.Cases = new HashSet<Cases>();
+            this.Cases1 = new HashSet<Cases>();
+            this.Cases2 = new HashSet<Cases>();
+            this.Contact = new HashSet<Contact>();
+            this.Contact1 = new HashSet<Contact>();
+            this.Contact2 = new HashSet<Contact>();
+            this.Leads = new HashSet<Leads>();
+            this.Leads1 = new HashSet<Leads>();
+            this.Leads2 = new HashSet<Leads>();
+            this.Opportunities = new HashSet<Opportunities>();
+            this.Opportunities1 = new HashSet<Opportunities>();
+            this.Opportunities2 = new HashSet<Opportunities>();
+            this.Products = new HashSet<Products>();
+            this.Products1 = new HashSet<Products>();
         }
     
         public int UserId { get; set; }
@@ -49,26 +49,26 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
-        public virtual ICollection<Account> Accounts { get; set; }
-        public virtual ICollection<Account> Accounts1 { get; set; }
-        public virtual ICollection<Account> Accounts2 { get; set; }
-        public virtual ICollection<Campaign> Campaigns { get; set; }
-        public virtual ICollection<Campaign> Campaigns1 { get; set; }
-        public virtual ICollection<Campaign> Campaigns2 { get; set; }
-        public virtual ICollection<Case> Cases { get; set; }
-        public virtual ICollection<Case> Cases1 { get; set; }
-        public virtual ICollection<Case> Cases2 { get; set; }
-        public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<Contact> Contacts1 { get; set; }
-        public virtual ICollection<Contact> Contacts2 { get; set; }
-        public virtual ICollection<Lead> Leads { get; set; }
-        public virtual ICollection<Lead> Leads1 { get; set; }
-        public virtual ICollection<Lead> Leads2 { get; set; }
-        public virtual ICollection<Opportunity> Opportunities { get; set; }
-        public virtual ICollection<Opportunity> Opportunities1 { get; set; }
-        public virtual ICollection<Opportunity> Opportunities2 { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<Product> Products1 { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
+        public virtual ICollection<Account> Account1 { get; set; }
+        public virtual ICollection<Account> Account2 { get; set; }
+        public virtual ICollection<Campaign> Campaign { get; set; }
+        public virtual ICollection<Campaign> Campaign1 { get; set; }
+        public virtual ICollection<Campaign> Campaign2 { get; set; }
+        public virtual ICollection<Cases> Cases { get; set; }
+        public virtual ICollection<Cases> Cases1 { get; set; }
+        public virtual ICollection<Cases> Cases2 { get; set; }
+        public virtual ICollection<Contact> Contact { get; set; }
+        public virtual ICollection<Contact> Contact1 { get; set; }
+        public virtual ICollection<Contact> Contact2 { get; set; }
+        public virtual ICollection<Leads> Leads { get; set; }
+        public virtual ICollection<Leads> Leads1 { get; set; }
+        public virtual ICollection<Leads> Leads2 { get; set; }
+        public virtual ICollection<Opportunities> Opportunities { get; set; }
+        public virtual ICollection<Opportunities> Opportunities1 { get; set; }
+        public virtual ICollection<Opportunities> Opportunities2 { get; set; }
+        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Products> Products1 { get; set; }
         public virtual Profile Profile { get; set; }
     }
 }

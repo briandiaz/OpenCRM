@@ -23,7 +23,7 @@ namespace OpenCRM.DataBase
         public Nullable<int> ProfileId { get; set; }
         public Nullable<int> ObjectId { get; set; }
     
-        public virtual Object Object { get; set; }
+        public virtual Objects Objects { get; set; }
         public virtual Profile Profile { get; set; }
         public virtual ICollection<Profile_Object_Fields> Profile_Object_Fields { get; set; }
     }

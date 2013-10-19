@@ -12,7 +12,7 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Lead
+    public partial class Leads
     {
         public int LeadId { get; set; }
         public Nullable<int> UserId { get; set; }

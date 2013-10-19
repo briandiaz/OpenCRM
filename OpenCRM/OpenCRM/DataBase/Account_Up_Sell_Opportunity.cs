@@ -16,12 +16,12 @@ namespace OpenCRM.DataBase
     {
         public Account_Up_Sell_Opportunity()
         {
-            this.Accounts = new HashSet<Account>();
+            this.Account = new HashSet<Account>();
         }
     
         public int AccountUpSellOpportunityId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
     }
 }

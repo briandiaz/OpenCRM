@@ -12,9 +12,9 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Opportunity
+    public partial class Opportunities
     {
-        public Opportunity()
+        public Opportunities()
         {
             this.Opportunities_Products = new HashSet<Opportunities_Products>();
         }

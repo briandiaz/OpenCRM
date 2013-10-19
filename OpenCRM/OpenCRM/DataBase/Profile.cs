@@ -17,7 +17,7 @@ namespace OpenCRM.DataBase
         public Profile()
         {
             this.Profile_Object = new HashSet<Profile_Object>();
-            this.Users = new HashSet<User>();
+            this.User = new HashSet<User>();
         }
     
         public int ProfileId { get; set; }
@@ -27,6 +27,6 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
         public virtual ICollection<Profile_Object> Profile_Object { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }

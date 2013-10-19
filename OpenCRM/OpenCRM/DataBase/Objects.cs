@@ -12,9 +12,9 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Object
+    public partial class Objects
     {
-        public Object()
+        public Objects()
         {
             this.Object_Fields = new HashSet<Object_Fields>();
             this.Profile_Object = new HashSet<Profile_Object>();

@@ -12,7 +12,7 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Case
+    public partial class Cases
     {
         public int CaseId { get; set; }
         public Nullable<int> UserId { get; set; }
@@ -37,7 +37,7 @@ namespace OpenCRM.DataBase
         public virtual Case_Status Case_Status { get; set; }
         public virtual Case_Type Case_Type { get; set; }
         public virtual Contact Contact { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Products Products { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }

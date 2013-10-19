@@ -12,13 +12,13 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Products
     {
-        public Product()
+        public Products()
         {
-            this.Cases = new HashSet<Case>();
+            this.Cases = new HashSet<Cases>();
             this.Opportunities_Products = new HashSet<Opportunities_Products>();
-            this.Inventories = new HashSet<Inventory>();
+            this.Inventory = new HashSet<Inventory>();
         }
     
         public int ProductId { get; set; }
@@ -31,10 +31,10 @@ namespace OpenCRM.DataBase
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
-        public virtual ICollection<Case> Cases { get; set; }
+        public virtual ICollection<Cases> Cases { get; set; }
         public virtual ICollection<Opportunities_Products> Opportunities_Products { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
-        public virtual ICollection<Inventory> Inventories { get; set; }
+        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

@@ -16,12 +16,12 @@ namespace OpenCRM.DataBase
     {
         public Case_Origin()
         {
-            this.Cases = new HashSet<Case>();
+            this.Cases = new HashSet<Cases>();
         }
     
         public int CaseOriginId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Case> Cases { get; set; }
+        public virtual ICollection<Cases> Cases { get; set; }
     }
 }

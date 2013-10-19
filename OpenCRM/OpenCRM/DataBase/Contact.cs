@@ -16,7 +16,7 @@ namespace OpenCRM.DataBase
     {
         public Contact()
         {
-            this.Cases = new HashSet<Case>();
+            this.Cases = new HashSet<Cases>();
             this.Contact1 = new HashSet<Contact>();
         }
     
@@ -51,7 +51,7 @@ namespace OpenCRM.DataBase
         public virtual Account Account { get; set; }
         public virtual Address Address { get; set; }
         public virtual Address Address1 { get; set; }
-        public virtual ICollection<Case> Cases { get; set; }
+        public virtual ICollection<Cases> Cases { get; set; }
         public virtual ICollection<Contact> Contact1 { get; set; }
         public virtual Contact Contact2 { get; set; }
         public virtual Contact_Level_Languages Contact_Level_Languages { get; set; }

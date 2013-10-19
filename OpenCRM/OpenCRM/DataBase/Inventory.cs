@@ -16,7 +16,7 @@ namespace OpenCRM.DataBase
     {
         public Inventory()
         {
-            this.Products = new HashSet<Product>();
+            this.Products = new HashSet<Products>();
         }
     
         public int InventoryId { get; set; }
@@ -26,6 +26,6 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
         public virtual Address Address { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Products> Products { get; set; }
     }
 }
