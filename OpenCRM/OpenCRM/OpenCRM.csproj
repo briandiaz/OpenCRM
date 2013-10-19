@@ -37,24 +37,32 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="GrayscaleEffect">
-      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\lib\GrayscaleEffect.dll</HintPath>
+    <Reference Include="GrayscaleEffect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GrayscaleEffect.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.10.1.1\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro.SampleData">
-      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\src\Panorama\bin\Debug\MahApps.Metro.SampleData.dll</HintPath>
+    <Reference Include="MahApps.Metro.SampleData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MahApps.Metro.SampleData.dll</HintPath>
     </Reference>
-    <Reference Include="ReactiveUI">
-      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\src\Panorama\bin\Debug\ReactiveUI.dll</HintPath>
+    <Reference Include="ReactiveUI, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\..\..\..\metro\MahApps.Metro.Samples\src\Panorama\bin\Debug\System.Reactive.Interfaces.dll</HintPath>
+    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -78,6 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Page\PageSwitcher.cs" />
     <Compile Include="Controllers\RightsAccess\RightsAccessController.cs" />
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="DataBase\Account.cs">
@@ -225,6 +234,7 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Login\LoginModel.cs" />
+    <Compile Include="Views\Home\Data.cs" />
     <Compile Include="Views\Home\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -331,6 +341,7 @@
     <Resource Include="Views\Home\images\blank-cd.png" />
     <Resource Include="Views\Home\images\placeholder_person.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -22,12 +22,11 @@ namespace OpenCRM.Views.Login
         {
             if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password)) 
             {
-                MainWindow mg = new MainWindow();
-                mg.gridSplash.Visibility = System.Windows.Visibility.Hidden;
-                mg.frmSource.Visibility = System.Windows.Visibility.Visible;
-                mg.frmSource.Navigate(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
-                
-                mg.Show();
+                //MainWindow mg = new MainWindow();
+                PageSwitcher.Switch(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
+
+                PageSwitcher.mainwindow.gridSplash.Visibility = System.Windows.Visibility.Hidden;
+                PageSwitcher.mainwindow.frmSource.Visibility = System.Windows.Visibility.Visible;
             }
            
         }
