@@ -26,6 +26,8 @@ namespace OpenCRM
         public MainWindow()
         {
             InitializeComponent();
+            PageSwitcher.mainwindow = this;
+            //PageSwitcher.Switch(new MainMenu());   
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
@@ -37,7 +39,8 @@ namespace OpenCRM
         {
             try
             {
-                frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
+                //frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
+                PageSwitcher.mainwindow.frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
                 ShowFrame(true);
             }
             catch (Exception ex)
