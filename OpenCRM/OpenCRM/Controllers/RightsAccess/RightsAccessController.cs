@@ -33,7 +33,7 @@ namespace OpenCRM.Controllers.RightsAccess
                 var query = (
                     from objects in db.Objects
                     from fields in db.Object_Fields
-                    from profile in db.Profiles
+                    from profile in db.Profile
                     from profileObjects in db.Profile_Object
                     from profileObjectsFields in db.Profile_Object_Fields
                     where
@@ -60,7 +60,7 @@ namespace OpenCRM.Controllers.RightsAccess
         #endregion
     }
 
-    public struct DataRightsAccess
+    public class DataRightsAccess
     {
         #region "Properties"
         public string ObjectName { get; set; }

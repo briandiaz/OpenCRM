@@ -46,7 +46,7 @@ namespace OpenCRM.Models.Login
                         var hashpassword = password.GetHashCode().ToString();
 
                         var query = ( 
-                            from user in db.Users
+                            from user in db.User
                             where user.UserName == username && user.HashPassword == hashpassword
                             select user
                         );
