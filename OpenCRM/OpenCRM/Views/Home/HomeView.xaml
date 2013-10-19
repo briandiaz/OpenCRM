@@ -10,9 +10,9 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:home="clr-namespace:OpenCRM.Views.Home"
                       mc:Ignorable="d"
-                      Title="Panorama Sample" 
-                      Height="600" 
-                      Width="800"
+                      Title="Home" 
+                      Height="Auto" 
+                      Width="Auto"
                       d:DataContext="{d:DesignInstance home:ShellViewModel}"
 >
     <Page.Resources>
