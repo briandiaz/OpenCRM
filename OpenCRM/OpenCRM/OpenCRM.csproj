@@ -86,7 +86,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="Page\PageSwitcher.cs" />
+=======
+    <Compile Include="Controllers\Page\PageController.cs" />
+>>>>>>> 7a8474a8cf85eaffef730af900b22a211bae31ed
     <Compile Include="Controllers\RightsAccess\RightsAccessController.cs" />
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="DataBase\Account.cs">

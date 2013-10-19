@@ -10,7 +10,11 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:home="clr-namespace:OpenCRM.Views.Home"
                       mc:Ignorable="d"
+<<<<<<< HEAD
                       Title="Panorama Sample" 
+=======
+                      Title="Home" 
+>>>>>>> 7a8474a8cf85eaffef730af900b22a211bae31ed
                       Height="Auto" 
                       Width="Auto"
                       d:DataContext="{d:DesignInstance home:ShellViewModel}"
