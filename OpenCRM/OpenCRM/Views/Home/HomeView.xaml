@@ -10,15 +10,13 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:home="clr-namespace:OpenCRM.Views.Home"
                       xmlns:dataBase="clr-namespace:OpenCRM.DataBase"
+                      xmlns:musicStore="clr-namespace:MahApps.Metro.SampleData.MusicStore;assembly=MahApps.Metro.SampleData"
                       mc:Ignorable="d"
-
                       Title="Panorama Sample" 
-
-                      Title="Home" 
                       Height="Auto" 
                       Width="Auto"
-                      d:DataContext="{d:DesignInstance home:ShellViewModel}"
->
+                      d:DataContext="{d:DesignInstance home:ShellViewModel}">
+    
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -29,51 +27,18 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type models:Artist}">
-                <controls:Tile Title="{Binding Name}" Width="160" Height="120">
-                    <Image Source="images/placeholder_person.gif" Opacity="0.5"  Stretch="UniformToFill">
-            <DataTemplate x:Key="Data">
-                <controls:Tile Title="{Binding Name}" Width="160" Height="160">
-                    <Image Source="{Binding Art}" Opacity="0.8"  Stretch="UniformToFill">
-                        <Image.Effect>
-                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                        </Image.Effect>
-                    </Image>
-                </controls:Tile>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type models:Album}">
-                <controls:Tile Title="{Binding Title}" Width="160" Height="120">
-                    <Image Source="images/blank-cd.png" Opacity="0.5"  Stretch="UniformToFill">
-                        <Image.Effect>
-                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                        </Image.Effect>
-                    </Image>
-                </controls:Tile>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type dataBase:Objects}">
-                <controls:Tile Title="{Binding ObjectId}" Width="160" Height="120">
-                    <Image Source="C:\Users\jose\Desktop\OpenCrm\OpenCRM\OpenCRM\OpenCRM\Views\Home\images\blank-cd.png" Opacity="0.5"  Stretch="Fill">
-                        <Image.Effect>
-                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                        </Image.Effect>
-                    </Image>
-                </controls:Tile>
-            </DataTemplate>
             
-        </ResourceDictionary>
+
+            
+
+         </ResourceDictionary>
     </Page.Resources>
     <Page.DataContext>
         <home:ShellViewModel/>
     </Page.DataContext>
 
+ 
 
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> 0197d8da401e7798deba804c256302289dd38dc0
 
     <Grid>
         <Grid.Background>
