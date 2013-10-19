@@ -60,7 +60,7 @@ namespace OpenCRM.Controllers.RightsAccess
         #endregion
     }
 
-    public struct DataRightsAccess
+    public class DataRightsAccess
     {
         #region "Properties"
         public string ObjectName { get; set; }
