@@ -9,6 +9,7 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:home="clr-namespace:OpenCRM.Views.Home"
+                      xmlns:dataBase="clr-namespace:OpenCRM.DataBase"
                       mc:Ignorable="d"
                       Title="Home" 
                       Height="Auto" 
@@ -26,7 +27,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type models:Artist}">
-                <controls:Tile Title="{Binding Name}" Width="120" Height="120">
+                <controls:Tile Title="{Binding Name}" Width="160" Height="120">
                     <Image Source="images/placeholder_person.gif" Opacity="0.5"  Stretch="UniformToFill">
                         <Image.Effect>
                             <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
@@ -36,7 +37,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type models:Album}">
-                <controls:Tile Title="{Binding Title}" Width="120" Height="120">
+                <controls:Tile Title="{Binding Title}" Width="160" Height="120">
                     <Image Source="images/blank-cd.png" Opacity="0.5"  Stretch="UniformToFill">
                         <Image.Effect>
                             <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
@@ -44,9 +45,21 @@
                     </Image>
                 </controls:Tile>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type dataBase:Objects}">
+                <controls:Tile Title="{Binding ObjectId}" Width="160" Height="120">
+                    <Image Source="C:\Users\jose\Desktop\OpenCrm\OpenCRM\OpenCRM\OpenCRM\Views\Home\images\blank-cd.png" Opacity="0.5"  Stretch="Fill">
+                        <Image.Effect>
+                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
+                        </Image.Effect>
+                    </Image>
+                </controls:Tile>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Page.Resources>
 
+    
     
 
     <Grid>
