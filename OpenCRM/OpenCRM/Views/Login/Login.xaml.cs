@@ -10,6 +10,7 @@ namespace OpenCRM.Views.Login
     public partial class Login
     {
         private LoginModel loginM;
+
         public Login()
         {
             InitializeComponent();
@@ -18,7 +19,10 @@ namespace OpenCRM.Views.Login
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password);
+            if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password)) 
+            {
+ 
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -27,11 +31,6 @@ namespace OpenCRM.Views.Login
             tbxPassword.Password = "";
         }
 
-        private void LoginKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password);
-        }
         private void tbxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             LoginKeyDown(sender, e);
@@ -42,5 +41,15 @@ namespace OpenCRM.Views.Login
             LoginKeyDown(sender, e);
         }
 
+        private void LoginKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password))
+                {
+
+                }
+            }
+        }
     }
 }

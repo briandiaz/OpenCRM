@@ -66,154 +66,153 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\RightsAccess\RightsAccessController.cs" />
     <Compile Include="Controllers\Login\LoginController.cs" />
-    <Compile Include="Controllers\Register\RegisterController.cs" />
-    <Compile Include="Database\Account.cs">
+    <Compile Include="DataBase\Account.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Account_Ownership.cs">
+    <Compile Include="DataBase\Account_Ownership.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Account_Priority.cs">
+    <Compile Include="DataBase\Account_Priority.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Account_SLA.cs">
+    <Compile Include="DataBase\Account_SLA.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Account_Type.cs">
+    <Compile Include="DataBase\Account_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Account_Up_Sell_Opportunity.cs">
+    <Compile Include="DataBase\Account_Up_Sell_Opportunity.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Address.cs">
+    <Compile Include="DataBase\Address.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Address_Type.cs">
+    <Compile Include="DataBase\Address_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Campaign.cs">
+    <Compile Include="DataBase\Campaign.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Campaign_Status.cs">
+    <Compile Include="DataBase\Campaign_Status.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Campaign_Type.cs">
+    <Compile Include="DataBase\Campaign_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Cases.cs">
+    <Compile Include="DataBase\Case.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Case_Origin.cs">
+    <Compile Include="DataBase\Case_Origin.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Case_Priority.cs">
+    <Compile Include="DataBase\Case_Priority.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Case_Reason.cs">
+    <Compile Include="DataBase\Case_Reason.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Case_Status.cs">
+    <Compile Include="DataBase\Case_Status.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Case_Type.cs">
+    <Compile Include="DataBase\Case_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Contact.cs">
+    <Compile Include="DataBase\Contact.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Contact_Level_Languages.cs">
+    <Compile Include="DataBase\Contact_Level_Languages.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Country.cs">
+    <Compile Include="DataBase\Country.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Industry.cs">
+    <Compile Include="DataBase\Industry.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Inventory.cs">
+    <Compile Include="DataBase\Inventory.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Language.cs">
+    <Compile Include="DataBase\Language.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Leads.cs">
+    <Compile Include="DataBase\Lead.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Lead_Source.cs">
+    <Compile Include="DataBase\Lead_Source.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Level_Language.cs">
+    <Compile Include="DataBase\Level_Language.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Object.cs">
+    <Compile Include="DataBase\Object.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Object_Fields.cs">
+    <Compile Include="DataBase\Object_Fields.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\OpenCRMDataModel.Context.cs">
+    <Compile Include="DataBase\OpenCRMDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OpenCRMDataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\OpenCRMDataModel.cs">
+    <Compile Include="DataBase\OpenCRMDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\OpenCRMDataModel.Designer.cs">
+    <Compile Include="DataBase\OpenCRMDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities.cs">
+    <Compile Include="DataBase\Opportunities_Competidor.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities_Competidor.cs">
+    <Compile Include="DataBase\Opportunities_Delivery_Status.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities_Delivery_Status.cs">
+    <Compile Include="DataBase\Opportunities_Products.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities_Products.cs">
+    <Compile Include="DataBase\Opportunities_Stage.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities_Stage.cs">
+    <Compile Include="DataBase\Opportunities_Status.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities_Status.cs">
+    <Compile Include="DataBase\Opportunities_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Opportunities_Type.cs">
+    <Compile Include="DataBase\Opportunity.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Products.cs">
+    <Compile Include="DataBase\Product.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Profile.cs">
+    <Compile Include="DataBase\Profile.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Profile_Object.cs">
+    <Compile Include="DataBase\Profile_Object.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Profile_Object_Fields.cs">
+    <Compile Include="DataBase\Profile_Object_Fields.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Rating.cs">
+    <Compile Include="DataBase\Rating.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Salutation.cs">
+    <Compile Include="DataBase\Salutation.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\State.cs">
+    <Compile Include="DataBase\State.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\User.cs">
+    <Compile Include="DataBase\User.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Login\LoginModel.cs" />
-    <Compile Include="Models\Register\RegisterModel.cs" />
     <Compile Include="Views\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -263,19 +262,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Database\OpenCRMDataModel.edmx">
+    <EntityDeploy Include="DataBase\OpenCRMDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OpenCRMDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Database\OpenCRMDataModel.Context.tt">
+    <None Include="DataBase\OpenCRMDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
       <LastGenOutput>OpenCRMDataModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="Database\OpenCRMDataModel.edmx.diagram">
+    <None Include="DataBase\OpenCRMDataModel.edmx.diagram">
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
     </None>
-    <None Include="Database\OpenCRMDataModel.tt">
+    <None Include="DataBase\OpenCRMDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
       <LastGenOutput>OpenCRMDataModel.cs</LastGenOutput>

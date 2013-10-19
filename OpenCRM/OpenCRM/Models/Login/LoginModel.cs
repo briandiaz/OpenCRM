@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+
 using OpenCRM.Database;
 using OpenCRM.Views.Login;
 
@@ -58,7 +59,7 @@ namespace OpenCRM.Models.Login
             }
             catch (Exception)
             {
-                System.Windows.MessageBox.Show("There was an error.");
+                MessageBox.Show("There was an error.");
             }
             return false;
         }
