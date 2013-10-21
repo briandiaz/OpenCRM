@@ -16,7 +16,7 @@ namespace OpenCRM.Views.Home
         {
             this.ID = id;
             this.Name = name;
-            this.Art = "/images/placeholder.gif";
+            this.Art = "/images/placeholder_person.gif";
         }
     }
 }
