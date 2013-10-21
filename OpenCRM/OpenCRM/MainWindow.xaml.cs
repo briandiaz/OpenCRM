@@ -40,7 +40,8 @@ namespace OpenCRM
             try
             {
                 //frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
-                PageSwitcher.mainwindow.frmSource.Navigate(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
+                //PageSwitcher.mainwindow.frmSource.Navigate(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
+                PageSwitcher.mainwindow.frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
                 ShowFrame(true);
             }
             catch (Exception ex)
