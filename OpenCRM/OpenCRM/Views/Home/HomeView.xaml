@@ -4,17 +4,17 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
                       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                      xmlns:models="clr-namespace:OpenCRM.Views.Home;assembly=OpenCRM.Views.Home"
+                      xmlns:models="clr-namespace:MahApps.Metro.SampleData.MusicStore;assembly=MahApps.Metro.SampleData"
                       xmlns:effect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      xmlns:home="clr-namespace:OpenCRM.Views.Home"
+                      xmlns:home="clr-namespace:OpenCRM.Models.Home"
+                      xmlns:dataBase="clr-namespace:OpenCRM.DataBase"
                       mc:Ignorable="d"
-                      Title="Panorama Sample" 
+                      Title="Home" 
                       Height="Auto" 
                       Width="Auto"
-                      d:DataContext="{d:DesignInstance home:ShellViewModel}"
->
+                      d:DataContext="{d:DesignInstance home:HomeModel}">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,33 +25,18 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate x:Key="Data">
-                <controls:Tile Title="{Binding Name}" Width="160" Height="160">
-                    <Image Source="{Binding Art}" Opacity="0.8"  Stretch="UniformToFill">
+            <DataTemplate DataType="{x:Type home:HomeData}">
+                <controls:Tile Title="{Binding Name}" Width="160" Height="120">
+                    <Image Source="images/blank-cd.png" Opacity="0.5"  Stretch="Fill">
                         <Image.Effect>
                             <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
                         </Image.Effect>
                     </Image>
                 </controls:Tile>
             </DataTemplate>
-<!--
-            <DataTemplate DataType="{x:Type models:Album}">
-                <controls:Tile Title="{Binding Title}" Width="120" Height="120">
-                    <Image Source="images/blank-cd.png" Opacity="0.5"  Stretch="UniformToFill">
-                        <Image.Effect>
-                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                        </Image.Effect>
-                    </Image>
-                </controls:Tile>
-            </DataTemplate>
-            -->
+
         </ResourceDictionary>
     </Page.Resources>
-    <Page.DataContext>
-        <home:ShellViewModel/>
-    </Page.DataContext>
-
-
 
     <Grid>
         <Grid.Background>

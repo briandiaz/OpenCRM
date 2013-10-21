@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using OpenCRM.Models.Home;
+
 namespace OpenCRM.Views.Home
 {
     /// <summary>
@@ -23,7 +25,7 @@ namespace OpenCRM.Views.Home
         public HomeView()
         {
             InitializeComponent();
-            DataContext = new ShellViewModel();
+            DataContext = new HomeModel();
         }
     }
 }

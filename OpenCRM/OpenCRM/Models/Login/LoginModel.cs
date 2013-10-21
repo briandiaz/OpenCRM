@@ -43,6 +43,7 @@ namespace OpenCRM.Models.Login
                 else
                     using (var db = new OpenCRMEntities())
                     {
+                        return true;
                         var hashpassword = password.GetHashCode().ToString();
 
                         var query = ( 

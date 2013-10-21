@@ -234,11 +234,10 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Login\LoginModel.cs" />
-    <Compile Include="Views\Home\Data.cs" />
     <Compile Include="Views\Home\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\ShellViewModel.cs" />
+    <Compile Include="Models\Home\HomeModel.cs" />
     <Compile Include="Views\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -315,9 +314,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Views\Home\Fody.targets">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -331,11 +327,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\opencrm_logo_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Home\FodyWeavers.xml">
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Home\images\blank-cd.png" />
