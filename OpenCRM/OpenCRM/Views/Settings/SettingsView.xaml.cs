@@ -18,9 +18,9 @@ namespace OpenCRM.Views.Settings
     /// <summary>
     /// Lógica de interacción para Settings.xaml
     /// </summary>
-    public partial class Settings : Page
+    public partial class SettingsView
     {
-        public Settings()
+        public SettingsView()
         {
             InitializeComponent();
         }

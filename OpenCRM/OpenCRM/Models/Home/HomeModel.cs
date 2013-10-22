@@ -21,7 +21,9 @@ namespace OpenCRM.Models.Home
         public ReactiveCollection<HomeData> Objects { get; set; }
 
         readonly PanoramaGroup objects;
-
+        /// <summary>
+        /// This method adds the button to the HomeView with its Name and Icon.
+        /// </summary>
         public HomeModel()
         {
             List<HomeData> data;

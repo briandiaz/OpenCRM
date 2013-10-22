@@ -27,22 +27,19 @@ namespace OpenCRM
         {
             InitializeComponent();
             PageSwitcher.mainwindow = this;
-            //PageSwitcher.Switch(new MainMenu());   
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-
+            PageSwitcher.Switch(new Uri("/Views/Settings/SettingsView.xaml",UriKind.Relative));
         }
 
         private void btnLoginShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
-                //PageSwitcher.mainwindow.frmSource.Navigate(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
                 PageSwitcher.mainwindow.frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
-                ShowFrame(true);
+                PageSwitcher.ShowFrame(true);
             }
             catch (Exception ex)
             {
@@ -52,20 +49,7 @@ namespace OpenCRM
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            ShowFrame(false);
-        }
-        private void ShowFrame(Boolean show)
-        {
-            if (show)
-            {
-                frmSource.Visibility = System.Windows.Visibility.Visible;
-                gridSplash.Visibility = System.Windows.Visibility.Hidden;
-            }
-            else
-            {
-                frmSource.Visibility = System.Windows.Visibility.Hidden;
-                gridSplash.Visibility = System.Windows.Visibility.Visible;
-            }
+            PageSwitcher.Switch(new Uri("/Views/Home/HomeView.xaml",UriKind.Relative));
         }
     }
 }

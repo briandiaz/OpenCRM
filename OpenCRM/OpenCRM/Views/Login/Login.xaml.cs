@@ -22,15 +22,19 @@ namespace OpenCRM.Views.Login
         {
             if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password)) 
             {
-                //MainWindow mg = new MainWindow();
-                PageSwitcher.Switch(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
-
-                PageSwitcher.mainwindow.gridSplash.Visibility = System.Windows.Visibility.Hidden;
-                PageSwitcher.mainwindow.frmSource.Visibility = System.Windows.Visibility.Visible;
+                LoggedIn();
             }
            
         }
+        /// <summary>
+        /// Display the HomeView when the user is logged in.
+        /// </summary>
+        private void LoggedIn() {
+            PageSwitcher.Switch(new Uri("/Views/Home/HomeView.xaml", UriKind.Relative));
 
+            PageSwitcher.mainwindow.gridSplash.Visibility = System.Windows.Visibility.Hidden;
+            PageSwitcher.mainwindow.frmSource.Visibility = System.Windows.Visibility.Visible;
+        }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             tbxUsername.Text = "";
@@ -53,7 +57,7 @@ namespace OpenCRM.Views.Login
             {
                 if (loginM.ValidateFields(tbxUsername.Text, tbxPassword.Password))
                 {
-
+                    LoggedIn();
                 }
             }
         }

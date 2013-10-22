@@ -21,7 +21,7 @@ namespace OpenCRM.Models.Login
         }
 
         /// <summary>
-        /// This function can validate de <paramref name="password"/>
+        /// This function can validate the <paramref name="password"/>
         /// and the <paramref name="username"/>
         /// </summary>
         /// <param name="username">The username for login</param>
@@ -43,18 +43,14 @@ namespace OpenCRM.Models.Login
                 else
                     using (var db = new OpenCRMEntities())
                     {
-                        //return true;
                         var hashpassword = password.GetHashCode().ToString();
-
                         var query = ( 
                             from user in db.User
                             where user.UserName == username && user.HashPassword == hashpassword
                             select user
                         );
-
                         if (query.Any())
                             return true;
-
                         ErrorLabel.Content = "Username or password are incorrect.";
                     }
             }

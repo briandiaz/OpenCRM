@@ -4,7 +4,6 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
                       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                      xmlns:models="clr-namespace:MahApps.Metro.SampleData.MusicStore;assembly=MahApps.Metro.SampleData"
                       xmlns:effect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -35,21 +34,18 @@
          </ResourceDictionary>
     </Page.Resources>
 
-    <Grid>
+    
+        <Grid>
         <Grid.Background>
+            
             <ImageBrush ImageSource="../../Assets/Img/Backgrounds/5.png" />
-            <!-- 
-            <RadialGradientBrush RadiusY="0.844" RadiusX="0.879" Center="0.269,0.107" GradientOrigin="0.269,0.107">
-                <GradientStop Color="{DynamicResource AccentColor}"/>
-                <GradientStop Color="{DynamicResource AccentColor3}" Offset="0.987"/>
-            </RadialGradientBrush>
-            -->
         </Grid.Background>
-
-        <controls:Panorama x:Name="MainPanorama" 
+        <controls:MetroContentControl>
+            <controls:Panorama x:Name="MainPanorama" 
                            VerticalAlignment="Stretch" 
                            Margin="125,25,25,25" 
                            ItemBox="140" 
                            ItemsSource="{Binding Groups}" />
-    </Grid>
+            </controls:MetroContentControl>
+        </Grid>
 </Page>

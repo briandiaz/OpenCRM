@@ -1,0 +1,97 @@
+﻿<Page x:Class="OpenCRM.Views.Settings.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+                      Title="Settings" 
+                      Height="Auto" 
+                      Width="Auto">
+    
+        <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+
+
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../../Assets/Img/Backgrounds/2.jpg" />
+        </Grid.Background>
+        <Controls:MetroContentControl>
+            <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+
+                                <ControlTemplate TargetType="{x:Type TabItem}">
+                                    <Grid>
+                                        <Border Name="Border" Margin="0,0,0,0" Background="Transparent" CornerRadius="5">
+                                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              ContentSource="Header" Margin="15"
+                              RecognizesAccessKey="True">
+                                                <ContentPresenter.LayoutTransform>
+                                                    <RotateTransform Angle="270" />
+                                                </ContentPresenter.LayoutTransform>
+                                            </ContentPresenter>
+                                        </Border>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Panel.ZIndex" Value="100" />
+                                            <Setter TargetName="Border" Property="Background" Value="White" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <Setter Property="FontSize" Value="24" />
+                                            <Setter Property="FontFamily" Value="Segoe WP" />
+                                        </Trigger>
+                                            <Trigger Property="IsSelected" Value="False">
+                                                <Setter Property="Panel.ZIndex" Value="100" />
+                                                <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="FontFamily" Value="Segoe WP" />
+                                                <Setter Property="FontSize" Value="24" />
+                                        </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="Red" />
+                                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                    </Setter>
+                    <Setter Property="Padding" Value="14"/>
+                </Style>
+
+                </TabControl.Resources>
+                <TabControl.Effect>
+                    <DropShadowEffect ShadowDepth="4" Color="Black" />
+                </TabControl.Effect>
+                <TabItem Header="Edit Profile">
+                    <Label Content="The Profile Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+            </TabItem>
+                <TabItem Header="New User">
+                    <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+             </TabItem>
+                <TabItem Header="Permissions">
+                    <Label Content="The Permissions Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+                </TabItem>
+            </TabControl>
+        </Controls:MetroContentControl>
+    </Grid>
+    
+    
+
+</Page>

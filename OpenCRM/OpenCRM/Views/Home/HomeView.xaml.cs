@@ -26,7 +26,7 @@ namespace OpenCRM.Views.Home
         {
             InitializeComponent();
             DataContext = new HomeModel();
-
+            PageSwitcher.MainButtons(true);
         }
     }
 }
