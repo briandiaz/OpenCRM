@@ -13,6 +13,7 @@ namespace OpenCRM
         public static void Switch(Uri newPage)
         {
             mainwindow.frmSource.Navigate(newPage);
+            
         }
     }
     

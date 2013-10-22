@@ -26,6 +26,7 @@ namespace OpenCRM.Views.Home
         {
             InitializeComponent();
             DataContext = new HomeModel();
+
         }
     }
 }

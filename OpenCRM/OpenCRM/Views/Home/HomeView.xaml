@@ -27,12 +27,8 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type home:HomeData}">
-                <controls:Tile Title="{Binding Name}" Width="120" Height="120">
-                    <Image Source="images/blank-cd.png" Opacity="0.5"  Stretch="Fill">
-                        <Image.Effect>
-                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                        </Image.Effect>
-                    </Image>
+                <controls:Tile Title="{Binding Name}" Width="130" Height="130">
+                    <Image Source="{Binding ImgUrl}"  Stretch="Fill" />
                 </controls:Tile>
             </DataTemplate>            
 
@@ -41,15 +37,18 @@
 
     <Grid>
         <Grid.Background>
+            <ImageBrush ImageSource="../../Assets/Img/Backgrounds/5.png" />
+            <!-- 
             <RadialGradientBrush RadiusY="0.844" RadiusX="0.879" Center="0.269,0.107" GradientOrigin="0.269,0.107">
                 <GradientStop Color="{DynamicResource AccentColor}"/>
                 <GradientStop Color="{DynamicResource AccentColor3}" Offset="0.987"/>
             </RadialGradientBrush>
+            -->
         </Grid.Background>
 
         <controls:Panorama x:Name="MainPanorama" 
                            VerticalAlignment="Stretch" 
-                           Margin="0,25,25,25" 
+                           Margin="125,25,25,25" 
                            ItemBox="140" 
                            ItemsSource="{Binding Groups}" />
     </Grid>

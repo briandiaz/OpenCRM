@@ -33,6 +33,7 @@ namespace OpenCRM.Models.Home
                    select new HomeData()
                    {
                        Name = ob.Name,
+                       ImgUrl = "..\\..\\Assets\\Img\\Icons\\Campaigns.png",
                        ObjectId = ob.ObjectId
                    }
                 );
@@ -54,5 +55,6 @@ namespace OpenCRM.Models.Home
     {
         public int ObjectId { get; set; }
         public string Name { get; set; }
+        public String ImgUrl { get; set; }
     }
 }

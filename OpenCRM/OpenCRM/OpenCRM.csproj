@@ -349,7 +349,32 @@
     <Resource Include="Views\Home\images\blank-cd.png" />
     <Resource Include="Views\Home\images\placeholder_person.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\Img\Icons\Contacts Folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Icons\Accounts.png" />
+    <Resource Include="Assets\Img\Icons\Campaigns.png" />
+    <Resource Include="Assets\Img\Icons\Cases.png" />
+    <Resource Include="Assets\Img\Icons\Contact.png" />
+    <Resource Include="Assets\Img\Icons\Contacts.png" />
+    <Resource Include="Assets\Img\Icons\Leads.png" />
+    <Resource Include="Assets\Img\Icons\Oportunities.png" />
+    <Resource Include="Assets\Img\Icons\Products.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Backgrounds\2.jpg" />
+    <Resource Include="Assets\Img\Backgrounds\20.jpg" />
+    <Resource Include="Assets\Img\Backgrounds\4.png" />
+    <Resource Include="Assets\Img\Backgrounds\5.png" />
+    <Resource Include="Assets\Img\Backgrounds\6.png" />
+    <Resource Include="Assets\Img\Backgrounds\7.png" />
+    <Resource Include="Assets\Img\Backgrounds\8.jpg" />
+    <Resource Include="Assets\Img\Backgrounds\9.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
