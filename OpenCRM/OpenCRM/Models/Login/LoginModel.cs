@@ -8,6 +8,7 @@ using System.Windows.Controls;
 
 using OpenCRM.DataBase;
 using OpenCRM.Views.Login;
+using OpenCRM.Controllers.Session;
 
 namespace OpenCRM.Models.Login
 {
@@ -49,8 +50,13 @@ namespace OpenCRM.Models.Login
                             where user.UserName == username && user.HashPassword == hashpassword
                             select user
                         );
+                        
                         if (query.Any())
+                        {
+                            Session.CreateSession(query.First());
+                            ErrorLabel.Content = "";
                             return true;
+                        }
                         ErrorLabel.Content = "Username or password are incorrect.";
                     }
             }

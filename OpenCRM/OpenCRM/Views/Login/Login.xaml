@@ -4,7 +4,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        Title="OpenCRM" Height="768" Width="1024" MinWidth="1024" MinHeight="768"
+        Title="OpenCRM" Height="Auto" Width="Auto" MinWidth="1024" MinHeight="768"
         >
 
     <Page.Resources>
@@ -24,11 +24,8 @@
         <TabControl>
             <TabItem Header="_Login" FontSize="20px">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.ColumnSpan="2" Margin="340,192,312,256">
+                    <Image Source="/Assets/Img/opencrm_logo_blue.png" Margin="260,95,260,477" Width="500" Height="145"/>
+                    <Grid Margin="326,305,326,143" HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -40,33 +37,34 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
 
-                        <Label Content="Username"
-                                       VerticalAlignment="Center"
-                                       Grid.Row="2"
-                                       HorizontalAlignment="Right" />
+                        <Label 
+                            Content="Username"
+                            VerticalAlignment="Center"
+                            Grid.Row="2"
+                            HorizontalAlignment="Right" />
 
                         <TextBox
-                                 Controls:TextboxHelper.Watermark="Enter Username"
-                                 Controls:TextboxHelper.ClearTextButton="True"
-                                 Margin="5,5,-238,5"
-                                 Grid.Row="2"
-                                 Grid.Column="1" 
-                                 FontSize="20px"
-                                 Name="tbxUsername"
-                                 KeyDown="tbxUsername_KeyDown"
-                                />
+                            Controls:TextboxHelper.Watermark="Enter Username"
+                            Controls:TextboxHelper.ClearTextButton="True"
+                            Margin="5,5,-238,5"
+                            Grid.Row="2"
+                            Grid.Column="1" 
+                            FontSize="20px"
+                            Name="tbxUsername"
+                            KeyDown="tbxUsername_KeyDown" />
 
-                        <Label Content="Password"
-                               Grid.Row="3"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
+                        <Label 
+                            Content="Password"
+                            Grid.Row="3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right" />
 
                         <PasswordBox Controls:TextboxHelper.Watermark="Enter Password"
                                      Controls:TextboxHelper.ClearTextButton="True"
@@ -99,125 +97,6 @@
                     </Grid>
                     <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="340,377,0,0" VerticalAlignment="Top" Foreground="Red" Width="462" Grid.ColumnSpan="2"/>
                     <Frame Name="frmSource" Visibility="Hidden"/>
-                </Grid>
-            </TabItem>
-
-            <TabItem Header="_Register" FontSize="20px">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.ColumnSpan="2" Margin="340,100,312,256">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-
-                        <Label Content="Name"
-                                       VerticalAlignment="Center"
-                                       Grid.Row="2"
-                                       HorizontalAlignment="Right" />
-
-                        <TextBox
-                                 Controls:TextboxHelper.Watermark="Insert Your Name"
-                                 Controls:TextboxHelper.ClearTextButton="True"
-                                 Margin="5,5,-238,5"
-                                 Grid.Row="2"
-                                 Grid.Column="1" 
-                                 FontSize="20px"
-                                 Name="tbxName"
-                                />
-
-                        <Label Content="LastName"
-                               Grid.Row="3"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
-
-                        <TextBox 
-                                Controls:TextboxHelper.Watermark="Insert Your LastName"
-                                Controls:TextboxHelper.ClearTextButton="True"
-                                Margin="5,5,-238,5"
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                FontSize="20px"
-                                Name="tbxUserLastName"
-                                />
-                        <Label Content="Birthdate"
-                               Grid.Row="4"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
-
-                        <TextBox 
-                                Controls:TextboxHelper.Watermark="Insert Your Birthdate"
-                                Controls:TextboxHelper.ClearTextButton="True"
-                                Margin="5,5,-238,5"
-                                Grid.Row="4"
-                                Grid.Column="1"
-                                FontSize="20px"
-                                Name="tbxUserBirthDate"
-                                />
-                        <Label Content="Email"
-                               Grid.Row="5"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
-
-                        <TextBox 
-                                Controls:TextboxHelper.Watermark="Insert Your Email"
-                                Controls:TextboxHelper.ClearTextButton="True"
-                                Margin="5,5,-238,5"
-                                Grid.Row="5"
-                                Grid.Column="1"
-                                FontSize="20px"
-                                Name="tbxUserEmail"
-                                />
-                        <Label Content="UserName"
-                               Grid.Row="6"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
-
-                        <TextBox 
-                                Controls:TextboxHelper.Watermark="Insert Your UserName"
-                                Controls:TextboxHelper.ClearTextButton="True"
-                                Margin="5,5,-238,5"
-                                Grid.Row="6"
-                                Grid.Column="1"
-                                FontSize="20px"
-                                Name="tbxUserUsername"
-                                />
-                        <Label Content="Password"
-                               Grid.Row="7"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
-
-                        <PasswordBox Controls:TextboxHelper.Watermark="Insert Your Password"
-                                     Controls:TextboxHelper.ClearTextButton="True"
-                                     Margin="5,5,-238,5"
-                                     Grid.Row="7"
-                                     Grid.Column="1"
-                                     VerticalContentAlignment="Center" 
-                                     FontSize="20px"
-                                     Name="tbxUserPassword" 
-                                     />
-                    </Grid>
-
                 </Grid>
             </TabItem>
         </TabControl>

@@ -103,10 +103,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataBase\Cases.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\DataBaseInstance.cs" />
+    <Compile Include="DataBase\Leads.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Objects.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Objects_ImgURL.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Opportunities.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Products.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Page\PageSwitcher.cs" />
-    <Compile Include="Controllers\RightsAccess\RightsAccessController.cs" />
-    <Compile Include="Controllers\Login\LoginController.cs" />
+    <Compile Include="Controllers\Session\Session.cs" />
     <Compile Include="DataBase\Account.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -138,9 +156,6 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Campaign_Type.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Case.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Case_Origin.cs">
@@ -176,16 +191,10 @@
     <Compile Include="DataBase\Language.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\Lead.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataBase\Lead_Source.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Level_Language.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Object.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Object_Fields.cs">
@@ -222,12 +231,6 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities_Type.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Opportunity.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Product.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Profile.cs">

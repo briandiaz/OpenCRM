@@ -12,10 +12,12 @@ namespace OpenCRM
         /// <summary>
         /// Switch the current page of the mainFrame to any that you specify with the Uri
         /// </summary>
-        /// <param name="newPage">Uri of the New Page</param>
-        public static void Switch(Uri newPage)
+        /// <param name="newPage">The New Page string URL</param>
+        public static void Switch(string newPage)
         {
-            mainwindow.frmSource.Navigate(newPage);
+            var url = new Uri(newPage, UriKind.Relative);
+            mainwindow.frmSource.Navigate(url);
+            ShowFrame(true);
             
         }
         /// <summary>

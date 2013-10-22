@@ -32,9 +32,7 @@
 
     <Grid Name="gridHome">
         <Grid Name="gridSplash">
-            <TextBlock Margin="67,88,53,128" FontSize="29" Foreground="LightBlue">Welcome to</TextBlock>
-            <Image Source="Assets/Img/opencrm_logo_blue.png" Margin="245,134,271,237" Width="500" Height="145"/>
-            <Button Name="btnLoginShow" Margin="407,436,437,256" Width="150" Height="45" Style="{DynamicResource SquareButtonStyle}" FontSize="19" Click="btnLoginShow_Click">Login</Button>
+            <TextBlock Margin="67,88,53,128" FontSize="29" Foreground="LightBlue"/>
         </Grid>
         <Frame Name="frmSource" Visibility="Hidden" NavigationUIVisibility="Hidden"/>
     </Grid>

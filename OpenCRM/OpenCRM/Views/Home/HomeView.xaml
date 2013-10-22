@@ -38,7 +38,7 @@
         <Grid>
         <Grid.Background>
             
-            <ImageBrush ImageSource="../../Assets/Img/Backgrounds/5.png" />
+            <ImageBrush ImageSource="/Assets/Img/Backgrounds/5.png" />
         </Grid.Background>
         <controls:MetroContentControl>
             <controls:Panorama x:Name="MainPanorama" 

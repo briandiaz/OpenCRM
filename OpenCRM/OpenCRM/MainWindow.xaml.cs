@@ -27,29 +27,22 @@ namespace OpenCRM
         {
             InitializeComponent();
             PageSwitcher.mainwindow = this;
+            PageSwitcher.Switch("/Views/Login/Login.xaml");
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch(new Uri("/Views/Settings/SettingsView.xaml",UriKind.Relative));
+            PageSwitcher.Switch("/Views/Settings/SettingsView.xaml");
         }
 
         private void btnLoginShow_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                PageSwitcher.mainwindow.frmSource.Navigate(new Uri("/Views/Login/Login.xaml", UriKind.Relative));
-                PageSwitcher.ShowFrame(true);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+        {                
+            PageSwitcher.Switch("/Views/Login/Login.xaml");
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch(new Uri("/Views/Home/HomeView.xaml",UriKind.Relative));
+            PageSwitcher.Switch("/Views/Home/HomeView.xaml");
         }
     }
 }
