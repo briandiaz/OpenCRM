@@ -103,28 +103,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataBase\Cases.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\DataBaseInstance.cs" />
-    <Compile Include="DataBase\Leads.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Objects.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Objects_ImgURL.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Opportunities.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Products.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Settings\SettingsModel.cs" />
-    <Compile Include="Page\PageSwitcher.cs" />
-    <Compile Include="Controllers\Session\Session.cs" />
     <Compile Include="DataBase\Account.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -158,6 +136,9 @@
     <Compile Include="DataBase\Campaign_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\Cases.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\Case_Origin.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -182,6 +163,7 @@
     <Compile Include="DataBase\Country.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\DataBaseInstance.cs" />
     <Compile Include="DataBase\Industry.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -191,10 +173,19 @@
     <Compile Include="DataBase\Language.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\Leads.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\Lead_Source.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Level_Language.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Objects.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Objects_ImgURL.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Object_Fields.cs">
@@ -215,6 +206,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\Opportunities.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\Opportunities_Competidor.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -231,6 +225,9 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities_Type.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Products.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Profile.cs">
@@ -254,13 +251,16 @@
     <Compile Include="DataBase\User.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Settings\SettingsModel.cs" />
+    <Compile Include="Page\PageSwitcher.cs" />
+    <Compile Include="Controllers\Session\Session.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Views\Home\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Home\HomeModel.cs" />
-    <Compile Include="Views\Login\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="Views\Login\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -285,7 +285,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login\Login.xaml">
+    <Page Include="Views\Login\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

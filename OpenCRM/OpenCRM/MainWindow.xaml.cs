@@ -27,17 +27,12 @@ namespace OpenCRM
         {
             InitializeComponent();
             PageSwitcher.mainwindow = this;
-            PageSwitcher.Switch("/Views/Login/Login.xaml");
+            PageSwitcher.Switch("/Views/Login/LoginView.xaml");
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Settings/SettingsView.xaml");
-        }
-
-        private void btnLoginShow_Click(object sender, RoutedEventArgs e)
-        {                
-            PageSwitcher.Switch("/Views/Login/Login.xaml");
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)

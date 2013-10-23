@@ -57,7 +57,6 @@ namespace OpenCRM.Models.Home
             var objetos = (
                 from x in Session.RightAccess
                 group x by new { x.ObjectName, x.ObjectId } into temp
-                orderby temp.Key
                 select new {
                     temp.Key
                 }

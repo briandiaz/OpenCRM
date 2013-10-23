@@ -26,26 +26,28 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type home:HomeData}">
-                <controls:Tile Title="{Binding Name}" Width="130" Height="130">
-                    <Image Source="{Binding ImgUrl}"  Stretch="Fill" />
+                <controls:Tile Title="{Binding Name}" Width="260" Height="160">
+                    <Image Source="{Binding ImgUrl}"  Opacity="0.5"  Stretch="UniformToFill">
+                        <Image.Effect>
+                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
+                        </Image.Effect>
+                    </Image>
                 </controls:Tile>
             </DataTemplate>            
 
          </ResourceDictionary>
     </Page.Resources>
 
-    
-        <Grid>
+    <Grid>
         <Grid.Background>
-            
             <ImageBrush ImageSource="/Assets/Img/Backgrounds/5.png" />
         </Grid.Background>
         <controls:MetroContentControl>
             <controls:Panorama x:Name="MainPanorama" 
-                           VerticalAlignment="Stretch" 
-                           Margin="125,25,25,25" 
-                           ItemBox="140" 
-                           ItemsSource="{Binding Groups}" />
-            </controls:MetroContentControl>
-        </Grid>
+                            VerticalAlignment="Stretch"
+                            Margin="125,25,25,25" 
+                            ItemBox="140" 
+                            ItemsSource="{Binding Groups}" />
+        </controls:MetroContentControl>
+    </Grid>
 </Page>
