@@ -53,23 +53,25 @@ namespace OpenCRM.Models.Home
         private List<HomeData> getHomeTitles()
         {
             List<HomeData> data = new List<HomeData>();
-
-            var objetos = (
-                from x in Session.RightAccess
-                group x by new { x.ObjectName, x.ObjectId } into temp
-                select new {
-                    temp.Key
-                }
-            ).ToList();
-
-            objetos.ForEach(
-                x => data.Add(new HomeData(){
+            using (var _db = new OpenCRMEntities()){
+                var objetos = (
+                    from x in Session.RightAccess join url in _db.Objects_ImgURL
+                                                  on x.ObjectId equals url.Objectid
+                    group x by new { x.ObjectName, x.ObjectId, url.ImgUrl } into temp
+                    select new {
+                        temp.Key
+                    }
+                ).ToList();
+                objetos.ForEach(
+                    x => data.Add(new HomeData()
+                    {
                         Name = x.Key.ObjectName,
-                        ImgUrl = @"/Assets/Img/Icons/Campaigns.png",
+                        ImgUrl = @"..\..\"+x.Key.ImgUrl,
                         ObjectId = x.Key.ObjectId
                     }
-                )
-            );
+                    )
+                );
+            }
 
             return data;
         }

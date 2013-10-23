@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCRM.Models.Settings;
 
 namespace OpenCRM.Views.Settings
 {
@@ -23,6 +24,7 @@ namespace OpenCRM.Views.Settings
         public SettingsView()
         {
             InitializeComponent();
+            DataContext = new SettingsModel();
         }
     }
 }
