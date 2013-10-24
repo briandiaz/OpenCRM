@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCRM.Models.Settings;
+using OpenCRM.Controllers.Session;
 
 namespace OpenCRM.Views.Settings
 {
@@ -21,14 +22,18 @@ namespace OpenCRM.Views.Settings
     /// </summary>
     public partial class SettingsView
     {
+        SettingsModel _settingsModel;
+
         public SettingsView()
         {
             InitializeComponent();
-            gridSettingsProfile.DataContext = SettingsData.getUserProfileData();
-            cmbUserProfile.ItemsSource = SettingsData.getProfiles();
+            _settingsModel = new SettingsModel(Session.User,Session.RightAccess);
+            
+            gridSettingsProfile.DataContext = _settingsModel.getUserProfileData();
+            cmbUserProfile.ItemsSource = _settingsModel.Profiles;
             cmbUserProfile.DisplayMemberPath = "ProfileName";
             cmbUserProfile.SelectedValuePath = "ID";
-            cmbUserProfile.SelectedValue = SettingsData.getUserProfession().ID;
+            cmbUserProfile.SelectedValue = _settingsModel.getUserProfession().ID;
         }
     }
 }

@@ -5,22 +5,52 @@ using System.Text;
 using System.Threading.Tasks;
 using MahApps.Metro.Controls;
 using ReactiveUI;
+
 using OpenCRM.DataBase;
 using OpenCRM.Controllers.Session;
 
 namespace OpenCRM.Models.Settings
 {
-    public class SettingsData {
+    public class SettingsModel
+    {
+        #region "Values"
+        User _user;
+        List<RightsAccess> _rightsAccess;
+        
+        #endregion
 
-        public static List<Profile> getProfiles()
+        #region "Properties"
+
+        public List<DataProfile> Profiles { get; set; }
+        
+        #endregion
+
+        #region "Constructor"
+        public SettingsModel()
+        {
+
+        }
+
+        public SettingsModel(User User, List<RightsAccess> RightsAccess)
+        {
+            this._user = User;
+            this._rightsAccess = RightsAccess;
+            this.Profiles = getProfiles();
+        }
+
+        #endregion
+
+        #region "Methods"
+        private List<DataProfile> getProfiles()
         {
             try
             {
-                using (var _db = new OpenCRM.DataBase.OpenCRMEntities())
+                var data = new List<DataProfile>();
+                using (var _db = new OpenCRMEntities())
                 {
                     var _profiles = (
                        from profile in _db.Profile
-                       select new Profile()
+                       select new DataProfile()
                        {
                            ID = profile.ProfileId,
                            ProfileName = profile.Name,
@@ -28,8 +58,10 @@ namespace OpenCRM.Models.Settings
                        }
                     ).ToList();
 
-                    return _profiles;
+                    data = _profiles;
                 }
+
+                return data;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -43,13 +75,17 @@ namespace OpenCRM.Models.Settings
             }
         }
 
-        public static Profile getUserProfession() {
-            try {
-                using (var _db = new OpenCRM.DataBase.OpenCRMEntities())
+        public Profile getUserProfession()
+        {
+            return Profiles.Single(x => x.ID == this._user.ProfileId);
+            
+            /*try
+            {
+                using (var _db = new OpenCRMEntities())
                 {
                     var _profile = (
                        from user in _db.User
-                       join    profile in _db.Profile
+                       join profile in _db.Profile
                        on user.ProfileId equals profile.ProfileId
                        where user.UserId == Session.User.UserId
                        select new Profile()
@@ -72,49 +108,48 @@ namespace OpenCRM.Models.Settings
             {
                 System.Windows.MessageBox.Show(ex.ToString());
                 return null;
-            }
+            }*/
         }
 
-        public static UserProfile getUserProfileData()
+        public UserProfile getUserProfileData()
         {
-            try
-            {
-                UserProfile _userProfileData = new UserProfile(
-                    Session.User.UserId,
-                    Session.User.UserName,
-                    Session.User.Name,
-                    Session.User.LastName,
-                    Session.User.BirthDate.Value,
-                    Session.User.Email,
-                    Session.User.HashPassword
-                );
-                return _userProfileData;
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                System.Windows.MessageBox.Show(ex.ToString());
-                return null;
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.ToString());
-                return null;
-            }
-        }
-    }
-    public class UserProfile {
+            var _userProfileData = new UserProfile(
+                this._user.UserId,
+                this._user.UserName,
+                this._user.Name,
+                this._user.LastName,
+                this._user.BirthDate.Value,
+                this._user.Email,
+                this._user.HashPassword
+            );
 
+            return _userProfileData;
+        }
+
+        #endregion
+    }
+
+    public class UserProfile
+    {
+        #region "Properties"
         public int ID { get; set; }
-        public String Username { get; set; }
-        public String Name { get; set; }
-        public String Lastname { get; set; }
-        public String Birthdate { get; set; }
-        public String Email { get; set; }
-        public String Password { get; set; }
-        public UserProfile() { }
-        public UserProfile(int pID, String pUsername, String pName, String pLastname, DateTime pBirthDate, 
-            String pEmail, String pPassword)
-        { 
+        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Lastname { get; set; }
+        public string Birthdate { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+
+        #endregion
+
+        #region "Constructors"
+        public UserProfile() 
+        {
+ 
+        }
+        
+        public UserProfile( int pID, string pUsername, string pName, string pLastname, DateTime pBirthDate, string pEmail, string pPassword)
+        {
             this.ID = pID;
             this.Username = pUsername;
             this.Name = pName;
@@ -123,31 +158,53 @@ namespace OpenCRM.Models.Settings
             this.Email = pEmail;
             this.Password = pPassword;
         }
+
+        #endregion
+
+        #region "Methods"
         public override string ToString()
         {
             return this.ID + " - " + this.Username + " - " + this.Name + " - " + this.Lastname + " - " + this.Birthdate + " - " + this.Email + " - " + this.Password;
         }
 
-    }
-    public class Profile {
+        #endregion
 
+    }
+
+    public class DataProfile
+    {
+        #region "Properties"
         public int ID { get; set; }
         public String ProfileName { get; set; }
         public String AbbrevationName { get; set; }
-        public Profile() { }
-        public Profile(int id, String Name, String Abbreviation) {
+
+        #endregion
+
+        #region "Constructors"
+        public DataProfile() 
+        {
+ 
+        }
+
+        public DataProfile(int id, String Name, String Abbreviation)
+        {
             this.ID = id;
             this.ProfileName = Name;
             this.AbbrevationName = Abbreviation;
         }
+
+        #endregion
+        
     }
+
     public class FactoryProfile
     {
-        public List<Profile> Profiles { get; set; }
+        public List<DataProfile> Profiles { get; set; }
         public FactoryProfile() { 
         
         }
-        public FactoryProfile(List<Profile> Profiles) {
+        public FactoryProfile(List<DataProfile> Profiles)
+        {
             this.Profiles = Profiles;
         }
     }

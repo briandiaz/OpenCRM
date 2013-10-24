@@ -4,12 +4,12 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-                      Title="Home" 
-                      Height="Auto" 
-                      Width="Auto"
-                      >
+        Title="Home" 
+        Height="Auto" 
+        Width="Auto"
+        >
     
-        <Page.Resources>
+    <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
@@ -28,15 +28,10 @@
     <Controls:MetroContentControl>
         <Grid>
             <Grid.Background>
-
                 <ImageBrush ImageSource="../../Assets/Img/Backgrounds/2.jpg" />
             </Grid.Background>
 
-            <Grid
-  
->
-
-
+            <Grid>
                 <Grid Name="gridSettings">
                     <Controls:MetroContentControl>
                         <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
@@ -48,13 +43,11 @@
                                             <ControlTemplate TargetType="{x:Type TabItem}">
                                                 <Grid>
                                                     <Border Name="Border" Margin="0,0,0,0" Background="Transparent" CornerRadius="5">
-                                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
-                              HorizontalAlignment="Center"
-                              ContentSource="Header" Margin="15"
-                              RecognizesAccessKey="True">
-                                                            <ContentPresenter.LayoutTransform>
-                                                                <RotateTransform Angle="270" />
-                                                            </ContentPresenter.LayoutTransform>
+                                                        <ContentPresenter   x:Name="ContentSite" 
+                                                                            VerticalAlignment="Center"
+                                                                            HorizontalAlignment="Center"
+                                                                            ContentSource="Header" Margin="15"
+                                                                            RecognizesAccessKey="True">
                                                         </ContentPresenter>
                                                     </Border>
                                                 </Grid>
@@ -113,117 +106,99 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Content="Username"
-                                       VerticalAlignment="Center"
-                                       Grid.Row="2"
-                                       HorizontalAlignment="Right" />
+                                        <Label  Content="Username"
+                                                VerticalAlignment="Center"
+                                                Grid.Row="2"
+                                                HorizontalAlignment="Right" />
 
-                                        <TextBox
-                                 Controls:TextboxHelper.Watermark="UserName"
-                                 Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Path=Username}"
-                                 Margin="5,5,-380,5"
-                                 Grid.Row="2"
-                                 Grid.Column="1" 
-                                 FontSize="20px"
-                                 Name="tbxUserUsername"
-                                    
-                                />
+                                        <TextBox    Controls:TextboxHelper.Watermark="UserName"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text="{Binding Path=Username}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="2"
+                                                    Grid.Column="1" 
+                                                    FontSize="20px"
+                                                    Name="tbxUserUsername" 
+                                                    IsEnabled="False"/>
 
-                                        <Label Content="Name"
-                                       VerticalAlignment="Center"
-                                       Grid.Row="3"
-                                       HorizontalAlignment="Right" />
+                                        <Label  Content="Name"
+                                                VerticalAlignment="Center"
+                                                Grid.Row="3"
+                                                HorizontalAlignment="Right" />
 
-                                        <TextBox
-                                 Controls:TextboxHelper.Watermark="Insert Your Name"
-                                 Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Path=Name}"
-                                 Margin="5,5,-380,5"
-                                 Grid.Row="3"
-                                 Grid.Column="1" 
-                                 FontSize="20px"
-                                 Name="tbxUserName"
-                                />
+                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your Name"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text="{Binding Path=Name}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="3"
+                                                    Grid.Column="1" 
+                                                    FontSize="20px"
+                                                    Name="tbxUserName" />
 
-                                        <Label Content="LastName"
-                               Grid.Row="4"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
+                                        <Label  Content="LastName"
+                                                Grid.Row="4"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
 
-                                        <TextBox 
-                                Controls:TextboxHelper.Watermark="Insert Your LastName"
-                                Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Path=Lastname}"
-                                Margin="5,5,-380,5"
-                                Grid.Row="4"
-                                Grid.Column="1"
-                                FontSize="20px"
-                                Name="tbxUserLastName"
-                                />
-                                        <Label Content="Birthdate"
-                               Grid.Row="5"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
+                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your LastName"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text="{Binding Path=Lastname}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="4"
+                                                    Grid.Column="1"
+                                                    FontSize="20px"
+                                                    Name="tbxUserLastName" />
+                                        
+                                        <Label  Content="Birthdate"
+                                                Grid.Row="5"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
 
-                                        <DatePicker 
-                                
-                                    Text="{Binding Path=Birthdate}"
-                                Margin="5,5,-380,5"
-                                Grid.Row="5"
-                                Grid.Column="1"
-                                FontSize="20px"
-                                Name="tbxUserBirthDate"
-                                />
-                                        <Label Content="Email"
-                               Grid.Row="6"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
+                                        <DatePicker Text="{Binding Path=Birthdate}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="5"
+                                                    Grid.Column="1"
+                                                    FontSize="20px"
+                                                    Name="tbxUserBirthDate" />
+                                        
+                                        <Label  Content="Email"
+                                                Grid.Row="6"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
 
-                                        <TextBox 
-                                Controls:TextboxHelper.Watermark="Insert Your Email"
-                                Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Path=Email}"
-                                Margin="5,5,-380,5"
-                                Grid.Row="6"
-                                Grid.Column="1"
-                                FontSize="20px"
-                                Name="tbxUserEmail"
-                                />
+                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your Email"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text="{Binding Path=Email}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="6"
+                                                    Grid.Column="1"
+                                                    FontSize="20px"
+                                                    Name="tbxUserEmail" />
 
-                                        <Label Content="Password"
-                               Grid.Row="7"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
+                                        <Label  Content="Password"
+                                                Grid.Row="7"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
 
-                                        <PasswordBox Controls:TextboxHelper.Watermark="Insert Your Password"
-                                     Controls:TextboxHelper.ClearTextButton="True"
-                                             
-                                     Margin="5,5,-380,5"
-                                     Grid.Row="7"
-                                     Grid.Column="1"
-                                     VerticalContentAlignment="Center" 
-                                     FontSize="20px"
-                                     Name="tbxUserHashPassword" 
-                                     />
+                                        <PasswordBox    Controls:TextboxHelper.Watermark="Insert Your Password"
+                                                        Controls:TextboxHelper.ClearTextButton="True"                                             
+                                                        Margin="5,5,-380,5"
+                                                        Grid.Row="7"
+                                                        Grid.Column="1"
+                                                        VerticalContentAlignment="Center" 
+                                                        FontSize="20px"
+                                                        Name="tbxUserHashPassword" />
 
-                                        <Label Content="User Profile"
-                               Grid.Row="8"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               />
+                                        <Label  Content="User Profile"
+                                                Grid.Row="8"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
 
-                                        <ComboBox 
-                                  Name="cmbUserProfile"
-                                  Grid.Row="8" 
-                                  Grid.Column="1"
-                                  VerticalAlignment="Center"
-                                  ItemsSource="{Binding Path=ProfileName}" Margin="5,8,-380,3" Height="36"
-                                />
+                                        <ComboBox   Name="cmbUserProfile"
+                                                    Grid.Row="8" 
+                                                    Grid.Column="1"
+                                                    VerticalAlignment="Center"
+                                                    ItemsSource="{Binding Path=ProfileName}" Margin="5,8,-380,3" Height="36" />
 
                                         <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="8">
                                             <StackPanel>
@@ -231,9 +206,9 @@
                                                 <TextBlock>Save</TextBlock>
                                             </StackPanel>
                                         </Button>
+                                        
                                     </Grid>
                                 </Grid>
-
                             </TabItem>
 
                             <TabItem Header="New User">
@@ -241,16 +216,15 @@
                                     <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
                                  </Grid>
                             </TabItem>
+                            
                             <TabItem Header="Permissions">
                                 <Grid Name="gridPermissions">
                                     <Label Content="The Permissions Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
                                     
                                 </Grid>
                             </TabItem>
-
-
+                            
                         </TabControl>
-
                     </Controls:MetroContentControl>
                 </Grid>
             </Grid>
