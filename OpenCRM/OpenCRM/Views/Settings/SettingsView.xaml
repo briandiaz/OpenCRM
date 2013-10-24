@@ -4,15 +4,10 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:settings="clr-namespace:OpenCRM.Models.Settings"
-                      xmlns:dataBase="clr-namespace:OpenCRM.DataBase"
-                      mc:Ignorable="d"
                       Title="Home" 
                       Height="Auto" 
                       Width="Auto"
-                      d:DataContext="{d:DesignInstance settings:SettingsModel}">
+                      >
     
         <Page.Resources>
         <ResourceDictionary>
@@ -25,9 +20,24 @@
             </ResourceDictionary.MergedDictionaries>
 
 
-            <DataTemplate DataType="{x:Type settings:SettingsProfileData}">
+            <!-- <DataTemplate DataType="{x:Type settings:SettingsProfileData}"> -->
+            <!--  </DataTemplate> -->
+        </ResourceDictionary>
+    </Page.Resources>
 
-                <Grid>
+    <Controls:MetroContentControl>
+        <Grid>
+            <Grid.Background>
+
+                <ImageBrush ImageSource="../../Assets/Img/Backgrounds/2.jpg" />
+            </Grid.Background>
+
+            <Grid
+  
+>
+
+
+                <Grid Name="gridSettings">
                     <Controls:MetroContentControl>
                         <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
                             <TabControl.Resources>
@@ -82,11 +92,11 @@
 
                             <TabItem Header="Edit Profile">
 
-                                <Grid>
+                                <Grid Margin="100,50">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Grid>
+                                    <Grid Name="gridSettingsProfile">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
@@ -111,8 +121,8 @@
                                         <TextBox
                                  Controls:TextboxHelper.Watermark="UserName"
                                  Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Username}"
-                                 Margin="5,5,-238,5"
+                                    Text="{Binding Path=Username}"
+                                 Margin="5,5,-380,5"
                                  Grid.Row="2"
                                  Grid.Column="1" 
                                  FontSize="20px"
@@ -128,8 +138,8 @@
                                         <TextBox
                                  Controls:TextboxHelper.Watermark="Insert Your Name"
                                  Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Name}"
-                                 Margin="5,5,-238,5"
+                                    Text="{Binding Path=Name}"
+                                 Margin="5,5,-380,5"
                                  Grid.Row="3"
                                  Grid.Column="1" 
                                  FontSize="20px"
@@ -145,8 +155,8 @@
                                         <TextBox 
                                 Controls:TextboxHelper.Watermark="Insert Your LastName"
                                 Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Lastname}"
-                                Margin="5,5,-238,5"
+                                    Text="{Binding Path=Lastname}"
+                                Margin="5,5,-380,5"
                                 Grid.Row="4"
                                 Grid.Column="1"
                                 FontSize="20px"
@@ -158,11 +168,10 @@
                                HorizontalAlignment="Right"
                                />
 
-                                        <TextBox 
-                                Controls:TextboxHelper.Watermark="Insert Your Birthdate"
-                                Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Birthdate}"
-                                Margin="5,5,-238,5"
+                                        <DatePicker 
+                                
+                                    Text="{Binding Path=Birthdate}"
+                                Margin="5,5,-380,5"
                                 Grid.Row="5"
                                 Grid.Column="1"
                                 FontSize="20px"
@@ -177,14 +186,14 @@
                                         <TextBox 
                                 Controls:TextboxHelper.Watermark="Insert Your Email"
                                 Controls:TextboxHelper.ClearTextButton="True"
-                                    Text="{Binding Email}"
-                                Margin="5,5,-238,5"
+                                    Text="{Binding Path=Email}"
+                                Margin="5,5,-380,5"
                                 Grid.Row="6"
                                 Grid.Column="1"
                                 FontSize="20px"
                                 Name="tbxUserEmail"
                                 />
-                                        <!--
+
                                         <Label Content="Password"
                                Grid.Row="7"
                                VerticalAlignment="Center"
@@ -193,43 +202,50 @@
 
                                         <PasswordBox Controls:TextboxHelper.Watermark="Insert Your Password"
                                      Controls:TextboxHelper.ClearTextButton="True"
-                                             Password="{Binding Password}"
-                                     Margin="5,5,-238,5"
+                                             
+                                     Margin="5,5,-380,5"
                                      Grid.Row="7"
                                      Grid.Column="1"
                                      VerticalContentAlignment="Center" 
                                      FontSize="20px"
                                      Name="tbxUserHashPassword" 
                                      />
--->
 
                                         <Label Content="User Profile"
                                Grid.Row="8"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,45,0,-39"
+                               HorizontalAlignment="Right"
                                />
 
                                         <ComboBox 
                                   Name="cmbUserProfile"
-                                    
                                   Grid.Row="8" 
                                   Grid.Column="1"
                                   VerticalAlignment="Center"
-                                  MaxDropDownHeight="50"
-                                  SelectedIndex="0" Margin="0,50,0,-29"
-                                  ItemsSource="{Binding UserProfile}"
+                                  ItemsSource="{Binding Path=ProfileName}" Margin="5,8,-380,3" Height="36"
                                 />
 
+                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="8">
+                                            <StackPanel>
+                                                <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
+                                                <TextBlock>Save</TextBlock>
+                                            </StackPanel>
+                                        </Button>
                                     </Grid>
                                 </Grid>
 
                             </TabItem>
 
                             <TabItem Header="New User">
-                                <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+                                <Grid Name="gridNewUser">
+                                    <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+                                 </Grid>
                             </TabItem>
                             <TabItem Header="Permissions">
-                                <Label Content="The Permissions Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+                                <Grid Name="gridPermissions">
+                                    <Label Content="The Permissions Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+                                    
+                                </Grid>
                             </TabItem>
 
 
@@ -237,24 +253,7 @@
 
                     </Controls:MetroContentControl>
                 </Grid>
-            </DataTemplate>
-        </ResourceDictionary>
-    </Page.Resources>
-
-
-    <Grid>
-        <Grid.Background>
-
-            <ImageBrush ImageSource="../../Assets/Img/Backgrounds/2.jpg" />
-        </Grid.Background>
-        <Controls:MetroContentControl Height="Auto" Width="Auto">
-            <Controls:Panorama x:Name="MainPanorama" 
-                           VerticalAlignment="Stretch" 
-                           Margin="125,25,25,25" 
-                           ItemBox="140" 
-                           ItemsSource="{Binding Groups}" />
-            
-        </Controls:MetroContentControl>
-    </Grid>
-
+            </Grid>
+        </Grid>
+    </Controls:MetroContentControl>
 </Page>

@@ -6,62 +6,150 @@ using System.Threading.Tasks;
 using MahApps.Metro.Controls;
 using ReactiveUI;
 using OpenCRM.DataBase;
+using OpenCRM.Controllers.Session;
 
 namespace OpenCRM.Models.Settings
 {
-    class SettingsModel : ReactiveObject
-    {
-        public ReactiveCollection<PanoramaGroup> Groups { get; set; }
-        public ReactiveCollection<SettingsProfileData> Objects { get; set; }
-        readonly PanoramaGroup objects;
-        
-        public SettingsModel() {
-            int UserID = 4;
-            List<SettingsProfileData> data;
+    public class SettingsData {
 
-            using (var _db = new OpenCRMEntities())
+        public static List<Profile> getProfiles()
+        {
+            try
             {
-                var query = (
-                   from user in _db.User
-                   join profile in _db.Profile
-                   on user.ProfileId equals profile.ProfileId
-                   where user.UserId == UserID
-                   select new SettingsProfileData()
-                   {
-                       Username = user.UserName,
-                       Name = user.Name,
-                       Lastname = user.LastName,
-                       Birthdate = (DateTime)user.BirthDate,
-                       Email = user.Email,
-                       Password = user.HashPassword,
-                       ProfileName = profile.Name,
-                       AbbrevationName = profile.AbbrevationName
-                   }
-                );
+                using (var _db = new OpenCRM.DataBase.OpenCRMEntities())
+                {
+                    var _profiles = (
+                       from profile in _db.Profile
+                       select new Profile()
+                       {
+                           ID = profile.ProfileId,
+                           ProfileName = profile.Name,
+                           AbbrevationName = profile.AbbrevationName
+                       }
+                    ).ToList();
 
-                data = query.ToList();
+                    return _profiles;
+                }
             }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
 
-            Objects = new ReactiveCollection<SettingsProfileData>(data);
+        public static Profile getUserProfession() {
+            try {
+                using (var _db = new OpenCRM.DataBase.OpenCRMEntities())
+                {
+                    var _profile = (
+                       from user in _db.User
+                       join    profile in _db.Profile
+                       on user.ProfileId equals profile.ProfileId
+                       where user.UserId == Session.User.UserId
+                       select new Profile()
+                       {
+                           ID = profile.ProfileId,
+                           ProfileName = profile.Name,
+                           AbbrevationName = profile.AbbrevationName
+                       }
+                    ).ToList();
 
-            objects = new PanoramaGroup("Settings");
+                    return _profile[0];
+                }
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
 
-            Groups = new ReactiveCollection<PanoramaGroup> { objects };
-
-            objects.SetSource(Objects);
+        public static UserProfile getUserProfileData()
+        {
+            try
+            {
+                UserProfile _userProfileData = new UserProfile(
+                    Session.User.UserId,
+                    Session.User.UserName,
+                    Session.User.Name,
+                    Session.User.LastName,
+                    Session.User.BirthDate.Value,
+                    Session.User.Email,
+                    Session.User.HashPassword
+                );
+                return _userProfileData;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+                return null;
+            }
         }
     }
-    class SettingsProfileData { 
-        
-        
+    public class UserProfile {
+
+        public int ID { get; set; }
         public String Username { get; set; }
         public String Name { get; set; }
         public String Lastname { get; set; }
-        public DateTime Birthdate { get; set; }
+        public String Birthdate { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
-        public String ProfileName { get; set; }
-        public String AbbrevationName { get; set; }
+        public UserProfile() { }
+        public UserProfile(int pID, String pUsername, String pName, String pLastname, DateTime pBirthDate, 
+            String pEmail, String pPassword)
+        { 
+            this.ID = pID;
+            this.Username = pUsername;
+            this.Name = pName;
+            this.Lastname = pLastname;
+            this.Birthdate = pBirthDate.ToShortDateString();
+            this.Email = pEmail;
+            this.Password = pPassword;
+        }
+        public override string ToString()
+        {
+            return this.ID + " - " + this.Username + " - " + this.Name + " - " + this.Lastname + " - " + this.Birthdate + " - " + this.Email + " - " + this.Password;
+        }
 
     }
+    public class Profile {
+
+        public int ID { get; set; }
+        public String ProfileName { get; set; }
+        public String AbbrevationName { get; set; }
+        public Profile() { }
+        public Profile(int id, String Name, String Abbreviation) {
+            this.ID = id;
+            this.ProfileName = Name;
+            this.AbbrevationName = Abbreviation;
+        }
+    }
+    public class FactoryProfile
+    {
+        public List<Profile> Profiles { get; set; }
+        public FactoryProfile() { 
+        
+        }
+        public FactoryProfile(List<Profile> Profiles) {
+            this.Profiles = Profiles;
+        }
+    }
+    
 }

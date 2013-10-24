@@ -24,7 +24,11 @@ namespace OpenCRM.Views.Settings
         public SettingsView()
         {
             InitializeComponent();
-            DataContext = new SettingsModel();
+            gridSettingsProfile.DataContext = SettingsData.getUserProfileData();
+            cmbUserProfile.ItemsSource = SettingsData.getProfiles();
+            cmbUserProfile.DisplayMemberPath = "ProfileName";
+            cmbUserProfile.SelectedValuePath = "ID";
+            cmbUserProfile.SelectedValue = SettingsData.getUserProfession().ID;
         }
     }
 }
