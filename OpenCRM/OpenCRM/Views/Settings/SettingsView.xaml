@@ -18,25 +18,16 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-
-            <!-- <DataTemplate DataType="{x:Type settings:SettingsProfileData}"> -->
-            <!--  </DataTemplate> -->
         </ResourceDictionary>
     </Page.Resources>
 
     <Controls:MetroContentControl>
         <Grid>
             <Grid.Background>
-
                 <ImageBrush ImageSource="../../Assets/Img/Backgrounds/2.jpg" />
             </Grid.Background>
 
-            <Grid
-  
->
-
-
+            <Grid>
                 <Grid Name="gridSettings">
                     <Controls:MetroContentControl>
                         <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
@@ -127,6 +118,7 @@
                                  Grid.Column="1" 
                                  FontSize="20px"
                                  Name="tbxUserUsername"
+                                  IsEnabled="False"
                                     
                                 />
 
@@ -222,6 +214,8 @@
                                   Grid.Row="8" 
                                   Grid.Column="1"
                                   VerticalAlignment="Center"
+                                            FontSize="20px"
+                                            IsEnabled="False"
                                   ItemsSource="{Binding Path=ProfileName}" Margin="5,8,-380,3" Height="36"
                                 />
 
