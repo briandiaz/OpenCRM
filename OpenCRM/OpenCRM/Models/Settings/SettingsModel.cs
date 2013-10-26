@@ -8,20 +8,22 @@ using ReactiveUI;
 
 using OpenCRM.DataBase;
 using OpenCRM.Controllers.Session;
+using System.Data.SqlClient;
+using System.Windows;
 
 namespace OpenCRM.Models.Settings
 {
     public class SettingsModel
     {
         #region "Values"
-        User _user;
+        int _userId;
         List<RightsAccess> _rightsAccess;
         
         #endregion
 
         #region "Properties"
 
-        public List<DataProfile> Profiles { get; set; }
+        public List<Profile> Profiles { get; set; }
         
         #endregion
 
@@ -31,9 +33,9 @@ namespace OpenCRM.Models.Settings
 
         }
 
-        public SettingsModel(User User, List<RightsAccess> RightsAccess)
+        public SettingsModel(int UserId, List<RightsAccess> RightsAccess)
         {
-            this._user = User;
+            this._userId = UserId;
             this._rightsAccess = RightsAccess;
             this.Profiles = getProfiles();
         }
@@ -41,172 +43,130 @@ namespace OpenCRM.Models.Settings
         #endregion
 
         #region "Methods"
-        private List<DataProfile> getProfiles()
+        private List<Profile> getProfiles()
         {
+            var data = new List<Profile>();
             try
             {
-                var data = new List<DataProfile>();
                 using (var _db = new OpenCRMEntities())
                 {
                     var _profiles = (
                        from profile in _db.Profile
-                       select new DataProfile()
-                       {
-                           ID = profile.ProfileId,
-                           ProfileName = profile.Name,
-                           AbbrevationName = profile.AbbrevationName
-                       }
+                       select profile
                     ).ToList();
 
                     data = _profiles;
                 }
-
-                return data;
             }
-            catch (System.Data.SqlClient.SqlException ex)
+            catch (SqlException ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString());
-                return null;
+                MessageBox.Show(ex.ToString());
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString());
-                return null;
+                MessageBox.Show(ex.ToString());
             }
+                
+            return data;
         }
 
-        public Profile getUserProfession()
+        public Profile getUserProfile()
         {
-            return Profiles.Single(x => x.ID == this._user.ProfileId);
-            
-            /*try
+            var userProfile = Profiles.Single(x => x.ProfileId == this._userId);
+            return userProfile;
+        }
+
+        public UserData getUserData()
+        {
+            UserData userData = null;
+
+            try
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    var _profile = (
-                       from user in _db.User
-                       join profile in _db.Profile
-                       on user.ProfileId equals profile.ProfileId
-                       where user.UserId == Session.User.UserId
-                       select new Profile()
-                       {
-                           ID = profile.ProfileId,
-                           ProfileName = profile.Name,
-                           AbbrevationName = profile.AbbrevationName
-                       }
-                    ).ToList();
+                    var user = _db.User.Single(x => x.UserId == this._userId);
 
-                    return _profile[0];
+                    userData = new UserData(
+                        user.UserName,
+                        user.HashPassword,
+                        user.Name,
+                        user.LastName,
+                        user.BirthDate.Value,
+                        user.Email
+                    );
                 }
             }
-            catch (System.Data.SqlClient.SqlException ex)
+            catch (SqlException ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString());
-                return null;
+                MessageBox.Show(ex.ToString());
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString());
-                return null;
-            }*/
+                MessageBox.Show(ex.ToString());
+            }
+
+            return userData;
         }
 
-        public UserProfile getUserProfileData()
+        public void Save(UserData User)
         {
-            var _userProfileData = new UserProfile(
-                this._user.UserId,
-                this._user.UserName,
-                this._user.Name,
-                this._user.LastName,
-                this._user.BirthDate.Value,
-                this._user.Email,
-                this._user.HashPassword
-            );
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                   var user = _db.User.SingleOrDefault(x => x.UserId == this._userId);
 
-            return _userProfileData;
+                    user.BirthDate = Convert.ToDateTime(User.BirthDate);
+                    user.Email = User.Email;
+                    user.HashPassword = User.Password.GetHashCode().ToString();
+                    user.LastName = User.LastName;
+                    user.Name = User.Name;
+
+                    _db.SaveChanges();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         #endregion
     }
 
-    public class UserProfile
+    public class UserData
     {
         #region "Properties"
-        public int ID { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
         public string Name { get; set; }
-        public string Lastname { get; set; }
-        public string Birthdate { get; set; }
+        public string LastName { get; set; }
+        public string BirthDate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
         #endregion
 
         #region "Constructors"
-        public UserProfile() 
+        public UserData(string Name, string Lastname, DateTime BirthDate, string Email)
         {
- 
-        }
-        
-        public UserProfile( int pID, string pUsername, string pName, string pLastname, DateTime pBirthDate, string pEmail, string pPassword)
-        {
-            this.ID = pID;
-            this.Username = pUsername;
-            this.Name = pName;
-            this.Lastname = pLastname;
-            this.Birthdate = pBirthDate.ToShortDateString();
-            this.Email = pEmail;
-            this.Password = pPassword;
+            this.Name = Name;
+            this.LastName = Lastname;
+            this.BirthDate = BirthDate.ToShortDateString();
+            this.Email = Email;
         }
 
-        #endregion
-
-        #region "Methods"
-        public override string ToString()
+        public UserData(string Username, string Password, string Name, string Lastname, DateTime BirthDate, string Email)
+            :this(Name, Lastname, BirthDate, Email)
         {
-            return this.ID + " - " + this.Username + " - " + this.Name + " - " + this.Lastname + " - " + this.Birthdate + " - " + this.Email + " - " + this.Password;
+            this.UserName = Username;
+            this.Password = Password;
         }
 
         #endregion
 
     }
-
-    public class DataProfile
-    {
-        #region "Properties"
-        public int ID { get; set; }
-        public String ProfileName { get; set; }
-        public String AbbrevationName { get; set; }
-
-        #endregion
-
-        #region "Constructors"
-        public DataProfile() 
-        {
- 
-        }
-
-        public DataProfile(int id, String Name, String Abbreviation)
-        {
-            this.ID = id;
-            this.ProfileName = Name;
-            this.AbbrevationName = Abbreviation;
-        }
-
-        #endregion
-        
-    }
-
-    public class FactoryProfile
-    {
-        public List<DataProfile> Profiles { get; set; }
-        public FactoryProfile() { 
-        
-        }
-        public FactoryProfile(List<DataProfile> Profiles)
-        {
-            this.Profiles = Profiles;
-        }
-    }
-    
 }
