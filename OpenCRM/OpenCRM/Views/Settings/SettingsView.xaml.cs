@@ -27,13 +27,27 @@ namespace OpenCRM.Views.Settings
         public SettingsView()
         {
             InitializeComponent();
-            _settingsModel = new SettingsModel(Session.User,Session.RightAccess);
+            _settingsModel = new SettingsModel(Session.UserId, Session.RightAccess);
             
-            gridSettingsProfile.DataContext = _settingsModel.getUserProfileData();
+            gridSettingsProfile.DataContext = _settingsModel.getUserData();
             cmbUserProfile.ItemsSource = _settingsModel.Profiles;
-            cmbUserProfile.DisplayMemberPath = "ProfileName";
-            cmbUserProfile.SelectedValuePath = "ID";
-            cmbUserProfile.SelectedValue = _settingsModel.getUserProfession().ID;
+            cmbUserProfile.DisplayMemberPath = "Name";
+            cmbUserProfile.SelectedValuePath = "ProfileId";
+            cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var userData = new UserData(
+                this.tbxUserUsername.Text,
+                this.tbxUserHashPassword.Password,
+                this.tbxUserName.Text,
+                this.tbxUserLastName.Text,
+                Convert.ToDateTime(this.tbxUserBirthDate.Text),
+                this.tbxUserEmail.Text
+            );
+
+            _settingsModel.Save(userData);
         }
     }
 }
