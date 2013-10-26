@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro;
 using OpenCRM.Views.Home;
+using OpenCRM.DataBase;
+using System.Data.SqlClient;
 
 
 namespace OpenCRM
@@ -27,6 +29,7 @@ namespace OpenCRM
         {
             InitializeComponent();
             PageSwitcher.mainwindow = this;
+            dataBaseInit();
             PageSwitcher.Switch("/Views/Login/LoginView.xaml");
         }
 
@@ -38,6 +41,25 @@ namespace OpenCRM
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Home/HomeView.xaml");
+        }
+
+        private void dataBaseInit() 
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    _db.Database.Initialize(false);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
