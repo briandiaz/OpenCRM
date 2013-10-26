@@ -11,7 +11,7 @@ namespace OpenCRM.Controllers.Session
     public static class Session
     {
         #region "Values"
-        private static User _user;
+        private static int _userId;
         private static List<RightsAccess> _rightAccess;
 
         #endregion
@@ -21,9 +21,9 @@ namespace OpenCRM.Controllers.Session
         {
             get { return _rightAccess; }
         } 
-        public static User User 
+        public static int UserId 
         {
-            get { return _user; }
+            get { return _userId; }
         }
        
         #endregion
@@ -41,13 +41,15 @@ namespace OpenCRM.Controllers.Session
             using(var db = new OpenCRMEntities())
             {
                 var query = (
+                    from user in db.User
                     from objects in db.Objects
                     from fields in db.Object_Fields
                     from profile in db.Profile
                     from profileObjects in db.Profile_Object
                     from profileObjectsFields in db.Profile_Object_Fields
                     where
-                        _user.ProfileId == profile.ProfileId &&
+                        _userId == user.UserId &&
+                        user.ProfileId == profile.ProfileId &&
                         profile.ProfileId == profileObjects.ProfileId &&
                         profileObjects.ObjectId == objects.ObjectId &&
                         profileObjectsFields.ProfileObjectId == profileObjects.ProfileObjectId &&
@@ -74,9 +76,9 @@ namespace OpenCRM.Controllers.Session
         /// This method create a session of a specific user
         /// </summary>
         /// <param name="User">A user from login</param>
-        public static void CreateSession(User User)
+        public static void CreateSession(int UserId)
         {
-            _user = User;
+            _userId = UserId;
             _rightAccess = getUserRightAccess();
         }
 
