@@ -53,7 +53,7 @@ namespace OpenCRM.Models.Login
                         
                         if (query.Any())
                         {
-                            Session.CreateSession(query.First());
+                            Session.CreateSession(query.First().UserId);
                             ErrorLabel.Content = "";
                             return true;
                         }

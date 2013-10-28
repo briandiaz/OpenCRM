@@ -34,6 +34,13 @@ namespace OpenCRM.Views.Settings
             cmbUserProfile.DisplayMemberPath = "Name";
             cmbUserProfile.SelectedValuePath = "ProfileId";
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
+
+
+            ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
+            ProfilesComboBox.DisplayMemberPath = "Name";
+            ProfilesComboBox.SelectedValuePath = "ProfileId";
+            ProfilesComboBox.SelectedValue = _settingsModel.getUserProfile().ProfileId;
+
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -48,6 +55,12 @@ namespace OpenCRM.Views.Settings
             );
 
             _settingsModel.Save(userData);
+        }
+
+        private void ProfilesComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var profileId = (int)this.ProfilesComboBox.SelectedValue;
+            _settingsModel.LoadProfile(profileId, this.gridAccessRights);
         }
     }
 }

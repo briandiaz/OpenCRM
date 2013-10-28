@@ -8,7 +8,7 @@
         Height="Auto" 
         Width="Auto"
         >
-    
+
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -138,7 +138,7 @@
                                                     Grid.Column="1"
                                                     FontSize="20px"
                                                     Name="tbxUserLastName" />
-                                        
+
                                         <Label  Content="Birthdate"
                                                 Grid.Row="5"
                                                 VerticalAlignment="Center"
@@ -150,7 +150,7 @@
                                                     Grid.Column="1"
                                                     FontSize="20px"
                                                     Name="tbxUserBirthDate" />
-                                        
+
                                         <Label  Content="Email"
                                                 Grid.Row="6"
                                                 VerticalAlignment="Center"
@@ -205,14 +205,53 @@
                             <TabItem Header="New User">
                                 <Grid Name="gridNewUser">
                                     <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
-                                 </Grid>
+                                </Grid>
                             </TabItem>
-                            
+
                             <TabItem Header="Permissions">
                                 <Grid Name="gridPermissions">
-                                    <Label Content="The Permissions Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
-                                    
+                                    <Label Content="Profile" HorizontalAlignment="Left" Margin="94,36,0,0" VerticalAlignment="Top"/>
+                                    <ComboBox Name="ProfilesComboBox" Margin="194,36,0,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
+
+
+                                    <Grid Name="gridAccessRights">
+                                        <TabControl HorizontalAlignment="Left" Height="450" Margin="020,107,0,0" VerticalAlignment="Top" Width="700">
+                                            <TabItem Header="Account" FontSize ="17" Height ="50"  Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5">
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Opportunities" FontSize ="17" Height ="50" Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5">
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Contacts" FontSize ="17" Height ="50" Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5">
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Campaigns" FontSize ="17" Height ="50" Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5">
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Leads" FontSize ="17" Height ="50" Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5">
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Cases" FontSize ="17" Height ="50" Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5">
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Header="Products" FontSize ="17" Height ="50" Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5">
+                                                </Grid>
+                                            </TabItem>
+
+                                        </TabControl>
+
+                                    </Grid>
+
+
                                 </Grid>
+
                             </TabItem>
 
                         </TabControl>

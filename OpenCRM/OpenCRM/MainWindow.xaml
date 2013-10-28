@@ -4,8 +4,13 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        Title="OpenCRM" Height="768" Width="1024" MinWidth="1024" MinHeight="768"
-                      ShowTitleBar="True" ShowIconOnTitleBar="True">
+        Title="OpenCRM" 
+        Height="768" 
+        Width="1024" 
+        ShowTitleBar="True" 
+        ShowIconOnTitleBar="True"
+        WindowState="Maximized"
+        ResizeMode="CanMinimize">
 
     <Window.Resources>
         <ResourceDictionary>

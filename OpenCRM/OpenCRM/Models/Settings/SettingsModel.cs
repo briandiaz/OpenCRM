@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using MahApps.Metro.Controls;
 using ReactiveUI;
 
@@ -13,7 +14,7 @@ using System.Windows;
 
 namespace OpenCRM.Models.Settings
 {
-    public class SettingsModel
+    public class SettingsModel : UserControl
     {
         #region "Values"
         int _userId;
@@ -135,6 +136,76 @@ namespace OpenCRM.Models.Settings
             }
         }
 
+        public void LoadProfile(int profileId, Grid gridAccessRights) 
+        {
+            var permitions = new Dictionary<string, List<RightsAccess>>();
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from objects in db.Objects
+                        from fields in db.Object_Fields
+                        from profile in db.Profile
+                        from profileObjects in db.Profile_Object
+                        from profileObjectsFields in db.Profile_Object_Fields
+                        where
+                            profile.ProfileId == profileId &&
+                            profile.ProfileId == profileObjects.ProfileId &&
+                            profileObjects.ObjectId == objects.ObjectId &&
+                            profileObjectsFields.ProfileObjectId == profileObjects.ProfileObjectId &&
+                            profileObjectsFields.ObjectFieldsId == fields.ObjectFieldsId &&
+                            objects.ObjectId == fields.ObjectId
+                        select
+                            new RightsAccess()
+                            {
+                                ObjectId = objects.ObjectId,
+                                ObjectName = objects.Name,
+                                ObjectFielId = fields.ObjectFieldsId,
+                                ObjectFieldName = fields.Name,
+                                Read = profileObjectsFields.Read.Value,
+                                Create = profileObjectsFields.Create.Value,
+                                Modify = profileObjectsFields.Modify.Value
+                            }
+                    );
+                    
+                    var objectName = (
+                        from ob in query
+                        group ob by new{ob.ObjectName} into objts
+                        select new{ objts.Key}
+                        ).ToList();
+
+                    objectName.ForEach( x => 
+                        permitions.Add(x.Key.ObjectName,null)
+                        );
+
+                    var list = new List<RightsAccess>();
+                    string actualName = query.First().ObjectName;
+                    foreach (var rightsAccess in query)
+                    {
+                        if (rightsAccess.ObjectName == actualName)
+                        {
+                            list.Add(rightsAccess);
+                        }
+                        else
+                        {
+                            permitions[actualName] = list;
+                            actualName = rightsAccess.ObjectName;
+                            list.Clear();
+                        }
+                    }
+                    permitions[actualName] = list;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         #endregion
     }
 
@@ -169,4 +240,7 @@ namespace OpenCRM.Models.Settings
         #endregion
 
     }
+
+
+
 }

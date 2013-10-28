@@ -30,7 +30,9 @@ namespace OpenCRM
             InitializeComponent();
             PageSwitcher.mainwindow = this;
             dataBaseInit();
+            this.WindowState = WindowState.Maximized;
             PageSwitcher.Switch("/Views/Login/LoginView.xaml");
+
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)

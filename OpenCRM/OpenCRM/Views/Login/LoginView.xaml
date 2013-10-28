@@ -25,7 +25,7 @@
             <TabItem Header="_Login" FontSize="20px">
                 <Grid>
                     <Image Source="/Assets/Img/opencrm_logo_blue.png" Margin="260,95,260,477" Width="500" Height="145"/>
-                    <Grid Margin="326,305,326,143" HorizontalAlignment="Stretch">
+                    <Grid  Margin="326,305,326,143" HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
