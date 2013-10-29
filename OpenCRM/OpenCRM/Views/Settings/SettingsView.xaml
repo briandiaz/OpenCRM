@@ -192,7 +192,7 @@
                                                     IsEnabled="False"
                                                     ItemsSource="{Binding Path=Name}" Margin="5,8,-380,3" Height="36" />
 
-                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="8" Click="btnSave_Click">
+                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="8" Click="btnSave_Click" Cursor="Hand" >
                                             <StackPanel>
                                                 <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
                                                 <TextBlock>Save</TextBlock>
@@ -217,31 +217,31 @@
                                     <Grid Name="gridAccessRights">
                                         <TabControl HorizontalAlignment="Left" Height="450" Margin="020,107,0,0" VerticalAlignment="Top" Width="700">
                                             <TabItem Header="Account" FontSize ="17" Height ="50"  Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
+                                                <Grid Name="gridAccessRights_Account" Background="#FFE5E5E5">
                                                 </Grid>
                                             </TabItem>
                                             <TabItem Header="Opportunities" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
+                                                <Grid Name="gridAccessRights_Opportunities" Background="#FFE5E5E5">
                                                 </Grid>
                                             </TabItem>
                                             <TabItem Header="Contacts" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
+                                                <Grid Name="gridAccessRights_Contacts" Background="#FFE5E5E5">
                                                 </Grid>
                                             </TabItem>
                                             <TabItem Header="Campaigns" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
+                                                <Grid Name="gridAccessRights_Campaigns" Background="#FFE5E5E5">
                                                 </Grid>
                                             </TabItem>
                                             <TabItem Header="Leads" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
+                                                <Grid Name="gridAccessRights_Leads" Background="#FFE5E5E5">
                                                 </Grid>
                                             </TabItem>
                                             <TabItem Header="Cases" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
+                                                <Grid Name="gridAccessRights_Cases" Background="#FFE5E5E5">
                                                 </Grid>
                                             </TabItem>
                                             <TabItem Header="Products" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
+                                                <Grid Name="gridAccessRights_Products" Background="#FFE5E5E5">
                                                 </Grid>
                                             </TabItem>
 

@@ -25,7 +25,7 @@
             <TabItem Header="_Login" FontSize="20px">
                 <Grid>
                     <Image Source="/Assets/Img/opencrm_logo_blue.png" Margin="260,95,260,477" Width="500" Height="145"/>
-                    <Grid  Margin="326,305,326,143" HorizontalAlignment="Stretch">
+                    <Grid  Margin="372,304,548,144" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -82,20 +82,24 @@
                                 Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{DynamicResource SquareButtonStyle}" Click="btnLogin_Click"     
+                                Cursor="Hand" 
                                 />
                         <Button Name="btnCancel" 
                                 Content="Cancel"
                                 Margin="10,5,-19,5"
                                 Grid.Row="4" Grid.ColumnSpan="2"
                                 Style="{DynamicResource SquareButtonStyle}" Click="btnCancel_Click"     
+                                Cursor="Hand" 
                                 />
                         <Label
                                 Content="Forgot Password?"
                                 Margin="121,8,-238,-47"
                                 Grid.Row="8" FontSize="14px" Grid.Column="1"
-                            Name="lblForgotPassword"/>
+                                Name="lblForgotPassword"
+                                Cursor="Hand" 
+                                />
                     </Grid>
-                    <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="340,377,0,0" VerticalAlignment="Top" Foreground="Red" Width="462" Grid.ColumnSpan="2"/>
+                    <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Center" Margin="372,500,187,0" VerticalAlignment="Top" Foreground="Red" Width="462" FontSize="16px" />
                     <Frame Name="frmSource" Visibility="Hidden"/>
                 </Grid>
             </TabItem>

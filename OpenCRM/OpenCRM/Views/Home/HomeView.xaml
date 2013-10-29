@@ -26,8 +26,8 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type home:HomeData}">
-                <controls:Tile Title="{Binding Name}" Width="260" Height="160">
-                    <Image Source="{Binding ImgUrl}"  Opacity="0.6"  Stretch="UniformToFill">
+                <controls:Tile Title="{Binding Name}" Width="160" Height="160" Cursor="Hand">
+                    <Image Source="{Binding ImgUrl}"  Opacity="0.8"  Stretch="UniformToFill">
                         <!--
                         <Image.Effect>
                             <effect:GrayscaleEffect x:Name="grayscaleEffect"/>

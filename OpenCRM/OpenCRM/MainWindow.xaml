@@ -30,8 +30,8 @@
     </i:Interaction.Behaviors>
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-            <Button Content="Home" Name="btnHome" Visibility="Hidden" Click="btnHome_Click" />
-            <Button Content="Settings" Name="btnSettings" Visibility="Hidden" Click="btnSettings_Click"/>
+            <Button Content="Home" Name="btnHome" Visibility="Hidden" Click="btnHome_Click" DataContext="null" Cursor="Hand" />
+            <Button Content="Settings" Name="btnSettings" Visibility="Hidden" Click="btnSettings_Click" DataContext="null" Cursor="Hand" />
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
 
