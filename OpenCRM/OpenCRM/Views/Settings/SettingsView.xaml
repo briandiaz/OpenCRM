@@ -338,32 +338,41 @@
 
                             <TabItem Header="Permissions">
                                 <Grid Name="gridPermissions">
-                                    <Label Content="Profile" HorizontalAlignment="Left" Margin="94,36,0,0" VerticalAlignment="Top"/>
-                                    <ComboBox Name="ProfilesComboBox" Margin="194,36,0,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
+                                    <Label Content="Profile" HorizontalAlignment="Left" Margin="50,36,0,0" VerticalAlignment="Top"/>
+                                    <ComboBox Name="ProfilesComboBox" Margin="160,38,398,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
 
                                     <Grid Name="gridAccessRights" Margin="0,80,0,0">
-                                        <TabControl Name="permissionTapControl" TabStripPlacement="Top" Background="White" Margin="50,20,50,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900" SelectionChanged="TabControl_SelectionChanged_Permission">
+                                        <TabControl     Name="permissionTapControl" 
+                                                        TabStripPlacement="Top" 
+                                                        Background="White" 
+                                                        Margin="50,20,50,20" 
+                                                        FontFamily="Segoe WP Light"  
+                                                        MinHeight="600" 
+                                                        MinWidth="900" 
+                                                        ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                                                        ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            
                                             <TabControl.Resources>
                                                 <Style TargetType="{x:Type TabItem}">
                                                     <Setter Property="Template">
                                                         <Setter.Value>
                                                             <ControlTemplate TargetType="{x:Type TabItem}">
                                                                 <Grid>
-                                                                    <Border Name="Border" Margin="0,0,0,0" Background="Transparent" CornerRadius="5">
+                                                                    <Border Name="Border" Margin="0,0,0,0" Background="Black" CornerRadius="5">
                                                                         <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="15" RecognizesAccessKey="True"/>
                                                                     </Border>
                                                                 </Grid>
                                                                 <ControlTemplate.Triggers>
                                                                     <Trigger Property="IsSelected" Value="True">
                                                                         <Setter Property="Panel.ZIndex" Value="100" />
-                                                                        <Setter TargetName="Border" Property="Background" Value="White" />
-                                                                        <Setter Property="Foreground" Value="Black" />
+                                                                        <Setter TargetName="Border" Property="Background" Value="Black" />
+                                                                        <Setter Property="Foreground" Value="White" />
                                                                         <Setter Property="FontSize" Value="24" />
                                                                         <Setter Property="FontFamily" Value="Segoe WP" />
                                                                     </Trigger>
                                                                     <Trigger Property="IsSelected" Value="False">
                                                                         <Setter Property="Panel.ZIndex" Value="100" />
-                                                                        <Setter TargetName="Border" Property="Background" Value="Black" />
+                                                                        <Setter TargetName="Border" Property="Background" Value="Gray" />
                                                                         <Setter Property="Foreground" Value="White" />
                                                                         <Setter Property="FontFamily" Value="Segoe WP" />
                                                                         <Setter Property="FontSize" Value="24" />
