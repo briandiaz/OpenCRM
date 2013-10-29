@@ -139,6 +139,7 @@ namespace OpenCRM.Models.Settings
         public void LoadProfile(int profileId, Grid gridAccessRights) 
         {
             var permitions = new Dictionary<string, List<RightsAccess>>();
+            
             try
             {
                 using (var db = new OpenCRMEntities())
@@ -168,19 +169,25 @@ namespace OpenCRM.Models.Settings
                                 Modify = profileObjectsFields.Modify.Value
                             }
                     );
+
+                    if (!query.Any()) 
+                    {
+                        return;
+                    }
                     
                     var objectName = (
                         from ob in query
                         group ob by new{ob.ObjectName} into objts
                         select new{ objts.Key}
-                        ).ToList();
+                    ).ToList();
 
                     objectName.ForEach( x => 
                         permitions.Add(x.Key.ObjectName,null)
-                        );
+                    );
 
                     var list = new List<RightsAccess>();
                     string actualName = query.First().ObjectName;
+                    
                     foreach (var rightsAccess in query)
                     {
                         if (rightsAccess.ObjectName == actualName)
@@ -189,12 +196,13 @@ namespace OpenCRM.Models.Settings
                         }
                         else
                         {
-                            permitions[actualName] = list;
+                            permitions[actualName] = new List<RightsAccess>(list);
                             actualName = rightsAccess.ObjectName;
                             list.Clear();
                         }
                     }
-                    permitions[actualName] = list;
+
+                    permitions[actualName] = new List<RightsAccess>(list);
                 }
             }
             catch (SqlException ex)
