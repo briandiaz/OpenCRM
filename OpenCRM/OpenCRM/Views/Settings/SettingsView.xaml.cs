@@ -29,17 +29,17 @@ namespace OpenCRM.Views.Settings
             InitializeComponent();
             _settingsModel = new SettingsModel(Session.UserId, Session.RightAccess);
             
+            //Edit Profile            
             gridSettingsProfile.DataContext = _settingsModel.getUserData();
             cmbUserProfile.ItemsSource = _settingsModel.Profiles;
             cmbUserProfile.DisplayMemberPath = "Name";
             cmbUserProfile.SelectedValuePath = "ProfileId";
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
 
-
+            //Permission
             ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
             ProfilesComboBox.DisplayMemberPath = "Name";
             ProfilesComboBox.SelectedValuePath = "ProfileId";
-            //ProfilesComboBox.SelectedValue = _settingsModel.getUserProfile().ProfileId;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -64,15 +64,6 @@ namespace OpenCRM.Views.Settings
                 _settingsModel.LoadGrid(this.permissionTapControl);
                 _settingsModel.LoadProfile(profileId, this.permissionTapControl);
             }
-        }
-
-        private void TabControl_SelectionChanged_Permission(object sender, SelectionChangedEventArgs e)
-        {
-            // ... Get TabControl reference.
-            var item = sender as TabControl;
-
-            // ... Set Title to selected tab header.
-            var selected = item.SelectedItem as TabItem;
         }
     }
 }

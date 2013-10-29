@@ -74,7 +74,7 @@ namespace OpenCRM.Models.Settings
 
         public Profile getUserProfile()
         {
-            var userProfile = Profiles.Single(x => x.ProfileId == this._userId);
+            var userProfile = Profiles.SingleOrDefault(x => x.ProfileId == this._userId);
             return userProfile;
         }
 
@@ -156,7 +156,7 @@ namespace OpenCRM.Models.Settings
                 tapItem.Visibility = Visibility.Visible;
 
                 var grid = new Grid();
-                grid.Background = new SolidColorBrush(Colors.Gray);
+                grid.Background = new SolidColorBrush(Colors.DeepSkyBlue);
                 tapItem.Content = grid;
 
                 PermissionTabs.Items.Add(tapItem);
@@ -204,7 +204,7 @@ namespace OpenCRM.Models.Settings
             LoadGridData(permissions, PermissionTabs);
         }
 
-        public void LoadGridData(Dictionary<string, List<RightsAccess>> Permission, TabControl PermissionTab)
+        private void LoadGridData(Dictionary<string, List<RightsAccess>> Permission, TabControl PermissionTab)
         {
             var ObjectsFieldsNames = new Dictionary<string, List<Label>>();
             var ObjectsFieldsCheckBox = new Dictionary<string, List<List<CheckBox>>>();
@@ -218,6 +218,7 @@ namespace OpenCRM.Models.Settings
                 {
                     var label = new Label();
                     label.Content = value.ObjectFieldName;
+                    label.FontSize = 12;
                     labelsObjectsFields.Add(label);
 
                     var checkBoxes = new List<CheckBox>(3);
@@ -252,25 +253,30 @@ namespace OpenCRM.Models.Settings
 
                     if (i == 0)
                     {
-                        columnDefinition.Width = new GridLength(90, GridUnitType.Pixel);
+                        columnDefinition.Width = new GridLength(70, GridUnitType.Star);
+
                     }
                     else
                     {
-                        columnDefinition.Width = new GridLength(20, GridUnitType.Pixel);
+                        columnDefinition.Width = new GridLength(10, GridUnitType.Star);
                     }
 
                     itemGrid.ColumnDefinitions.Add(columnDefinition);
                 }
 
+                var count = ObjectsFieldsNames[itemTab.Header.ToString()].Count;
+                
                 //Create Rows
-                for (int i = 0; i < ObjectsFieldsNames.Count; i++)
+                for (int i = 0; i < count; i++)
                 {
                     var rowDefinition = new RowDefinition();
+                    rowDefinition.Height = new GridLength(20,GridUnitType.Auto);
 
                     itemGrid.RowDefinitions.Add(rowDefinition);
                 }
-                
-                for (int i = 0; i < ObjectsFieldsNames.Count; i++)
+
+                //Add labels and checkbox to the Grid
+                for (int i = 0; i < count; i++)
                 {
                     Grid.SetRow(ObjectsFieldsNames[itemTab.Header.ToString()][i], i);
                     Grid.SetRow(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][0],i);
