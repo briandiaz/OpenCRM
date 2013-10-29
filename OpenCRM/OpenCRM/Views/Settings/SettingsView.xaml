@@ -187,7 +187,7 @@
                                                     IsEnabled="False"
                                                     ItemsSource="{Binding Path=Name}" Margin="5,8,-380,3" Height="36" />
 
-                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="8" Click="btnSave_Click">
+                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="8" Click="btnSave_Click" Cursor="Hand" >
                                             <StackPanel>
                                                 <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
                                                 <TextBlock>Save</TextBlock>
@@ -247,35 +247,6 @@
                                                     <Setter Property="Padding" Value="14"/>
                                                 </Style>
                                             </TabControl.Resources>
-                                            
-                                            <!--<TabItem Header="Account" FontSize ="17"  Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5"/>
-                                            </TabItem>
-                                            <TabItem Header="Opportunities" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
-                                                </Grid>
-                                            </TabItem>
-                                            <TabItem Header="Contacts" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
-                                                </Grid>
-                                            </TabItem>
-                                            <TabItem Header="Campaigns" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
-                                                </Grid>
-                                            </TabItem>
-                                            <TabItem Header="Leads" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
-                                                </Grid>
-                                            </TabItem>
-                                            <TabItem Header="Cases" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
-                                                </Grid>
-                                            </TabItem>
-                                            <TabItem Header="Products" FontSize ="17" Height ="50" Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
-                                                </Grid>
-                                            </TabItem> 
-                                        -->
                                         </TabControl>
                                     </Grid>
                                 </Grid>

@@ -28,5 +28,12 @@ namespace OpenCRM.Views.Home
             DataContext = new HomeModel();
             PageSwitcher.MainButtons(true);
         }
+
+        private void Tile_Click_1(object sender, RoutedEventArgs e)
+        {
+            MahApps.Metro.Controls.Tile _thisTile = (MahApps.Metro.Controls.Tile)sender;
+            MessageBox.Show(_thisTile.Title);
+        }
+
     }
 }
