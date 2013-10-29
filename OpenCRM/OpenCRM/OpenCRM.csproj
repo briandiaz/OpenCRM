@@ -382,6 +382,11 @@
   <ItemGroup>
     <Resource Include="Assets\Img\Icons\System-Save-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Correct.png" />
+    <Resource Include="Assets\Img\Search.png" />
+    <Resource Include="Assets\Img\Wrong.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

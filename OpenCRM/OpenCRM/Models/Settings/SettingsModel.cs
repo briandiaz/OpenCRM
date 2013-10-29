@@ -90,7 +90,6 @@ namespace OpenCRM.Models.Settings
 
                     userData = new UserData(
                         user.UserName,
-                        user.HashPassword,
                         user.Name,
                         user.LastName,
                         user.BirthDate.Value,
@@ -289,6 +288,34 @@ namespace OpenCRM.Models.Settings
                 }
 	        }
         }
+
+        public bool CheckUsername(string username)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var userName = (
+                       from user in _db.User
+                       where user.UserName == username
+                       select user
+                    );
+                    if (!userName.Any())
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
         
         #endregion
     }
@@ -314,11 +341,10 @@ namespace OpenCRM.Models.Settings
             this.Email = Email;
         }
 
-        public UserData(string Username, string Password, string Name, string Lastname, DateTime BirthDate, string Email)
+        public UserData(string Username, string Name, string Lastname, DateTime BirthDate, string Email)
             :this(Name, Lastname, BirthDate, Email)
         {
             this.UserName = Username;
-            this.Password = Password;
         }
 
         #endregion

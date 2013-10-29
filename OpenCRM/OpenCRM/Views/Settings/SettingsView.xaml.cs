@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using OpenCRM.Models.Settings;
 using OpenCRM.Controllers.Session;
 
@@ -35,6 +36,9 @@ namespace OpenCRM.Views.Settings
             cmbUserProfile.SelectedValuePath = "ProfileId";
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
 
+            cmbUserProfile2.ItemsSource = _settingsModel.Profiles;
+            cmbUserProfile2.DisplayMemberPath = "Name";
+
 
             ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
             ProfilesComboBox.DisplayMemberPath = "Name";
@@ -46,7 +50,6 @@ namespace OpenCRM.Views.Settings
         {
             var userData = new UserData(
                 this.tbxUserUsername.Text,
-                this.tbxUserHashPassword.Password,
                 this.tbxUserName.Text,
                 this.tbxUserLastName.Text,
                 Convert.ToDateTime(this.tbxUserBirthDate.Text),
@@ -73,6 +76,18 @@ namespace OpenCRM.Views.Settings
 
             // ... Set Title to selected tab header.
             var selected = item.SelectedItem as TabItem;
+        }
+
+        private void BtnSearch_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ima = (btnSearch.Content as StackPanel).Children[0] as Image;
+            ima.Source = _settingsModel.CheckUsername(tbxUserUsername2.Text) ? new BitmapImage(new Uri("/Assets/Img/Correct.png",UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+        }
+
+        private void TbxUserUsername2_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var ima = (btnSearch.Content as StackPanel).Children[0] as Image;
+            ima.Source = new BitmapImage(new Uri("/Assets/Img/Search.png", UriKind.RelativeOrAbsolute));
         }
     }
 }

@@ -29,7 +29,7 @@
 
             <Grid>
                 <Grid Name="gridSettings" Margin="0,0,0,0">
-                    <Controls:MetroContentControl>
+                    <Controls:MetroContentControl Margin="4,0,-4,0">
                         <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
                             <TabControl.Resources>
                                 <Style TargetType="{x:Type TabItem}">
@@ -120,7 +120,7 @@
                                                     FontSize="20px"
                                                     Name="tbxUserName" />
 
-                                        <Label  Content="LastName"
+                                        <Label  Content="Last Name"
                                                 Grid.Row="4"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Right"  />
@@ -160,6 +160,131 @@
                                                     FontSize="20px"
                                                     Name="tbxUserEmail" />
 
+                                        <Label  Content="User Profile"
+                                                Grid.Row="7"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
+
+                                        <ComboBox   Name="cmbUserProfile"
+                                                    Grid.Row="7" 
+                                                    Grid.Column="1"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="20px"
+                                                    IsEnabled="False"
+                                                    ItemsSource="{Binding Path=Name}" Margin="5,8,-380,3" Height="36" />
+
+                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="7" Click="btnSave_Click" Cursor="Hand" >
+                                            <StackPanel>
+                                                <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
+                                                <TextBlock>Save</TextBlock>
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="New User" Margin="-1,0,1,0">
+                                <!--<Grid Name="gridNewUser">
+                                    <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
+                                </Grid>-->
+                                <Grid Margin="100,50">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Name="gridSettingsProfile2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label  Content="Username"
+                                                VerticalAlignment="Center"
+                                                Grid.Row="2"
+                                                HorizontalAlignment="Right" />
+
+                                        <TextBox    Controls:TextboxHelper.Watermark="UserName"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text=""
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="2"
+                                                    Grid.Column="1" 
+                                                    FontSize="20px"
+                                                    Name="tbxUserUsername2"
+                                                    TextChanged="TbxUserUsername2_OnTextChanged"/>
+                                        <Button Name="btnSearch" Grid.Row="2" Grid.Column="2" Margin="390,5,-380,5" Click="BtnSearch_OnClick">
+                                            <StackPanel>
+                                                <Image Source="/Assets/Img/Search.png"  Width="20"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Label  Content="Name"
+                                                VerticalAlignment="Center"
+                                                Grid.Row="3"
+                                                HorizontalAlignment="Right" />
+
+                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your Name"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text="{Binding Path=Name}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="3"
+                                                    Grid.Column="1" 
+                                                    FontSize="20px"
+                                                    Name="tbxUserName2" />
+
+                                        <Label  Content="Last Name"
+                                                Grid.Row="4"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right"  />
+
+                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your LastName"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text="{Binding Path=LastName}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="4"
+                                                    Grid.Column="1"
+                                                    FontSize="20px"
+                                                    Name="tbxUserLastName2" />
+
+                                        <Label  Content="Birthdate"
+                                                Grid.Row="5"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
+
+                                        <DatePicker Text="{Binding Path=BirthDate}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="5"
+                                                    Grid.Column="1"
+                                                    FontSize="20px"
+                                                    Name="tbxUserBirthDate2" />
+
+                                        <Label  Content="Email"
+                                                Grid.Row="6"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right" />
+
+                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your Email"
+                                                    Controls:TextboxHelper.ClearTextButton="True"
+                                                    Text="{Binding Path=Email}"
+                                                    Margin="5,5,-380,5"
+                                                    Grid.Row="6"
+                                                    Grid.Column="1"
+                                                    FontSize="20px"
+                                                    Name="tbxUserEmail2" />
+
                                         <Label Content="Password"
                                                Grid.Row="7"
                                                VerticalAlignment="Center"
@@ -172,34 +297,42 @@
                                                         Grid.Column="1"
                                                         VerticalContentAlignment="Center" 
                                                         FontSize="20px"
-                                                        Name="tbxUserHashPassword" />
+                                                        Name="tbxUserHashPassword2" />
 
+                                        <Label Content="Confirm Password"
+                                               Grid.Row="8"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right" />
+
+                                        <PasswordBox    Controls:TextboxHelper.Watermark="Insert Your Password"
+                                                        Controls:TextboxHelper.ClearTextButton="True"                                            
+                                                        Margin="5,5,-380,5"
+                                                        Grid.Row="8"
+                                                        Grid.Column="1"
+                                                        VerticalContentAlignment="Center" 
+                                                        FontSize="20px"
+                                                        Name="tbxUserConfirmPassword" />
+                                        
                                         <Label  Content="User Profile"
-                                                Grid.Row="8"
+                                                Grid.Row="9"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Right" />
 
-                                        <ComboBox   Name="cmbUserProfile"
-                                                    Grid.Row="8" 
+                                        <ComboBox   Name="cmbUserProfile2"
+                                                    Grid.Row="9" 
                                                     Grid.Column="1"
                                                     VerticalAlignment="Center"
                                                     FontSize="20px"
-                                                    IsEnabled="False"
-                                                    ItemsSource="{Binding Path=Name}" Margin="5,8,-380,3" Height="36" />
+                                                    ItemsSource="{Binding Path=Name}" Margin="10,15,-385,14" Height="36" />
 
-                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="8" Click="btnSave_Click" Cursor="Hand" >
+                                       
+                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="9" Click="btnSave_Click" Cursor="Hand" >
                                             <StackPanel>
                                                 <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
                                                 <TextBlock>Save</TextBlock>
                                             </StackPanel>
                                         </Button>
                                     </Grid>
-                                </Grid>
-                            </TabItem>
-
-                            <TabItem Header="New User">
-                                <Grid Name="gridNewUser">
-                                    <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
                                 </Grid>
                             </TabItem>
 
