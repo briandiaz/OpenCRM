@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 using MahApps.Metro.Controls;
 using ReactiveUI;
 
@@ -14,7 +15,7 @@ using System.Windows;
 
 namespace OpenCRM.Models.Settings
 {
-    public class SettingsModel : UserControl
+    public class SettingsModel
     {
         #region "Values"
         int _userId;
@@ -136,84 +137,159 @@ namespace OpenCRM.Models.Settings
             }
         }
 
-        public void LoadProfile(int profileId, Grid gridAccessRights) 
+        public void LoadGrid(TabControl PermissionTabs)
         {
-            var permitions = new Dictionary<string, List<RightsAccess>>();
-            
-            try
+            PermissionTabs.Items.Clear();
+
+            var objetos = (
+                from x in _rightsAccess
+                group x by new { x.ObjectName } into temp
+                select new { temp.Key }
+            ).ToList();
+
+            foreach (var item in objetos)
+	        {
+                var tapItem = new TabItem();
+                tapItem.Header = item.Key.ObjectName;
+                tapItem.FontSize = 17;
+                tapItem.Height = 50;
+                tapItem.Visibility = Visibility.Visible;
+
+                var grid = new Grid();
+                grid.Background = new SolidColorBrush(Colors.Gray);
+                tapItem.Content = grid;
+
+                PermissionTabs.Items.Add(tapItem);
+	        }
+        }
+
+        public void LoadProfile(int profileId, TabControl PermissionTabs) 
+        {
+            var permissions = new Dictionary<string, List<RightsAccess>>();
+
+            if (!_rightsAccess.Any()) 
             {
-                using (var db = new OpenCRMEntities())
+                return;
+            }
+                    
+            var objectName = (
+                from ob in _rightsAccess
+                group ob by new { ob.ObjectName } into objts
+                select new { objts.Key }
+            ).ToList();
+
+            objectName.ForEach( 
+                x => permissions.Add(x.Key.ObjectName,null)
+            );
+
+            var list = new List<RightsAccess>();
+            string actualName = _rightsAccess.First().ObjectName;
+
+            foreach (var rightsAccess in _rightsAccess)
+            {
+                if (rightsAccess.ObjectName == actualName)
                 {
-                    var query = (
-                        from objects in db.Objects
-                        from fields in db.Object_Fields
-                        from profile in db.Profile
-                        from profileObjects in db.Profile_Object
-                        from profileObjectsFields in db.Profile_Object_Fields
-                        where
-                            profile.ProfileId == profileId &&
-                            profile.ProfileId == profileObjects.ProfileId &&
-                            profileObjects.ObjectId == objects.ObjectId &&
-                            profileObjectsFields.ProfileObjectId == profileObjects.ProfileObjectId &&
-                            profileObjectsFields.ObjectFieldsId == fields.ObjectFieldsId &&
-                            objects.ObjectId == fields.ObjectId
-                        select
-                            new RightsAccess()
-                            {
-                                ObjectId = objects.ObjectId,
-                                ObjectName = objects.Name,
-                                ObjectFielId = fields.ObjectFieldsId,
-                                ObjectFieldName = fields.Name,
-                                Read = profileObjectsFields.Read.Value,
-                                Create = profileObjectsFields.Create.Value,
-                                Modify = profileObjectsFields.Modify.Value
-                            }
-                    );
-
-                    if (!query.Any()) 
-                    {
-                        return;
-                    }
-                    
-                    var objectName = (
-                        from ob in query
-                        group ob by new{ob.ObjectName} into objts
-                        select new{ objts.Key}
-                    ).ToList();
-
-                    objectName.ForEach( x => 
-                        permitions.Add(x.Key.ObjectName,null)
-                    );
-
-                    var list = new List<RightsAccess>();
-                    string actualName = query.First().ObjectName;
-                    
-                    foreach (var rightsAccess in query)
-                    {
-                        if (rightsAccess.ObjectName == actualName)
-                        {
-                            list.Add(rightsAccess);
-                        }
-                        else
-                        {
-                            permitions[actualName] = new List<RightsAccess>(list);
-                            actualName = rightsAccess.ObjectName;
-                            list.Clear();
-                        }
-                    }
-
-                    permitions[actualName] = new List<RightsAccess>(list);
+                    list.Add(rightsAccess);
+                }
+                else
+                {
+                    permissions[actualName] = new List<RightsAccess>(list);
+                    actualName = rightsAccess.ObjectName;
+                    list.Clear();
                 }
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+
+            permissions[actualName] = new List<RightsAccess>(list);
+
+            LoadGridData(permissions, PermissionTabs);
         }
+
+        public void LoadGridData(Dictionary<string, List<RightsAccess>> Permission, TabControl PermissionTab)
+        {
+            var ObjectsFieldsNames = new Dictionary<string, List<Label>>();
+            var ObjectsFieldsCheckBox = new Dictionary<string, List<List<CheckBox>>>();
+
+            foreach (var key in Permission)
+            {
+                var labelsObjectsFields = new List<Label>();
+                var checkBoxesPermission = new List<List<CheckBox>>();
+                
+                foreach (var value in key.Value)
+                {
+                    var label = new Label();
+                    label.Content = value.ObjectFieldName;
+                    labelsObjectsFields.Add(label);
+
+                    var checkBoxes = new List<CheckBox>(3);
+
+                    var checkBoxCreate = new CheckBox();
+                    var checkBoxModify = new CheckBox();
+                    var checkBoxRead = new CheckBox();
+
+                    checkBoxCreate.IsChecked = value.Create;
+                    checkBoxModify.IsChecked = value.Modify;
+                    checkBoxRead.IsChecked = value.Read;
+
+                    checkBoxes.Add(checkBoxCreate);
+                    checkBoxes.Add(checkBoxRead);
+                    checkBoxes.Add(checkBoxModify);
+
+                    checkBoxesPermission.Add(checkBoxes);
+                }
+
+                ObjectsFieldsNames.Add(key.Key, labelsObjectsFields);
+                ObjectsFieldsCheckBox.Add(key.Key, checkBoxesPermission);
+            }
+
+            foreach (TabItem itemTab in PermissionTab.Items)
+	        {
+                var itemGrid = itemTab.Content as Grid;
+
+                //Create Columns
+                for (int i = 0; i < 4; i++)
+                {
+                    var columnDefinition = new ColumnDefinition();
+
+                    if (i == 0)
+                    {
+                        columnDefinition.Width = new GridLength(90, GridUnitType.Pixel);
+                    }
+                    else
+                    {
+                        columnDefinition.Width = new GridLength(20, GridUnitType.Pixel);
+                    }
+
+                    itemGrid.ColumnDefinitions.Add(columnDefinition);
+                }
+
+                //Create Rows
+                for (int i = 0; i < ObjectsFieldsNames.Count; i++)
+                {
+                    var rowDefinition = new RowDefinition();
+
+                    itemGrid.RowDefinitions.Add(rowDefinition);
+                }
+                
+                for (int i = 0; i < ObjectsFieldsNames.Count; i++)
+                {
+                    Grid.SetRow(ObjectsFieldsNames[itemTab.Header.ToString()][i], i);
+                    Grid.SetRow(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][0],i);
+                    Grid.SetRow(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][1],i);
+                    Grid.SetRow(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][2],i);
+
+                    Grid.SetColumn(ObjectsFieldsNames[itemTab.Header.ToString()][i], 0);
+                    Grid.SetColumn(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][0], 1);
+                    Grid.SetColumn(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][1], 2);
+                    Grid.SetColumn(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][2], 3);
+
+                    itemGrid.Children.Add(ObjectsFieldsNames[itemTab.Header.ToString()][i]);
+                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][0]);
+                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][1]);
+                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][2]);
+                }
+	        }
+        }
+        
         #endregion
     }
 
@@ -248,7 +324,4 @@ namespace OpenCRM.Models.Settings
         #endregion
 
     }
-
-
-
 }

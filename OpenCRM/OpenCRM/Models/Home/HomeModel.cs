@@ -55,7 +55,8 @@ namespace OpenCRM.Models.Home
             List<HomeData> data = new List<HomeData>();
             using (var _db = new OpenCRMEntities()){
                 var objetos = (
-                    from x in Session.RightAccess join url in _db.Objects_ImgURL on x.ObjectId equals url.Objectid
+                    from x in Session.RightAccess
+                    join url in _db.Objects_ImgURL on x.ObjectId equals url.Objectid
                     group x by new { x.ObjectName, x.ObjectId, url.ImgUrl } into temp
                     select new {
                         temp.Key

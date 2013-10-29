@@ -28,7 +28,7 @@
             </Grid.Background>
 
             <Grid>
-                <Grid Name="gridSettings">
+                <Grid Name="gridSettings" Margin="0,0,0,0">
                     <Controls:MetroContentControl>
                         <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
                             <TabControl.Resources>
@@ -38,7 +38,7 @@
                                             <ControlTemplate TargetType="{x:Type TabItem}">
                                                 <Grid>
                                                     <Border Name="Border" Margin="0,0,0,0" Background="Transparent" CornerRadius="5">
-                                                        <ContentPresenter   x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="15" RecognizesAccessKey="True"/>
+                                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="15" RecognizesAccessKey="True"/>
                                                     </Border>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
@@ -67,14 +67,9 @@
                                     </Setter>
                                     <Setter Property="Padding" Value="14"/>
                                 </Style>
-
                             </TabControl.Resources>
-                            <TabControl.Effect>
-                                <DropShadowEffect ShadowDepth="4" Color="Black" />
-                            </TabControl.Effect>
 
                             <TabItem Header="Edit Profile">
-
                                 <Grid Margin="100,50">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -213,12 +208,48 @@
                                     <Label Content="Profile" HorizontalAlignment="Left" Margin="94,36,0,0" VerticalAlignment="Top"/>
                                     <ComboBox Name="ProfilesComboBox" Margin="194,36,0,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
 
-
-                                    <Grid Name="gridAccessRights">
-                                        <TabControl HorizontalAlignment="Left" Height="450" Margin="020,107,0,0" VerticalAlignment="Top" Width="700">
-                                            <TabItem Header="Account" FontSize ="17" Height ="50"  Visibility="Visible">
-                                                <Grid Background="#FFE5E5E5">
-                                                </Grid>
+                                    <Grid Name="gridAccessRights" Margin="0,80,0,0">
+                                        <TabControl Name="permissionTapControl" TabStripPlacement="Top" Background="White" Margin="50,20,50,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900" SelectionChanged="TabControl_SelectionChanged_Permission">
+                                            <TabControl.Resources>
+                                                <Style TargetType="{x:Type TabItem}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                                                <Grid>
+                                                                    <Border Name="Border" Margin="0,0,0,0" Background="Transparent" CornerRadius="5">
+                                                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="15" RecognizesAccessKey="True"/>
+                                                                    </Border>
+                                                                </Grid>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsSelected" Value="True">
+                                                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                                                        <Setter Property="Foreground" Value="Black" />
+                                                                        <Setter Property="FontSize" Value="24" />
+                                                                        <Setter Property="FontFamily" Value="Segoe WP" />
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsSelected" Value="False">
+                                                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                                                        <Setter TargetName="Border" Property="Background" Value="Black" />
+                                                                        <Setter Property="Foreground" Value="White" />
+                                                                        <Setter Property="FontFamily" Value="Segoe WP" />
+                                                                        <Setter Property="FontSize" Value="24" />
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsEnabled" Value="False">
+                                                                        <Setter TargetName="Border" Property="Background" Value="Red" />
+                                                                        <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="White" />
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="Padding" Value="14"/>
+                                                </Style>
+                                            </TabControl.Resources>
+                                            
+                                            <!--<TabItem Header="Account" FontSize ="17"  Visibility="Visible">
+                                                <Grid Background="#FFE5E5E5"/>
                                             </TabItem>
                                             <TabItem Header="Opportunities" FontSize ="17" Height ="50" Visibility="Visible">
                                                 <Grid Background="#FFE5E5E5">
@@ -243,17 +274,12 @@
                                             <TabItem Header="Products" FontSize ="17" Height ="50" Visibility="Visible">
                                                 <Grid Background="#FFE5E5E5">
                                                 </Grid>
-                                            </TabItem>
-
+                                            </TabItem> 
+                                        -->
                                         </TabControl>
-
                                     </Grid>
-
-
                                 </Grid>
-
                             </TabItem>
-
                         </TabControl>
                     </Controls:MetroContentControl>
                 </Grid>
