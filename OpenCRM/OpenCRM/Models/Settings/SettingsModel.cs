@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace OpenCRM.Models.Settings
 {
-    public class SettingsModel : UserControl
+    public class SettingsModel
     {
         #region "Values"
         int _userId;
