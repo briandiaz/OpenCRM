@@ -30,11 +30,13 @@ namespace OpenCRM
             {
                 PageSwitcher.mainwindow.btnHome.Visibility = System.Windows.Visibility.Visible;
                 PageSwitcher.mainwindow.btnSettings.Visibility = System.Windows.Visibility.Visible;
+                PageSwitcher.mainwindow.btnLogOut.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
                 PageSwitcher.mainwindow.btnHome.Visibility = System.Windows.Visibility.Hidden;
                 PageSwitcher.mainwindow.btnSettings.Visibility = System.Windows.Visibility.Hidden;
+                PageSwitcher.mainwindow.btnLogOut.Visibility = System.Windows.Visibility.Hidden;
             }
         }
 

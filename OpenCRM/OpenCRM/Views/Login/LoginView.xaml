@@ -25,7 +25,7 @@
             <TabItem Header="_Login" FontSize="20px">
                 <Grid>
                     <Image Source="/Assets/Img/opencrm_logo_blue.png" Margin="260,95,260,477" Width="500" Height="145"/>
-                    <Grid  Margin="299,270,548,144" HorizontalAlignment="Center">
+                    <Grid  Margin="336,292,583,122" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -99,7 +99,7 @@
                                 Cursor="Hand" 
                                 />
                     </Grid>
-                    <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Center" Margin="372,500,187,0" VerticalAlignment="Top" Foreground="Red" Width="462" FontSize="16px" />
+                    <Label x:Name="ErrorLabel" Content="" HorizontalAlignment="Center" Margin="336,500,223,0" VerticalAlignment="Top" Foreground="Red" Width="462" FontSize="16px" />
                     <Frame Name="frmSource" Visibility="Hidden"/>
                 </Grid>
             </TabItem>

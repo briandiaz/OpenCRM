@@ -73,7 +73,7 @@ namespace OpenCRM.Controllers.Session
         }
 
         /// <summary>
-        /// This method create a session of a specific user
+        /// This method create a session of a specific user.
         /// </summary>
         /// <param name="User">A user from login</param>
         public static void CreateSession(int UserId)
@@ -82,6 +82,14 @@ namespace OpenCRM.Controllers.Session
             _rightAccess = getUserRightAccess();
         }
 
+        /// <summary>
+        /// This method destroy the current session of the user.
+        /// </summary>
+        public static void DestroySession()
+        {
+            _userId = -1;
+            _rightAccess = null;    
+        }
         #endregion
     }
 

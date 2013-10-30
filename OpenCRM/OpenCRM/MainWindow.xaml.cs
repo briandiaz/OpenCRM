@@ -63,5 +63,11 @@ namespace OpenCRM
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            OpenCRM.Controllers.Session.Session.DestroySession();
+            PageSwitcher.Switch("/Views/Login/LoginView.xaml");
+        }
     }
 }
