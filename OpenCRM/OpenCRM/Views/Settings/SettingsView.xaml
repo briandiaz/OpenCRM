@@ -4,7 +4,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        Title="Home" 
+        Title="Settings" 
         Height="Auto" 
         Width="Auto"
         >
@@ -338,9 +338,14 @@
 
                             <TabItem Header="Permissions">
                                 <Grid Name="gridPermissions">
-                                    <Label Content="Profile" HorizontalAlignment="Left" Margin="50,36,0,0" VerticalAlignment="Top"/>
-                                    <ComboBox Name="ProfilesComboBox" Margin="160,38,398,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
-
+                                    <Button Margin="39,16,892,660" Click="BtnPermissionSave_OnClick" Cursor="Hand" Visibility="Visible" >
+                                        <StackPanel>
+                                            <Image Source="/Assets/Img/Icons/System-Save-icon.png"/>
+                                            <TextBlock HorizontalAlignment="Center">Save</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Label Content="Profile" HorizontalAlignment="Left" Margin="144,34,0,0" VerticalAlignment="Top"/>
+                                    <ComboBox Name="ProfilesComboBox" Margin="254,34,304,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
                                     <Grid Name="gridAccessRights" Margin="0,80,0,0">
                                         <TabControl     Name="permissionTapControl" 
                                                         TabStripPlacement="Top" 
