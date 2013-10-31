@@ -109,7 +109,7 @@ namespace OpenCRM.Models.Settings
             return userData;
         }
 
-        public void Save(UserData User)
+        public void SaveEditUser(UserData User)
         {
             try
             {
@@ -251,14 +251,9 @@ namespace OpenCRM.Models.Settings
                     var columnDefinition = new ColumnDefinition();
 
                     if (i == 0)
-                    {
                         columnDefinition.Width = new GridLength(70, GridUnitType.Star);
-
-                    }
                     else
-                    {
                         columnDefinition.Width = new GridLength(10, GridUnitType.Star);
-                    }
 
                     itemGrid.ColumnDefinitions.Add(columnDefinition);
                 }
@@ -269,7 +264,7 @@ namespace OpenCRM.Models.Settings
                 for (int i = 0; i < count; i++)
                 {
                     var rowDefinition = new RowDefinition();
-                    rowDefinition.Height = new GridLength(20,GridUnitType.Auto);
+                    rowDefinition.Height = new GridLength(20, GridUnitType.Auto);
 
                     itemGrid.RowDefinitions.Add(rowDefinition);
                 }
@@ -277,22 +272,114 @@ namespace OpenCRM.Models.Settings
                 //Add labels and checkbox to the Grid
                 for (int i = 0; i < count; i++)
                 {
-                    Grid.SetRow(ObjectsFieldsNames[itemTab.Header.ToString()][i], i);
-                    Grid.SetRow(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][0],i);
-                    Grid.SetRow(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][1],i);
-                    Grid.SetRow(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][2],i);
+                    var itemHeader = itemTab.Header.ToString();
+                    Grid.SetRow(ObjectsFieldsNames[itemHeader][i], i);
+                    Grid.SetRow(ObjectsFieldsCheckBox[itemHeader][i][0], i);
+                    Grid.SetRow(ObjectsFieldsCheckBox[itemHeader][i][1], i);
+                    Grid.SetRow(ObjectsFieldsCheckBox[itemHeader][i][2], i);
 
-                    Grid.SetColumn(ObjectsFieldsNames[itemTab.Header.ToString()][i], 0);
-                    Grid.SetColumn(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][0], 1);
-                    Grid.SetColumn(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][1], 2);
-                    Grid.SetColumn(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][2], 3);
+                    Grid.SetColumn(ObjectsFieldsNames[itemHeader][i], 0);
+                    Grid.SetColumn(ObjectsFieldsCheckBox[itemHeader][i][0], 1);
+                    Grid.SetColumn(ObjectsFieldsCheckBox[itemHeader][i][1], 2);
+                    Grid.SetColumn(ObjectsFieldsCheckBox[itemHeader][i][2], 3);
 
-                    itemGrid.Children.Add(ObjectsFieldsNames[itemTab.Header.ToString()][i]);
-                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][0]);
-                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][1]);
-                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemTab.Header.ToString()][i][2]);
+                    itemGrid.Children.Add(ObjectsFieldsNames[itemHeader][i]);
+                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemHeader][i][0]);
+                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemHeader][i][1]);
+                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemHeader][i][2]);
                 }
 	        }
+        }
+
+        public void SavePermission(TabControl PermissionTab, int SelectedProfileId)
+        {
+            var newListAccessRights = new List<RightsAccess>();
+
+            foreach (TabItem itemTab in PermissionTab.Items)
+            {
+                var itemGrid = itemTab.Content as Grid;
+                var itemHeader = itemTab.Header.ToString();
+            
+                for (int i = 0; i < itemGrid.RowDefinitions.Count ; i++)
+                {
+                    var newAccessRight = new RightsAccess();
+                    newAccessRight.ObjectName = itemHeader;
+
+                    for (int j = 0; j < itemGrid.ColumnDefinitions.Count; j++)
+			        {
+			            var itemSelected = itemGrid.Children.Cast<UIElement>().First(
+                           x => Grid.GetRow(x) == i && Grid.GetColumn(x) == j  
+                        );
+
+                        if(j == 0)
+                        {
+                            var item = itemSelected as Label;
+                            newAccessRight.ObjectFieldName = item.Content.ToString();
+                        }
+                        else
+                        {
+                            var item = itemSelected as CheckBox;
+
+                            if (j == 1) 
+                                newAccessRight.Read = item.IsChecked.Value;
+                            else if (j == 2)
+                                newAccessRight.Create = item.IsChecked.Value;
+                            else
+                                newAccessRight.Modify = item.IsChecked.Value;
+                        }
+                    }
+                    newListAccessRights.Add(newAccessRight);
+                }
+            }
+
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from objects in db.Objects
+                        from fields in db.Object_Fields
+                        from profile in db.Profile
+                        from profileObjects in db.Profile_Object
+                        from profileObjectsFields in db.Profile_Object_Fields
+                        where
+                            SelectedProfileId == profile.ProfileId &&
+                            profile.ProfileId == profileObjects.ProfileId &&
+                            profileObjects.ObjectId == objects.ObjectId &&
+                            profileObjectsFields.ProfileObjectId == profileObjects.ProfileObjectId &&
+                            profileObjectsFields.ObjectFieldsId == fields.ObjectFieldsId &&
+                            objects.ObjectId == fields.ObjectId
+                        select
+                            profileObjectsFields
+                    );
+
+                    foreach (var item in newListAccessRights)
+                    {
+                        Profile_Object_Fields selectedRow = query.SingleOrDefault(
+                            x => 
+                                x.Object_Fields.Name == item.ObjectFieldName &&
+                                x.Object_Fields.Objects.Name == item.ObjectName
+                        );
+
+                        if (!(selectedRow.Modify == item.Modify && selectedRow.Create == item.Create && selectedRow.Read == item.Read))
+                        {
+                            selectedRow.Modify = item.Modify;
+                            selectedRow.Create = item.Create;
+                            selectedRow.Read = item.Read;
+
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         public bool CheckUsername(string username)
@@ -323,6 +410,8 @@ namespace OpenCRM.Models.Settings
             return false;
         }
         
+        
+
         #endregion
     }
 
@@ -356,4 +445,14 @@ namespace OpenCRM.Models.Settings
         #endregion
 
     }
+
+    public class ProfileAccessRights : RightsAccess
+    {
+        #region "Properties"
+        
+        
+        #endregion
+
+    }
+
 }
