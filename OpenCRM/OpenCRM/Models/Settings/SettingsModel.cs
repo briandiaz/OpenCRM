@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using MahApps.Metro.Controls;
 using ReactiveUI;
 
@@ -306,7 +308,7 @@ namespace OpenCRM.Models.Settings
                        where user.UserName == username
                        select user
                     );
-                    if (!userName.Any())
+                    if (!userName.Any() && Validate("^[a-zA-Z][a-zA-Z0-9]{5,11}$", username))
                     {
                         return true;
                     }
@@ -322,7 +324,105 @@ namespace OpenCRM.Models.Settings
             }
             return false;
         }
-        
+
+        public bool Validate(string pattern, string st)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(st, pattern);
+        }
+
+        public void SaveData(string userName, string birthDate, string email, string password, string confirmPassword, string name, string lastName, ComboBox profile, Image imageEmail, Image imgProfile, Image imgPassword, Image imgConfirm, Button search)
+        {
+            #region Validate
+            bool complete = true;
+            var imgSearch = (search.Content as StackPanel).Children[0] as Image;
+            if (Validate("^[a-zA-Z][a-zA-Z0-9]{5,11}$", userName) && CheckUsername(userName))
+            {
+                imgSearch.Source = new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                imgSearch.Source = new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+                complete = false;
+            }
+
+            if (Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+", password))
+            {
+                imgPassword.Source = new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                imgPassword.Source = new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+                complete = false;
+            }
+            if (password == confirmPassword && Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+", confirmPassword))
+            {
+                imgConfirm.Source = new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                imgConfirm.Source = new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+                complete = false;
+            }
+
+            if (!Validate(
+                    @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" +
+                    @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$", email))
+            {
+                imageEmail.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                imageEmail.Visibility = Visibility.Hidden;
+            }
+
+            imgPassword.Visibility = Visibility.Visible;
+            imgConfirm.Visibility = Visibility.Visible;
+
+            if (profile.SelectedValue == null)
+            {
+                imgProfile.Visibility = Visibility.Visible;
+                complete = false;
+            }
+            #endregion Validate
+
+            if (complete)
+            {
+                try
+                {
+                    using (var _db = new OpenCRMEntities())
+                    {
+                        User user = _db.User.Create();
+                        user.UserId = _db.User.Count() + 1;
+                        user.UserName = userName;
+                        user.Name = name;
+                        user.BirthDate = Convert.ToDateTime(birthDate);
+                        user.LastName = lastName;
+                        user.HashPassword = password.GetHashCode().ToString();
+                        user.Profile = _db.Profile.Find(profile.SelectedIndex);
+                        user.Email = email;
+                        user.CreateDate = DateTime.Now;
+                        user.UpdateDate = DateTime.Now;
+                        _db.User.Add(user);
+                        _db.SaveChanges();
+                        MessageBox.Show("User created.");
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+        }
+
+        public void ValidateFields(string us)
+        {
+            
+        }
         #endregion
     }
 
