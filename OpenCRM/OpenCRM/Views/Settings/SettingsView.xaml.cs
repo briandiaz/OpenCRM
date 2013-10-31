@@ -56,7 +56,7 @@ namespace OpenCRM.Views.Settings
                 this.tbxUserEmail.Text
             );
 
-            _settingsModel.Save(userData);
+            _settingsModel.SaveEditUser(userData);
         }
 
         private void ProfilesComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -79,6 +79,13 @@ namespace OpenCRM.Views.Settings
         {
             var ima = (btnSearch.Content as StackPanel).Children[0] as Image;
             ima.Source = new BitmapImage(new Uri("/Assets/Img/Search.png", UriKind.RelativeOrAbsolute));
+        }
+
+        private void BtnPermissionSave_OnClick(object sender, RoutedEventArgs e)
+        {
+            var SelectedProfileId = (int) this.ProfilesComboBox.SelectedValue;
+            _settingsModel.SavePermission(this.permissionTapControl, SelectedProfileId);
+
         }
     }
 }
