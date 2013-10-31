@@ -251,6 +251,13 @@
     <Compile Include="DataBase\User.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Objects\Accounts\AccountsModel.cs" />
+    <Compile Include="Models\Objects\Campaigns\CampaignsModel.cs" />
+    <Compile Include="Models\Objects\Cases\CasesModel.cs" />
+    <Compile Include="Models\Objects\Contacts\ContactsModel.cs" />
+    <Compile Include="Models\Objects\Leads\LeadsModel.cs" />
+    <Compile Include="Models\Objects\Oportunities\OportunitiesModel.cs" />
+    <Compile Include="Models\Objects\Products\ProductsModel.cs" />
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Page\PageSwitcher.cs" />
     <Compile Include="Controllers\Session\Session.cs" />
@@ -261,6 +268,27 @@
     <Compile Include="Models\Home\HomeModel.cs" />
     <Compile Include="Views\Login\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Accounts\AccountsView.xaml.cs">
+      <DependentUpon>AccountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Campaigns\CampaingsView.xaml.cs">
+      <DependentUpon>CampaingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Cases\CasesView.xaml.cs">
+      <DependentUpon>CasesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Contacts\ContactsView.xaml.cs">
+      <DependentUpon>ContactsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Leads\LeadsView.xaml.cs">
+      <DependentUpon>LeadsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Oportunities\OportunitiesView.xaml.cs">
+      <DependentUpon>OportunitiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Products\ProductsView.xaml.cs">
+      <DependentUpon>ProductsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -286,6 +314,34 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Login\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Accounts\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Campaigns\CampaingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Cases\CasesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Contacts\ContactsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Leads\LeadsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Oportunities\OportunitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Products\ProductsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -387,6 +443,7 @@
     <Resource Include="Assets\Img\Search.png" />
     <Resource Include="Assets\Img\Wrong.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
