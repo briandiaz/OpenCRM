@@ -172,6 +172,8 @@
                                                     FontSize="20px"
                                                     IsEnabled="False"
                                                     ItemsSource="{Binding Path=Name}" Margin="5,8,-380,3" Height="36" />
+                                        
+                                        
 
                                         <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="7" Click="btnSave_Click" Cursor="Hand" >
                                             <StackPanel>
@@ -230,6 +232,22 @@
                                                 <Image Source="/Assets/Img/Search.png"  Width="20"/>
                                             </StackPanel>
                                         </Button>
+                                        
+                                        <StackPanel Grid.Row="7" Grid.Column="2" Margin="390,8,-380,4">
+                                            <Image Name ="ImagePassword" Source="/Assets/Img/Correct.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="8" Grid.Column="2" Margin="390,8,-380,4">
+                                            <Image Name ="ImagePasswordConfirm" Source="/Assets/Img/Correct.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
+                                       
+                                        <StackPanel Grid.Row="9" Grid.Column="2" Margin="390,25,-380,0">
+                                            <Image Name ="ImageProfile" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="6" Grid.Column="2" Margin="390,15,-380,0">
+                                            <Image Name ="ImageEmail" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
 
                                         <Label  Content="Name"
                                                 VerticalAlignment="Center"
@@ -297,7 +315,8 @@
                                                         Grid.Column="1"
                                                         VerticalContentAlignment="Center" 
                                                         FontSize="20px"
-                                                        Name="tbxUserHashPassword2" />
+                                                        Name="tbxUserHashPassword2" 
+                                                        LostFocus="TbxUserHashPassword2_OnLostFocus"/>
 
                                         <Label Content="Confirm Password"
                                                Grid.Row="8"
@@ -311,7 +330,8 @@
                                                         Grid.Column="1"
                                                         VerticalContentAlignment="Center" 
                                                         FontSize="20px"
-                                                        Name="tbxUserConfirmPassword" />
+                                                        Name="tbxUserConfirmPassword"
+                                                        LostFocus="TbxUserConfirmPassword_OnLostFocus"/>
                                         
                                         <Label  Content="User Profile"
                                                 Grid.Row="9"
@@ -323,10 +343,11 @@
                                                     Grid.Column="1"
                                                     VerticalAlignment="Center"
                                                     FontSize="20px"
-                                                    ItemsSource="{Binding Path=Name}" Margin="10,15,-385,14" Height="36" />
+                                                    ItemsSource="{Binding Path=Name}" Margin="10,15,-385,14" Height="36"
+                                                    SelectionChanged="CmbUserProfile2_OnSelectionChanged" />
 
                                        
-                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="9" Click="btnSave_Click" Cursor="Hand" >
+                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="9" Click="btnSave2_Click" Cursor="Hand" >
                                             <StackPanel>
                                                 <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
                                                 <TextBlock>Save</TextBlock>

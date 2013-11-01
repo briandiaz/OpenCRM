@@ -37,6 +37,7 @@ namespace OpenCRM.Views.Settings
             cmbUserProfile.SelectedValuePath = "ProfileId";
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
 
+            //Create New User
             cmbUserProfile2.ItemsSource = _settingsModel.Profiles;
             cmbUserProfile2.DisplayMemberPath = "Name";
 
@@ -64,13 +65,13 @@ namespace OpenCRM.Views.Settings
             if (ProfilesComboBox.SelectedValue != null)
             {
                 var profileId = (int)this.ProfilesComboBox.SelectedValue;
-                _settingsModel.LoadGrid(this.permissionTapControl);
-                _settingsModel.LoadProfile(profileId, this.permissionTapControl);
+                _settingsModel.LoadTabControl(profileId, this.permissionTapControl);
             }
         }
 
         private void BtnSearch_OnClick(object sender, RoutedEventArgs e)
         {
+
             var ima = (btnSearch.Content as StackPanel).Children[0] as Image;
             ima.Source = _settingsModel.CheckUsername(tbxUserUsername2.Text) ? new BitmapImage(new Uri("/Assets/Img/Correct.png",UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
         }
@@ -83,9 +84,45 @@ namespace OpenCRM.Views.Settings
 
         private void BtnPermissionSave_OnClick(object sender, RoutedEventArgs e)
         {
-            var SelectedProfileId = (int) this.ProfilesComboBox.SelectedValue;
+            var SelectedProfileId = (int)this.ProfilesComboBox.SelectedValue;
             _settingsModel.SavePermission(this.permissionTapControl, SelectedProfileId);
+        }
 
+        private void TbxUserHashPassword2_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.tbxUserHashPassword2.Password != "")
+            {
+                ImagePassword.Source = _settingsModel.Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+",
+                    tbxUserHashPassword2.Password) ? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+                ImagePassword.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ImagePassword.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void TbxUserConfirmPassword_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.tbxUserHashPassword2.Password != "")
+            {
+                ImagePasswordConfirm.Source = this.tbxUserConfirmPassword.Password == this.tbxUserHashPassword2.Password ? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+                ImagePasswordConfirm.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ImagePasswordConfirm.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnSave2_Click(object sender, RoutedEventArgs e)
+        {
+            _settingsModel.SaveNewUser(tbxUserUsername2.Text, tbxUserBirthDate2.Text, tbxUserEmail2.Text, tbxUserHashPassword2.Password, tbxUserConfirmPassword.Password, tbxUserName2.Text, tbxUserLastName2.Text, cmbUserProfile2, ImageEmail, ImageProfile, ImagePassword, ImagePasswordConfirm, btnSearch);
+        }
+        
+        private void CmbUserProfile2_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ImageProfile.Visibility = Visibility.Hidden;
         }
     }
 }
