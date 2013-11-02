@@ -24,5 +24,10 @@ namespace OpenCRM.Views.Objects.Leads
         {
             InitializeComponent();
         }
+
+        private void btn_CreateLeadOnClick(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("./CreateLead.xaml");
+        }
     }
 }
