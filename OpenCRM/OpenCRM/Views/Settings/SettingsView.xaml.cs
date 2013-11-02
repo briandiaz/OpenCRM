@@ -49,15 +49,25 @@ namespace OpenCRM.Views.Settings
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var userData = new UserData(
-                this.tbxUserUsername.Text,
-                this.tbxUserName.Text,
-                this.tbxUserLastName.Text,
-                Convert.ToDateTime(this.tbxUserBirthDate.Text),
-                this.tbxUserEmail.Text
-            );
+            if (_settingsModel.Validate(
+                @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" +
+                @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$", tbxUserEmail.Text))
+            {
+                var userData = new UserData(
+                    this.tbxUserUsername.Text,
+                    this.tbxUserName.Text,
+                    this.tbxUserLastName.Text,
+                    Convert.ToDateTime(this.tbxUserBirthDate.Text),
+                    this.tbxUserEmail.Text
+                    );
+                _settingsModel.SaveEditUser(userData);
 
-            _settingsModel.SaveEditUser(userData);
+                ImageEmailEdit.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                ImageEmailEdit.Visibility = Visibility.Visible;
+            }
         }
 
         private void ProfilesComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
