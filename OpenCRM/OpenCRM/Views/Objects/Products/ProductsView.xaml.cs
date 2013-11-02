@@ -23,6 +23,13 @@ namespace OpenCRM.Views.Objects.Products
         public ProductsView()
         {
             InitializeComponent();
+            
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Products/CreateProduct.xaml");
+        }
+
     }
 }
