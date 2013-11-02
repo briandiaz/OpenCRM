@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCRM.DataBase;
 using OpenCRM.Models.Objects.Leads;
-using OpenCRM.DataBase;
+
 namespace OpenCRM.Views.Objects.Accounts
 {
     /// <summary>
