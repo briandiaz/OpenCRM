@@ -14,6 +14,7 @@ using OpenCRM.DataBase;
 using OpenCRM.Controllers.Session;
 using System.Data.SqlClient;
 using System.Windows;
+using System.Collections;
 
 namespace OpenCRM.Models.Settings
 {
@@ -348,9 +349,8 @@ namespace OpenCRM.Models.Settings
                 tapItem.Height = 50;
                 tapItem.Visibility = Visibility.Visible;
 
-                var grid = new Grid();
-                grid.Background = new SolidColorBrush(Colors.DeepSkyBlue);
-                tapItem.Content = grid;
+                var dataGrid = new DataGrid();
+                tapItem.Content = dataGrid;
 
                 PermissionTabs.Items.Add(tapItem);
             }
@@ -396,34 +396,23 @@ namespace OpenCRM.Models.Settings
 
         private void LoadTabControlGridData(Dictionary<string, List<AccessRights>> Permission, TabControl PermissionTab)
         {
-            var ObjectsFieldsNames = new Dictionary<string, List<Label>>();
-            var ObjectsFieldsCheckBox = new Dictionary<string, List<List<CheckBox>>>();
+            var ObjectsFieldsNames = new Dictionary<string, List<string>>();
+            var ObjectsFieldsCheckBox = new Dictionary<string, List<List<bool>>>();
+
 
             foreach (var key in Permission)
             {
-                var labelsObjectsFields = new List<Label>();
-                var checkBoxesPermission = new List<List<CheckBox>>();
+                var labelsObjectsFields = new List<string>();
+                var checkBoxesPermission = new List<List<bool>>();
 
                 foreach (var value in key.Value)
                 {
-                    var label = new Label();
-                    label.Content = value.ObjectFieldName;
-                    label.FontSize = 12;
-                    labelsObjectsFields.Add(label);
-
-                    var checkBoxes = new List<CheckBox>(3);
-
-                    var checkBoxCreate = new CheckBox();
-                    var checkBoxModify = new CheckBox();
-                    var checkBoxRead = new CheckBox();
-
-                    checkBoxCreate.IsChecked = value.Create;
-                    checkBoxModify.IsChecked = value.Modify;
-                    checkBoxRead.IsChecked = value.Read;
-
-                    checkBoxes.Add(checkBoxCreate);
-                    checkBoxes.Add(checkBoxRead);
-                    checkBoxes.Add(checkBoxModify);
+                    labelsObjectsFields.Add(value.ObjectFieldName);
+                    
+                    var checkBoxes = new List<bool>(3);
+                    checkBoxes.Add(value.Create);
+                    checkBoxes.Add(value.Modify);
+                    checkBoxes.Add(value.Read);
 
                     checkBoxesPermission.Add(checkBoxes);
                 }
@@ -434,51 +423,39 @@ namespace OpenCRM.Models.Settings
 
             foreach (TabItem itemTab in PermissionTab.Items)
             {
-                var itemGrid = itemTab.Content as Grid;
-
-                //Create Columns
-                for (int i = 0; i < 4; i++)
-                {
-                    var columnDefinition = new ColumnDefinition();
-
-                    if (i == 0)
-                        columnDefinition.Width = new GridLength(70, GridUnitType.Star);
-                    else
-                        columnDefinition.Width = new GridLength(10, GridUnitType.Star);
-
-                    itemGrid.ColumnDefinitions.Add(columnDefinition);
-                }
-
+                var itemDataGrid = itemTab.Content as DataGrid;
                 var count = ObjectsFieldsNames[itemTab.Header.ToString()].Count;
+                var itemHeader = itemTab.Header.ToString();
+                
+                var listProfileData = new List<DataGridProfileData>();
 
-                //Create Rows
+                //Fill the DataGrid
                 for (int i = 0; i < count; i++)
                 {
-                    var rowDefinition = new RowDefinition();
-                    rowDefinition.Height = new GridLength(20, GridUnitType.Auto);
-
-                    itemGrid.RowDefinitions.Add(rowDefinition);
+                    listProfileData.Add(
+                        new DataGridProfileData()
+                        {
+                            Fields = ObjectsFieldsNames[itemHeader][i].PadRight(100),
+                            Create = ObjectsFieldsCheckBox[itemHeader][i][0],
+                            Modify = ObjectsFieldsCheckBox[itemHeader][i][1],
+                            Read = ObjectsFieldsCheckBox[itemHeader][i][2]
+                        }
+                    );
                 }
 
-                //Add labels and checkbox to the Grid
-                for (int i = 0; i < count; i++)
-                {
-                    var itemHeader = itemTab.Header.ToString();
-                    Grid.SetRow(ObjectsFieldsNames[itemHeader][i], i);
-                    Grid.SetRow(ObjectsFieldsCheckBox[itemHeader][i][0], i);
-                    Grid.SetRow(ObjectsFieldsCheckBox[itemHeader][i][1], i);
-                    Grid.SetRow(ObjectsFieldsCheckBox[itemHeader][i][2], i);
+                itemDataGrid.AutoGeneratedColumns += AutoGeneratingColumnDataGrid;
+                itemDataGrid.ItemsSource = listProfileData;
+            }
+        }
 
-                    Grid.SetColumn(ObjectsFieldsNames[itemHeader][i], 0);
-                    Grid.SetColumn(ObjectsFieldsCheckBox[itemHeader][i][0], 1);
-                    Grid.SetColumn(ObjectsFieldsCheckBox[itemHeader][i][1], 2);
-                    Grid.SetColumn(ObjectsFieldsCheckBox[itemHeader][i][2], 3);
+        private void AutoGeneratingColumnDataGrid(object sender, EventArgs e)
+        {
+            var column = (sender as DataGrid).Columns;
 
-                    itemGrid.Children.Add(ObjectsFieldsNames[itemHeader][i]);
-                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemHeader][i][0]);
-                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemHeader][i][1]);
-                    itemGrid.Children.Add(ObjectsFieldsCheckBox[itemHeader][i][2]);
-                }
+            foreach (var item in column)
+            {
+                if (item.Header.ToString() == "Fields")
+                    item.IsReadOnly = true;
             }
         }
 
@@ -488,38 +465,23 @@ namespace OpenCRM.Models.Settings
 
             foreach (TabItem itemTab in PermissionTab.Items)
             {
-                var itemGrid = itemTab.Content as Grid;
+                var itemGrid = itemTab.Content as DataGrid;
                 var itemHeader = itemTab.Header.ToString();
 
-                for (int i = 0; i < itemGrid.RowDefinitions.Count; i++)
+                var profileDataGrid = itemGrid.ItemsSource as List<DataGridProfileData>;
+
+                foreach (var item in profileDataGrid)
                 {
-                    var newAccessRight = new AccessRights();
-                    newAccessRight.ObjectName = itemHeader;
-
-                    for (int j = 0; j < itemGrid.ColumnDefinitions.Count; j++)
-                    {
-                        var itemSelected = itemGrid.Children.Cast<UIElement>().First(
-                           x => Grid.GetRow(x) == i && Grid.GetColumn(x) == j
-                        );
-
-                        if (j == 0)
+                    newListAccessRights.Add(
+                        new AccessRights() 
                         {
-                            var item = itemSelected as Label;
-                            newAccessRight.ObjectFieldName = item.Content.ToString();
+                            Create = item.Create,
+                            Modify = item.Modify,
+                            Read = item.Read,
+                            ObjectFieldName = item.Fields,
+                            ObjectName = itemHeader
                         }
-                        else
-                        {
-                            var item = itemSelected as CheckBox;
-
-                            if (j == 1)
-                                newAccessRight.Read = item.IsChecked.Value;
-                            else if (j == 2)
-                                newAccessRight.Create = item.IsChecked.Value;
-                            else
-                                newAccessRight.Modify = item.IsChecked.Value;
-                        }
-                    }
-                    newListAccessRights.Add(newAccessRight);
+                    );
                 }
             }
 
@@ -607,6 +569,17 @@ namespace OpenCRM.Models.Settings
 
         #endregion
 
+    }
+
+    public class DataGridProfileData
+    {
+        #region "Properties"
+        public string Fields { get; set; }
+        public bool Create { get; set; }
+        public bool Modify { get; set; }
+        public bool Read { get; set; }
+
+        #endregion
     }
 
 }
