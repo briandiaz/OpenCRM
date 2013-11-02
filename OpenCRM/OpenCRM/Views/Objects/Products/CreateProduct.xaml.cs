@@ -58,6 +58,10 @@ namespace OpenCRM.Views.Objects.Products
                     _db.Products.Add(product);
                     _db.SaveChanges();
 
+                    TxtBoxCodigo.Text = "";
+                    TxtBoxDescripcion.Text = "";
+                    TxtBoxName.Text = "";
+                    TxtBoxPrecio.Text = "";
                     MessageBox.Show("Producto ingresado con Exito");
                 }
 

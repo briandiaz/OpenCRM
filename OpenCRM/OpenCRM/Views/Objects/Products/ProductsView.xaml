@@ -54,27 +54,43 @@
             </TabControl>
 
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Editar"
-                VerticalAlignment="Center"
-                Margin="2"
-                Width="75"
-                />
+                <Button 
+                    Name="btnEdit"
+                    VerticalAlignment="Center"
+                    Margin="2"
+                    Width="75"
+               >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"></Image>
+                        <TextBlock VerticalAlignment="Center">Edit </TextBlock>
+                    </StackPanel>
+                    
+                    </Button>
 
-                <Button Content="Crear" 
-                VerticalAlignment="Center"
-                Margin="2"
-                Width="75" Click="Button_Click_1"
-                />
+                <Button 
+                    Name="btnCreate"
+                    VerticalAlignment="Center"
+                    Margin="2"
+                    Width="75" 
+                    Click="Button_Click_1"
+                >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"></Image>
+                        <TextBlock VerticalAlignment="Center">Create</TextBlock>
+                    </StackPanel>
+                    </Button>
             </StackPanel>
             <DataGrid 
-            Margin="0,20,0,0"    
-            Style="{DynamicResource MetroDataGrid}"
-            Grid.Column="1" 
+                IsReadOnly="True"
+                Name="RecentProductsGrid"
+                Margin="0,20,0,0"    
+                Style="{DynamicResource MetroDataGrid}"
+                Grid.Column="1" 
                 HorizontalAlignment="Left"
-            Grid.Row="2" 
-            VerticalAlignment="Top"
+                Grid.Row="2" 
+                VerticalAlignment="Top"
                 MinWidth="1000"
-                MinHeight="400"
+                MinHeight="400" 
          >
             </DataGrid>
 

@@ -52,6 +52,9 @@ namespace OpenCRM.Views.Home
                 case "Contacts":
                     PageSwitcher.Switch("/Views/Objects/Contacts/ContactsView.xaml");
                     break;
+                case "Products":
+                    PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
+                    break;
             }
         }
     }

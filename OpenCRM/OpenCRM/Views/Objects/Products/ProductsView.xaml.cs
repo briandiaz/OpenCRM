@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCRM.Controllers.Session;
+using OpenCRM.DataBase;
+using OpenCRM.Models.Objects.Products;
+using OpenCRM.Models.Settings;
 
 namespace OpenCRM.Views.Objects.Products
 {
@@ -20,10 +24,13 @@ namespace OpenCRM.Views.Objects.Products
     /// </summary>
     public partial class ProductsView
     {
+        ProductsModel pm;
         public ProductsView()
         {
             InitializeComponent();
-            
+            pm = new ProductsModel();
+            pm.LoadRecentProduts(this.RecentProductsGrid);
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -31,5 +38,8 @@ namespace OpenCRM.Views.Objects.Products
             PageSwitcher.Switch("/Views/Objects/Products/CreateProduct.xaml");
         }
 
+       
     }
+
+
 }
