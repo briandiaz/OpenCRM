@@ -13,23 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpenCRM.Views.Objects.Products
+namespace OpenCRM.Views.Objects.Leads
 {
     /// <summary>
-    /// Lógica de interacción para ProductsView.xaml
+    /// Interaction logic for CreateLead.xaml
     /// </summary>
-    public partial class ProductsView
+    public partial class CreateLead : Page
     {
-        public ProductsView()
+        public CreateLead()
         {
             InitializeComponent();
-            
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void btn_CancelNewLeadOnClick(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch("/Views/Objects/Products/CreateProduct.xaml");
+            PageSwitcher.Switch("./LeadsView.xaml");
         }
 
+        private void btn_SaveLeadOnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("New lead saved.");
+        }
+        
     }
 }

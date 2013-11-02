@@ -13,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpenCRM.Views.Objects.Products
+namespace OpenCRM.Views.Objects.Oportunities
 {
     /// <summary>
-    /// Lógica de interacción para ProductsView.xaml
+    /// Lógica de interacción para OportunitiesView.xaml
     /// </summary>
-    public partial class ProductsView
+    public partial class OportunitiesView
     {
-        public ProductsView()
+        public OportunitiesView()
         {
             InitializeComponent();
-            
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            PageSwitcher.Switch("/Views/Objects/Products/CreateProduct.xaml");
-        }
-
     }
 }

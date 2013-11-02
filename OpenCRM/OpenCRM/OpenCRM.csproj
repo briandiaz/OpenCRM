@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>OpenCRM.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -284,11 +287,17 @@
     <Compile Include="Views\Objects\Contacts\ContactsView.xaml.cs">
       <DependentUpon>ContactsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Leads\CreateLead.xaml.cs">
+      <DependentUpon>CreateLead.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Leads\LeadsView.xaml.cs">
       <DependentUpon>LeadsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Objects\Oportunities\OportunitiesView.xaml.cs">
-      <DependentUpon>OportunitiesView.xaml</DependentUpon>
+    <Compile Include="Views\Objects\Opportunities\OpportunitiesView.xaml.cs">
+      <DependentUpon>OpportunitiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Products\CreateProduct.xaml.cs">
+      <DependentUpon>CreateProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Products\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
@@ -344,11 +353,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Objects\Leads\CreateLead.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Objects\Leads\LeadsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Objects\Oportunities\OportunitiesView.xaml">
+    <Page Include="Views\Objects\Opportunities\OpportunitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Products\CreateProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -906,6 +923,7 @@
     <Resource Include="Assets\Img\Icons\32px\youtube2.png" />
     <Resource Include="Assets\Img\Icons\32px\zoom-in.png" />
     <Resource Include="Assets\Img\Icons\32px\zoom-out.png" />
+    <Resource Include="OpenCRM.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

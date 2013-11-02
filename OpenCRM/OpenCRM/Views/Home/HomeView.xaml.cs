@@ -43,11 +43,16 @@ namespace OpenCRM.Views.Home
                 case "Leads":
                     PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
                     break;
-                case "Products":
-                    PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
+                case "Cases":
+                    PageSwitcher.Switch("/Views/Objects/Cases/CasesView.xaml");
+                    break;
+                case "Opportunities":
+                    PageSwitcher.Switch("/Views/Objects/Opportunities/OpportunitiesView.xaml");
+                    break;
+                case "Contacts":
+                    PageSwitcher.Switch("/Views/Objects/Contacts/ContactsView.xaml");
                     break;
             }
         }
-
     }
 }

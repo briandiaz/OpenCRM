@@ -1,4 +1,4 @@
-﻿<Page x:Class="OpenCRM.Views.Objects.Accounts.AccountsView"
+﻿<Page x:Class="OpenCRM.Views.Objects.Oportunities.OportunitiesView"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -7,7 +7,7 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       mc:Ignorable="d"
-                      Title="Accounts" 
+                      Title="Oportunities" 
                       MinHeight="1024" 
                       MinWidth="768"
                       >
@@ -21,12 +21,12 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
                 <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
-            </ResourceDictionary.MergedDictionaries>     
+            </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>
     </Page.Resources>
 
-        <controls:MetroContentControl>
+    <controls:MetroContentControl>
         <Grid>
 
             <Grid.Background>
@@ -49,7 +49,7 @@
 
 
             <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_Accounts" FontSize="20px">
+                <TabItem Header="_Oportunities" FontSize="20px">
                 </TabItem>
             </TabControl>
 
@@ -64,7 +64,6 @@
                 VerticalAlignment="Center"
                 Margin="2"
                 Width="75"
-                Click="ButtonBase_OnClick"
                 />
             </StackPanel>
             <DataGrid 
@@ -79,7 +78,7 @@
          >
             </DataGrid>
 
-            <Image Source="/Assets/Img/Icons/Accounts.png" 
+            <Image Source="/Assets/Img/Icons/Oportunities.png" 
                Grid.Column="1"
                HorizontalAlignment="Left"
                Height="100"
@@ -87,6 +86,6 @@
                VerticalAlignment="Top"
                Width="100"/>
 
-            </Grid>
+        </Grid>
     </controls:MetroContentControl>
 </Page>
