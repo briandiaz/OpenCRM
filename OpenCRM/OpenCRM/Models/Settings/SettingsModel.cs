@@ -41,7 +41,7 @@ namespace OpenCRM.Models.Settings
         public SettingsModel(int UserId, List<AccessRights> RightsAccess)
         {
             this._userId = UserId;
-            this._userRightsAccess = RightsAccess;
+            this._userAccessRights = RightsAccess;
             this.Profiles = getAllProfiles();
         }
 

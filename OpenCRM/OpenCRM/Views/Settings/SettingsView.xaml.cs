@@ -38,27 +38,27 @@ namespace OpenCRM.Views.Settings
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
 
             //Create New User
-            if (_settingsModel.HasAccessRightsTo("Create New User"))
-            {
+            //if (_settingsModel.HasAccessRightsTo("Create New User"))
+            //{
                 cmbUserProfile2.ItemsSource = _settingsModel.Profiles;
                 cmbUserProfile2.DisplayMemberPath = "Name";
-            }
-            else 
+            //}
+            /*else 
             {
                 _settingsModel.DisableTabItem(this.settingsTabControl, "Create New User");
-            }
+            }*/
 
             //Permission
-            if (_settingsModel.HasAccessRightsTo("Permission"))
-            {
+            //if (_settingsModel.HasAccessRightsTo("Permission"))
+            //{
                 ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
                 ProfilesComboBox.DisplayMemberPath = "Name";
                 ProfilesComboBox.SelectedValuePath = "ProfileId";
-            }
+            /*}
             else
             {
                 _settingsModel.DisableTabItem(this.settingsTabControl,"Permission");
-            }
+            }*/
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
