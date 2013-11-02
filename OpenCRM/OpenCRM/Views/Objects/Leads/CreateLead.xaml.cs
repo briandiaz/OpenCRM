@@ -27,7 +27,7 @@ namespace OpenCRM.Views.Objects.Leads
 
         private void btn_CancelNewLeadOnClick(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch("./LeadsView.xaml");
+            PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
         }
 
         private void btn_SaveLeadOnClick(object sender, RoutedEventArgs e)

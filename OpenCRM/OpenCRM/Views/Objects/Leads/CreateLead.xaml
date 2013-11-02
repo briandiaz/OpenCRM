@@ -50,7 +50,7 @@
 
 
             <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_New Lead" FontSize="20px">
+                <TabItem Header="_New Lead" FontSize="20px" Margin="0,0,-21,0">
                 </TabItem>
             </TabControl>
 
@@ -69,7 +69,6 @@
 
             <Grid 
                 Margin="0,20,0,0"    
-                Style="{DynamicResource MetroDataGrid}"
                 Grid.Column="1" 
                 HorizontalAlignment="Left"
                 Grid.Row="2" 
