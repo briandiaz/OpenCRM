@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using OpenCRM.DataBase;
 using OpenCRM.Models.Home;
 
 namespace OpenCRM.Views.Home
@@ -32,7 +32,10 @@ namespace OpenCRM.Views.Home
         private void Tile_Click_1(object sender, RoutedEventArgs e)
         {
             MahApps.Metro.Controls.Tile _thisTile = (MahApps.Metro.Controls.Tile)sender;
-            MessageBox.Show(_thisTile.Title);
+            if (_thisTile.Title.Equals("Accounts"))
+            {
+                PageSwitcher.Switch("/Views/Objects/Accounts/AccountsView.xaml");
+            }
         }
 
     }
