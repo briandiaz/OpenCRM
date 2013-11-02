@@ -12,12 +12,12 @@ namespace OpenCRM.Controllers.Session
     {
         #region "Values"
         private static int _userId;
-        private static List<RightsAccess> _rightAccess;
+        private static List<AccessRights> _rightAccess;
 
         #endregion
 
         #region "Properties"
-        public static List<RightsAccess> RightAccess 
+        public static List<AccessRights> RightAccess 
         {
             get { return _rightAccess; }
         } 
@@ -34,9 +34,9 @@ namespace OpenCRM.Controllers.Session
         /// the created user
         /// </summary>
         /// <returns></returns>
-        private static List<RightsAccess> getUserRightAccess() 
+        private static List<AccessRights> getUserRightAccess() 
         {
-            var data = new List<RightsAccess>();
+            var data = new List<AccessRights>();
 
             using(var db = new OpenCRMEntities())
             {
@@ -56,7 +56,8 @@ namespace OpenCRM.Controllers.Session
                         profileObjectsFields.ObjectFieldsId == fields.ObjectFieldsId &&
                         objects.ObjectId == fields.ObjectId
                     select
-                        new RightsAccess() {
+                        new AccessRights()
+                        {
                             ObjectId = objects.ObjectId,
                             ObjectName = objects.Name,
                             ObjectFielId = fields.ObjectFieldsId,
@@ -69,6 +70,7 @@ namespace OpenCRM.Controllers.Session
 
                 data = query.ToList();
             }
+
             return data;
         }
 
@@ -93,7 +95,7 @@ namespace OpenCRM.Controllers.Session
         #endregion
     }
 
-    public class RightsAccess
+    public class AccessRights
     {
         #region "Properties"
         public int ObjectId { get; set; }

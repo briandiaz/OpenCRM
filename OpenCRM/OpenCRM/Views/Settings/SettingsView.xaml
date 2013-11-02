@@ -4,7 +4,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        Title="Home" 
+        Title="Settings" 
         Height="Auto" 
         Width="Auto"
         >
@@ -89,6 +89,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
                                         <Label  Content="Username"
@@ -160,6 +161,10 @@
                                                     FontSize="20px"
                                                     Name="tbxUserEmail" />
 
+                                        <StackPanel Grid.Row="6" Grid.Column="2" Margin="390,13,-380,0">
+                                            <Image Name ="ImageEmailEdit" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
+
                                         <Label  Content="User Profile"
                                                 Grid.Row="7"
                                                 VerticalAlignment="Center"
@@ -172,6 +177,8 @@
                                                     FontSize="20px"
                                                     IsEnabled="False"
                                                     ItemsSource="{Binding Path=Name}" Margin="5,8,-380,3" Height="36" />
+                                        
+                                        
 
                                         <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="7" Click="btnSave_Click" Cursor="Hand" >
                                             <StackPanel>
@@ -184,9 +191,6 @@
                             </TabItem>
 
                             <TabItem Header="New User" Margin="-1,0,1,0">
-                                <!--<Grid Name="gridNewUser">
-                                    <Label Content="The New User Content goes here..." FontFamily="Segoe WP Light" FontSize="18" Padding="50" />
-                                </Grid>-->
                                 <Grid Margin="100,50">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -230,6 +234,22 @@
                                                 <Image Source="/Assets/Img/Search.png"  Width="20"/>
                                             </StackPanel>
                                         </Button>
+                                        
+                                        <StackPanel Grid.Row="7" Grid.Column="2" Margin="390,8,-380,4">
+                                            <Image Name ="ImagePassword" Source="/Assets/Img/Correct.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="8" Grid.Column="2" Margin="390,8,-380,4">
+                                            <Image Name ="ImagePasswordConfirm" Source="/Assets/Img/Correct.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
+                                       
+                                        <StackPanel Grid.Row="9" Grid.Column="2" Margin="390,25,-380,0">
+                                            <Image Name ="ImageProfile" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="6" Grid.Column="2" Margin="390,15,-380,0">
+                                            <Image Name ="ImageEmail" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
+                                        </StackPanel>
 
                                         <Label  Content="Name"
                                                 VerticalAlignment="Center"
@@ -297,7 +317,8 @@
                                                         Grid.Column="1"
                                                         VerticalContentAlignment="Center" 
                                                         FontSize="20px"
-                                                        Name="tbxUserHashPassword2" />
+                                                        Name="tbxUserHashPassword2" 
+                                                        LostFocus="TbxUserHashPassword2_OnLostFocus"/>
 
                                         <Label Content="Confirm Password"
                                                Grid.Row="8"
@@ -311,7 +332,8 @@
                                                         Grid.Column="1"
                                                         VerticalContentAlignment="Center" 
                                                         FontSize="20px"
-                                                        Name="tbxUserConfirmPassword" />
+                                                        Name="tbxUserConfirmPassword"
+                                                        LostFocus="TbxUserConfirmPassword_OnLostFocus"/>
                                         
                                         <Label  Content="User Profile"
                                                 Grid.Row="9"
@@ -323,10 +345,11 @@
                                                     Grid.Column="1"
                                                     VerticalAlignment="Center"
                                                     FontSize="20px"
-                                                    ItemsSource="{Binding Path=Name}" Margin="10,15,-385,14" Height="36" />
+                                                    ItemsSource="{Binding Path=Name}" Margin="10,15,-385,14" Height="36"
+                                                    SelectionChanged="CmbUserProfile2_OnSelectionChanged" />
 
                                        
-                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="9" Click="btnSave_Click" Cursor="Hand" >
+                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="9" Click="btnSave2_Click" Cursor="Hand" >
                                             <StackPanel>
                                                 <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
                                                 <TextBlock>Save</TextBlock>
@@ -338,9 +361,14 @@
 
                             <TabItem Header="Permissions">
                                 <Grid Name="gridPermissions">
-                                    <Label Content="Profile" HorizontalAlignment="Left" Margin="50,36,0,0" VerticalAlignment="Top"/>
-                                    <ComboBox Name="ProfilesComboBox" Margin="160,38,398,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
-
+                                    <Button Margin="39,16,892,660" Click="BtnPermissionSave_OnClick" Cursor="Hand" Visibility="Visible" >
+                                        <StackPanel>
+                                            <Image Source="/Assets/Img/Icons/System-Save-icon.png"/>
+                                            <TextBlock HorizontalAlignment="Center">Save</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Label Content="Profile" HorizontalAlignment="Left" Margin="144,34,0,0" VerticalAlignment="Top"/>
+                                    <ComboBox Name="ProfilesComboBox" Margin="254,34,304,0" VerticalAlignment="Top" Width="442" Height="39" SelectionChanged="ProfilesComboBox_OnSelectionChanged"/>
                                     <Grid Name="gridAccessRights" Margin="0,80,0,0">
                                         <TabControl     Name="permissionTapControl" 
                                                         TabStripPlacement="Top" 
