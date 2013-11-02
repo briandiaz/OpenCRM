@@ -13,16 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace OpenCRM.Views.Objects.Campaigns
 {
     /// <summary>
     /// Lógica de interacción para CampaingsView.xaml
     /// </summary>
-    public partial class CampaingsView
+    public partial class CampaignsView
     {
-        public CampaingsView()
+        public CampaignsView()
         {
             InitializeComponent();
         }
+
+        private void bntCreate_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Campaigns/Create.xaml");
+        }
+
     }
 }
