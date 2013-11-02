@@ -372,6 +372,7 @@ namespace OpenCRM.Models.Settings
                 tapItem.Visibility = Visibility.Visible;
 
                 var dataGrid = new DataGrid();
+
                 tapItem.Content = dataGrid;
 
                 PermissionTabs.Items.Add(tapItem);
