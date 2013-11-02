@@ -22,7 +22,7 @@ namespace OpenCRM.Models.Settings
     {
         #region "Values"
         int _userId;
-        List<AccessRights> _userRightsAccess;
+        List<AccessRights> _userAccessRights;
         
         #endregion
 
@@ -41,13 +41,35 @@ namespace OpenCRM.Models.Settings
         public SettingsModel(int UserId, List<AccessRights> RightsAccess)
         {
             this._userId = UserId;
-            this._userRightsAccess = RightsAccess;
+            this._userAccessRights = RightsAccess;
             this.Profiles = getAllProfiles();
         }
 
         #endregion
 
-        #region "Methods"
+        #region "Methods" 
+
+        public bool HasAccessRightsTo(string itemHeader) 
+        {
+            bool hasRights = false;
+
+            hasRights = _userAccessRights.Any(
+                x => x.ObjectName == "Settings" && x.ObjectFieldName == itemHeader
+            );
+
+            return hasRights;
+        }
+
+        public void DisableTabItem(TabControl SettingsTabControl, string ItemName)
+        {
+            foreach (TabItem item in SettingsTabControl.Items)
+            {
+                if (item.Header.ToString() == ItemName)
+                {
+                    item.IsEnabled = false;
+                }
+            }
+        }
 
         #region "Edit User Data"
         private List<Profile> getAllProfiles()

@@ -29,8 +29,8 @@ namespace OpenCRM.Views.Settings
         {
             InitializeComponent();
             _settingsModel = new SettingsModel(Session.UserId, Session.RightAccess);
-            
-            //Edit Profile            
+
+            //Edit Profile 
             gridSettingsProfile.DataContext = _settingsModel.getUserData();
             cmbUserProfile.ItemsSource = _settingsModel.Profiles;
             cmbUserProfile.DisplayMemberPath = "Name";
@@ -38,13 +38,27 @@ namespace OpenCRM.Views.Settings
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
 
             //Create New User
-            cmbUserProfile2.ItemsSource = _settingsModel.Profiles;
-            cmbUserProfile2.DisplayMemberPath = "Name";
+            //if (_settingsModel.HasAccessRightsTo("Create New User"))
+            //{
+                cmbUserProfile2.ItemsSource = _settingsModel.Profiles;
+                cmbUserProfile2.DisplayMemberPath = "Name";
+            //}
+            /*else 
+            {
+                _settingsModel.DisableTabItem(this.settingsTabControl, "Create New User");
+            }*/
 
             //Permission
-            ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
-            ProfilesComboBox.DisplayMemberPath = "Name";
-            ProfilesComboBox.SelectedValuePath = "ProfileId";
+            //if (_settingsModel.HasAccessRightsTo("Permission"))
+            //{
+                ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
+                ProfilesComboBox.DisplayMemberPath = "Name";
+                ProfilesComboBox.SelectedValuePath = "ProfileId";
+            /*}
+            else
+            {
+                _settingsModel.DisableTabItem(this.settingsTabControl,"Permission");
+            }*/
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

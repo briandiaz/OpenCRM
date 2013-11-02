@@ -30,7 +30,7 @@
             <Grid>
                 <Grid Name="gridSettings" Margin="0,0,0,0">
                     <Controls:MetroContentControl Margin="4,0,-4,0">
-                        <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
+                        <TabControl Name="settingsTabControl" TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
                             <TabControl.Resources>
                                 <Style TargetType="{x:Type TabItem}">
                                     <Setter Property="Template">
