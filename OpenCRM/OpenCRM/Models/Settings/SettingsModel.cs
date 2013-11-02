@@ -146,11 +146,11 @@ namespace OpenCRM.Models.Settings
 
                     user.BirthDate = Convert.ToDateTime(User.BirthDate);
                     user.Email = User.Email;
-                    user.HashPassword = User.Password.GetHashCode().ToString();
                     user.LastName = User.LastName;
                     user.Name = User.Name;
-
+                    user.UpdateDate = DateTime.Now;
                     _db.SaveChanges();
+                    MessageBox.Show("Changes saved correctly.");
                 }
             }
             catch (SqlException ex)
