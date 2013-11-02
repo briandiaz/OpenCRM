@@ -366,6 +366,7 @@
                                         <RowDefinition Height="50*" />
                                         <RowDefinition Height="50*" />
                                         <RowDefinition Height="500*" />
+                                        <RowDefinition Height="50*" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100*" />

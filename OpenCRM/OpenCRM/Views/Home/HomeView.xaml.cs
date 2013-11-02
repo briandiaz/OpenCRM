@@ -33,18 +33,15 @@ namespace OpenCRM.Views.Home
         {
             MahApps.Metro.Controls.Tile _thisTile = (MahApps.Metro.Controls.Tile)sender;
             switch (_thisTile.Title)
-            {
+            { 
                 case "Accounts":
                     PageSwitcher.Switch("/Views/Objects/Accounts/AccountsView.xaml");
                     break;
-                case "Products":
-                    PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
+                case "Campaigns":
+                    PageSwitcher.Switch("/Views/Objects/Campaigns/CampaignsView.xaml");
                     break;
                 case "Leads":
                     PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
-                    break;
-                case "Campaigns":
-                    PageSwitcher.Switch("/Views/Objects/Campaigns/CampaingsView.xaml");
                     break;
                 case "Cases":
                     PageSwitcher.Switch("/Views/Objects/Cases/CasesView.xaml");
@@ -56,11 +53,6 @@ namespace OpenCRM.Views.Home
                     PageSwitcher.Switch("/Views/Objects/Contacts/ContactsView.xaml");
                     break;
             }
-            
-            
-                
-            
         }
-
     }
 }
