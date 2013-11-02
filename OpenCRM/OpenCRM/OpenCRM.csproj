@@ -293,6 +293,9 @@
     <Compile Include="Views\Objects\Oportunities\OportunitiesView.xaml.cs">
       <DependentUpon>OportunitiesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Products\CreateProduct.xaml.cs">
+      <DependentUpon>CreateProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Products\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
     </Compile>
@@ -352,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Oportunities\OportunitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Products\CreateProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -63,7 +63,7 @@
                 <Button Content="Crear" 
                 VerticalAlignment="Center"
                 Margin="2"
-                Width="75"
+                Width="75" Click="Button_Click_1"
                 />
             </StackPanel>
             <DataGrid 

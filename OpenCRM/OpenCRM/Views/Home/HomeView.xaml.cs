@@ -32,10 +32,21 @@ namespace OpenCRM.Views.Home
         private void Tile_Click_1(object sender, RoutedEventArgs e)
         {
             MahApps.Metro.Controls.Tile _thisTile = (MahApps.Metro.Controls.Tile)sender;
-            if (_thisTile.Title.Equals("Accounts"))
+            switch (_thisTile.Title)
             {
-                PageSwitcher.Switch("/Views/Objects/Accounts/AccountsView.xaml");
+                case "Accounts":
+                    PageSwitcher.Switch("/Views/Objects/Accounts/AccountsView.xaml");
+                break;
+                
+                case "Products":
+                    PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
+                    break;
+           
             }
+            
+            
+                
+            
         }
 
     }
