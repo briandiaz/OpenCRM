@@ -59,13 +59,16 @@
                         Name="btnEdit"
                         VerticalAlignment="Center" 
                         Margin="2" 
-                        Width="75" />
+                        Width="75" 
+                        Style="{DynamicResource SquareButtonStyle}"/>
 
                 <Button Content="Crear"
                         Name="bntCreate"
                         VerticalAlignment="Center" 
                         Margin="2" 
-                        Width="75" Click="bntCreate_Click" />
+                        Width="75" 
+                        Style="{DynamicResource SquareButtonStyle}"
+                        Click="bntCreate_Click" />
             </StackPanel>
             <DataGrid Margin="0,20,0,0" 
                       Style="{DynamicResource MetroDataGrid}" 
