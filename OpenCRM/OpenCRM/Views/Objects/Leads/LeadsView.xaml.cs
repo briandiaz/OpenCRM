@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace OpenCRM.Views.Objects.Leads
 {
     /// <summary>
-    /// Lógica de interacción para LeadsView.xaml
+    /// Interaction logic for LeadsView.xaml
     /// </summary>
-    public partial class LeadsView
+    public partial class LeadsView : Page
     {
         public LeadsView()
         {
             InitializeComponent();
+        }
+
+        private void btn_NewLeadOnClick(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
+        }
+
+        private void btn_EditLeadOnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Editing leads.");
         }
     }
 }

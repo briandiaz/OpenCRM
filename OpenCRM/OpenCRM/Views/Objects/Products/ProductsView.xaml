@@ -20,42 +20,88 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid>
+    <controls:MetroContentControl>
+        <Grid>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Img/Backgrounds/2.jpg" />
-        </Grid.Background>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+            </Grid.Background>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="400*"/>
+                <RowDefinition Height="500*"/>
+            </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="600*"/>
+                <ColumnDefinition Width="200*"/>
+            </Grid.ColumnDefinitions>
 
-        <controls:MetroContentControl>
-            <TabControl>
+
+
+            <TabControl Grid.Row="0" Grid.Column="0">
                 <TabItem Header="_Products" FontSize="20px">
-
-
                 </TabItem>
             </TabControl>
 
-        </controls:MetroContentControl>
-    </Grid>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button 
+                    Name="btnEdit"
+                    VerticalAlignment="Center"
+                    Margin="2"
+                    Width="75"
+               >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"></Image>
+                        <TextBlock VerticalAlignment="Center">Edit </TextBlock>
+                    </StackPanel>
+                    
+                    </Button>
+
+                <Button 
+                    Name="btnCreate"
+                    VerticalAlignment="Center"
+                    Margin="2"
+                    Width="75" 
+                    Click="Button_Click_1"
+                >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"></Image>
+                        <TextBlock VerticalAlignment="Center">Create</TextBlock>
+                    </StackPanel>
+                    </Button>
+            </StackPanel>
+            <DataGrid 
+                IsReadOnly="True"
+                Name="RecentProductsGrid"
+                Margin="0,20,0,0"    
+                Style="{DynamicResource MetroDataGrid}"
+                Grid.Column="1" 
+                HorizontalAlignment="Left"
+                Grid.Row="2" 
+                VerticalAlignment="Top"
+                MinWidth="1000"
+                MinHeight="400" 
+         >
+            </DataGrid>
+
+            <Image Source="/Assets/Img/Icons/Products.png" 
+               Grid.Column="1"
+               HorizontalAlignment="Left"
+               Height="100"
+               Grid.Row="1"
+               VerticalAlignment="Top"
+               Width="100"/>
+
+        </Grid>
+    </controls:MetroContentControl>
 </Page>

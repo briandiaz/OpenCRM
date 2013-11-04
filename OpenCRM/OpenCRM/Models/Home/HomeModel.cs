@@ -40,7 +40,7 @@ namespace OpenCRM.Models.Home
 
             Objects = new ReactiveCollection<HomeData>(data);
 
-            objects = new PanoramaGroup("App");
+            objects = new PanoramaGroup("Modules");
 
             Groups = new ReactiveCollection<PanoramaGroup> { objects };
 

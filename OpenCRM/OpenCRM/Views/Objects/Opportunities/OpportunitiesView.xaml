@@ -24,77 +24,78 @@
 
         </ResourceDictionary>
     </Page.Resources>
+    <controls:MetroContentControl>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+            </Grid.Background>
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
-        </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="300"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
-        </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" 
+                  Grid.Column="1">
+                <Image  Source="/Assets/Img/Icons/Opportunities.png" 
+                        Margin="0,10,536,30" 
+                        RenderTransformOrigin="-0.92,0.73" />
 
-        <Grid Grid.Row="1" 
-              Grid.Column="1">
-            <Image  Source="/Assets/Img/Icons/Opportunities.png" 
-                    Margin="0,10,536,30" 
-                    RenderTransformOrigin="-0.92,0.73" />
+                <TabControl Margin="122,64,244,41">
+                    <TabItem Header="_Opportunities" FontSize="20px" Margin="-4,-2,-29,2"/>
+                </TabControl>
 
-            <TabControl Margin="122,64,244,41">
-                <TabItem Header="_Opportunities" FontSize="20px" Margin="-4,-2,-29,2"/>
-            </TabControl>
+                <TextBlock Text="Home"
+                           FontSize="24" 
+                           Margin="126,34,368,85" />
 
-            <TextBlock Text="Home"
-                       FontSize="24" 
-                       Margin="126,34,368,85" />
+                <Button Content="Edit"
+            		    Margin="560,36,34,50"
+            		    Width="75" 
+            		    Height="65" />
+                <Button Content="New" 
+                	    Margin="468,36,124,50"
+                	    Width="75" 
+                	    Height="65" />
+            </Grid>
 
-            <Button Content="Edit"
-            		Margin="560,36,34,50"
-            		Width="75" 
-            		Height="65" />
-            <Button Content="New" 
-                	Margin="468,36,124,50"
-                	Width="75" 
-                	Height="65" />
+            <Grid Grid.Row="3" 
+                  Grid.Column="1"
+                  Background="#349CE2">
+                <TextBlock Text="View:"
+                           FontSize="20"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="188,2,434,6"/>
+                <ComboBox Name="cmbSearchTypeOpportunities"
+                          VerticalAlignment="Center"
+                          Margin="239,4,173,5" Height="20"/>
+            </Grid>
+
+            <Grid Grid.Row="5" 
+                  Grid.Column="1" 
+                  Background="#349CE2">
+                <TextBlock Text="Recent Opportunities"
+        		           FontSize="22"
+                           Foreground="White"
+                           Margin="231,20,231,250"/>
+
+                <DataGrid Name="DataGridRecentOpportunities"
+                          Style="{DynamicResource MetroDataGrid}" 
+                          Margin="10,72,10,10" SelectionChanged="DataGridRecentOpportunities_SelectionChanged"/>
+            </Grid>
         </Grid>
-
-        <Grid Grid.Row="3" 
-              Grid.Column="1"
-              Background="#349CE2">
-            <TextBlock Text="View:"
-                       FontSize="20"
-                       Foreground="White"
-                       VerticalAlignment="Center"
-                       Margin="188,2,434,6"/>
-            <ComboBox Name="cmbSearchTypeOpportunities"
-                      VerticalAlignment="Center"
-                      Margin="239,4,173,5" Height="20"/>
-        </Grid>
-
-        <Grid Grid.Row="5" 
-              Grid.Column="1" 
-              Background="#349CE2">
-            <TextBlock Text="Recent Opportunities"
-        		       FontSize="22"
-                       Foreground="White"
-                       Margin="231,20,231,250"/>
-
-            <DataGrid Name="DataGridRecentOpportunities"
-                      Style="{DynamicResource MetroDataGrid}" 
-                      Margin="10,72,10,10" SelectionChanged="DataGridRecentOpportunities_SelectionChanged"/>
-        </Grid>
-    </Grid>
+    </controls:MetroContentControl>
 </Page>

@@ -64,6 +64,7 @@
                 VerticalAlignment="Center"
                 Margin="2"
                 Width="75"
+                Click="ButtonBase_OnClick"
                 />
             </StackPanel>
             <DataGrid 
