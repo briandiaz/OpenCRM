@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCRM.Models.Objects.Oportunities;
 using OpenCRM.Controllers.Session;
+using OpenCRM.DataBase;
 
 namespace OpenCRM.Views.Objects.Oportunities
 {
@@ -33,12 +34,18 @@ namespace OpenCRM.Views.Objects.Oportunities
 
             this.cmbOpportunityType.ItemsSource = _opportunitiesModel.getOpportunityType();
             this.cmbOpportunityType.DisplayMemberPath = "Name";
+            this.cmbOpportunityType.SelectedValuePath = "OpportunityTypeId";
+            this.cmbOpportunityType.SelectedValue = 1;
 
             this.cmbOpportunityStage.ItemsSource = _opportunitiesModel.getOpportunityStages();
             this.cmbOpportunityStage.DisplayMemberPath = "Name";
+            this.cmbOpportunityStage.SelectedValuePath = "OpportunityStageId";
+            this.cmbOpportunityStage.SelectedValue = 1;
 
             this.cmbOpportunityServiceStatus.ItemsSource = _opportunitiesModel.getOpportunityStatus();
             this.cmbOpportunityServiceStatus.DisplayMemberPath = "Name";
+            this.cmbOpportunityServiceStatus.SelectedValuePath = "OpportunityDeliveryStatusId";
+            this.cmbOpportunityServiceStatus.SelectedValue = 1;
 
         }
 
@@ -77,10 +84,93 @@ namespace OpenCRM.Views.Objects.Oportunities
             }
         }
 
+        private void btnCancelOpportunity_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Opportunities/OpportunitiesView.xaml");
+        }
+
+        #region "Opportunity Information"
+
+        private void cmbOpportunityStage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.tbxOpportunityProbability.Text = Convert.ToString((this.cmbOpportunityStage.SelectedItem as Opportunities_Stage).Probability);
+        }
+
+        #region "Buttons Search"
         private void btnSearchAccount_Click(object sender, RoutedEventArgs e)
         {
             this.gridDefaultRow2.Visibility = Visibility.Hidden;
             this.gridSearchAccount.Visibility = Visibility.Visible;
         }
+
+        private void btnSearchCampaign_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridDefaultRow2.Visibility = Visibility.Hidden;
+            this.gridSearchCampaign.Visibility = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region "In Search"
+        private void btnSearchAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            _opportunitiesModel.SearchAccount(this.tbxSearchAccount.Text, this.DataGridAccount);
+        }
+
+        private void btnSearchCampaignLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            _opportunitiesModel.SearchAccount(this.tbxSearchCampaign.Text, this.DataGridCampaign);
+        }
+
+        #region "Cancel Search"
+        private void btnCancelAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridDefaultRow2.Visibility = Visibility.Visible;
+            this.gridSearchAccount.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCancelCampaignLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridDefaultRow2.Visibility = Visibility.Visible;
+            this.gridSearchCampaign.Visibility = Visibility.Collapsed;
+        }
+
+        #endregion
+
+
+        #endregion
+
+        #endregion
+
+        #region "Aditional Information"
+
+        #region "Button Search"
+        private void btnSearchCompetidor_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridDefaultRow4.Visibility = Visibility.Hidden;
+            this.gridSearchCompetidor.Visibility = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region "In Search"
+
+        private void btnSearchCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            _opportunitiesModel.SearchCompetidors(this.tbxSearchCompetidors.Text, this.DataGridCompetidors);
+        }
+
+        #region "Cancel Search"
+        private void btnCancelCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridDefaultRow4.Visibility = Visibility.Visible;
+            this.gridSearchCompetidor.Visibility = Visibility.Collapsed;
+        }
+
+        #endregion
+        
+        #endregion
+        
+        #endregion
     }
 }

@@ -8,7 +8,6 @@ using OpenCRM.Controllers.Session;
 using System.Windows.Controls;
 using System.Data.SqlClient;
 using System.Windows;
-using OpenCRM.DataBase;
 
 namespace OpenCRM.Models.Objects.Oportunities
 {
@@ -201,6 +200,101 @@ namespace OpenCRM.Models.Objects.Oportunities
         public void Save(OpportunitiesData OpportunityData)
         {
  
+        }
+
+        #endregion
+
+        #region "Search"
+        public void SearchAccount(string ToSearch, DataGrid TargetGrid)
+        {
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from account in db.Account
+                        where 
+                            account.Name.Contains(ToSearch)
+                        select new {
+                            AccountId = account.AccountId,
+                            AccountName = account.Name,
+                            account.AccountSite,
+                            account.User.UserName,
+                            AccountType = account.Account_Type.Name
+                        }
+                    ).ToList();
+
+                    TargetGrid.ItemsSource = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void SearchCampaing(string ToSearch, DataGrid TargetGrid)
+        {
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from campaign in db.Campaign
+                        where
+                            campaign.Name.Contains(ToSearch)
+                        select new
+                        {
+                            CampaignId = campaign.CampaignId,
+                            CampaignName = campaign.Name + " - " + campaign.StartDate + " to" + campaign.EndDate
+                        }
+                    ).ToList();
+
+                    TargetGrid.ItemsSource = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void SearchCompetidors(string ToSearch, DataGrid TargetGrid)
+        {
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from competidor in db.Opportunities_Competidor
+                        where
+                            competidor.Name.Contains(ToSearch)
+                        select new
+                        {
+                            CompetidorId = competidor.OpportunityCompetidorId,
+                            CompetidorName = competidor.Name
+                        }
+                    ).ToList();
+
+                    TargetGrid.ItemsSource = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         #endregion

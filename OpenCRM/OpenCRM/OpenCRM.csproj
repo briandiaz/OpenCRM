@@ -259,7 +259,7 @@
     <Compile Include="Models\Objects\Cases\CasesModel.cs" />
     <Compile Include="Models\Objects\Contacts\ContactsModel.cs" />
     <Compile Include="Models\Objects\Leads\LeadsModel.cs" />
-    <Compile Include="Models\Objects\Oportunities\OportunitiesModel.cs" />
+    <Compile Include="Models\Objects\Opportunities\OpportunitiesModel.cs" />
     <Compile Include="Models\Objects\Products\ProductsModel.cs" />
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Page\PageSwitcher.cs" />
@@ -454,7 +454,6 @@
     <Resource Include="Assets\Img\Icons\Contact.png" />
     <Resource Include="Assets\Img\Icons\Contacts.png" />
     <Resource Include="Assets\Img\Icons\Leads.png" />
-    <Resource Include="Assets\Img\Icons\Oportunities.png" />
     <Resource Include="Assets\Img\Icons\Products.png" />
   </ItemGroup>
   <ItemGroup>
@@ -931,6 +930,9 @@
     <Resource Include="Assets\Img\Icons\32px\zoom-in.png" />
     <Resource Include="Assets\Img\Icons\32px\zoom-out.png" />
     <Resource Include="OpenCRM.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Icons\Opportunities.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

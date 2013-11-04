@@ -17,24 +17,25 @@ using System.Windows.Shapes;
 namespace OpenCRM.Views.Objects.Oportunities
 {
     /// <summary>
-    /// Lógica de interacción para OportunitiesView.xaml
+    /// Lógica de interacción para OpportunitiesView.xaml
     /// </summary>
     public partial class OportunitiesView
     {
         OpportunitiesModel _opportunitiesModel;
+
         public OportunitiesView()
         {
             InitializeComponent();            
         }
 
-        private void btnCreateOpportunity_OnClick(object sender, RoutedEventArgs e)
-        {
-            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateOpportunity.xaml");
-        }
-
         private void DataGridRecentOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PageSwitcher.Switch("/Views/Objects/Opportunities/");
+            //PageSwitcher.Switch("/Views/Objects/Opportunities/");
+        }
+
+        private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateOpportunity.xaml");
         }
     }
 }

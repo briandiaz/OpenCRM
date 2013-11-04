@@ -30,29 +30,19 @@
             <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
         </Grid.Background>
 
-        <Grid.Resources>
-            <Style TargetType="{x:Type Border}">
-                <Setter Property="BorderBrush" Value="Black" />
-                <Setter Property="BorderThickness" Value="2" />
-                <Setter Property="CornerRadius" Value="10" />
-            </Style>
-        </Grid.Resources>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="41"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="41"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="41"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0"
+              Grid.Column="1">
             <Label Content="Opportunity Edit" 
                    FontSize="12px"
                    Margin="81,20,577,63"/>
@@ -68,408 +58,482 @@
                    Width="66" 
                    Margin="10,20,0,0" />
 
-            <Button Content="Save"
+            <Button Name="btnSaveNewOpportunity"
+                    Content="Save"
                     RenderTransformOrigin="3.322,0.756"
-                    Margin="558,20,139,31" 
+                    Margin="548,20,149,31" 
                     Click="btnSaveNewOpportunity_OnClick"/>
 
-            <Button Content="Cancel"
+            <Button Name="btnCancelOpportunity"
+                    Content="Cancel"
                     RenderTransformOrigin="3.322,0.756" 
-                    Margin="657,20,39,31"/>
+                    Margin="654,20,42,31"
+                    Click="btnCancelOpportunity_Click"/>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <Border BorderBrush="#1179BE">
-                <Grid Background="#1179BE">
-                    <TextBlock  Text="Opportunity Information"
-                                VerticalAlignment="Center"
-                                TextAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Foreground="White"
-                                FontSize="16px"
-                                Margin="34,8,0,8" />
+        <ScrollViewer Grid.Row="1"
+                      Grid.Column="1"
+                      Visibility="Visible">
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1">
+
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="CornerRadius" Value="10" />
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="41"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="41"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="41"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      Grid.Column="1">
+                    <Border BorderBrush="#1179BE">
+                        <Grid Background="#1179BE">
+                            <TextBlock  Text="Opportunity Information"
+                                        VerticalAlignment="Center"
+                                        TextAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="16px"
+                                        Margin="34,8,0,8" />
+                        </Grid>
+                    </Border>
                 </Grid>
-            </Border>
-        </Grid>
 
-        <Grid Name="gridDefaultRow2"
-              Grid.Row="2"
-              Visibility="Visible">
-            <TextBlock  Text="Private"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px"
-                        Margin="15,69,621,240" Height="20" />
+                <Grid Name="gridDefaultRow2"
+                      Grid.Row="1"
+                      Visibility="Visible">
+                    <TextBlock  Text="Private"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+                                Margin="15,69,621,240" Height="20" />
 
-            <TextBlock  Text="Opportunity Owner"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px" 
-                        Margin="15,28,620,281" Height="20" />
+                    <TextBlock  Text="Opportunity Owner"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px" 
+                                Margin="15,28,620,281" Height="20" />
 
-            <Label  Content=""
-        	        VerticalAlignment="Center"
-        	        FontSize="15px"
-                    Margin="181,25,428,274" Height="30" />
+                    <Label  Content=""
+        	                VerticalAlignment="Center"
+        	                FontSize="15px"
+                            Margin="181,25,428,274" Height="30" />
 
-            <CheckBox   Name="ckbOpportunityPrivate"
-                        Margin="181,73,566,240" 
-                        RenderTransformOrigin="0.35,1.286" />
+                    <CheckBox   Name="ckbOpportunityPrivate"
+                                Margin="181,73,566,240" 
+                                RenderTransformOrigin="0.35,1.286" />
 
-            <TextBlock  Text="Opportunity Name"
-                        VerticalAlignment="Center"
-                        TextAlignment="Right"
-                        FontSize="15px"
-                        Margin="15,118,621,191" 
-                        Height="20" />
+                    <TextBlock  Text="Opportunity Name"
+                                VerticalAlignment="Center"
+                                TextAlignment="Right"
+                                FontSize="15px"
+                                Margin="15,118,621,191" 
+                                Height="20" />
 
-            <Grid Background="#DA3232"
-                  Margin="171,112,610,184" />
+                    <Grid Background="#DA3232"
+                          Margin="171,112,610,184" />
 
-            <TextBox Name="tbxOpportunityName"
-                     RenderTransformOrigin="-5.28,-12.3" 
-                     Margin="181,112,416,184" />
+                    <TextBox Name="tbxOpportunityName"
+                             RenderTransformOrigin="-5.28,-12.3" 
+                             Margin="181,112,416,184" />
 
-            <TextBlock  Text="Account Name"
-                        VerticalAlignment="Center"
-                        TextAlignment="Right"
-                        FontSize="15px"
-                        Margin="15,163,620,146" 
-                        Height="20" />
+                    <TextBlock  Text="Account Name"
+                                VerticalAlignment="Center"
+                                TextAlignment="Right"
+                                FontSize="15px"
+                                Margin="15,163,620,146" 
+                                Height="20" />
 
-            <TextBox Name="tbxAccountName"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="181,160,416,136" />
+                    <TextBox Name="tbxAccountName"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="181,160,416,136" />
 
-            <Button Name="btnSearchAccount"
-                    Margin="375,160,381,136"
-                    Click="btnSearchAccount_Click">
-                <StackPanel>
+                    <Button Name="btnSearchAccount"
+                            Margin="375,160,381,136"
+                            Click="btnSearchAccount_Click">
+                        <StackPanel>
+                            <Image Source="/Assets/Img/Search.png" 
+                                   Width="20" 
+                                   RenderTransformOrigin="0.067,-0.217"/>
+                        </StackPanel>
+                    </Button>
+
+                    <TextBlock  Text="Type" 
+        	                    FontSize="15px"
+                                VerticalAlignment="Center"
+                                TextAlignment="Right"
+        	                    Margin="15,214,620,95" 
+                                Height="20" />
+
+                    <ComboBox Name="cmbOpportunityType"
+                              Margin="181,211,416,85" />
+
+                    <TextBlock  Text="Lead Source" 
+        	                    FontSize="15px"
+                                TextAlignment="Right"
+        	                    Margin="15,264,620,45" />
+
+                    <ComboBox Name="cmbLeadSource"
+                              Margin="181,261,416,36" />
+
+                    <TextBlock  Text="Amount"
+                                TextAlignment="Right"
+                                VerticalAlignment="Center"
+        	                    FontSize="15px"
+                                Margin="417,26,243,283" 
+                                Height="20" />
+
+                    <TextBox Name="tbxOpportunityAmount"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="558,22,39,274" />
+
+                    <TextBlock  Text="Close Date"
+                                TextAlignment="Right"
+                                VerticalAlignment="Center"
+        	                    FontSize="15px" 
+                                Margin="415,70,243,239" 
+                                Height="20" />
+
+                    <Grid Background="#DA3232"
+            	          Margin="548,63,233,233" />
+
+                    <DatePicker Name="tbxOpportunityBirthDate"
+                                Margin="558,63,39,233"
+                                FontSize="18px" />
+
+                    <TextBlock  Text="Next Step"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+                                Margin="418,118,243,190" 
+                                Height="21" />
+
+                    <TextBox Name="tbxOpportunityNextStep"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="558,113,39,183" />
+
+                    <TextBlock  Text="Stage" 
+        	                    FontSize="15px"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    Margin="415,163,243,146" 
+                                Height="20" />
+
+                    <Grid   Background="#DA3232"
+            	            Margin="548,160,233,136" />
+
+                    <ComboBox   Name="cmbOpportunityStage"
+        	                    Grid.Column="0" 
+        	                    Margin="558,159,38,137" 
+                                SelectionChanged="cmbOpportunityStage_SelectionChanged"/>
+
+                    <TextBlock  Text="Probability (%)"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+        	                    Margin="418,214,243,95" 
+                                Height="20" />
+
+                    <TextBox Name="tbxOpportunityProbability"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="558,207,39,89" />
+
+                    <TextBlock  Text="Campaign Source"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px" 
+        	                    Margin="418,264,243,45" 
+                                Height="20" />
+
+                    <TextBox Name="tbxOpportunityCampaign"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="558,258,39,38" />
+
+                    <Button Name="btnSearchCampaign" 
+                            Margin="752,258,4,38"
+                            Click="btnSearchCampaign_Click">
+                        <StackPanel>
+                            <Image Source="/OpenCRM;component/Assets/Img/Search.png" Width="20"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+                <Grid Name="gridSearchAccount"
+                      Grid.Row="1"
+                      Background="#FAFAFA"
+                      Visibility="Collapsed">
                     <Image Source="/Assets/Img/Search.png" 
-                           Width="20" 
-                           RenderTransformOrigin="0.067,-0.217"/>
-                </StackPanel>
-            </Button>
+                           HorizontalAlignment="Left"
+                           Height="40"
+                           VerticalAlignment="Top"
+                           Width="40" 
+                           Margin="30,20,0,0" />
 
-            <TextBlock  Text="Type" 
-        	            FontSize="15px"
-                        VerticalAlignment="Center"
-                        TextAlignment="Right"
-        	            Margin="15,214,620,95" 
-                        Height="20" />
+                    <Label Content="Lookup Accounts"
+                           VerticalAlignment="Top"
+                           FontSize="28px"
+                           Margin="75,13,464,0"/>
 
-            <ComboBox Name="cmbOpportunityType"
-                      Margin="181,211,416,85" />
+                    <TextBox Name="tbxSearchAccount"
+                             RenderTransformOrigin="-5.28,-12.3" 
+                             Margin="30,65,567,231" />
 
-            <TextBlock  Text="Lead Source" 
-        	            FontSize="15px"
-                        TextAlignment="Right"
-        	            Margin="15,264,620,45" />
+                    <Button Name="btnSearchAccountLookUp"
+                            Margin="224,65,527,231"
+                            Click="btnSearchAccountLookUp_Click">
+                        <StackPanel>
+                            <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
+                        </StackPanel>
+                    </Button>
 
-            <ComboBox Name="cmbLeadSource"
-                      Margin="181,261,416,36" />
+                    <Button Name="btnClearAccountLookUp"
+                            Content="Clear"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="264,65,464,231"/>
 
-            <TextBlock  Text="Amount"
-                        TextAlignment="Right"
-                        VerticalAlignment="Center"
-        	            FontSize="15px"
-                        Margin="417,26,243,283" 
-                        Height="20" />
+                    <Button Name="btnCancelAccountLookUp"
+                            Content="Cancel"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="698,65,30,231"
+                            Click="btnCancelAccountLookUp_Click"/>
 
-            <TextBox Name="tbxOpportunityAmount"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="558,22,39,274" />
+                    <Button Name="btnAcceptAccountLookUp"
+                            Content="Accept"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="635,65,93,231"/>
 
-            <TextBlock  Text="Close Date"
-                        TextAlignment="Right"
-                        VerticalAlignment="Center"
-        	            FontSize="15px" 
-                        Margin="415,70,243,239" 
-                        Height="20" />
-
-            <Grid Background="#DA3232"
-            	  Margin="548,63,233,233" />
-
-            <DatePicker Name="tbxOpportunityBirthDate"
-                        Margin="558,63,39,233"
-                        FontSize="18px" />
-
-            <TextBlock  Text="Next Step"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px"
-                        Margin="418,118,243,190" 
-                        Height="21" />
-
-            <TextBox Name="tbxOpportunityNextStep"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="558,113,39,183" />
-
-            <TextBlock  Text="Stage" 
-        	            FontSize="15px"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            Margin="415,163,243,146" 
-                        Height="20" />
-
-            <Grid   Background="#DA3232"
-            	    Margin="548,160,233,136" />
-
-            <ComboBox   Name="cmbOpportunityStage"
-        	            Grid.Column="0" 
-        	            Margin="558,159,38,137" />
-
-            <TextBlock  Text="Probability (%)"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px"
-        	            Margin="418,214,243,95" 
-                        Height="20" />
-
-            <TextBox Name="tbxOpportunityProbability"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="558,207,39,89" />
-
-            <TextBlock  Text="Campaign Source"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px" 
-        	            Margin="418,264,243,45" 
-                        Height="20" />
-
-            <TextBox Name="tbxOpportunityCampaign"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="558,258,39,38" />
-
-            <Button Name="btnSearchCampaign" 
-                    Margin="752,258,4,38">
-                <StackPanel>
-                    <Image Source="/OpenCRM;component/Assets/Img/Search.png" Width="20"/>
-                </StackPanel>
-            </Button>
-        </Grid>
-
-        <Grid Name="gridSearchAccount"
-              Grid.Row="2"
-              Background="#FAFAFA"
-              Visibility="Hidden">
-            <Image Source="/Assets/Img/Search.png" 
-                   HorizontalAlignment="Left"
-                   Height="40"
-                   VerticalAlignment="Top"
-                   Width="40" 
-                   Margin="30,20,0,0" />
-
-            <Label Content="Lookup Accounts"
-                   VerticalAlignment="Top"
-                   FontSize="28px"
-                   Margin="75,13,464,0"/>
-
-            <TextBox Name="tbxSearchAccount"
-                     RenderTransformOrigin="-5.28,-12.3" 
-                     Margin="30,65,567,231" />
-
-            <Button Name="btnSearchAccountLookUp"
-                    Margin="224,65,527,231">
-                <StackPanel>
-                    <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
-                </StackPanel>
-            </Button>
-
-            <Button Name="btnClearAccountLookUp"
-                    Content="Clear"
-                    RenderTransformOrigin="3.322,0.756" 
-                    Margin="264,65,464,231"/>
-
-            <DataGrid Name="DataGridAccount"
-                      Style="{DynamicResource MetroDataGrid}" 
-                      Margin="30,122,30,30" />
+                    <DataGrid Name="DataGridAccount"
+                              Style="{DynamicResource MetroDataGrid}" 
+                              Margin="30,122,30,30" />
 
 
-        </Grid>
-
-        <Grid Name="gridSearchCampaign"
-              Grid.Row="2"
-              Background="#FAFAFA"
-              Visibility="Hidden">
-            <Image Source="/Assets/Img/Search.png" 
-                   HorizontalAlignment="Left"
-                   Height="40"
-                   VerticalAlignment="Top"
-                   Width="40" 
-                   Margin="30,20,0,0" />
-
-            <Label Content="Lookup Campaigns"
-                   VerticalAlignment="Top"
-                   FontSize="28px"
-                   Margin="75,13,464,0"/>
-
-            <TextBox Name="tbxSearchCampaigh"
-                     RenderTransformOrigin="-5.28,-12.3" 
-                     Margin="30,65,567,231" />
-
-            <Button Name="btnSearchCampaignLookUp"
-                    Margin="224,65,527,231">
-                <StackPanel>
-                    <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
-                </StackPanel>
-            </Button>
-
-            <Button Name="btnClearCampaingLookUp"
-                    Content="Clear"
-                    RenderTransformOrigin="3.322,0.756" 
-                    Margin="264,65,464,231"/>
-
-            <DataGrid Name="DataGridCampaign"
-                      Style="{DynamicResource MetroDataGrid}" 
-                      Margin="30,122,30,30"/>
-
-
-        </Grid>
-
-        <Grid Grid.Row="3">
-            <Border BorderBrush="#1179BE">
-                <Grid Background="#1179BE">
-                    <TextBlock  Text="Additional Information"
-                                VerticalAlignment="Center"
-                                TextAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Foreground="White"
-                                FontSize="16px"
-                                Margin="34,8,0,8" />
                 </Grid>
-            </Border>
-        </Grid>
 
-        <Grid Name="gridDefaultRow4"
-              Grid.Row="4"
-              Visibility="Visible">
-            <TextBlock  Text="Order Number"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px"
-                        Margin="10,36,620,159" 
-                        Height="20" />
+                <Grid Name="gridSearchCampaign"
+                      Grid.Row="1"
+                      Background="#FAFAFA"
+                      Visibility="Collapsed">
+                    <Image Source="/Assets/Img/Search.png" 
+                           HorizontalAlignment="Left"
+                           Height="40"
+                           VerticalAlignment="Top"
+                           Width="40" 
+                           Margin="30,20,0,0" />
 
-            <TextBox Name="tbxOpportunityOrderNumber"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="181,30,416,152" />
+                    <Label Content="Lookup Campaigns"
+                           VerticalAlignment="Top"
+                           FontSize="28px"
+                           Margin="75,13,464,0"/>
 
-            <TextBlock  Text="Current Generator(s)"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px"
-        	            Margin="10,91,620,104" Height="20" />
+                    <TextBox Name="tbxSearchCampaign"
+                             RenderTransformOrigin="-5.28,-12.3" 
+                             Margin="30,65,567,231" />
 
-            <TextBox Name="tbxCurrentGenerator"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="181,84,416,98" />
+                    <Button Name="btnSearchCampaignLookUp"
+                            Margin="224,65,527,231"
+                            Click="btnSearchCampaignLookUp_Click">
+                        <StackPanel>
+                            <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
+                        </StackPanel>
+                    </Button>
 
-            <TextBlock  Text="Main Competidor"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px"
-        	            Margin="418,36,243,159" 
-                        Height="20" />
+                    <Button Name="btnClearCampaingLookUp"
+                            Content="Clear"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="264,65,464,231"/>
 
-            <TextBlock  Text="Tracking Number"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            FontSize="15px" 
-        	            Margin="10,146,620,49" 
-                        Height="20" />
+                    <Button Name="btnCancelCampaignLookUp"
+                            Content="Cancel"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="698,65,30,231"
+                            Click="btnCancelCampaignLookUp_Click"/>
 
-            <TextBox Name="tbxOpportunityTrackingNumber"
-        	         Grid.Column="0" 
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="181,139,416,43" />
+                    <Button Name="btnAcceptCampaignLookUp"
+                            Content="Accept"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="635,65,93,231"/>
 
-            <TextBox Name="tbxOpportunityMainCompetidor"
-        	         RenderTransformOrigin="-5.28,-12.3" 
-        	         Margin="558,30,39,152" />
+                    <DataGrid Name="DataGridCampaign"
+                              Style="{DynamicResource MetroDataGrid}" 
+                              Margin="30,122,30,30"/>
 
-            <TextBlock  Text="Service Status" 
-        	            FontSize="15px"
-        	            VerticalAlignment="Center"
-        	            TextAlignment="Right"
-        	            Margin="418,91,243,104" 
-                        Height="20" />
 
-            <ComboBox   Name="cmbOpportunityServiceStatus"
-        	            Margin="558,84,39,98" />
-
-            <Button Name="btnSearchCompetidor"
-                    Margin="752,30,4,152">
-                <StackPanel>
-                    <Image Source="/OpenCRM;component/Assets/Img/Search.png" Width="20"/>
-                </StackPanel>
-            </Button>
-
-        </Grid>
-
-        <Grid Name="gridSearchMainCompetidor"
-              Grid.Row="4"
-              Visibility="Hidden">
-            <Image Source="/Assets/Img/Search.png" 
-                   HorizontalAlignment="Left"
-                   Height="40"
-                   VerticalAlignment="Top"
-                   Width="40" 
-                   Margin="30,20,0,0" />
-
-            <Label Content="Lookup Campaigns"
-                   VerticalAlignment="Top"
-                   FontSize="28px"
-                   Margin="75,13,464,0"/>
-
-            <TextBox Name="tbxSearchCompetidors"
-                     RenderTransformOrigin="-5.28,-12.3" 
-                     Margin="30,65,567,119" />
-
-            <Button Name="btnSearchCompetidorsLookUp"
-                    Margin="224,65,527,119">
-                <StackPanel>
-                    <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
-                </StackPanel>
-            </Button>
-
-            <Button Name="btnClearCompetidorsLookUp"
-                    Content="Clear"
-                    RenderTransformOrigin="3.322,0.756" 
-                    Margin="264,65,464,119"/>
-
-            <DataGrid Name="DataGridRecentOpportunities"
-                      Style="{DynamicResource MetroDataGrid}" 
-                      Margin="30,114,30,30" />
-        </Grid>
-
-        <Grid Grid.Row="5">
-            <Border BorderBrush="#1179BE">
-                <Grid Background="#1179BE">
-                    <TextBlock  Text="Description Information"
-                                VerticalAlignment="Center"
-                                TextAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Foreground="White"
-                                FontSize="16px"
-                                Margin="34,8,0,8" />
                 </Grid>
-            </Border>
-        </Grid>
 
-        <Grid Grid.Row="6">
-            <TextBlock  Text="Description"
-            	VerticalAlignment="Center"
-            	TextAlignment="Right"
-            	FontSize="15px"
-            	Margin="-4,34,598,161" 
-            	Height="20" />
+                <Grid Grid.Row="2"
+                      Grid.Column="1">
+                    <Border BorderBrush="#1179BE">
+                        <Grid Background="#1179BE">
+                            <TextBlock  Text="Additional Information"
+                                        VerticalAlignment="Center"
+                                        TextAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="16px"
+                                        Margin="34,8,0,8" />
+                        </Grid>
+                    </Border>
+                </Grid>
 
-            <TextBox Name="tbxOpportunityDescription"
-            	     RenderTransformOrigin="-5.28,-12.3" 
-            	     Margin="192,34,146,52" 
-                     VerticalAlignment="Center" Height="129"/>
-        </Grid>
+                <Grid Name="gridDefaultRow4"
+                      Grid.Row="3"
+                      Grid.Column="1"
+                      Visibility="Visible">
+                    <TextBlock  Text="Order Number"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+                                Margin="10,36,620,159" 
+                                Height="20" />
 
+                    <TextBox Name="tbxOpportunityOrderNumber"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="181,30,416,152" />
+
+                    <TextBlock  Text="Current Generator(s)"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+        	                    Margin="10,91,620,104" Height="20" />
+
+                    <TextBox Name="tbxCurrentGenerator"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="181,84,416,98" />
+
+                    <TextBlock  Text="Main Competidor"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+        	                    Margin="418,36,243,159" 
+                                Height="20" />
+
+                    <TextBlock  Text="Tracking Number"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px" 
+        	                    Margin="10,146,620,49" 
+                                Height="20" />
+
+                    <TextBox Name="tbxOpportunityTrackingNumber"
+        	                 Grid.Column="0" 
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="181,139,416,43" />
+
+                    <TextBox Name="tbxOpportunityMainCompetidor"
+        	                 RenderTransformOrigin="-5.28,-12.3" 
+        	                 Margin="558,30,39,152" />
+
+                    <TextBlock  Text="Service Status" 
+        	                    FontSize="15px"
+        	                    VerticalAlignment="Center"
+        	                    TextAlignment="Right"
+        	                    Margin="418,91,243,104" 
+                                Height="20" />
+
+                    <ComboBox   Name="cmbOpportunityServiceStatus"
+        	                    Margin="558,84,39,98" />
+
+                    <Button Name="btnSearchCompetidor"
+                            Margin="752,30,4,152"
+                            Click="btnSearchCompetidor_Click">
+                        <StackPanel>
+                            <Image Source="/OpenCRM;component/Assets/Img/Search.png" Width="20"/>
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+
+                <Grid Name="gridSearchCompetidor"
+                      Grid.Row="3"
+                      Background="#FAFAFA"
+                      Visibility="Collapsed">
+                    <Image Source="/Assets/Img/Search.png" 
+                           HorizontalAlignment="Left"
+                           Height="40"
+                           VerticalAlignment="Top"
+                           Width="40" 
+                           Margin="30,20,0,0" />
+
+                    <Label Content="Lookup Campaigns"
+                           VerticalAlignment="Top"
+                           FontSize="28px"
+                           Margin="75,13,464,0"/>
+
+                    <TextBox Name="tbxSearchCompetidors"
+                             RenderTransformOrigin="-5.28,-12.3" 
+                             Margin="30,65,567,223" />
+
+                    <Button Name="btnSearchCompetidorsLookUp"
+                            Margin="224,65,527,223"
+                            Click="btnSearchCompetidorsLookUp_Click">
+                        <StackPanel>
+                            <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Name="btnClearCompetidorsLookUp"
+                            Content="Clear"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="264,65,464,223"/>
+
+                    <Button Name="btnCancelCompetidorsLookUp"
+                            Content="Cancel"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="698,65,30,223"
+                            Click="btnCancelCompetidorsLookUp_Click"/>
+
+                    <Button Name="btnAcceptCompetidorsLookUp"
+                            Content="Accept"
+                            RenderTransformOrigin="3.322,0.756" 
+                            Margin="635,65,93,223"/>
+
+                    <DataGrid Name="DataGridCompetidors"
+                              Style="{DynamicResource MetroDataGrid}" 
+                              Margin="30,114,30,30"/>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Border BorderBrush="#1179BE">
+                        <Grid Background="#1179BE">
+                            <TextBlock  Text="Description Information"
+                                        VerticalAlignment="Center"
+                                        TextAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="16px"
+                                        Margin="34,8,0,8" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="5"
+                      Grid.Column="1">
+                    <TextBlock  Text="Description"
+            	        VerticalAlignment="Center"
+            	        TextAlignment="Right"
+            	        FontSize="15px"
+            	        Margin="-20,62,614,133" 
+            	        Height="20" />
+
+                    <TextBox Name="tbxOpportunityDescription"
+            	             RenderTransformOrigin="-5.28,-12.3" 
+            	             Margin="192,62,146,24" 
+                             VerticalAlignment="Center" Height="129"/>
+                </Grid>
+
+            </Grid>
+
+        </ScrollViewer>
     </Grid>
 </Page>

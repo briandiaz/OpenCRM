@@ -21,6 +21,7 @@ namespace OpenCRM.DataBase
     
         public int OpportunityStageId { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Probability { get; set; }
     
         public virtual ICollection<Opportunities> Opportunities { get; set; }
     }
