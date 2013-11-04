@@ -1,0 +1,100 @@
+﻿<Page x:Class="OpenCRM.Views.Objects.Oportunities.OportunitiesView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+                      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d"
+                      Title="Opportunities" 
+                      Height="Auto" 
+                      Width="Auto" >
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" 
+              Grid.Column="1">
+            <Image  Source="/Assets/Img/Icons/Opportunities.png" 
+                    Margin="0,10,536,30" 
+                    RenderTransformOrigin="-0.92,0.73" />
+
+            <TabControl Margin="122,64,244,41">
+                <TabItem Header="_Opportunities" FontSize="20px" Margin="-4,-2,-29,2"/>
+            </TabControl>
+
+            <TextBlock Text="Home"
+                       FontSize="24" 
+                       Margin="126,34,368,85" />
+
+            <Button Content="Edit"
+            		Margin="560,36,34,50"
+            		Width="75" 
+            		Height="65" />
+            <Button Content="New" 
+                	Margin="468,36,124,50"
+                	Width="75" 
+                	Height="65" />
+        </Grid>
+
+        <Grid Grid.Row="3" 
+              Grid.Column="1"
+              Background="#349CE2">
+            <TextBlock Text="View:"
+                       FontSize="20"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       Margin="188,2,434,6"/>
+            <ComboBox Name="cmbSearchTypeOpportunities"
+                      VerticalAlignment="Center"
+                      Margin="239,4,173,5" Height="20"/>
+        </Grid>
+
+        <Grid Grid.Row="5" 
+              Grid.Column="1" 
+              Background="#349CE2">
+            <TextBlock Text="Recent Opportunities"
+        		       FontSize="22"
+                       Foreground="White"
+                       Margin="231,20,231,250"/>
+
+            <DataGrid Name="DataGridRecentOpportunities"
+                      Style="{DynamicResource MetroDataGrid}" 
+                      Margin="10,72,10,10" SelectionChanged="DataGridRecentOpportunities_SelectionChanged"/>
+        </Grid>
+    </Grid>
+</Page>

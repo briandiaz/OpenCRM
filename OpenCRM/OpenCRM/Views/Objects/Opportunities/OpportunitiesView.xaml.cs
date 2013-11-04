@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenCRM.Models.Objects.Oportunities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,20 @@ namespace OpenCRM.Views.Objects.Oportunities
     /// </summary>
     public partial class OportunitiesView
     {
+        OpportunitiesModel _opportunitiesModel;
         public OportunitiesView()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        private void btnCreateOpportunity_OnClick(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateOpportunity.xaml");
+        }
+
+        private void DataGridRecentOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Opportunities/");
         }
     }
 }

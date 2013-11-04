@@ -256,7 +256,7 @@
     <Compile Include="Models\Objects\Cases\CasesModel.cs" />
     <Compile Include="Models\Objects\Contacts\ContactsModel.cs" />
     <Compile Include="Models\Objects\Leads\LeadsModel.cs" />
-    <Compile Include="Models\Objects\Oportunities\OportunitiesModel.cs" />
+    <Compile Include="Models\Objects\Oportunities\OpportunitiesModel.cs" />
     <Compile Include="Models\Objects\Products\ProductsModel.cs" />
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Page\PageSwitcher.cs" />
@@ -284,8 +284,11 @@
     <Compile Include="Views\Objects\Leads\LeadsView.xaml.cs">
       <DependentUpon>LeadsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Objects\Oportunities\OportunitiesView.xaml.cs">
-      <DependentUpon>OportunitiesView.xaml</DependentUpon>
+    <Compile Include="Views\Objects\Opportunities\CreateOpportunity.xaml.cs">
+      <DependentUpon>CreateOpportunity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Opportunities\OpportunitiesView.xaml.cs">
+      <DependentUpon>OpportunitiesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Products\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
@@ -341,7 +344,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Objects\Oportunities\OportunitiesView.xaml">
+    <Page Include="Views\Objects\Opportunities\CreateOpportunity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Opportunities\OpportunitiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -423,7 +430,7 @@
     <Resource Include="Assets\Img\Icons\Contact.png" />
     <Resource Include="Assets\Img\Icons\Contacts.png" />
     <Resource Include="Assets\Img\Icons\Leads.png" />
-    <Resource Include="Assets\Img\Icons\Oportunities.png" />
+    <Resource Include="Assets\Img\Icons\Opportunities.png" />
     <Resource Include="Assets\Img\Icons\Products.png" />
   </ItemGroup>
   <ItemGroup>
