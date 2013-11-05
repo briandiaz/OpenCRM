@@ -7,10 +7,9 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       mc:Ignorable="d"
-                      Title="Oportunities" 
-                      MinHeight="1024" 
-                      MinWidth="768"
-                      >
+                      Title="Opportunities" 
+                      Height="Auto" 
+                      Width="Auto" >
 
     <Page.Resources>
         <ResourceDictionary>
@@ -25,67 +24,80 @@
 
         </ResourceDictionary>
     </Page.Resources>
-
+    
     <controls:MetroContentControl>
         <Grid>
-
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
             </Grid.Background>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="100*"/>
-                <RowDefinition Height="400*"/>
-                <RowDefinition Height="500*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="300*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="600*"/>
-                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="700*"/>
+                <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
+            <Grid Grid.Row="1" 
+                  Grid.Column="1">
+                
+                <Image  Source="/Assets/Img/Icons/Opportunities.png" 
+                        Margin="10,10,556,30" 
+                        RenderTransformOrigin="-0.92,0.73" />
 
+                <TabControl Margin="122,64,244,41">
+                    <TabItem Header="_Opportunities" FontSize="20px" Margin="-4,-2,-29,2"/>
+                </TabControl>
 
-            <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_Oportunities" FontSize="20px">
-                </TabItem>
-            </TabControl>
+                <TextBlock Text="Home"
+                           FontSize="24" 
+                           Margin="126,34,368,85" />
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Editar"
-                VerticalAlignment="Center"
-                Margin="2"
-                Width="75"
-                />
+                <Button Content="Edit"
+            		    Margin="560,36,34,59"
+            		    Width="75" />
 
-                <Button Content="Crear" 
-                VerticalAlignment="Center"
-                Margin="2"
-                Width="75"
-                />
-            </StackPanel>
-            <DataGrid 
-            Margin="0,20,0,0"    
-            Style="{DynamicResource MetroDataGrid}"
-            Grid.Column="1" 
-                HorizontalAlignment="Left"
-            Grid.Row="2" 
-            VerticalAlignment="Top"
-                MinWidth="1000"
-                MinHeight="400"
-         >
-            </DataGrid>
+                <Button Name="btnNewOpportunity"
+                        Content="New" 
+                	    Margin="469,36,125,59"
+                	    Width="75" 
+                        Click="btnNewOpportunity_Click"/>
+            </Grid>
 
-            <Image Source="/Assets/Img/Icons/Oportunities.png" 
-               Grid.Column="1"
-               HorizontalAlignment="Left"
-               Height="100"
-               Grid.Row="1"
-               VerticalAlignment="Top"
-               Width="100"/>
+            <Grid Grid.Row="3" 
+                  Grid.Column="1"
+                  Background="#349CE2">
+                <TextBlock Text="View:"
+                           FontSize="20"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="188,2,434,6"/>
+                <ComboBox Name="cmbSearchTypeOpportunities"
+                          VerticalAlignment="Center"
+                          Margin="239,4,173,5" Height="20"/>
+            </Grid>
 
+            <Grid Grid.Row="5" 
+                  Grid.Column="1" 
+                  Background="#349CE2">
+                <TextBlock Text="Recent Opportunities"
+        		           FontSize="22"
+                           Foreground="White"
+                           Margin="231,20,231,250"/>
+
+                <DataGrid Name="DataGridRecentOpportunities"
+                          Style="{DynamicResource MetroDataGrid}" 
+                          Margin="10,72,10,10" SelectionChanged="DataGridRecentOpportunities_SelectionChanged"/>
+            </Grid>
         </Grid>
     </controls:MetroContentControl>
 </Page>

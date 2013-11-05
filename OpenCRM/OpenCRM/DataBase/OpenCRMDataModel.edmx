@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="OpenCRMModelStoreContainer">
           <EntitySet Name="Account" EntityType="OpenCRMModel.Store.Account" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Account_Ownership" EntityType="OpenCRMModel.Store.Account_Ownership" store:Type="Tables" Schema="dbo" />
@@ -354,6 +354,10 @@
           <AssociationSet Name="FK State Country" Association="OpenCRMModel.Store.FK State Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profile__ParentP__56E8E7AB" Association="OpenCRMModel.Store.FK__Profile__ParentP__56E8E7AB">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Profile1" EntitySet="Profile" />
           </AssociationSet>
           <AssociationSet Name="PK User Profile" Association="OpenCRMModel.Store.PK User Profile">
             <End Role="Profile" EntitySet="Profile" />
@@ -742,6 +746,7 @@
           </Key>
           <Property Name="OpportunityStageId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Probability" Type="int" />
         </EntityType>
         <EntityType Name="Opportunities_Status">
           <Key>
@@ -780,6 +785,7 @@
           <Property Name="AbbrevationName" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="ParentProfile" Type="int" />
         </EntityType>
         <EntityType Name="Profile_Object">
           <Key>
@@ -1750,6 +1756,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Profile__ParentP__56E8E7AB">
+          <End Role="Profile" Type="OpenCRMModel.Store.Profile" Multiplicity="0..1" />
+          <End Role="Profile1" Type="OpenCRMModel.Store.Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Profile1">
+              <PropertyRef Name="ParentProfile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PK User Profile">
           <End Role="Profile" Type="OpenCRMModel.Store.Profile" Multiplicity="0..1" />
           <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="*" />
@@ -1762,8 +1780,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OpenCRMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2115,6 +2132,10 @@
           <AssociationSet Name="Inventory_Products" Association="OpenCRMModel.Inventory_Products">
             <End Role="Inventory" EntitySet="Inventory" />
             <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profile__ParentP__56E8E7AB" Association="OpenCRMModel.FK__Profile__ParentP__56E8E7AB">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Profile1" EntitySet="Profile" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -2603,6 +2624,7 @@
           <Property Name="OpportunityStageId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Stage" FromRole="Opportunities_Stage" ToRole="Opportunities" />
+          <Property Type="Int32" Name="Probability" />
         </EntityType>
         <EntityType Name="Opportunities_Status">
           <Key>
@@ -2650,6 +2672,9 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Profile_Object" Relationship="OpenCRMModel.FK_Profile_Object_Profile" FromRole="Profile" ToRole="Profile_Object" />
           <NavigationProperty Name="User" Relationship="OpenCRMModel.PK_User_Profile" FromRole="Profile" ToRole="User" />
+          <Property Type="Int32" Name="ParentProfile" />
+          <NavigationProperty Name="Profile1" Relationship="OpenCRMModel.FK__Profile__ParentP__56E8E7AB" FromRole="Profile" ToRole="Profile1" />
+          <NavigationProperty Name="Profile2" Relationship="OpenCRMModel.FK__Profile__ParentP__56E8E7AB" FromRole="Profile1" ToRole="Profile" />
         </EntityType>
         <EntityType Name="Profile_Object">
           <Key>
@@ -3643,6 +3668,18 @@
           <End Role="Inventory" Type="OpenCRMModel.Inventory" Multiplicity="*" />
           <End Role="Products" Type="OpenCRMModel.Products" Multiplicity="*" />
         </Association>
+        <Association Name="FK__Profile__ParentP__56E8E7AB">
+          <End Type="OpenCRMModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="OpenCRMModel.Profile" Role="Profile1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Profile1">
+              <PropertyRef Name="ParentProfile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4053,6 +4090,7 @@
           <EntitySetMapping Name="Opportunities_Stage">
             <EntityTypeMapping TypeName="OpenCRMModel.Opportunities_Stage">
               <MappingFragment StoreEntitySet="Opportunities_Stage">
+                <ScalarProperty Name="Probability" ColumnName="Probability" />
                 <ScalarProperty Name="OpportunityStageId" ColumnName="OpportunityStageId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -4092,6 +4130,7 @@
           <EntitySetMapping Name="Profile">
             <EntityTypeMapping TypeName="OpenCRMModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="ParentProfile" ColumnName="ParentProfile" />
                 <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="AbbrevationName" ColumnName="AbbrevationName" />

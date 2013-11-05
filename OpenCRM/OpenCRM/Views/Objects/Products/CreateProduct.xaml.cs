@@ -63,6 +63,7 @@ namespace OpenCRM.Views.Objects.Products
                     TxtBoxName.Text = "";
                     TxtBoxPrecio.Text = "";
                     MessageBox.Show("Producto ingresado con Exito");
+                    PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
                 }
 
 
