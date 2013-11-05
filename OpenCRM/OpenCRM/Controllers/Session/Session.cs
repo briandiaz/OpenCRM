@@ -92,6 +92,24 @@ namespace OpenCRM.Controllers.Session
             _userId = -1;
             _rightAccess = null;    
         }
+
+        public static User getUserSession()
+        {
+            User userSession = null;
+            using (var db = new OpenCRMEntities())
+            {
+                var query = (
+                    from user in db.User
+                    where _userId == user.UserId
+                    select user
+                ).ToList();
+
+                userSession = query.First();
+            }
+
+            return userSession;
+        }
+
         #endregion
     }
 
