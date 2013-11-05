@@ -45,13 +45,13 @@ namespace OpenCRM.Views.Objects.Campaigns
                 return (cbxCampaignActive.IsChecked.Value) ? true : false;
             }
         }
-        public int _campaignTypeId
+        public int? _campaignTypeId
         {
-            get { return Convert.ToInt32(cmbCampaignType.SelectedValue); }
+            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null; }
         }
-        public int _campaignStatusId
+        public int? _campaignStatusId
         {
-            get { return Convert.ToInt32(cmbCampaignStatus.SelectedValue); }
+            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null; }
         }
         public DateTime _startDate
         {
@@ -95,7 +95,7 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             get 
             {
-                return Convert.ToInt32(cmbCampaignParent.SelectedValue); 
+                return (Convert.ToInt32(cmbCampaignParent.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignParent.SelectedValue) : (int?)null; 
             }
         }
         public String _description
@@ -202,20 +202,15 @@ namespace OpenCRM.Views.Objects.Campaigns
             CampaignsModel campaign;
             try
             {
-                var selectedCampaignType = (_campaignTypeId != -1) ? _campaignTypeId : (int?)null;
-                var selectedCampaignStatus = (_campaignStatusId != -1) ? _campaignStatusId : (int?)null;
-                var selectedCampaignParent = (_campaignParent != -1) ? _campaignParent : null;
-                Console.WriteLine(selectedCampaignType);
-                Console.WriteLine(selectedCampaignStatus);
-                Console.WriteLine(selectedCampaignParent);
+                MessageBox.Show("_campaignTypeId: " + _campaignTypeId + " _campaignStatusId: " + _campaignStatusId + " _campaignParent: " + _campaignParent);
                 campaign = new CampaignsModel()
                 {
                     CampaignId = _campaignId,
                     UserId = _userId,
                     Name = _name,
                     Active = _active,
-                    CampaignTypeId = selectedCampaignType,
-                    CampaignStatusId = selectedCampaignStatus,
+                    CampaignTypeId = _campaignTypeId,
+                    CampaignStatusId = _campaignStatusId,
                     StartDate = _startDate,
                     EndDate = _endDate,
                     ExpectedRevenue = _expectedRevenue,
@@ -223,7 +218,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                     ActualCost = _actualCost,
                     ExpectedResponse = _expectedResponse,
                     NumberSent = _numberSent,
-                    CampaignParent = selectedCampaignParent,
+                    CampaignParent = _campaignParent,
                     Description = _description,
                     CreateBy = _createBy,
                     CreateDate = _createDate,
@@ -231,12 +226,6 @@ namespace OpenCRM.Views.Objects.Campaigns
                     UpdateDate = _updateDate
                 };
 
-                /*campaign = new CampaignsModel(
-                    _campaignId,_userId,_name,_active,_campaignTypeId,_campaignStatusId,_startDate,_endDate,_expectedRevenue,_budgetedCost,_actualCost,
-                    _expectedResponse,_numberSent,_campaignParent,_description,_createBy,_createDate,_updateBy,_updateDate
-                    
-                    );
-                */
                 if (campaign.Save())
                 {
                     System.Windows.MessageBox.Show("Campaign created successfully", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Exclamation);

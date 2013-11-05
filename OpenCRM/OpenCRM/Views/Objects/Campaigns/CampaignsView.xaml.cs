@@ -31,5 +31,10 @@ namespace OpenCRM.Views.Objects.Campaigns
             PageSwitcher.Switch("/Views/Objects/Campaigns/Create.xaml");
         }
 
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Home/HomeView.xaml");
+        }
+
     }
 }
