@@ -100,8 +100,22 @@
             <Border  Grid.Row="2" Grid.Column="2" Background="#CC119EDA" />
             <Border  Grid.Row="2" Grid.Column="3" Background="#CC119EDA" />
             <Border  Grid.Row="2" Grid.Column="4" Background="#CC119EDA" />
-            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White">Recent Campaigns</TextBlock>
-
+            
+            <ComboBox Name="cmbTargetKeyCampaign"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      Width="200"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center" SelectionChanged="cmbTargetKeyCampaign_SelectionChanged"
+                      />
+            <ComboBox Name="cmbTargetValueCampaign"
+                      Grid.Row="2"
+                      Grid.Column="2"
+                      Width="200"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Visibility="Hidden"
+                      />
             <StackPanel Grid.Column="3" 
                         Grid.Row="1" 
                         Orientation="Horizontal" 
