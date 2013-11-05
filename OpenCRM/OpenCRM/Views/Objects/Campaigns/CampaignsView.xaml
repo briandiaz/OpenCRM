@@ -34,33 +34,16 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="2.5*" />
-                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="4.5*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="18*" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="10*" />
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" 
@@ -72,6 +55,7 @@
                         Click="btnGoBack_Click"
                         Width="118"
                         Height="45"
+                        Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/Img/Icons/32px/arrow-left3.png" Width="32px" Height="32px"/>
@@ -80,7 +64,7 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
 
                 <Image Source="/Assets/Img/Icons/Campaigns.png" 
                    HorizontalAlignment="Left" 
@@ -99,24 +83,47 @@
             <Border  Grid.Row="2" Grid.Column="1" Background="#CC119EDA" />
             <Border  Grid.Row="2" Grid.Column="2" Background="#CC119EDA" />
             <Border  Grid.Row="2" Grid.Column="3" Background="#CC119EDA" />
-            <Border  Grid.Row="2" Grid.Column="4" Background="#CC119EDA" />
-            
-            <ComboBox Name="cmbTargetKeyCampaign"
-                      Grid.Row="2"
-                      Grid.Column="1"
+
+            <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1">
+                <ComboBox Name="cmbTargetKeyCampaign"
                       Width="200"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center" SelectionChanged="cmbTargetKeyCampaign_SelectionChanged"
                       />
-            <ComboBox Name="cmbTargetValueCampaign"
-                      Grid.Row="2"
-                      Grid.Column="2"
+                <ComboBox Name="cmbTargetValueCampaign"
                       Width="200"
                       HorizontalAlignment="Left"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Center" SelectionChanged="cmbTargetValueCampaign_SelectionChanged"
                       Visibility="Hidden"
                       />
-            <StackPanel Grid.Column="3" 
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">
+                <Grid Name="gridCampaign" Margin="10,20,0,0" Width="600" Height="400" >
+                    <Border  HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="#CC119EDA" BorderThickness="2">
+                        <Grid Height="400" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="600" Background="Beige" />
+                    </Border>
+                    <TextBlock Text="{Binding Name}" VerticalAlignment="Top" FontSize="36" Foreground="Blue" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+                    <StackPanel Orientation="Horizontal" Height="60" Margin="10,0,0,0">
+                        <Image Source="/Assets/Img/Icons/32px/calendar.png" Width="32" Height="32" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding StartDate}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right" Height="60">
+                        <Image Source="/Assets/Img/Icons/32px/lab.png" Width="32" Height="32" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding ExpectedRevenue}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="60">
+                        <Image Source="/Assets/Img/Icons/32px/stats.png" Width="32" Height="32" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding ExpectedResponse*100}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                    </StackPanel>
+                    <TextBlock Text="{Binding CampaignId}"></TextBlock>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding Description}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                    </StackPanel>
+                    
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Column="2" 
                         Grid.Row="1" 
                         Orientation="Horizontal" 
                         VerticalAlignment="Center"
@@ -125,6 +132,7 @@
                         Click="bntCreate_Click"
                         Width="118"
                         Height="45"
+                        Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/Img/Icons/32px/file3.png" Width="32px" Height="32px"/>

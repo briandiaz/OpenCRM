@@ -71,6 +71,7 @@
                         Click="btnGoBack_Click"
                         Width="118"
                         Height="45"
+                        Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/Img/Icons/32px/arrow-left3.png" Width="32px" Height="32px"/>
@@ -114,6 +115,7 @@
                         VerticalAlignment="Center" 
                         Margin="2" 
                         Click="btnSave_Click"
+                        Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="15" Height="15" />
@@ -125,6 +127,7 @@
                         VerticalAlignment="Center" 
                         Margin="2" 
                         Click="btnSaveandNew_Click"
+                        Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/checkmark2.png" Width="15" Height="15" />
@@ -136,6 +139,7 @@
                         VerticalAlignment="Center" 
                         Margin="2" 
                         Click="btnCancel_Click"
+                        Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/cancel-circle.png" Width="15" Height="15" />
@@ -205,18 +209,8 @@
                         Grid.Column="2"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
+                        Cursor="Hand"
                                    />
-            <!--<CheckBox Name="cbxCampaignActive"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Margin="10,10,0,0"
-                        Grid.Row="5"
-                        Grid.Column="2"
-                        Height="30"
-                        Width="200"
-                      FontSize="16px"
-                       />
-            -->
             <TextBlock
                 FontSize="16px"
                 VerticalAlignment="Center"
@@ -236,6 +230,7 @@
                         Height="30"
                         Width="200"
                       FontSize="16px"
+                        Cursor="Hand"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
@@ -325,20 +320,6 @@
                 Height="30"
                 >Expected Response
             </TextBlock>
-<!--
-            <TextBox Name="tbxCampaignExpectedResponse"
-                        controls:TextboxHelper.ClearTextButton="True"
-                        controls:TextboxHelper.Watermark="Expected Response"
-                        HorizontalAlignment="Left"
-                        Margin="10,0,0,0"
-                        Grid.Row="10"
-                        Grid.Column="2"
-                        Height="30"
-                        Width="200"
-                      FontSize="16px"
-                       />
--->
-
             <Slider     Name="tbxCampaignExpectedResponse"
                         Margin="10,0,0,0"
                         Grid.Row="10"
@@ -346,7 +327,9 @@
                         Width="200"
                         HorizontalAlignment="Left"
                         Value="20"
-                        SmallChange="1" />
+                        SmallChange="1"
+                        Cursor="Hand"
+                        />
 
             <TextBlock
                 FontSize="16px"
@@ -452,6 +435,7 @@
                     Grid.Column="3" Grid.Row="6"
                     Height="30"
                     Width="200"
+                    Cursor="Hand"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
@@ -484,6 +468,7 @@
                     Grid.Column="3" Grid.Row="3"
                     Width="200"
                     Height="30"
+                    Cursor="Hand"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
