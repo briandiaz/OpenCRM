@@ -38,14 +38,10 @@ namespace OpenCRM.Models.Objects.Oportunities
                 {
                     var query = (
                         from opportunity in db.Opportunities
-                        from account in db.Account
-                        where
-                            opportunity.AccountId == account.AccountId
                         select new
                         {
                             Id = opportunity.OpportunityId,
                             Opportunity = opportunity.Name,
-                            Account = account.Name,
                             CloseDate = opportunity.CloseDate.Value
                         }
                     ).ToList();

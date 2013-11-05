@@ -779,6 +779,7 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -2682,6 +2683,7 @@
           <NavigationProperty Name="User" Relationship="OpenCRMModel.FK_Products_User_Creator" FromRole="Products" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="OpenCRMModel.FK_Products_User_Modificator" FromRole="Products" ToRole="User" />
           <NavigationProperty Name="Inventory" Relationship="OpenCRMModel.Inventory_Products" FromRole="Products" ToRole="Inventory" />
+          <Property Type="String" Name="ProductCode" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -4149,6 +4151,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="OpenCRMModel.Products">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

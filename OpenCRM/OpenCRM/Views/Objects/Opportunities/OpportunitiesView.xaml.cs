@@ -34,7 +34,8 @@ namespace OpenCRM.Views.Objects.Oportunities
 
         private void DataGridRecentOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            var itemType = (sender as DataGridRow).Item.GetType();
+
         }
 
         private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)

@@ -30,6 +30,7 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string ProductCode { get; set; }
     
         public virtual ICollection<Cases> Cases { get; set; }
         public virtual ICollection<Opportunities_Products> Opportunities_Products { get; set; }
