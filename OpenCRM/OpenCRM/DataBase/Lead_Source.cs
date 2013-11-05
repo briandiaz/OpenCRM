@@ -18,6 +18,7 @@ namespace OpenCRM.DataBase
         {
             this.Contact = new HashSet<Contact>();
             this.Leads = new HashSet<Leads>();
+            this.Opportunities = new HashSet<Opportunities>();
         }
     
         public int LeadSourceId { get; set; }
@@ -25,5 +26,6 @@ namespace OpenCRM.DataBase
     
         public virtual ICollection<Contact> Contact { get; set; }
         public virtual ICollection<Leads> Leads { get; set; }
+        public virtual ICollection<Opportunities> Opportunities { get; set; }
     }
 }

@@ -126,6 +126,7 @@
         <AssociationConnector Association="OpenCRMModel.FK_Profile_Object_Fields_Profile_Object" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.Inventory_Products" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.FK__Profile__ParentP__56E8E7AB" />
+        <AssociationConnector Association="OpenCRMModel.FK_Opportunities_Lead_Source" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
