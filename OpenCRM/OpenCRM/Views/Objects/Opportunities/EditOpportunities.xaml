@@ -1,0 +1,13 @@
+﻿<Page x:Class="OpenCRM.Views.Objects.Opportunities.EditOpportunities"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="321.951" d:DesignWidth="340.767"
+	  Title="EditOpportunities">
+
+    <Grid>
+
+    </Grid>
+</Page>
