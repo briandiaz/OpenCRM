@@ -43,32 +43,32 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private void loadKeyType()
         {
-            List<SearchTargets> _keyTypes = new List<SearchTargets>();
-            SearchTargets keyType = new SearchTargets(1,"Type");
+            List<SearchAttribute> _keyTypes = new List<SearchAttribute>();
+            SearchAttribute keyType = new SearchAttribute(1, "Type");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(2, "Status");
+            keyType = new SearchAttribute(2, "Status");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(3, "Active");
+            keyType = new SearchAttribute(3, "Active");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(4, "Name");
+            keyType = new SearchAttribute(4, "Name");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(5, "Start Date");
+            keyType = new SearchAttribute(5, "Start Date");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(6, "End Date");
+            keyType = new SearchAttribute(6, "End Date");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(7, "Expected Revenue");
+            keyType = new SearchAttribute(7, "Expected Revenue");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(8, "Expected Response");
+            keyType = new SearchAttribute(8, "Expected Response");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(9, "Number Sent");
+            keyType = new SearchAttribute(9, "Number Sent");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(10, "Actual Cost");
+            keyType = new SearchAttribute(10, "Actual Cost");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(11, "Budgeted Cost");
+            keyType = new SearchAttribute(11, "Budgeted Cost");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(12, "Created By");
+            keyType = new SearchAttribute(12, "Created By");
             _keyTypes.Add(keyType);
-            keyType = new SearchTargets(13, "Updated By");
+            keyType = new SearchAttribute(13, "Updated By");
             _keyTypes.Add(keyType);
             cmbTargetKeyCampaign.ItemsSource = _keyTypes;
             cmbTargetKeyCampaign.DisplayMemberPath = "Name";
@@ -89,6 +89,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                     cmbTargetValueCampaign.DisplayMemberPath = "Name";
                     cmbTargetValueCampaign.SelectedValuePath = "ID";
                     cmbTargetValueCampaign.SelectedItem = 1;
+                    
                     break;
                 case 3:
                     cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
@@ -129,9 +130,9 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             return null;
         }
-        private List<SearchTargets> getSearchTargetKeys(int by)
+        private List<SearchAttribute> getSearchTargetKeys(int by)
         {
-            List<SearchTargets> _searchTargets = new List<SearchTargets>();
+            List<SearchAttribute> _searchTargets = new List<SearchAttribute>();
             try {
                 using (var _db = new OpenCRMEntities())
                 {
@@ -140,7 +141,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                         case 1:
                             var query = (
                                     from type in _db.Campaign_Type
-                                    select new SearchTargets()
+                                    select new SearchAttribute()
                                     {
                                         ID = type.CampaignTypeId,
                                         Name = type.Name
@@ -151,7 +152,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                         case 2:
                             query = (
                                     from status in _db.Campaign_Status
-                                    select new SearchTargets()
+                                    select new SearchAttribute()
                                     {
                                         ID = status.CampaignStatusId,
                                         Name = status.Name
@@ -172,6 +173,25 @@ namespace OpenCRM.Views.Objects.Campaigns
             }
             return _searchTargets;
         }
+
+        private void cmbTargetValueCampaign_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedSearchKey((SearchAttribute)cmbTargetValueCampaign.SelectedItem, (SearchAttribute)cmbTargetKeyCampaign.SelectedItem);
+        }
+
+        private void SelectedSearchKey(SearchAttribute attr,SearchAttribute key)
+        {
+            CampaignsModel _cmp = new CampaignsModel();
+            if (key.ID.Equals(1))
+            {
+                _cmp.LoadCampaigns(gridCampaign, attr.ID, "Status");
+            }
+            else if (key.ID.Equals(2))
+            {
+                _cmp.LoadCampaigns(gridCampaign, attr.ID, "Type");
+            }
+        }   
+        
     }
     public class SearchAttribute {
         
@@ -181,15 +201,6 @@ namespace OpenCRM.Views.Objects.Campaigns
         public SearchAttribute(int id, String Name)
         {
             this.ID = id;
-            this.Name = Name;
-        }
-    }
-    public class SearchTargets : SearchAttribute
-    {
-        public SearchTargets() { }
-        public SearchTargets(int ID, String Name) : base(ID,Name)
-        {
-            this.ID = ID;
             this.Name = Name;
         }
     }

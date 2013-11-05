@@ -213,6 +213,92 @@ namespace OpenCRM.Models.Objects.Campaigns
             return _campaignsModel;
 
         }
+
+        public void LoadCampaigns(System.Windows.Controls.Grid Grid,int StatusorType,String SearchKey)
+        {
+            var listProducts = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                { 
+                    if (SearchKey.Equals("Status"))
+                    {
+                        var query =
+                        (
+                             from _campaign in _db.Campaign
+                             where _campaign.CampaignStatusId == StatusorType
+                             select new CampaignsModel()
+                                {
+                                    CampaignId = _campaign.CampaignId,
+                                    UserId = _campaign.UserId.Value,
+                                    Name = _campaign.Name,
+                                    Active = _campaign.Active.Value,
+                                    CampaignTypeId = _campaign.CampaignTypeId.Value,
+                                    CampaignStatusId = _campaign.CampaignStatusId.Value,
+                                    StartDate = _campaign.StartDate.Value,
+                                    EndDate = _campaign.EndDate.Value,
+                                    ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                                    BudgetedCost = _campaign.BudgetedCost.Value,
+                                    ActualCost = _campaign.ActualCost.Value,
+                                    ExpectedResponse = _campaign.ExpectedResponse.Value,
+                                    NumberSent = _campaign.NumberSent.Value,
+                                    CampaignParent = _campaign.CampaignParent.Value,
+                                    Description = _campaign.Description,
+                                    CreateBy = _campaign.CreateBy.Value,
+                                    CreateDate = _campaign.CreateDate.Value,
+                                    UpdateBy = _campaign.UpdateBy.Value,
+                                    UpdateDate = _campaign.UpdateDate.Value
+                                }
+
+                        ).ToList();
+                        listProducts = query;
+                    }
+                    else
+                    {
+                        var query =
+                        (
+                             from _campaign in _db.Campaign
+                             where _campaign.CampaignTypeId == StatusorType
+                             select new CampaignsModel()
+                             {
+                                 CampaignId = _campaign.CampaignId,
+                                 UserId = _campaign.UserId.Value,
+                                 Name = _campaign.Name,
+                                 Active = _campaign.Active.Value,
+                                 CampaignTypeId = _campaign.CampaignTypeId.Value,
+                                 CampaignStatusId = _campaign.CampaignStatusId.Value,
+                                 StartDate = _campaign.StartDate.Value,
+                                 EndDate = _campaign.EndDate.Value,
+                                 ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                                 BudgetedCost = _campaign.BudgetedCost.Value,
+                                 ActualCost = _campaign.ActualCost.Value,
+                                 ExpectedResponse = _campaign.ExpectedResponse.Value,
+                                 NumberSent = _campaign.NumberSent.Value,
+                                 CampaignParent = _campaign.CampaignParent.Value,
+                                 Description = _campaign.Description,
+                                 CreateBy = _campaign.CreateBy.Value,
+                                 CreateDate = _campaign.CreateDate.Value,
+                                 UpdateBy = _campaign.UpdateBy.Value,
+                                 UpdateDate = _campaign.UpdateDate.Value
+                             }
+
+                        ).ToList();
+                        listProducts = query;
+                    }
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            Grid.DataContext = listProducts;
+
+        }
+
         #endregion
 
     }
