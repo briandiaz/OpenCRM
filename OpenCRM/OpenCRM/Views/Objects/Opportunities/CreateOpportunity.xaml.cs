@@ -30,7 +30,8 @@ namespace OpenCRM.Views.Objects.Oportunities
         {
             InitializeComponent();
 
-            _opportunitiesModel = new OpportunitiesModel(Session.UserId, Session.RightAccess);
+            _opportunityData = new OpportunitiesData();
+            _opportunitiesModel = new OpportunitiesModel();
 
             this.cmbOpportunityType.ItemsSource = _opportunitiesModel.getOpportunityType();
             this.cmbOpportunityType.DisplayMemberPath = "Name";
@@ -42,10 +43,17 @@ namespace OpenCRM.Views.Objects.Oportunities
             this.cmbOpportunityStage.SelectedValuePath = "OpportunityStageId";
             this.cmbOpportunityStage.SelectedValue = 1;
 
+            this.cmbLeadSource.ItemsSource = _opportunitiesModel.getLeadsSource();
+            this.cmbLeadSource.DisplayMemberPath = "Name";
+            this.cmbLeadSource.SelectedValuePath = "LeadSourceId";
+            this.cmbLeadSource.SelectedValue = 1;
+
             this.cmbOpportunityServiceStatus.ItemsSource = _opportunitiesModel.getOpportunityStatus();
             this.cmbOpportunityServiceStatus.DisplayMemberPath = "Name";
             this.cmbOpportunityServiceStatus.SelectedValuePath = "OpportunityDeliveryStatusId";
             this.cmbOpportunityServiceStatus.SelectedValue = 1;
+
+            this.lblOpportunityOwner.Content = Session.getUserSession().UserName;
 
         }
 
@@ -58,9 +66,6 @@ namespace OpenCRM.Views.Objects.Oportunities
             if (this.tbxOpportunityBirthDate.Text == String.Empty)
                 canSave = false;
 
-            if (this.cmbOpportunityStage.SelectedIndex == -1)
-                canSave = false;
-
             return canSave;
         }
 
@@ -68,19 +73,30 @@ namespace OpenCRM.Views.Objects.Oportunities
         {
             if (CanSaveOpportunity())
             {
-                var item = (new OpportunitiesData(){
-                     Name = this.tbxOpportunityName.Text,
-                     CloseDate = Convert.ToDateTime(this.tbxOpportunityBirthDate.Text),
-                     OpportunityStageId = this.cmbOpportunityStage.SelectedIndex,
-                     Amount = Convert.ToDecimal(this.tbxOpportunityAmount.Text),
-                     TrackingNumber = this.tbxOpportunityTrackingNumber.Text,
-                     CurrentGenerator = this.tbxCurrentGenerator.Text,
-                     Description = this.tbxOpportunityDescription.Text,
-                     NextStep = this.tbxOpportunityNextStep.Text,
-                     //CampaignPrimarySourceId = this.tbxOpportunityCampaign
-                     CreateDate = DateTime.Now,
-                     UpdateDate = DateTime.Now
-                });
+                _opportunityData.Private = this.ckbOpportunityPrivate.IsChecked.Value;
+                _opportunityData.Name = this.tbxOpportunityName.Text;
+                //Account Name
+                _opportunityData.OpportunityTypeId = Convert.ToInt32(this.cmbOpportunityType.SelectedValue);
+                _opportunityData.LeadSourceId = Convert.ToInt32(this.cmbLeadSource.SelectedValue);
+                _opportunityData.Amount = (this.tbxOpportunityAmount.Text != String.Empty)? Convert.ToDecimal(this.tbxOpportunityAmount.Text) : 0;
+                _opportunityData.CloseDate = Convert.ToDateTime(this.tbxOpportunityBirthDate.Text);
+                _opportunityData.NextStep = this.tbxOpportunityNextStep.Text;
+                _opportunityData.OpportunityStageId = Convert.ToInt32(this.cmbOpportunityStage.SelectedValue);
+                _opportunityData.Probability = Convert.ToDecimal(this.tbxOpportunityProbability.Text);
+                //Campaign Name
+                _opportunityData.OrderNumber = this.tbxOpportunityOrderNumber.Text;
+                _opportunityData.CurrentGenerator = this.tbxCurrentGenerator.Text;
+                _opportunityData.TrackingNumber = this.tbxOpportunityTrackingNumber.Text;
+                //Competidors Name
+                _opportunityData.OpportunityDeliveryStatusId = Convert.ToInt32(this.cmbOpportunityServiceStatus.SelectedValue);
+                _opportunityData.Description = this.tbxOpportunityDescription.Text;
+                _opportunityData.UserId = Session.UserId;
+                _opportunityData.UserCreateById = Session.UserId;
+                _opportunityData.UserUpdateById = Session.UserId;
+                _opportunityData.CreateDate = DateTime.Now;
+                _opportunityData.UpdateDate = DateTime.Now;
+
+                _opportunitiesModel.Save(_opportunityData);
             }
         }
 
@@ -96,7 +112,6 @@ namespace OpenCRM.Views.Objects.Oportunities
             this.tbxOpportunityProbability.Text = Convert.ToString((this.cmbOpportunityStage.SelectedItem as Opportunities_Stage).Probability);
         }
 
-        #region "Buttons Search"
         private void btnSearchAccount_Click(object sender, RoutedEventArgs e)
         {
             this.gridDefaultRow2.Visibility = Visibility.Hidden;
@@ -109,12 +124,47 @@ namespace OpenCRM.Views.Objects.Oportunities
             this.gridSearchCampaign.Visibility = Visibility.Visible;
         }
 
-        #endregion
+        #region "Account"
+        private void btnCancelAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridDefaultRow2.Visibility = Visibility.Visible;
+            this.gridSearchAccount.Visibility = Visibility.Collapsed;
+        }
 
-        #region "In Search"
         private void btnSearchAccountLookUp_Click(object sender, RoutedEventArgs e)
         {
             _opportunitiesModel.SearchAccount(this.tbxSearchAccount.Text, this.DataGridAccount);
+        }
+
+        private void btnAcceptAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            object selectedItem = this.DataGridAccount.SelectedItem;
+            Type type = selectedItem.GetType();
+
+            var data = new {
+                Id = (int)type.GetProperty("Id").GetValue(selectedItem, null),
+                Name = (string)type.GetProperty("Name").GetValue(selectedItem, null)
+            };
+
+            _opportunityData.AccountId = data.Id;
+            this.tbxAccountName.Text = data.Name;
+
+            this.gridSearchAccount.Visibility = Visibility.Collapsed;
+            this.gridDefaultRow2.Visibility = Visibility.Visible;
+        }
+
+        private void btnClearAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.tbxSearchAccount.Text = String.Empty;
+        }
+
+        #endregion
+
+        #region "Campagin"
+        private void btnCancelCampaignLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridDefaultRow2.Visibility = Visibility.Visible;
+            this.gridSearchCampaign.Visibility = Visibility.Collapsed;
         }
 
         private void btnSearchCampaignLookUp_Click(object sender, RoutedEventArgs e)
@@ -122,55 +172,79 @@ namespace OpenCRM.Views.Objects.Oportunities
             _opportunitiesModel.SearchAccount(this.tbxSearchCampaign.Text, this.DataGridCampaign);
         }
 
-        #region "Cancel Search"
-        private void btnCancelAccountLookUp_Click(object sender, RoutedEventArgs e)
+        private void btnAcceptCampaignLookUp_Click(object sender, RoutedEventArgs e)
         {
-            this.gridDefaultRow2.Visibility = Visibility.Visible;
+            object selectedItem = this.DataGridAccount.SelectedItem;
+            Type type = selectedItem.GetType();
+
+            var data = new
+            {
+                Id = (int)type.GetProperty("Id").GetValue(selectedItem, null),
+                Name = (string)type.GetProperty("Name").GetValue(selectedItem, null)
+            };
+
+            _opportunityData.CampaignPrimarySourceId = data.Id;
+            this.tbxOpportunityCampaign.Text = data.Name;
+
             this.gridSearchAccount.Visibility = Visibility.Collapsed;
-        }
-
-        private void btnCancelCampaignLookUp_Click(object sender, RoutedEventArgs e)
-        {
             this.gridDefaultRow2.Visibility = Visibility.Visible;
-            this.gridSearchCampaign.Visibility = Visibility.Collapsed;
         }
 
-        #endregion
-
-
+        private void btnClearCampaingLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.tbxSearchCampaign.Text = String.Empty;
+        }
+        
         #endregion
 
         #endregion
 
         #region "Aditional Information"
 
-        #region "Button Search"
         private void btnSearchCompetidor_Click(object sender, RoutedEventArgs e)
         {
             this.gridDefaultRow4.Visibility = Visibility.Hidden;
             this.gridSearchCompetidor.Visibility = Visibility.Visible;
         }
 
-        #endregion
-
-        #region "In Search"
+        #region "Competidors"
 
         private void btnSearchCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
         {
             _opportunitiesModel.SearchCompetidors(this.tbxSearchCompetidors.Text, this.DataGridCompetidors);
         }
 
-        #region "Cancel Search"
         private void btnCancelCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
         {
             this.gridDefaultRow4.Visibility = Visibility.Visible;
             this.gridSearchCompetidor.Visibility = Visibility.Collapsed;
         }
 
+        private void btnAcceptCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            object selectedItem = this.DataGridAccount.SelectedItem;
+            Type type = selectedItem.GetType();
+
+            var data = new
+            {
+                Id = (int)type.GetProperty("Id").GetValue(selectedItem, null),
+                Name = (string)type.GetProperty("Name").GetValue(selectedItem, null)
+            };
+
+            _opportunityData.CampaignPrimarySourceId = data.Id;
+            this.tbxSearchCompetidors.Text = data.Name;
+
+            this.gridSearchAccount.Visibility = Visibility.Collapsed;
+            this.gridDefaultRow2.Visibility = Visibility.Visible;
+        }
+
+        private void btnClearCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.tbxSearchCompetidors.Text = String.Empty;
+        }
+
         #endregion
-        
-        #endregion
-        
+
         #endregion
     }
 }

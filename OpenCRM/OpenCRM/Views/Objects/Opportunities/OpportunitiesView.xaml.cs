@@ -1,5 +1,4 @@
-﻿using OpenCRM.Models.Objects.Oportunities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using OpenCRM.Models.Objects.Oportunities;
+
 namespace OpenCRM.Views.Objects.Oportunities
 {
     /// <summary>
@@ -25,12 +26,15 @@ namespace OpenCRM.Views.Objects.Oportunities
 
         public OportunitiesView()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            _opportunitiesModel = new OpportunitiesModel();
+
+            _opportunitiesModel.SearchRecentOportunities(this.DataGridRecentOpportunities);
         }
 
         private void DataGridRecentOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //PageSwitcher.Switch("/Views/Objects/Opportunities/");
+            
         }
 
         private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)

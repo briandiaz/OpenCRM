@@ -125,7 +125,8 @@
         	                    FontSize="15px" 
                                 Margin="15,28,620,281" Height="20" />
 
-                    <Label  Content=""
+                    <Label  Name="lblOpportunityOwner"
+                            Content=""
         	                VerticalAlignment="Center"
         	                FontSize="15px"
                             Margin="181,25,428,274" Height="30" />
@@ -300,7 +301,8 @@
                     <Button Name="btnClearAccountLookUp"
                             Content="Clear"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="264,65,464,231"/>
+                            Margin="264,65,464,231"
+                            Click="btnClearAccountLookUp_Click"/>
 
                     <Button Name="btnCancelAccountLookUp"
                             Content="Cancel"
@@ -311,7 +313,8 @@
                     <Button Name="btnAcceptAccountLookUp"
                             Content="Accept"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="635,65,93,231"/>
+                            Margin="635,65,93,231"
+                            Click="btnAcceptAccountLookUp_Click"/>
 
                     <DataGrid Name="DataGridAccount"
                               Style="{DynamicResource MetroDataGrid}" 
@@ -351,7 +354,8 @@
                     <Button Name="btnClearCampaingLookUp"
                             Content="Clear"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="264,65,464,231"/>
+                            Margin="264,65,464,231"
+                            Click="btnClearCampaingLookUp_Click"/>
 
                     <Button Name="btnCancelCampaignLookUp"
                             Content="Cancel"
@@ -362,7 +366,8 @@
                     <Button Name="btnAcceptCampaignLookUp"
                             Content="Accept"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="635,65,93,231"/>
+                            Margin="635,65,93,231"
+                            Click="btnAcceptCampaignLookUp_Click"/>
 
                     <DataGrid Name="DataGridCampaign"
                               Style="{DynamicResource MetroDataGrid}" 
@@ -485,7 +490,8 @@
                     <Button Name="btnClearCompetidorsLookUp"
                             Content="Clear"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="264,65,464,223"/>
+                            Margin="264,65,464,223"
+                            Click="btnClearCompetidorsLookUp_Click"/>
 
                     <Button Name="btnCancelCompetidorsLookUp"
                             Content="Cancel"
@@ -496,7 +502,8 @@
                     <Button Name="btnAcceptCompetidorsLookUp"
                             Content="Accept"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="635,65,93,223"/>
+                            Margin="635,65,93,223"
+                            Click="btnAcceptCompetidorsLookUp_Click"/>
 
                     <DataGrid Name="DataGridCompetidors"
                               Style="{DynamicResource MetroDataGrid}" 
