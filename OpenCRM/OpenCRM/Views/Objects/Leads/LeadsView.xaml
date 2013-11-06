@@ -7,10 +7,9 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       mc:Ignorable="d"
-                      Title="Leads" 
-                      MinHeight="1024" 
-                      MinWidth="768"
-                      >
+                      Title="Opportunities" 
+                      Height="Auto" 
+                      Width="Auto" >
 
     <Page.Resources>
         <ResourceDictionary>
@@ -20,7 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
-                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
+                <ResourceDictionary Source="/Resources/DataGridViewAzure.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>
@@ -28,76 +27,81 @@
 
     <controls:MetroContentControl>
         <Grid>
-
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
             </Grid.Background>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="100*"/>
-                <RowDefinition Height="400*"/>
-                <RowDefinition Height="500*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="300*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="600*"/>
-                <ColumnDefinition Width="200*"/>
-                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="700*"/>
+                <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
+            <Grid Grid.Row="1" 
+                  Grid.Column="1">
+                <Grid Margin="0,0,356,0">
+                    <Image  Source="/Assets/Img/Icons/Opportunities.png" 
+                            Margin="0,10,0,25" 
+                            RenderTransformOrigin="-0.92,0.73" HorizontalAlignment="Left" Width="117" />
 
+                    <TabControl Margin="122,64,0,41" HorizontalAlignment="Left" Width="178">
+                        <TabItem Header="_Leads" FontSize="20px" Margin="-6,-2,-3,2"/>
+                    </TabControl>
 
-            <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_Lead" FontSize="20px">
-                </TabItem>
-            </TabControl>
+                    <TextBlock Text="Home"
+                               FontSize="24" 
+                               Margin="124,34,0,85" HorizontalAlignment="Left" Width="77" />
+                </Grid>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Edit"
-                    VerticalAlignment="Center"
-                    Margin="2"
-                    Width="75"
-                    Click="btn_EditLeadOnClick"/>
-                <Button Content="New" 
-                    VerticalAlignment="Center"
-                    Margin="2"
-                    Width="75" 
-                    Click="btn_NewLeadOnClick"/>
-            </StackPanel>
+            		    Margin="560,36,34,59"
+            		    Width="75"
+                        Click="btn_EditLead_OnClick"/>
 
-            <Grid 
-                Margin="0,20,0,0"    
-                Grid.Column="1" 
-                HorizontalAlignment="Left"
-                Grid.Row="2" 
-                VerticalAlignment="Top"
-                MinWidth="1000"
-                MinHeight="400">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="500*"/>
-                    <RowDefinition Height="500*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <GroupBox Grid.Column="1" Header="Recent Leads" HorizontalAlignment="Left" Margin="0,19,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1500" Height="154"/>
-                <GroupBox Grid.Column="1" Header="Reports" HorizontalAlignment="Left" Margin="0,19,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1500" Height="154"/>
-
-
+                <Button Name="btnNewLead"
+                        Content="New" 
+                	    Margin="469,36,125,59"
+                	    Width="75" 
+                        Click="btn_NewLead_OnClick"/>
             </Grid>
-            <Image Source="/Assets/Img/Icons/Leads.png" 
-               Grid.Column="1"
-               HorizontalAlignment="Left"
-               Height="100"
-               Grid.Row="1"
-                  VerticalAlignment="Top"
-               Width="100"/>
+
+            <Grid Grid.Row="3" 
+                  Grid.Column="1"
+                  Background="#349CE2">
+                <TextBlock Text="View:"
+                           FontSize="20"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="188,2,434,6"/>
+                <ComboBox Name="cmbSearchTypeLeads"
+                          VerticalAlignment="Center"
+                          Margin="239,4,173,5" Height="20"/>
+            </Grid>
+
+            <Grid Grid.Row="5" 
+                  Grid.Column="1" 
+                  Background="#349CE2">
+                <TextBlock Text="Recent Leads"
+        		           FontSize="22"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="231,20,231,250"/>
+
+                <DataGrid Name="DataGridRecentLeadss"
+                          Style="{DynamicResource MetroDataGrid}" 
+                          Margin="10,72,10,10" 
+                          SelectionChanged="DataGridRecentLeads_SelectionChanged"/>
+            </Grid>
         </Grid>
     </controls:MetroContentControl>
 </Page>

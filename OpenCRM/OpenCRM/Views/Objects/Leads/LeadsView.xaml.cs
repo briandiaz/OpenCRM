@@ -25,14 +25,19 @@ namespace OpenCRM.Views.Objects.Leads
             InitializeComponent();
         }
 
-        private void btn_NewLeadOnClick(object sender, RoutedEventArgs e)
+        private void btn_NewLead_OnClick(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
         }
 
-        private void btn_EditLeadOnClick(object sender, RoutedEventArgs e)
+        private void btn_EditLead_OnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Editing leads.");
+            PageSwitcher.Switch("/Views/Objects/Leads/EditLead.xaml");
+        }
+
+        private void DataGridRecentLeads_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var itemType = (sender as DataGridRow).Item.GetType();
         }
     }
 }
