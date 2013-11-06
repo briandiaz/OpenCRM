@@ -41,11 +41,15 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public int? _campaignTypeId
         {
-            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null; }
+            //get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null; }
+            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex)); }
+            set { }
         }
         public int? _campaignStatusId
         {
-            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null; }
+            //get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null; }
+            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex)); }
+            set { }
         }
         public DateTime _startDate
         {
@@ -94,8 +98,9 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             get
             {
-                return (Convert.ToInt32(cmbCampaignParent.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignParent.SelectedValue) : (int?)null;
+                return (Convert.ToInt32(cmbCampaignParent.SelectedValue));
             }
+            set { }
         }
         public String _description
         {
@@ -169,19 +174,17 @@ namespace OpenCRM.Views.Objects.Campaigns
                         NumberSent = _numberSent,
                         CampaignParent = _campaignParent,
                         Description = _description,
-                        CreateBy = _createBy,
-                        CreateDate = _createDate,
                         UpdateBy = _updateBy,
                         UpdateDate = _updateDate
                     };
 
                     if (campaign.Update(Convert.ToInt32(OpenCRM.Controllers.Campaign.CampaignController.CurrentCampaignId)))
                     {
-                        System.Windows.MessageBox.Show("Campaign created successfully", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Exclamation);
+                        System.Windows.MessageBox.Show("Campaign updated successfully", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Exclamation);
                     }
                     else
                     {
-                        System.Windows.MessageBox.Show("An error ocurred while the campaign was being created", "Error :(!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                        System.Windows.MessageBox.Show("An error ocurred while the campaign was being updated", "Error :(!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     }
                 }
                 catch (SqlException ex)
@@ -244,6 +247,34 @@ namespace OpenCRM.Views.Objects.Campaigns
             cmbCampaignParent.DisplayMemberPath = "Name";
             cmbCampaignParent.SelectedValuePath = "CampaignId";
 
+        }
+
+        private void cmbCampaignType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (cmbCampaignType.SelectedValue != null)
+            {
+                _campaignTypeId = Convert.ToInt32(cmbCampaignType.SelectedValue);
+                MessageBox.Show(_campaignTypeId.ToString());
+            }
+        }
+
+        private void cmbCampaignStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbCampaignStatus.SelectedValue != null)
+            {
+                _campaignStatusId = Convert.ToInt32(cmbCampaignStatus.SelectedValue);
+                MessageBox.Show(_campaignStatusId.ToString());
+            }
+        }
+
+        private void cmbCampaignParent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbCampaignParent.SelectedValue != null)
+            {
+                _campaignParent = Convert.ToInt32(cmbCampaignParent.SelectedValue);
+                MessageBox.Show(_campaignParent.ToString());
+            }
         }
     }
 }

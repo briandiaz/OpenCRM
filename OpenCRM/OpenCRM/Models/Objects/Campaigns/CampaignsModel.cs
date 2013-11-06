@@ -138,12 +138,13 @@ namespace OpenCRM.Models.Objects.Campaigns
                     _campaign.NumberSent = this.NumberSent;
                     _campaign.CampaignParent = this.CampaignParent;
                     _campaign.Description = this.Description;
-                    _campaign.CreateBy = this.CreateBy;
-                    _campaign.CreateDate = this.CreateDate;
                     _campaign.UpdateBy = this.UpdateBy;
                     _campaign.UpdateDate = this.UpdateDate;
                     _db.SaveChanges();
                 }
+                Console.WriteLine(this.UserId + "-" + this.Name + "-" + this.Active + "-" + this.CampaignTypeId + "-" + this.CampaignStatusId + "-" + this.StartDate + "-" + this.EndDate
+                    + "-" + this.ExpectedRevenue + "-" + this.BudgetedCost + "-" + this.ActualCost + "-" + this.ExpectedResponse + "-" + this.NumberSent + "-" + this.CampaignParent + "-"
+                    +"-" + this.Description + "-" + this.UpdateBy + "-" + this.UpdateDate);
                 return true;
             }
             catch (SqlException ex)

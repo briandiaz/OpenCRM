@@ -232,7 +232,8 @@
                         Height="30"
                         Width="200"
                         FontSize="16px"
-                        Cursor="Hand"
+                        SelectedValue="{Binding CampaignTypeId}"
+                        Cursor="Hand" SelectionChanged="cmbCampaignType_SelectionChanged"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
@@ -331,6 +332,8 @@
                         Grid.Column="2"
                         Width="200"
                         HorizontalAlignment="Left"
+                        Maximum="100"
+                        Minimum="0"
                         Value="{Binding ExpectedResponse}"
                         SmallChange="1"
                         Cursor="Hand"
@@ -447,6 +450,7 @@
                     Height="30"
                     Width="200"
                     Cursor="Hand"
+                    SelectedValue="{Binding CampaignStatusId}" SelectionChanged="cmbCampaignStatus_SelectionChanged"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
@@ -480,6 +484,7 @@
                     Width="200"
                     Height="30"
                     Cursor="Hand"
+                    SelectedValue="{Binding CampaignParent}" SelectionChanged="cmbCampaignParent_SelectionChanged"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
