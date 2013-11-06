@@ -32,7 +32,7 @@ namespace OpenCRM.Views.Objects.Leads
 
         private void btn_EditLead_OnClick(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch("/Views/Objects/Leads/EditLead.xaml");
+            PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
         }
 
         private void DataGridRecentLeads_SelectionChanged(object sender, SelectionChangedEventArgs e)
