@@ -92,35 +92,82 @@
                       />
                 <ComboBox Name="cmbTargetValueCampaign"
                       Width="200"
+                          Margin="15,0,0,0"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center" SelectionChanged="cmbTargetValueCampaign_SelectionChanged"
                       Visibility="Hidden"
                       />
             </StackPanel>
             <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">
-                <Grid Name="gridCampaign" Margin="10,20,0,0" Width="600" Height="400" >
-                    <Border  HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="#CC119EDA" BorderThickness="2">
-                        <Grid Height="400" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="600" Background="Beige" />
+                <Grid Name="gridCampaign" Margin="10,20,0,0" Width="700" Height="400" >
+                    <Border  HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="#000000" BorderThickness="5">
+                        <Grid Height="400" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="700" Background="White" />
                     </Border>
-                    <TextBlock Text="{Binding Name}" VerticalAlignment="Top" FontSize="36" Foreground="Blue" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
-                    <StackPanel Orientation="Horizontal" Height="60" Margin="10,0,0,0">
-                        <Image Source="/Assets/Img/Icons/32px/calendar.png" Width="32" Height="32" />
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding StartDate}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50,0,0">
+                        <Border  HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="#CC119EDA" BorderThickness="5">
+                            <Grid HorizontalAlignment="Left" Name="back" VerticalAlignment="Top" Width="700" Background="White" />
+                        </Border>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right" Height="60">
-                        <Image Source="/Assets/Img/Icons/32px/lab.png" Width="32" Height="32" />
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding ExpectedRevenue}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="#000000" Width="700">
+                        <TextBlock Text="{Binding Name}" FontSize="36"  Foreground="White" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="60">
-                        <Image Source="/Assets/Img/Icons/32px/stats.png" Width="32" Height="32" />
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding ExpectedResponse*100}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Height="80" Width="233.33"  Background="#CC119EDA">
+                        <Image Source="/Assets/Img/Icons/32px/calendar.png" Width="32" Height="32" Margin="10" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding StartDate}" FontSize="20"></TextBlock>
                     </StackPanel>
-                    <TextBlock Text="{Binding CampaignId}"></TextBlock>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="80"  Width="233.33" Background="#FF60A917">
+                        <Image Source="/Assets/Img/Icons/32px/lab.png" Margin="10" Width="32" Height="32" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedRevenue}" FontSize="20"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="80"  Width="233.33" Background="#FFFA6800">
+                        <Image Source="/Assets/Img/Icons/32px/stats.png" Width="32" Height="32" Margin="10" />
+                        <TextBlock VerticalAlignment="Bottom" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedResponse}" FontSize="20"></TextBlock>
+                    </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding Description}" FontFamily="Segoe UI" FontWeight="Bold" FontSize="20"></TextBlock>
+                        <Label VerticalAlignment="Center" Margin="5,0,0,20" Width="400" Height="60" HorizontalAlignment="Center" Content="{Binding Description}" FontSize="16"></Label>
                     </StackPanel>
-                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,275">
+                        <TextBlock FontWeight="Bold" FontSize="24px" VerticalAlignment="Top" HorizontalAlignment="Center">Campaign Progress</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,250">
+                            
+                        <ProgressBar IsIndeterminate="False"
+                                     Width="300"
+                                     Height="20"
+                                     Maximum="100"
+                                     Minimum="0"
+                                     Value="{Binding ExpectedResponse}"
+                                     />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,150">
+                        
+                        <controls:ToggleSwitch 
+                        Name="cbxCampaignActive"
+                        OnLabel="Active" 
+                        OffLabel="Not Active"
+                        Width="150"
+                        FontFamily="Segoe WP Light"
+                        IsChecked="{Binding Active}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Cursor="Hand"
+                                   />
+                    </StackPanel>
+                    <TextBox Visibility="Hidden" Text="{Binding CampaignId}" Name="tbxCampaignId" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,20,150">
+                        <Button Name="btnEdit"
+                                Click="btnEdit_Click"
+                                Width="118"
+                                Height="45"
+                                Cursor="Hand"
+                            >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Assets/Img/Icons/32px/pencil2.png" Width="32px" Height="32px"/>
+                                <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="20">Edit</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" 

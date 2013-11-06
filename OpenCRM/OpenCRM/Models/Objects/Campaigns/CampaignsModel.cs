@@ -82,7 +82,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                 {
                     var _campaign = _db.Campaign.Create();
 
-                    _campaign.CampaignId = this.CampaignId;
+                    _campaign.CampaignId = _db.Campaign.Count() + 1;
                     _campaign.UserId = this.UserId;
                     _campaign.Name = this.Name;
                     _campaign.Active = this.Active;
@@ -117,6 +117,92 @@ namespace OpenCRM.Models.Objects.Campaigns
             return false;
         }
 
+        public Boolean Update(int _campaignID)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    Campaign _campaign = _db.Campaign.First(x => x.CampaignId == _campaignID);
+                    _campaign.UserId = this.UserId;
+                    _campaign.Name = this.Name;
+                    _campaign.Active = this.Active;
+                    _campaign.CampaignTypeId = this.CampaignTypeId;
+                    _campaign.CampaignStatusId = this.CampaignStatusId;
+                    _campaign.StartDate = this.StartDate;
+                    _campaign.EndDate = this.EndDate;
+                    _campaign.ExpectedRevenue = this.ExpectedRevenue;
+                    _campaign.BudgetedCost = this.BudgetedCost;
+                    _campaign.ActualCost = this.ActualCost;
+                    _campaign.ExpectedResponse = this.ExpectedResponse;
+                    _campaign.NumberSent = this.NumberSent;
+                    _campaign.CampaignParent = this.CampaignParent;
+                    _campaign.Description = this.Description;
+                    _campaign.CreateBy = this.CreateBy;
+                    _campaign.CreateDate = this.CreateDate;
+                    _campaign.UpdateBy = this.UpdateBy;
+                    _campaign.UpdateDate = this.UpdateDate;
+                    _db.SaveChanges();
+                }
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
+
+        public CampaignsModel getCampaignByID(int id)
+        {
+            CampaignsModel _campaignModel = new CampaignsModel();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                            from _campaign in _db.Campaign
+                            where _campaign.CampaignId == id
+                            select new CampaignsModel()
+                            {
+                                CampaignId = _campaign.CampaignId,
+                                UserId = _campaign.UserId.Value,
+                                Name = _campaign.Name,
+                                Active = _campaign.Active.Value,
+                                CampaignTypeId = _campaign.CampaignTypeId.Value,
+                                CampaignStatusId = _campaign.CampaignStatusId.Value,
+                                StartDate = _campaign.StartDate.Value,
+                                EndDate = _campaign.EndDate.Value,
+                                ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                                BudgetedCost = _campaign.BudgetedCost.Value,
+                                ActualCost = _campaign.ActualCost.Value,
+                                ExpectedResponse = _campaign.ExpectedResponse.Value,
+                                NumberSent = _campaign.NumberSent.Value,
+                                CampaignParent = _campaign.CampaignParent.Value,
+                                Description = _campaign.Description,
+                                CreateBy = _campaign.CreateBy.Value,
+                                CreateDate = _campaign.CreateDate.Value,
+                                UpdateBy = _campaign.UpdateBy.Value,
+                                UpdateDate = _campaign.UpdateDate.Value
+                            }
+                        ).ToList();
+                    _campaignModel = query[0];
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _campaignModel;
+        }
         public List<CampaignsModel> getAllCampaignsFromUser()
         {
             var _campaignsModel = new List<CampaignsModel>();
@@ -240,7 +326,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                                     ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                                     BudgetedCost = _campaign.BudgetedCost.Value,
                                     ActualCost = _campaign.ActualCost.Value,
-                                    ExpectedResponse = _campaign.ExpectedResponse.Value,
+                                    ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                                     NumberSent = _campaign.NumberSent.Value,
                                     CampaignParent = _campaign.CampaignParent.Value,
                                     Description = _campaign.Description,
@@ -272,7 +358,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                                  ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                                  BudgetedCost = _campaign.BudgetedCost.Value,
                                  ActualCost = _campaign.ActualCost.Value,
-                                 ExpectedResponse = _campaign.ExpectedResponse.Value,
+                                 ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                                  NumberSent = _campaign.NumberSent.Value,
                                  CampaignParent = _campaign.CampaignParent.Value,
                                  Description = _campaign.Description,
