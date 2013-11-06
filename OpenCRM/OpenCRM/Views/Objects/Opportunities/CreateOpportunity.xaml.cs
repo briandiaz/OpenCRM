@@ -98,7 +98,7 @@ namespace OpenCRM.Views.Objects.Oportunities
             {
                 _opportunityData.Private = this.ckbOpportunityPrivate.IsChecked.Value;
                 _opportunityData.Name = this.tbxOpportunityName.Text;
-                //Account Name
+                //--Account Name
                 _opportunityData.OpportunityTypeId = Convert.ToInt32(this.cmbOpportunityType.SelectedValue);
                 _opportunityData.LeadSourceId = Convert.ToInt32(this.cmbLeadSource.SelectedValue);
                 _opportunityData.Amount = (this.tbxOpportunityAmount.Text != String.Empty) ? Convert.ToDecimal(this.tbxOpportunityAmount.Text) : 0;
@@ -106,11 +106,11 @@ namespace OpenCRM.Views.Objects.Oportunities
                 _opportunityData.NextStep = this.tbxOpportunityNextStep.Text;
                 _opportunityData.OpportunityStageId = Convert.ToInt32(this.cmbOpportunityStage.SelectedValue);
                 _opportunityData.Probability = Convert.ToDecimal(this.tbxOpportunityProbability.Text);
-                //Campaign Name
+                //--Campaign Name
                 _opportunityData.OrderNumber = this.tbxOpportunityOrderNumber.Text;
                 _opportunityData.CurrentGenerator = this.tbxCurrentGenerator.Text;
                 _opportunityData.TrackingNumber = this.tbxOpportunityTrackingNumber.Text;
-                //Competidors Name
+                //--Competidors Name
                 _opportunityData.OpportunityDeliveryStatusId = Convert.ToInt32(this.cmbOpportunityServiceStatus.SelectedValue);
                 _opportunityData.Description = this.tbxOpportunityDescription.Text;
                 if (OpportunitiesModel.IsNew)
@@ -130,8 +130,9 @@ namespace OpenCRM.Views.Objects.Oportunities
                     _opportunityData.UpdateDate = DateTime.Now;
                     _opportunitiesModel.Save(_opportunityData);
                 }
-
             }
+
+            this.btnCancelOpportunity.Content = "Exit";
         }
 
         private void btnCancelOpportunity_Click(object sender, RoutedEventArgs e)

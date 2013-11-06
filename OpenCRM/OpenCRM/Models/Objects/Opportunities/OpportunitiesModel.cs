@@ -424,9 +424,9 @@ namespace OpenCRM.Models.Objects.Oportunities
                     else
                         EditOpportunities.tbxAccountName.Text = string.Empty;
 
-                    EditOpportunities.cmbOpportunityType.SelectedIndex = (selectedOpportunity.OpportunityTypeId.HasValue) ? selectedOpportunity.OpportunityTypeId.Value : 1;
-                    
-                    EditOpportunities.cmbLeadSource.SelectedIndex = (selectedOpportunity.LeadSourceId.HasValue) ? selectedOpportunity.LeadSourceId.Value : 1;
+                    EditOpportunities.cmbOpportunityType.SelectedValue = (selectedOpportunity.OpportunityTypeId.HasValue) ? selectedOpportunity.OpportunityTypeId.Value : 1;
+
+                    EditOpportunities.cmbLeadSource.SelectedValue = (selectedOpportunity.LeadSourceId.HasValue) ? selectedOpportunity.LeadSourceId.Value : 1;
                     
                     EditOpportunities.tbxOpportunityAmount.Text = (selectedOpportunity.Amount.HasValue) ? selectedOpportunity.Amount.Value.ToString() : string.Empty;
 
@@ -434,8 +434,8 @@ namespace OpenCRM.Models.Objects.Oportunities
                         EditOpportunities.tbxOpportunityCloseDate.Text = selectedOpportunity.CloseDate.Value.ToShortDateString();
 
                     EditOpportunities.tbxOpportunityNextStep.Text = selectedOpportunity.NextStep;
-                    
-                    EditOpportunities.cmbOpportunityStage.SelectedIndex = (selectedOpportunity.OpportunityStageId.HasValue) ? selectedOpportunity.OpportunityStageId.Value : 1;
+
+                    EditOpportunities.cmbOpportunityStage.SelectedValue = (selectedOpportunity.OpportunityStageId.HasValue) ? selectedOpportunity.OpportunityStageId.Value : 1;
 
                     if (selectedOpportunity.CampaignPrimarySourceId.HasValue)
                         EditOpportunities.tbxOpportunityCampaign.Text = db.Campaign.FirstOrDefault(
@@ -455,7 +455,7 @@ namespace OpenCRM.Models.Objects.Oportunities
                     else
                         EditOpportunities.tbxOpportunityMainCompetidor.Text = string.Empty;
 
-                    EditOpportunities.cmbOpportunityServiceStatus.SelectedIndex = (selectedOpportunity.OpportunityDeliveryStatusId.HasValue) ? selectedOpportunity.OpportunityDeliveryStatusId.Value : 1;
+                    EditOpportunities.cmbOpportunityServiceStatus.SelectedValue = (selectedOpportunity.OpportunityDeliveryStatusId.HasValue) ? selectedOpportunity.OpportunityDeliveryStatusId.Value : 1;
                     EditOpportunities.tbxOpportunityDescription.Text = selectedOpportunity.Description;
 	            }
             }
