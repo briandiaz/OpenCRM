@@ -12,21 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OpenCRM.Models.Objects.Campaigns;
 using System.Data.SqlClient;
 using OpenCRM.DataBase;
+using OpenCRM.Models.Objects.Campaigns;
 using OpenCRM.Controllers.Session;
 
 namespace OpenCRM.Views.Objects.Campaigns
 {
     /// <summary>
-    /// Lógica de interacción para Create.xaml
+    /// Lógica de interacción para Edit.xaml
     /// </summary>
-    public partial class Create : Page
+    public partial class Edit : Page
     {
         public int _userId
         {
-            get { return Session.UserId; }
+            get { return ((AccountOwner)(cmbCampaignOwner.SelectedItem)).OwnerID; }
         }
         public String _name
         {
@@ -57,47 +57,53 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public decimal? _expectedRevenue
         {
-            get {
-                return (tbxCampaignExpectedRevenue.Text != "") ? Convert.ToDecimal(tbxCampaignExpectedRevenue.Text) : default(decimal); 
+            get
+            {
+                return (tbxCampaignExpectedRevenue.Text != "") ? Convert.ToDecimal(tbxCampaignExpectedRevenue.Text) : default(decimal);
             }
         }
         public decimal? _budgetedCost
         {
-            get {
-                return (tbxCampaignBudgetedCost.Text != "") ? Convert.ToDecimal(tbxCampaignBudgetedCost.Text) : default(decimal); 
+            get
+            {
+                return (tbxCampaignBudgetedCost.Text != "") ? Convert.ToDecimal(tbxCampaignBudgetedCost.Text) : default(decimal);
             }
         }
         public decimal? _actualCost
         {
-            get {
-                return (tbxCampaignActualCost.Text != "") ? Convert.ToDecimal(tbxCampaignActualCost.Text) : default(decimal); 
+            get
+            {
+                return (tbxCampaignActualCost.Text != "") ? Convert.ToDecimal(tbxCampaignActualCost.Text) : default(decimal);
             }
         }
         public decimal? _expectedResponse
         {
-            get {
-                return (tbxCampaignExpectedResponse.Value != -1) ? Convert.ToDecimal(tbxCampaignExpectedResponse.Value/100) : default(decimal); 
+            get
+            {
+                return (tbxCampaignExpectedResponse.Value != -1) ? Convert.ToDecimal(tbxCampaignExpectedResponse.Value / 100) : default(decimal);
             }
         }
         public int? _numberSent
         {
-            get {
-                return (tbxCampaignNumSent.Text != "") ? Convert.ToInt32(tbxCampaignNumSent.Text) : (int?)null; 
+            get
+            {
+                return (tbxCampaignNumSent.Text != "") ? Convert.ToInt32(tbxCampaignNumSent.Text) : (int?)null;
             }
         }
         public int? _campaignParent
         {
-            get 
+            get
             {
-                return (Convert.ToInt32(cmbCampaignParent.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignParent.SelectedValue) : (int?)null; 
+                return (Convert.ToInt32(cmbCampaignParent.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignParent.SelectedValue) : (int?)null;
             }
         }
         public String _description
         {
-            get {
+            get
+            {
                 if (tbxCampaignDescription.Text == "")
                 {
-                    MessageBox.Show("You must insert a Description!","Warning!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show("You must insert a Description!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return String.Empty;
                 }
                 else
@@ -108,11 +114,11 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public int _createBy
         {
-            get { return Session.UserId; }
+            get { return Convert.ToInt32(tbxCreatedby.Text); }
         }
         public DateTime _createDate
         {
-            get { return DateTime.Now;  }
+            get { return Convert.ToDateTime(tbxCreatedDate.SelectedDate); }
         }
         public int _updateBy
         {
@@ -126,68 +132,18 @@ namespace OpenCRM.Views.Objects.Campaigns
         private CampaignStatus _campaignStatus = new CampaignStatus();
         private CampaignType _campaignType = new CampaignType();
         private AccountOwner _accountOwner = new AccountOwner();
-        private CampaignsModel _campaigns = new CampaignsModel();
-
-        public Create()
+        private CampaignsModel _cmp = new CampaignsModel();
+        
+        public Edit()
         {
             InitializeComponent();
+            gridCampaign.DataContext = _cmp.getCampaignByID(Convert.ToInt32(OpenCRM.Controllers.Campaign.CampaignController.CurrentCampaignId));
             loadComboboxes();
         }
 
-        private long CreateID()
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            byte[] buffer = Guid.NewGuid().ToByteArray();
-
-            return BitConverter.ToInt64(buffer, 0);
-        }
-
-        private void loadComboboxes()
-        {
-            cmbCampaignOwner.ItemsSource = _accountOwner.getCampaignOwner();
-            cmbCampaignOwner.DisplayMemberPath = "Name";
-            cmbCampaignOwner.SelectedValuePath = "OwnerID";
-            cmbCampaignOwner.SelectedIndex = 0;
-            loadItems();   
-        }
-
-        private void loadItems()
-        {
-            List<CampaignType> _CampaignTypes = _campaignType.getAllCampaignType();
-            
-            cmbCampaignType.ItemsSource = _CampaignTypes;
-
-            cmbCampaignType.DisplayMemberPath = "Name";
-            cmbCampaignType.SelectedValuePath = "CampaignTypeId";
-
-            List<CampaignStatus> _CampaignStatuses = _campaignStatus.getAllCampaignStatuses();
-            
-            cmbCampaignStatus.ItemsSource = _CampaignStatuses;
-
-            cmbCampaignStatus.DisplayMemberPath = "Name";
-            cmbCampaignStatus.SelectedValuePath = "CampaignStatusID";
-
-            List<CampaignsModel> _CampaignsModel = _campaigns.getAllCampaignsFromUser();
-            
-            cmbCampaignParent.ItemsSource = _CampaignsModel;
-
-            cmbCampaignParent.DisplayMemberPath = "Name";
-            cmbCampaignParent.SelectedValuePath = "CampaignId";
-
-        }
-
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            SaveCampaign();
-            setAllControlsDefault();
             PageSwitcher.Switch("/Views/Objects/Campaigns/CampaignsView.xaml");
-        }
-
-        private void btnSaveandNew_Click(object sender, RoutedEventArgs e)
-        {
-            SaveCampaign();
-            setAllControlsDefault();
-            PageSwitcher.Switch("/Views/Objects/Campaigns/Create.xaml");
         }
 
         private void SaveCampaign()
@@ -219,7 +175,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                         UpdateDate = _updateDate
                     };
 
-                    if (campaign.Save())
+                    if (campaign.Update(Convert.ToInt32(OpenCRM.Controllers.Campaign.CampaignController.CurrentCampaignId)))
                     {
                         System.Windows.MessageBox.Show("Campaign created successfully", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Exclamation);
                     }
@@ -242,37 +198,52 @@ namespace OpenCRM.Views.Objects.Campaigns
                 MessageBox.Show("You must insert a Description and a Name!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
-        private void setAllControlsDefault()
+        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            tbxCampaignActualCost.Text = "";
-            tbxCampaignBudgetedCost.Text = "";
-            tbxCampaignDescription.Text = "";
-            tbxCampaignExpectedResponse.Value = 20;
-            tbxCampaignExpectedRevenue.Text = "";
-            tbxCampaignName.Text = "";
-            tbxCampaignNumSent.Text = "";
-            dpkCampaignEndDate.SelectedDate = null;
-            dpkCampaignStartDate.SelectedDate = null;
-            cmbCampaignType.SelectedItem = 0;
-            cmbCampaignStatus.SelectedItem = 0;
-            cmbCampaignParent.SelectedItem = 0;
+            SaveCampaign();
+        }
+
+        private void btnSaveandNew_Click(object sender, RoutedEventArgs e)
+        {
+            SaveCampaign();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch("/Views/Objects/Campaigns/CampaignsView.xaml"); 
+            PageSwitcher.Switch("/Views/Objects/Campaigns/CampaignsView.xaml");
+        }
+        private void loadComboboxes()
+        {
+            cmbCampaignOwner.ItemsSource = _accountOwner.getCampaignOwner();
+            cmbCampaignOwner.DisplayMemberPath = "Name";
+            cmbCampaignOwner.SelectedValuePath = "OwnerID";
+            cmbCampaignOwner.SelectedIndex = 0;
+            loadItems();
         }
 
-        private Boolean CreateCampaign()
+        private void loadItems()
         {
-            return false;  
-        }
+            List<CampaignType> _CampaignTypes = _campaignType.getAllCampaignType();
 
-        private void btnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-            PageSwitcher.Switch("/Views/Objects/Campaigns/CampaignsView.xaml"); 
+            cmbCampaignType.ItemsSource = _CampaignTypes;
+
+            cmbCampaignType.DisplayMemberPath = "Name";
+            cmbCampaignType.SelectedValuePath = "CampaignTypeId";
+
+            //List<CampaignStatus> _CampaignStatuses = _campaignStatus.getAllCampaignStatuses();
+
+            cmbCampaignStatus.ItemsSource = _campaignStatus.getAllCampaignStatuses();
+
+            cmbCampaignStatus.DisplayMemberPath = "Name";
+            cmbCampaignStatus.SelectedValuePath = "CampaignStatusID";
+
+            //List<CampaignsModel> _CampaignsModel = _cmp.getAllCampaignsFromUser();
+
+            cmbCampaignParent.ItemsSource = _cmp.getAllCampaignsFromUser();
+
+            cmbCampaignParent.DisplayMemberPath = "Name";
+            cmbCampaignParent.SelectedValuePath = "CampaignId";
+
         }
-            
     }
 }

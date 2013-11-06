@@ -73,7 +73,7 @@ namespace OpenCRM.Views.Objects.Campaigns
             cmbTargetKeyCampaign.ItemsSource = _keyTypes;
             cmbTargetKeyCampaign.DisplayMemberPath = "Name";
             cmbTargetKeyCampaign.SelectedValuePath = "ID";
-            cmbTargetKeyCampaign.SelectedItem = 1;
+            cmbTargetKeyCampaign.SelectedIndex = 0;
         }
 
         private void cmbTargetKeyCampaign_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,13 +83,13 @@ namespace OpenCRM.Views.Objects.Campaigns
             {
                 case 1:
                 case 2:
-                    cmbTargetValueCampaign.ItemsSource = getSearchTargetKeys(thisTarget.ID);
+                    cmbTargetValueCampaign.ItemsSource = null;
+                    cmbTargetValueCampaign.ItemsSource = getSearchTargetKeys(thisTarget);
                     cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Visible;
 
                     cmbTargetValueCampaign.DisplayMemberPath = "Name";
                     cmbTargetValueCampaign.SelectedValuePath = "ID";
-                    cmbTargetValueCampaign.SelectedItem = 1;
-                    
+                    cmbTargetValueCampaign.SelectedIndex = 0;
                     break;
                 case 3:
                     cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
@@ -130,13 +130,13 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             return null;
         }
-        private List<SearchAttribute> getSearchTargetKeys(int by)
+        private List<SearchAttribute> getSearchTargetKeys(SearchAttribute actualAtt)
         {
             List<SearchAttribute> _searchTargets = new List<SearchAttribute>();
             try {
                 using (var _db = new OpenCRMEntities())
                 {
-                    switch (by)
+                    switch (actualAtt.ID)
                     { 
                         case 1:
                             var query = (
@@ -176,21 +176,36 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private void cmbTargetValueCampaign_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedSearchKey((SearchAttribute)cmbTargetValueCampaign.SelectedItem, (SearchAttribute)cmbTargetKeyCampaign.SelectedItem);
+            SelectedSearchKey((SearchAttribute)cmbTargetKeyCampaign.SelectedItem, (SearchAttribute)cmbTargetValueCampaign.SelectedItem);
         }
 
-        private void SelectedSearchKey(SearchAttribute attr,SearchAttribute key)
+        private void SelectedSearchKey(SearchAttribute key,SearchAttribute valueSelected)
         {
-            CampaignsModel _cmp = new CampaignsModel();
-            if (key.ID.Equals(1))
+            try
             {
-                _cmp.LoadCampaigns(gridCampaign, attr.ID, "Status");
+                CampaignsModel _cmp;
+                if (key.ID.Equals(1) && valueSelected != null)
+                {
+                     _cmp = new CampaignsModel();
+                     _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, "Status");
+                }
+                else if (key.ID.Equals(2) && valueSelected != null)// && ((SearchAttribute)cmbTargetKeyCampaign.SelectedItem).ID == 2)
+                {
+                    _cmp = new CampaignsModel();
+                    _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, "Type");
+                }
             }
-            else if (key.ID.Equals(2))
+            catch (NullReferenceException ex)
             {
-                _cmp.LoadCampaigns(gridCampaign, attr.ID, "Type");
+                MessageBox.Show(ex.ToString());
             }
-        }   
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            OpenCRM.Controllers.Campaign.CampaignController.CurrentCampaignId = Convert.ToInt32(tbxCampaignId.Text);
+            PageSwitcher.Switch("/Views/Objects/Campaigns/Edit.xaml");
+        }
         
     }
     public class SearchAttribute {
