@@ -42,14 +42,14 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Img/Backgrounds/5.png" />
+            <ImageBrush ImageSource="/Assets/Img/Backgrounds/5.jpg" />
         </Grid.Background>
         <controls:MetroContentControl>
             <controls:Panorama x:Name="MainPanorama" 
                             VerticalAlignment="Stretch"
                             Margin="125,25,25,25" 
                             ItemBox="140" 
-                            ItemsSource="{Binding Groups}" />
+                            ItemsSource="{Binding Groups}"/>
         </controls:MetroContentControl>
     </Grid>
 </Page>
