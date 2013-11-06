@@ -25,15 +25,44 @@ namespace OpenCRM.Views.Objects.Leads
             InitializeComponent();
         }
 
-        private void btn_CancelNewLeadOnClick(object sender, RoutedEventArgs e)
+        private void btnCancelNewLead_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
         }
 
-        private void btn_SaveLeadOnClick(object sender, RoutedEventArgs e)
+        private void btnSaveNewLead_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("New lead saved.");
         }
-        
+
+        private void btnSearchCampaign_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnSearchCampaignLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnClearCampaignLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnCancelCampaignLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnAcceptCampaignLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnClearCampaingLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
