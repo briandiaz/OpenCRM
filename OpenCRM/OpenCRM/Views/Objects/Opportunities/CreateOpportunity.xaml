@@ -47,9 +47,10 @@
                    FontSize="12px"
                    Margin="81,20,577,63"/>
 
-            <Label Content="New Opportunity" 
-                   FontSize="20px"
-                   Margin="81,47,513,26"/>
+            <Label  Name="lblTitleOpportunity"
+                    Content="New Opportunity" 
+                    FontSize="20px"
+                    Margin="81,47,513,26"/>
 
             <Image Source="/Assets/Img/Icons/Opportunities.png" 
                    HorizontalAlignment="Left"
@@ -73,7 +74,9 @@
 
         <ScrollViewer Grid.Row="1"
                       Grid.Column="1"
-                      Visibility="Visible">
+                      Visibility="Visible"
+                      Height="615"
+                      Width="Auto">
 
             <Grid Grid.Row="1"
                   Grid.Column="1">
@@ -146,7 +149,8 @@
                           Margin="171,112,610,184" />
 
                     <TextBox Name="tbxOpportunityName"
-                             RenderTransformOrigin="-5.28,-12.3" 
+                             RenderTransformOrigin="-5.28,-12.3"
+                             
                              Margin="181,112,416,184" />
 
                     <TextBlock  Text="Account Name"
@@ -209,7 +213,7 @@
                     <Grid Background="#DA3232"
             	          Margin="548,63,233,233" />
 
-                    <DatePicker Name="tbxOpportunityBirthDate"
+                    <DatePicker Name="tbxOpportunityCloseDate"
                                 Margin="558,63,39,233"
                                 FontSize="18px" />
 
@@ -247,6 +251,7 @@
                                 Height="20" />
 
                     <TextBox Name="tbxOpportunityProbability"
+                             IsEnabled="False"
         	                 RenderTransformOrigin="-5.28,-12.3" 
         	                 Margin="558,207,39,89" />
 

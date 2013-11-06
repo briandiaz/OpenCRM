@@ -41,7 +41,6 @@
           <EntitySet Name="Opportunities_Delivery_Status" EntityType="OpenCRMModel.Store.Opportunities_Delivery_Status" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Opportunities_Products" EntityType="OpenCRMModel.Store.Opportunities_Products" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Opportunities_Stage" EntityType="OpenCRMModel.Store.Opportunities_Stage" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Opportunities_Status" EntityType="OpenCRMModel.Store.Opportunities_Status" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Opportunities_Type" EntityType="OpenCRMModel.Store.Opportunities_Type" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Products" EntityType="OpenCRMModel.Store.Products" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Profile" EntityType="OpenCRMModel.Store.Profile" store:Type="Tables" Schema="dbo" />
@@ -297,10 +296,6 @@
           </AssociationSet>
           <AssociationSet Name="FK Opportunities Opportunities_Stage" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Stage">
             <End Role="Opportunities_Stage" EntitySet="Opportunities_Stage" />
-            <End Role="Opportunities" EntitySet="Opportunities" />
-          </AssociationSet>
-          <AssociationSet Name="FK Opportunities Opportunities_Status" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Status">
-            <End Role="Opportunities_Status" EntitySet="Opportunities_Status" />
             <End Role="Opportunities" EntitySet="Opportunities" />
           </AssociationSet>
           <AssociationSet Name="FK Opportunities Opportunities_Type" Association="OpenCRMModel.Store.FK Opportunities Opportunities_Type">
@@ -712,13 +707,13 @@
           <Property Name="CurrentGenerator" Type="nvarchar" MaxLength="255" />
           <Property Name="TrackingNumber" Type="nvarchar" MaxLength="255" />
           <Property Name="OpportunityDeliveryStatusId" Type="int" />
-          <Property Name="OpportunityStatusId" Type="int" />
           <Property Name="OpportunityCompetidorId" Type="int" />
           <Property Name="CreateBy" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="LeadSourceId" Type="int" />
+          <Property Name="Private" Type="bit" />
         </EntityType>
         <EntityType Name="Opportunities_Competidor">
           <Key>
@@ -751,13 +746,6 @@
           <Property Name="OpportunityStageId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Probability" Type="int" />
-        </EntityType>
-        <EntityType Name="Opportunities_Status">
-          <Key>
-            <PropertyRef Name="OpportunityStatusId" />
-          </Key>
-          <Property Name="OpportunityStatusId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Opportunities_Type">
           <Key>
@@ -1593,18 +1581,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK Opportunities Opportunities_Status">
-          <End Role="Opportunities_Status" Type="OpenCRMModel.Store.Opportunities_Status" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opportunities_Status">
-              <PropertyRef Name="OpportunityStatusId" />
-            </Principal>
-            <Dependent Role="Opportunities">
-              <PropertyRef Name="OpportunityStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK Opportunities Opportunities_Type">
           <End Role="Opportunities_Type" Type="OpenCRMModel.Store.Opportunities_Type" Multiplicity="0..1" />
           <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
@@ -1836,7 +1812,6 @@
           <EntitySet Name="Opportunities_Delivery_Status" EntityType="OpenCRMModel.Opportunities_Delivery_Status" />
           <EntitySet Name="Opportunities_Products" EntityType="OpenCRMModel.Opportunities_Products" />
           <EntitySet Name="Opportunities_Stage" EntityType="OpenCRMModel.Opportunities_Stage" />
-          <EntitySet Name="Opportunities_Status" EntityType="OpenCRMModel.Opportunities_Status" />
           <EntitySet Name="Opportunities_Type" EntityType="OpenCRMModel.Opportunities_Type" />
           <EntitySet Name="Products" EntityType="OpenCRMModel.Products" />
           <EntitySet Name="Profile" EntityType="OpenCRMModel.Profile" />
@@ -2096,10 +2071,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Opportunities_Opportunities_Stage" Association="OpenCRMModel.FK_Opportunities_Opportunities_Stage">
             <End Role="Opportunities_Stage" EntitySet="Opportunities_Stage" />
-            <End Role="Opportunities" EntitySet="Opportunities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Opportunities_Opportunities_Status" Association="OpenCRMModel.FK_Opportunities_Opportunities_Status">
-            <End Role="Opportunities_Status" EntitySet="Opportunities_Status" />
             <End Role="Opportunities" EntitySet="Opportunities" />
           </AssociationSet>
           <AssociationSet Name="FK_Opportunities_Opportunities_Type" Association="OpenCRMModel.FK_Opportunities_Opportunities_Type">
@@ -2592,7 +2563,6 @@
           <Property Name="CurrentGenerator" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="TrackingNumber" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="OpportunityDeliveryStatusId" Type="Int32" />
-          <Property Name="OpportunityStatusId" Type="Int32" />
           <Property Name="OpportunityCompetidorId" Type="Int32" />
           <Property Name="CreateBy" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
@@ -2603,7 +2573,6 @@
           <NavigationProperty Name="Opportunities_Competidor" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Competidor" FromRole="Opportunities" ToRole="Opportunities_Competidor" />
           <NavigationProperty Name="Opportunities_Delivery_Status" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Delivery_Status" FromRole="Opportunities" ToRole="Opportunities_Delivery_Status" />
           <NavigationProperty Name="Opportunities_Stage" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Stage" FromRole="Opportunities" ToRole="Opportunities_Stage" />
-          <NavigationProperty Name="Opportunities_Status" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Status" FromRole="Opportunities" ToRole="Opportunities_Status" />
           <NavigationProperty Name="Opportunities_Type" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Type" FromRole="Opportunities" ToRole="Opportunities_Type" />
           <NavigationProperty Name="User" Relationship="OpenCRMModel.FK_Opportunities_User" FromRole="Opportunities" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="OpenCRMModel.FK_Opportunities_User_Creator" FromRole="Opportunities" ToRole="User" />
@@ -2611,6 +2580,7 @@
           <NavigationProperty Name="Opportunities_Products" Relationship="OpenCRMModel.FK_Opportunities_Products_Opportunities" FromRole="Opportunities" ToRole="Opportunities_Products" />
           <Property Type="Int32" Name="LeadSourceId" />
           <NavigationProperty Name="Lead_Source" Relationship="OpenCRMModel.FK_Opportunities_Lead_Source" FromRole="Opportunities" ToRole="Lead_Source" />
+          <Property Type="Boolean" Name="Private" />
         </EntityType>
         <EntityType Name="Opportunities_Competidor">
           <Key>
@@ -2648,14 +2618,6 @@
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Stage" FromRole="Opportunities_Stage" ToRole="Opportunities" />
           <Property Type="Int32" Name="Probability" />
-        </EntityType>
-        <EntityType Name="Opportunities_Status">
-          <Key>
-            <PropertyRef Name="OpportunityStatusId" />
-          </Key>
-          <Property Name="OpportunityStatusId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Opportunities_Status" FromRole="Opportunities_Status" ToRole="Opportunities" />
         </EntityType>
         <EntityType Name="Opportunities_Type">
           <Key>
@@ -3544,18 +3506,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Opportunities_Opportunities_Status">
-          <End Role="Opportunities_Status" Type="OpenCRMModel.Opportunities_Status" Multiplicity="0..1" />
-          <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opportunities_Status">
-              <PropertyRef Name="OpportunityStatusId" />
-            </Principal>
-            <Dependent Role="Opportunities">
-              <PropertyRef Name="OpportunityStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Opportunities_Opportunities_Type">
           <End Role="Opportunities_Type" Type="OpenCRMModel.Opportunities_Type" Multiplicity="0..1" />
           <End Role="Opportunities" Type="OpenCRMModel.Opportunities" Multiplicity="*" />
@@ -4071,6 +4021,7 @@
           <EntitySetMapping Name="Opportunities">
             <EntityTypeMapping TypeName="OpenCRMModel.Opportunities">
               <MappingFragment StoreEntitySet="Opportunities">
+                <ScalarProperty Name="Private" ColumnName="Private" />
                 <ScalarProperty Name="LeadSourceId" ColumnName="LeadSourceId" />
                 <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -4087,7 +4038,6 @@
                 <ScalarProperty Name="CurrentGenerator" ColumnName="CurrentGenerator" />
                 <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
                 <ScalarProperty Name="OpportunityDeliveryStatusId" ColumnName="OpportunityDeliveryStatusId" />
-                <ScalarProperty Name="OpportunityStatusId" ColumnName="OpportunityStatusId" />
                 <ScalarProperty Name="OpportunityCompetidorId" ColumnName="OpportunityCompetidorId" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -4128,14 +4078,6 @@
               <MappingFragment StoreEntitySet="Opportunities_Stage">
                 <ScalarProperty Name="Probability" ColumnName="Probability" />
                 <ScalarProperty Name="OpportunityStageId" ColumnName="OpportunityStageId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Opportunities_Status">
-            <EntityTypeMapping TypeName="OpenCRMModel.Opportunities_Status">
-              <MappingFragment StoreEntitySet="Opportunities_Status">
-                <ScalarProperty Name="OpportunityStatusId" ColumnName="OpportunityStatusId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>

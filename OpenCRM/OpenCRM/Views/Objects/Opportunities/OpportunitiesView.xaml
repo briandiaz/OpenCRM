@@ -49,7 +49,8 @@
 
             <Grid Grid.Row="1" 
                   Grid.Column="1">
-                <Grid Margin="0,0,356,0">
+                <Grid Margin="0,0,356,0"
+                      HorizontalAlignment="Left">
                     <Image  Source="/Assets/Img/Icons/Opportunities.png" 
                             Margin="0,10,0,25" 
                             RenderTransformOrigin="-0.92,0.73" HorizontalAlignment="Left" Width="117" />
@@ -63,15 +64,21 @@
                                Margin="124,34,0,85" HorizontalAlignment="Left" Width="77" />
                 </Grid>
 
-                <Button Content="Edit"
+                <Button Name="btnEditOpportunity"
+                        Content="Edit"
             		    Margin="560,36,34,59"
-            		    Width="75" />
+                        HorizontalAlignment="Right"
+            		    Width="75"
+                        Click="btnEditOpportunity_Click"
+                        />
 
                 <Button Name="btnNewOpportunity"
                         Content="New" 
-                	    Margin="469,36,125,59"
+                	    Margin="0,36,125,59"
                 	    Width="75" 
-                        Click="btnNewOpportunity_Click"/>
+                        Click="btnNewOpportunity_Click" 
+                        HorizontalAlignment="Right"
+                        />
             </Grid>
 
             <Grid Grid.Row="3" 
@@ -81,10 +88,10 @@
                            FontSize="20"
                            Foreground="White"
                            VerticalAlignment="Center"
-                           Margin="188,2,434,6"/>
+                           Margin="50,2,572,6"/>
                 <ComboBox Name="cmbSearchTypeOpportunities"
                           VerticalAlignment="Center"
-                          Margin="239,4,173,5" Height="20"/>
+                          Margin="110,4,343,5" Height="20"/>
             </Grid>
 
             <Grid Grid.Row="5" 
@@ -98,8 +105,7 @@
 
                 <DataGrid Name="DataGridRecentOpportunities"
                           Style="{DynamicResource MetroDataGrid}" 
-                          Margin="10,72,10,10" 
-                          SelectionChanged="DataGridRecentOpportunities_SelectionChanged"/>
+                          Margin="10,72,10,10" />
             </Grid>
         </Grid>
     </controls:MetroContentControl>

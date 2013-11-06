@@ -8,12 +8,15 @@ using OpenCRM.Controllers.Session;
 using System.Windows.Controls;
 using System.Data.SqlClient;
 using System.Windows;
+using OpenCRM.Views.Objects.Oportunities;
 
 namespace OpenCRM.Models.Objects.Oportunities
 {
     public class OpportunitiesModel
     {
         #region "Properties"
+        public static int OpportunityIdforEdit { get; set; }
+        public static bool IsNew { get; set; }
 
         #endregion
 
@@ -61,7 +64,11 @@ namespace OpenCRM.Models.Objects.Oportunities
         }
 
         #endregion
+
+        #region ""
         
+        #endregion
+
         #endregion
 
         #region "Create Opportunity"
@@ -188,9 +195,20 @@ namespace OpenCRM.Models.Objects.Oportunities
             {
                 using (var db = new OpenCRMEntities())
                 {
-                    var opportunity = db.Opportunities.Create();
+                    Opportunities opportunity = null;
 
-                    opportunity.OpportunityId = db.Opportunities.Count() + 1;
+                    if (IsNew)
+                    {
+                        opportunity = db.Opportunities.Create();
+                        opportunity.OpportunityId = db.Opportunities.Count() + 1;
+                    }
+                    else
+                    {
+                        opportunity = db.Opportunities.FirstOrDefault(
+                            x => x.OpportunityId == OpportunityData.OpportunityId
+                        );
+                    }
+                    
                     opportunity.Name = OpportunityData.Name;
 
                     //Account
@@ -234,28 +252,33 @@ namespace OpenCRM.Models.Objects.Oportunities
 
                     opportunity.Description = OpportunityData.Description;
 
-                    opportunity.CreateDate = OpportunityData.CreateDate;
                     opportunity.UpdateDate = OpportunityData.UpdateDate;
-
-                    //User Owner
-                    opportunity.User = db.User.FirstOrDefault(
-                        x => x.UserId == OpportunityData.UserId
-                    );
-
-                    //User Create By
-                    opportunity.User1 = db.User.FirstOrDefault(
-                        x => x.UserId == OpportunityData.UserCreateById
-                    );
 
                     //User Update by
                     opportunity.User2 = db.User.FirstOrDefault(
                         x => x.UserId == OpportunityData.UserUpdateById
                     );
 
-                    db.Opportunities.Add(opportunity);
+                    if (IsNew)
+                    {
+                        opportunity.CreateDate = OpportunityData.CreateDate;
+
+                        //User Owner
+                        opportunity.User = db.User.FirstOrDefault(
+                            x => x.UserId == OpportunityData.UserId
+                        );
+
+                        //User Create By
+                        opportunity.User1 = db.User.FirstOrDefault(
+                            x => x.UserId == OpportunityData.UserCreateById
+                        );
+
+                        db.Opportunities.Add(opportunity);
+                    }
+
                     db.SaveChanges();
 
-                }
+                 }
             }
             catch (SqlException ex)
             {
@@ -374,6 +397,80 @@ namespace OpenCRM.Models.Objects.Oportunities
 
         #endregion
 
+        #region "Edit Opportunity"
+        public void LoadEditOpportunity(CreateOpportunities EditOpportunities)
+        {
+            try
+            {
+                using(var db = new OpenCRMEntities())
+	            {
+
+                    var selectedOpportunity = db.Opportunities.FirstOrDefault(
+                        x => x.OpportunityId == OpportunitiesModel.OpportunityIdforEdit
+                    );
+
+                    EditOpportunities.lblOpportunityOwner.Content = db.User.FirstOrDefault(
+                        x => x.UserId == selectedOpportunity.UserId
+                    ).UserName;
+
+                    EditOpportunities.ckbOpportunityPrivate.IsChecked = (selectedOpportunity.Private.HasValue) ? selectedOpportunity.Private.Value : false;
+
+                    EditOpportunities.tbxOpportunityName.Text = selectedOpportunity.Name;
+
+                    if (selectedOpportunity.AccountId.HasValue)
+                        EditOpportunities.tbxAccountName.Text = db.Account.FirstOrDefault(
+                            x => x.AccountId == selectedOpportunity.AccountId.Value
+                        ).Name;
+                    else
+                        EditOpportunities.tbxAccountName.Text = string.Empty;
+
+                    EditOpportunities.cmbOpportunityType.SelectedValue = (selectedOpportunity.OpportunityTypeId.HasValue) ? selectedOpportunity.OpportunityTypeId.Value : 1;
+
+                    EditOpportunities.cmbLeadSource.SelectedValue = (selectedOpportunity.LeadSourceId.HasValue) ? selectedOpportunity.LeadSourceId.Value : 1;
+                    
+                    EditOpportunities.tbxOpportunityAmount.Text = (selectedOpportunity.Amount.HasValue) ? selectedOpportunity.Amount.Value.ToString() : string.Empty;
+
+                    if (selectedOpportunity.CloseDate.HasValue)
+                        EditOpportunities.tbxOpportunityCloseDate.Text = selectedOpportunity.CloseDate.Value.ToShortDateString();
+
+                    EditOpportunities.tbxOpportunityNextStep.Text = selectedOpportunity.NextStep;
+
+                    EditOpportunities.cmbOpportunityStage.SelectedValue = (selectedOpportunity.OpportunityStageId.HasValue) ? selectedOpportunity.OpportunityStageId.Value : 1;
+
+                    if (selectedOpportunity.CampaignPrimarySourceId.HasValue)
+                        EditOpportunities.tbxOpportunityCampaign.Text = db.Campaign.FirstOrDefault(
+                            x => x.CampaignId == selectedOpportunity.CampaignPrimarySourceId.Value
+                        ).Name;
+                    else
+                        EditOpportunities.tbxOpportunityCampaign.Text = string.Empty;
+
+                    EditOpportunities.tbxOpportunityOrderNumber.Text = selectedOpportunity.OrderNumber;
+                    EditOpportunities.tbxCurrentGenerator.Text = selectedOpportunity.CurrentGenerator;
+                    EditOpportunities.tbxOpportunityTrackingNumber.Text = selectedOpportunity.TrackingNumber;
+
+                    if (selectedOpportunity.OpportunityCompetidorId.HasValue)
+                        EditOpportunities.tbxOpportunityMainCompetidor.Text = db.Opportunities_Competidor.FirstOrDefault(
+                            x => x.OpportunityCompetidorId == selectedOpportunity.OpportunityCompetidorId.Value
+                        ).Name;
+                    else
+                        EditOpportunities.tbxOpportunityMainCompetidor.Text = string.Empty;
+
+                    EditOpportunities.cmbOpportunityServiceStatus.SelectedValue = (selectedOpportunity.OpportunityDeliveryStatusId.HasValue) ? selectedOpportunity.OpportunityDeliveryStatusId.Value : 1;
+                    EditOpportunities.tbxOpportunityDescription.Text = selectedOpportunity.Description;
+	            }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region "Events"
@@ -383,6 +480,7 @@ namespace OpenCRM.Models.Objects.Oportunities
 
             foreach (var item in column)
             {
+                item.Width = new DataGridLength(30,DataGridLengthUnitType.Star);
                 if (item.Header.ToString().Equals("Id"))
                     item.Visibility = Visibility.Collapsed;
             }
@@ -411,7 +509,6 @@ namespace OpenCRM.Models.Objects.Oportunities
         public string CurrentGenerator { get; set; }
         public string TrackingNumber { get; set; }
         public int OpportunityDeliveryStatusId { get; set; }
-        public int OpportunityStatusId { get; set; }
         public int OpportunityCompetidorId { get; set; }
         public int UserCreateById { get; set; }
         public DateTime CreateDate { get; set; }

@@ -59,7 +59,6 @@ namespace OpenCRM.DataBase
         public DbSet<Opportunities_Delivery_Status> Opportunities_Delivery_Status { get; set; }
         public DbSet<Opportunities_Products> Opportunities_Products { get; set; }
         public DbSet<Opportunities_Stage> Opportunities_Stage { get; set; }
-        public DbSet<Opportunities_Status> Opportunities_Status { get; set; }
         public DbSet<Opportunities_Type> Opportunities_Type { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<Profile> Profile { get; set; }
