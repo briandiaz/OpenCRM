@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using OpenCRM.Models.Objects.Oportunities;
 using OpenCRM.Controllers.Session;
 using OpenCRM.DataBase;
+using System.Data.SqlClient;
 
 namespace OpenCRM.Views.Objects.Oportunities
 {
@@ -33,6 +34,31 @@ namespace OpenCRM.Views.Objects.Oportunities
             _opportunityData = new OpportunitiesData();
             _opportunitiesModel = new OpportunitiesModel();
 
+
+            if (OpportunitiesModel.IsNew)
+            {
+                LoadNewOpportunity();
+            }
+            else
+            {
+                LoadEditOpportunity();
+            }
+
+            this.lblOpportunityOwner.Content = Session.getUserSession().UserName;
+
+        }
+
+        private void LoadEditOpportunity()
+        {
+            LoadNewOpportunity();
+            _opportunitiesModel.LoadEditOpportunity(this);
+
+            this.lblTitleOpportunity.Content = "Editing Opportunity";
+
+        }
+
+        private void LoadNewOpportunity()
+        {
             this.cmbOpportunityType.ItemsSource = _opportunitiesModel.getOpportunityType();
             this.cmbOpportunityType.DisplayMemberPath = "Name";
             this.cmbOpportunityType.SelectedValuePath = "OpportunityTypeId";
@@ -52,9 +78,6 @@ namespace OpenCRM.Views.Objects.Oportunities
             this.cmbOpportunityServiceStatus.DisplayMemberPath = "Name";
             this.cmbOpportunityServiceStatus.SelectedValuePath = "OpportunityDeliveryStatusId";
             this.cmbOpportunityServiceStatus.SelectedValue = 1;
-
-            this.lblOpportunityOwner.Content = Session.getUserSession().UserName;
-
         }
 
         private bool CanSaveOpportunity()
@@ -63,7 +86,7 @@ namespace OpenCRM.Views.Objects.Oportunities
             if (this.tbxOpportunityName.Text == String.Empty)
                 canSave = false;
 
-            if (this.tbxOpportunityBirthDate.Text == String.Empty)
+            if (this.tbxOpportunityCloseDate.Text == String.Empty)
                 canSave = false;
 
             return canSave;
@@ -78,8 +101,8 @@ namespace OpenCRM.Views.Objects.Oportunities
                 //Account Name
                 _opportunityData.OpportunityTypeId = Convert.ToInt32(this.cmbOpportunityType.SelectedValue);
                 _opportunityData.LeadSourceId = Convert.ToInt32(this.cmbLeadSource.SelectedValue);
-                _opportunityData.Amount = (this.tbxOpportunityAmount.Text != String.Empty)? Convert.ToDecimal(this.tbxOpportunityAmount.Text) : 0;
-                _opportunityData.CloseDate = Convert.ToDateTime(this.tbxOpportunityBirthDate.Text);
+                _opportunityData.Amount = (this.tbxOpportunityAmount.Text != String.Empty) ? Convert.ToDecimal(this.tbxOpportunityAmount.Text) : 0;
+                _opportunityData.CloseDate = Convert.ToDateTime(Convert.ToDateTime(this.tbxOpportunityCloseDate.Text).ToShortDateString());
                 _opportunityData.NextStep = this.tbxOpportunityNextStep.Text;
                 _opportunityData.OpportunityStageId = Convert.ToInt32(this.cmbOpportunityStage.SelectedValue);
                 _opportunityData.Probability = Convert.ToDecimal(this.tbxOpportunityProbability.Text);
@@ -90,13 +113,24 @@ namespace OpenCRM.Views.Objects.Oportunities
                 //Competidors Name
                 _opportunityData.OpportunityDeliveryStatusId = Convert.ToInt32(this.cmbOpportunityServiceStatus.SelectedValue);
                 _opportunityData.Description = this.tbxOpportunityDescription.Text;
-                _opportunityData.UserId = Session.UserId;
-                _opportunityData.UserCreateById = Session.UserId;
-                _opportunityData.UserUpdateById = Session.UserId;
-                _opportunityData.CreateDate = DateTime.Now;
-                _opportunityData.UpdateDate = DateTime.Now;
+                if (OpportunitiesModel.IsNew)
+                {
+                    _opportunityData.UserId = Session.UserId;
+                    _opportunityData.UserCreateById = Session.UserId;
+                    _opportunityData.UserUpdateById = Session.UserId;
+                    _opportunityData.CreateDate = DateTime.Now;
+                    _opportunityData.UpdateDate = DateTime.Now;
 
-                _opportunitiesModel.Save(_opportunityData);
+                    _opportunitiesModel.Save(_opportunityData);
+                }
+                else
+                {
+                    _opportunityData.OpportunityId = OpportunitiesModel.OpportunityIdforEdit;
+                    _opportunityData.UserUpdateById = Session.UserId;
+                    _opportunityData.UpdateDate = DateTime.Now;
+                    _opportunitiesModel.Save(_opportunityData);
+                }
+
             }
         }
 

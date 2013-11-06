@@ -32,14 +32,26 @@ namespace OpenCRM.Views.Objects.Oportunities
             _opportunitiesModel.SearchRecentOportunities(this.DataGridRecentOpportunities);
         }
 
-        private void DataGridRecentOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var itemType = (sender as DataGridRow).Item.GetType();
-
-        }
-
         private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)
         {
+            OpportunitiesModel.IsNew = true;
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateOpportunity.xaml");
+        }
+
+        private void btnEditOpportunity_Click(object sender, RoutedEventArgs e)
+        {
+            OpportunitiesModel.IsNew = false;
+
+            object selectedItem = this.DataGridRecentOpportunities.SelectedItem;
+            Type type = selectedItem.GetType();
+
+            var data = new
+            {
+                Id = (int)type.GetProperty("Id").GetValue(selectedItem, null)
+            };
+
+            OpportunitiesModel.OpportunityIdforEdit = data.Id;
+
             PageSwitcher.Switch("/Views/Objects/Opportunities/CreateOpportunity.xaml");
         }
     }
