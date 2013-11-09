@@ -19,6 +19,7 @@ namespace OpenCRM.DataBase
             this.Object_Fields = new HashSet<Object_Fields>();
             this.Objects_ImgURL = new HashSet<Objects_ImgURL>();
             this.Profile_Object = new HashSet<Profile_Object>();
+            this.Objects_Views = new HashSet<Objects_Views>();
         }
     
         public int ObjectId { get; set; }
@@ -27,5 +28,6 @@ namespace OpenCRM.DataBase
         public virtual ICollection<Object_Fields> Object_Fields { get; set; }
         public virtual ICollection<Objects_ImgURL> Objects_ImgURL { get; set; }
         public virtual ICollection<Profile_Object> Profile_Object { get; set; }
+        public virtual ICollection<Objects_Views> Objects_Views { get; set; }
     }
 }

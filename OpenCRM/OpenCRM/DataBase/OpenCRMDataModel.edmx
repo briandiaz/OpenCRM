@@ -36,6 +36,7 @@
           <EntitySet Name="Object_Fields" EntityType="OpenCRMModel.Store.Object_Fields" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Objects" EntityType="OpenCRMModel.Store.Objects" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Objects_ImgURL" EntityType="OpenCRMModel.Store.Objects_ImgURL" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Objects_Views" EntityType="OpenCRMModel.Store.Objects_Views" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Opportunities" EntityType="OpenCRMModel.Store.Opportunities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Opportunities_Competidor" EntityType="OpenCRMModel.Store.Opportunities_Competidor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Opportunities_Delivery_Status" EntityType="OpenCRMModel.Store.Opportunities_Delivery_Status" store:Type="Tables" Schema="dbo" />
@@ -47,6 +48,7 @@
           <EntitySet Name="Profile_Object" EntityType="OpenCRMModel.Store.Profile_Object" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Profile_Object_Fields" EntityType="OpenCRMModel.Store.Profile_Object_Fields" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Rating" EntityType="OpenCRMModel.Store.Rating" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Records" EntityType="OpenCRMModel.Store.Records" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Salutation" EntityType="OpenCRMModel.Store.Salutation" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="State" EntityType="OpenCRMModel.Store.State" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="OpenCRMModel.Store.User" store:Type="Tables" Schema="dbo" />
@@ -277,6 +279,10 @@
           <AssociationSet Name="FK Objects_ImgURL Objects" Association="OpenCRMModel.Store.FK Objects_ImgURL Objects">
             <End Role="Objects" EntitySet="Objects" />
             <End Role="Objects_ImgURL" EntitySet="Objects_ImgURL" />
+          </AssociationSet>
+          <AssociationSet Name="FK Objects_Views Objects" Association="OpenCRMModel.Store.FK Objects_Views Objects">
+            <End Role="Objects" EntitySet="Objects" />
+            <End Role="Objects_Views" EntitySet="Objects_Views" />
           </AssociationSet>
           <AssociationSet Name="FK Opportunities Account" Association="OpenCRMModel.Store.FK Opportunities Account">
             <End Role="Account" EntitySet="Account" />
@@ -688,6 +694,14 @@
           <Property Name="ImgUrl" Type="nvarchar" MaxLength="100" />
           <Property Name="Objectid" Type="int" />
         </EntityType>
+        <EntityType Name="Objects_Views">
+          <Key>
+            <PropertyRef Name="ObjectsViewsId" />
+          </Key>
+          <Property Name="ObjectsViewsId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="objectid" Type="int" />
+        </EntityType>
         <EntityType Name="Opportunities">
           <Key>
             <PropertyRef Name="OpportunityId" />
@@ -714,6 +728,7 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="LeadSourceId" Type="int" />
           <Property Name="Private" Type="bit" />
+          <Property Name="ViewDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Opportunities_Competidor">
           <Key>
@@ -806,6 +821,15 @@
           <Property Name="RatingId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Value" Type="numeric" Precision="2" Scale="2" />
+        </EntityType>
+        <EntityType Name="Records">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="int" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="Date" Type="datetime" />
         </EntityType>
         <EntityType Name="Salutation">
           <Key>
@@ -1521,6 +1545,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK Objects_Views Objects">
+          <End Role="Objects" Type="OpenCRMModel.Store.Objects" Multiplicity="0..1" />
+          <End Role="Objects_Views" Type="OpenCRMModel.Store.Objects_Views" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objects">
+              <PropertyRef Name="ObjectId" />
+            </Principal>
+            <Dependent Role="Objects_Views">
+              <PropertyRef Name="objectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK Opportunities Account">
           <End Role="Account" Type="OpenCRMModel.Store.Account" Multiplicity="0..1" />
           <End Role="Opportunities" Type="OpenCRMModel.Store.Opportunities" Multiplicity="*" />
@@ -2129,6 +2165,12 @@
             <End Role="Lead_Source" EntitySet="Lead_Source" />
             <End Role="Opportunities" EntitySet="Opportunities" />
           </AssociationSet>
+          <EntitySet Name="Objects_Views" EntityType="OpenCRMModel.Objects_Views" />
+          <AssociationSet Name="FK_Objects_Views_Objects" Association="OpenCRMModel.FK_Objects_Views_Objects">
+            <End Role="Objects" EntitySet="Objects" />
+            <End Role="Objects_Views" EntitySet="Objects_Views" />
+          </AssociationSet>
+          <EntitySet Name="Records" EntityType="OpenCRMModel.Records" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -2534,6 +2576,7 @@
           <NavigationProperty Name="Object_Fields" Relationship="OpenCRMModel.FK_Object_Fields_Objects" FromRole="Objects" ToRole="Object_Fields" />
           <NavigationProperty Name="Objects_ImgURL" Relationship="OpenCRMModel.FK_Objects_ImgURL_Objects" FromRole="Objects" ToRole="Objects_ImgURL" />
           <NavigationProperty Name="Profile_Object" Relationship="OpenCRMModel.FK_Profile_Object_Objects" FromRole="Objects" ToRole="Profile_Object" />
+          <NavigationProperty Name="Objects_Views" Relationship="OpenCRMModel.FK_Objects_Views_Objects" FromRole="Objects" ToRole="Objects_Views" />
         </EntityType>
         <EntityType Name="Objects_ImgURL">
           <Key>
@@ -2581,6 +2624,7 @@
           <Property Type="Int32" Name="LeadSourceId" />
           <NavigationProperty Name="Lead_Source" Relationship="OpenCRMModel.FK_Opportunities_Lead_Source" FromRole="Opportunities" ToRole="Lead_Source" />
           <Property Type="Boolean" Name="Private" />
+          <Property Type="DateTime" Name="ViewDate" Precision="3" />
         </EntityType>
         <EntityType Name="Opportunities_Competidor">
           <Key>
@@ -3666,6 +3710,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Objects_Views">
+          <Key>
+            <PropertyRef Name="ObjectsViewsId" />
+          </Key>
+          <Property Type="Int32" Name="ObjectsViewsId" Nullable="false" />
+          <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="objectid" />
+          <NavigationProperty Name="Objects" Relationship="OpenCRMModel.FK_Objects_Views_Objects" FromRole="Objects_Views" ToRole="Objects" />
+        </EntityType>
+        <Association Name="FK_Objects_Views_Objects">
+          <End Type="OpenCRMModel.Objects" Role="Objects" Multiplicity="0..1" />
+          <End Type="OpenCRMModel.Objects_Views" Role="Objects_Views" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objects">
+              <PropertyRef Name="ObjectId" />
+            </Principal>
+            <Dependent Role="Objects_Views">
+              <PropertyRef Name="objectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Records">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Type="Int32" Name="RecordId" Nullable="false" />
+          <Property Type="String" Name="Place" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Date" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4021,6 +4095,7 @@
           <EntitySetMapping Name="Opportunities">
             <EntityTypeMapping TypeName="OpenCRMModel.Opportunities">
               <MappingFragment StoreEntitySet="Opportunities">
+                <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
                 <ScalarProperty Name="Private" ColumnName="Private" />
                 <ScalarProperty Name="LeadSourceId" ColumnName="LeadSourceId" />
                 <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
@@ -4189,6 +4264,25 @@
               <ScalarProperty Name="ProductId" ColumnName="ProductId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Objects_Views">
+            <EntityTypeMapping TypeName="OpenCRMModel.Objects_Views">
+              <MappingFragment StoreEntitySet="Objects_Views">
+                <ScalarProperty Name="objectid" ColumnName="objectid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ObjectsViewsId" ColumnName="ObjectsViewsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Records">
+            <EntityTypeMapping TypeName="OpenCRMModel.Records">
+              <MappingFragment StoreEntitySet="Records">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -4203,7 +4297,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

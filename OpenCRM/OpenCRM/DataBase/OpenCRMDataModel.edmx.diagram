@@ -125,6 +125,9 @@
         <AssociationConnector Association="OpenCRMModel.Inventory_Products" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.FK__Profile__ParentP__56E8E7AB" />
         <AssociationConnector Association="OpenCRMModel.FK_Opportunities_Lead_Source" />
+        <EntityTypeShape EntityType="OpenCRMModel.Objects_Views" Width="1.5" PointX="3.0508080697855018" PointY="3.3978368804780006" />
+        <AssociationConnector Association="OpenCRMModel.FK_Objects_Views_Objects" />
+        <EntityTypeShape EntityType="OpenCRMModel.Records" Width="1.5" PointX="1.0829777033454635" PointY="15.170434735329092" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

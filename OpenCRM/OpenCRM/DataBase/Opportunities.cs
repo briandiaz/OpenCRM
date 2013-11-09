@@ -41,6 +41,7 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<int> LeadSourceId { get; set; }
         public Nullable<bool> Private { get; set; }
+        public Nullable<System.DateTime> ViewDate { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Campaign Campaign { get; set; }

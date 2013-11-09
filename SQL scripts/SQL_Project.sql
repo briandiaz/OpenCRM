@@ -360,12 +360,6 @@ create table [dbo].[Opportunities_Type](
 	Constraint [PK Opportunities_Type] Primary Key(OpportunityTypeId)
 );
 
-create table [dbo].[Opportunities_Status](
-	OpportunityStatusId int,
-	Name nvarchar(50),
-	Constraint [PK Opportunities_Status] Primary Key(OpportunityStatusId)
-);
-
 create table [dbo].[Opportunities_Stage](
 	OpportunityStageId int,
 	Name nvarchar(50),
@@ -409,6 +403,8 @@ create table [dbo].[Opportunities](
 	CreateDate datetime,
 	UpdateBy int,
 	UpdateDate datetime,
+	Private bit,
+	ViewDate datetime,
 	Constraint [PK Opportunities] Primary Key(OpportunityId),
 	Constraint [FK Opportunities User] Foreign Key(UserId) References [dbo].[User](UserId),
 	Constraint [FK Opportunities User_Creator] Foreign Key(CreateBy) References [dbo].[User](UserId),
@@ -537,4 +533,30 @@ create table [dbo].[Cases](
 	Constraint [FK Cases Case_Status] Foreign Key(CaseStatusId) References [dbo].[Case_Status](CaseStatusId),
 	Constraint [FK Cases Case_Priority] Foreign Key(CasePriorityId) References [dbo].[Case_Priority](CasePriorityId),
 	Constraint [FK Cases Products] Foreign Key(ProductId) References [dbo].[Products](ProductId)
+);
+
+
+--Recently Added
+Create Table [dbo].[Objects_ImgURL](
+	ObjectImgurlId int,
+    ImgUrl nvarchar(50),
+    Objectid int,
+    constraint [PK Objects_ImgURL] Primary Key(ObjectImgurlId),
+	constraint [FK Objects_ImgURL Objects] Foreign Key(objectid) References [dbo].[Objects](objectid)
+);
+
+Create Table [dbo].[Objects_Views](
+	ObjectsViewsId int,
+	name nvarchar(50),
+	objectid int,
+	constraint [PK Objects_Views] Primary Key(ObjectsViewsId),
+	constraint [FK Objects_Views Objects] Foreign Key(objectid) References [dbo].[Objects](objectid)
+);
+
+create table [dbo].[Records](
+	RecordId int,
+	Place nvarchar(100),
+	[Description] nvarchar(256),
+	[Date] datetime,
+	Constraint [PK Bitacora] Primary Key(RecordId)
 );
