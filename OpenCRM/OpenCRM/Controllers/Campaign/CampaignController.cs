@@ -8,11 +8,18 @@ namespace OpenCRM.Controllers.Campaign
 {
     class CampaignController
     {
-        public static int CurrentCampaignId;
+        public static int CurrentCampaignId { get; set; }
 
-        public static int getCurrentCampaignID()
-        {
-            return CurrentCampaignId; 
-        }
+        public static int previousCampaignId { get; set; }
+        
+        public static int nextCampaignId { get; set; }
+
+        public static int currentCampaignIndex { get; set; }
+
+        public static int previousCampaignIndex { get; set; }
+
+        public static int nextCampaignIndex { get; set; }
+
+
     }
 }

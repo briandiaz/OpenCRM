@@ -57,9 +57,9 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2.3*" />
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2.3*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" 
@@ -89,7 +89,7 @@
                    />
 
                 <TabControl VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TabItem Header="_Edit Campaign">
+                    <TabItem Header="_Edit">
                     </TabItem>
                 </TabControl>
 
@@ -119,7 +119,7 @@
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light">Save</TextBlock>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Save</TextBlock>
                     </StackPanel>
                 </Button>
 
@@ -131,19 +131,19 @@
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/checkmark2.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light">Save And New</TextBlock>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Save And New</TextBlock>
                     </StackPanel>
                 </Button>
 
                 <Button Name="btnCancel"
-                        VerticalAlignment="Bottom" 
-                        Margin="2,0,2,5" 
+                        VerticalAlignment="Center" 
+                        Margin="2" 
                         Click="btnCancel_Click"
                         Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/cancel-circle.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light">Cancel</TextBlock>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Cancel</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -383,8 +383,8 @@
                         Margin="10,10,0,0"
                         Grid.Row="13"
                         Grid.Column="2"
-                        Height="161"
-                        Width="337"
+                        Height="Auto"
+                        Width="Auto"
                         Text="{Binding Description}"
                       FontSize="16px"
                        />

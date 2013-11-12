@@ -119,7 +119,7 @@
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light">Save</TextBlock>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Save</TextBlock>
                     </StackPanel>
                 </Button>
 
@@ -131,7 +131,7 @@
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/checkmark2.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light">Save And New</TextBlock>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Save And New</TextBlock>
                     </StackPanel>
                 </Button>
 
@@ -143,7 +143,7 @@
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/cancel-circle.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light">Cancel</TextBlock>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Cancel</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
