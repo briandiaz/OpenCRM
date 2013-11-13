@@ -26,6 +26,9 @@ namespace OpenCRM.Views.Objects.Oportunities
     {
         OpportunitiesModel _opportunitiesModel;
         OpportunitiesData _opportunityData;
+        List<SearchOpportunityAccounts> _opportunityAccount;
+        List<SearchOpportunityCampaigns> _opportunityCampaign;
+        List<SearchOpportunityCompetidors> _opportunityCompetidors;
 
         public CreateOpportunities()
         {
@@ -111,7 +114,7 @@ namespace OpenCRM.Views.Objects.Oportunities
                 _opportunityData.CurrentGenerator = this.tbxCurrentGenerator.Text;
                 _opportunityData.TrackingNumber = this.tbxOpportunityTrackingNumber.Text;
                 //--Competidors Name
-                _opportunityData.OpportunityDeliveryStatusId = Convert.ToInt32(this.cmbOpportunityServiceStatus.SelectedValue);
+                _opportunityData.OpportunityStatusId = Convert.ToInt32(this.cmbOpportunityServiceStatus.SelectedValue);
                 _opportunityData.Description = this.tbxOpportunityDescription.Text;
                 if (OpportunitiesModel.IsNew)
                 {
@@ -140,6 +143,16 @@ namespace OpenCRM.Views.Objects.Oportunities
             PageSwitcher.Switch("/Views/Objects/Opportunities/OpportunitiesView.xaml");
         }
 
+        private void FilterDataGrid<T>(string TargetSearchName, List<T> TargetList, DataGrid TargetGrid)
+        {
+            Type type = TargetList.FirstOrDefault().GetType();
+            var filterList = TargetList.FindAll(
+                x => Convert.ToString(type.GetProperty("Name").GetValue(x, null)).Contains(TargetSearchName)
+            );
+
+            TargetGrid.ItemsSource = filterList;
+        }
+
         #region "Opportunity Information"
 
         private void cmbOpportunityStage_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -151,24 +164,32 @@ namespace OpenCRM.Views.Objects.Oportunities
         {
             this.gridDefaultRow2.Visibility = Visibility.Hidden;
             this.gridSearchAccount.Visibility = Visibility.Visible;
+
+            this._opportunityAccount = _opportunitiesModel.SearchAccount();
+            this.DataGridAccount.ItemsSource = this._opportunityAccount;
         }
 
         private void btnSearchCampaign_Click(object sender, RoutedEventArgs e)
         {
             this.gridDefaultRow2.Visibility = Visibility.Hidden;
             this.gridSearchCampaign.Visibility = Visibility.Visible;
+
+            this._opportunityCampaign = _opportunitiesModel.SearchCampaing();
+            this.DataGridCampaign.ItemsSource = this._opportunityCampaign;
         }
 
         #region "Account"
         private void btnCancelAccountLookUp_Click(object sender, RoutedEventArgs e)
         {
+            this.DataGridAccount.ItemsSource = null;
+
             this.gridDefaultRow2.Visibility = Visibility.Visible;
             this.gridSearchAccount.Visibility = Visibility.Collapsed;
         }
 
         private void btnSearchAccountLookUp_Click(object sender, RoutedEventArgs e)
         {
-            _opportunitiesModel.SearchAccount(this.tbxSearchAccount.Text, this.DataGridAccount);
+            FilterDataGrid(this.tbxSearchAccount.Text, this._opportunityAccount,this.DataGridAccount);
         }
 
         private void btnAcceptAccountLookUp_Click(object sender, RoutedEventArgs e)
@@ -184,6 +205,8 @@ namespace OpenCRM.Views.Objects.Oportunities
             _opportunityData.AccountId = data.Id;
             this.tbxAccountName.Text = data.Name;
 
+            this.DataGridAccount.ItemsSource = null;
+
             this.gridSearchAccount.Visibility = Visibility.Collapsed;
             this.gridDefaultRow2.Visibility = Visibility.Visible;
         }
@@ -191,6 +214,9 @@ namespace OpenCRM.Views.Objects.Oportunities
         private void btnClearAccountLookUp_Click(object sender, RoutedEventArgs e)
         {
             this.tbxSearchAccount.Text = String.Empty;
+
+            this.DataGridAccount.ItemsSource = null;
+            this.DataGridAccount.ItemsSource = this._opportunityAccount;
         }
 
         #endregion
@@ -198,13 +224,15 @@ namespace OpenCRM.Views.Objects.Oportunities
         #region "Campagin"
         private void btnCancelCampaignLookUp_Click(object sender, RoutedEventArgs e)
         {
+            this.DataGridCampaign.ItemsSource = null;
+
             this.gridDefaultRow2.Visibility = Visibility.Visible;
             this.gridSearchCampaign.Visibility = Visibility.Collapsed;
         }
 
         private void btnSearchCampaignLookUp_Click(object sender, RoutedEventArgs e)
         {
-            _opportunitiesModel.SearchAccount(this.tbxSearchCampaign.Text, this.DataGridCampaign);
+            FilterDataGrid(this.tbxSearchAccount.Text, this._opportunityCampaign, this.DataGridCampaign);
         }
 
         private void btnAcceptCampaignLookUp_Click(object sender, RoutedEventArgs e)
@@ -221,6 +249,8 @@ namespace OpenCRM.Views.Objects.Oportunities
             _opportunityData.CampaignPrimarySourceId = data.Id;
             this.tbxOpportunityCampaign.Text = data.Name;
 
+            this.DataGridCampaign.ItemsSource = null;
+
             this.gridSearchAccount.Visibility = Visibility.Collapsed;
             this.gridDefaultRow2.Visibility = Visibility.Visible;
         }
@@ -228,6 +258,9 @@ namespace OpenCRM.Views.Objects.Oportunities
         private void btnClearCampaingLookUp_Click(object sender, RoutedEventArgs e)
         {
             this.tbxSearchCampaign.Text = String.Empty;
+
+            this.DataGridCampaign.ItemsSource = null;
+            this.DataGridCampaign.ItemsSource = this._opportunityCampaign;
         }
         
         #endregion
@@ -240,19 +273,24 @@ namespace OpenCRM.Views.Objects.Oportunities
         {
             this.gridDefaultRow4.Visibility = Visibility.Hidden;
             this.gridSearchCompetidor.Visibility = Visibility.Visible;
+
+            this._opportunityCompetidors = _opportunitiesModel.SearchCompetidors();
+            this.DataGridAccount.ItemsSource = this._opportunityCompetidors;
         }
 
         #region "Competidors"
 
-        private void btnSearchCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
-        {
-            _opportunitiesModel.SearchCompetidors(this.tbxSearchCompetidors.Text, this.DataGridCompetidors);
-        }
-
         private void btnCancelCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
         {
+            this.DataGridCompetidors.ItemsSource = null;
+
             this.gridDefaultRow4.Visibility = Visibility.Visible;
             this.gridSearchCompetidor.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnSearchCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            FilterDataGrid(this.tbxSearchCompetidors.Text, this._opportunityCompetidors, this.DataGridCompetidors);
         }
 
         private void btnAcceptCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
@@ -269,6 +307,8 @@ namespace OpenCRM.Views.Objects.Oportunities
             _opportunityData.CampaignPrimarySourceId = data.Id;
             this.tbxSearchCompetidors.Text = data.Name;
 
+            this.DataGridCompetidors.ItemsSource = null;
+
             this.gridSearchAccount.Visibility = Visibility.Collapsed;
             this.gridDefaultRow2.Visibility = Visibility.Visible;
         }
@@ -276,10 +316,43 @@ namespace OpenCRM.Views.Objects.Oportunities
         private void btnClearCompetidorsLookUp_Click(object sender, RoutedEventArgs e)
         {
             this.tbxSearchCompetidors.Text = String.Empty;
+
+            this.DataGridCompetidors.ItemsSource = null;
+            this.DataGridCompetidors.ItemsSource = this._opportunityCompetidors;
+        }
+
+        #region "Create Competidors"
+
+        private void btnCreateNewCompetidor_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridSearchCompetidor.Visibility = Visibility.Collapsed;
+            this.gridSearchCampaign.Visibility = Visibility.Visible;
+
+            var newCompetidor = new SearchOpportunityCompetidors()
+            {
+                Name = this.tbxNewCompetidorsName.Text,
+                Strengths = (this.cmbNewCompetidorsStrenghts.SelectedItem as Industry).Name,
+                Weakness = (this.cmbNewCompetidorsWeakness.SelectedItem as Industry).Name
+            };
+
+            _opportunitiesModel.SaveCompetidor(newCompetidor);
+
+            this._opportunityCompetidors = this._opportunitiesModel.SearchCompetidors();
+
+            this.DataGridCompetidors.ItemsSource = this._opportunityCompetidors;
+        }
+
+        private void btnExitNewCompetidor_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridCreateCompetidor.Visibility = Visibility.Collapsed;
+            this.gridSearchCompetidor.Visibility = Visibility.Visible;
         }
 
         #endregion
 
         #endregion
+
+        #endregion
+        
     }
 }
