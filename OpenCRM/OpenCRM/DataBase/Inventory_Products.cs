@@ -12,18 +12,13 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Opportunities_Competidor
+    public partial class Inventory_Products
     {
-        public Opportunities_Competidor()
-        {
-            this.Opportunities = new HashSet<Opportunities>();
-        }
+        public int InventoryProductId { get; set; }
+        public Nullable<int> ProductId { get; set; }
+        public Nullable<int> InventoryId { get; set; }
     
-        public int OpportunityCompetidorId { get; set; }
-        public string Name { get; set; }
-        public string Strenghts { get; set; }
-        public string Weakness { get; set; }
-    
-        public virtual ICollection<Opportunities> Opportunities { get; set; }
+        public virtual Inventory Inventory { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

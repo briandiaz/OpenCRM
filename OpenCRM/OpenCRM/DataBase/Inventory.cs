@@ -16,16 +16,20 @@ namespace OpenCRM.DataBase
     {
         public Inventory()
         {
-            this.Products = new HashSet<Products>();
+            this.Inventory_Products = new HashSet<Inventory_Products>();
         }
     
         public int InventoryId { get; set; }
         public string Name { get; set; }
         public Nullable<int> AddressId { get; set; }
+        public Nullable<int> CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
         public virtual Address Address { get; set; }
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
+        public virtual ICollection<Inventory_Products> Inventory_Products { get; set; }
     }
 }

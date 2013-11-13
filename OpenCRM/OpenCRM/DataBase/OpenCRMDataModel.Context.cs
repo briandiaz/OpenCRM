@@ -42,11 +42,13 @@ namespace OpenCRM.DataBase
         public DbSet<Case_Status> Case_Status { get; set; }
         public DbSet<Case_Type> Case_Type { get; set; }
         public DbSet<Cases> Cases { get; set; }
+        public DbSet<Competidors> Competidors { get; set; }
         public DbSet<Contact> Contact { get; set; }
         public DbSet<Contact_Level_Languages> Contact_Level_Languages { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Industry> Industry { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<Inventory_Products> Inventory_Products { get; set; }
         public DbSet<Language> Language { get; set; }
         public DbSet<Lead_Source> Lead_Source { get; set; }
         public DbSet<Leads> Leads { get; set; }
@@ -54,21 +56,20 @@ namespace OpenCRM.DataBase
         public DbSet<Object_Fields> Object_Fields { get; set; }
         public DbSet<Objects> Objects { get; set; }
         public DbSet<Objects_ImgURL> Objects_ImgURL { get; set; }
+        public DbSet<Objects_Views> Objects_Views { get; set; }
         public DbSet<Opportunities> Opportunities { get; set; }
-        public DbSet<Opportunities_Competidor> Opportunities_Competidor { get; set; }
-        public DbSet<Opportunities_Delivery_Status> Opportunities_Delivery_Status { get; set; }
         public DbSet<Opportunities_Products> Opportunities_Products { get; set; }
         public DbSet<Opportunities_Stage> Opportunities_Stage { get; set; }
+        public DbSet<Opportunities_Status> Opportunities_Status { get; set; }
         public DbSet<Opportunities_Type> Opportunities_Type { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Profile_Object> Profile_Object { get; set; }
         public DbSet<Profile_Object_Fields> Profile_Object_Fields { get; set; }
         public DbSet<Rating> Rating { get; set; }
+        public DbSet<Records> Records { get; set; }
         public DbSet<Salutation> Salutation { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Objects_Views> Objects_Views { get; set; }
-        public DbSet<Records> Records { get; set; }
     }
 }

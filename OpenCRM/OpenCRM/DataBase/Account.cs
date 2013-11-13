@@ -50,6 +50,7 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<bool> HiddenAccount { get; set; }
     
         public virtual Account_Ownership Account_Ownership { get; set; }
         public virtual ICollection<Account> Account1 { get; set; }

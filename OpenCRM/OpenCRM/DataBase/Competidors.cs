@@ -12,21 +12,20 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Profile
+    public partial class Competidors
     {
-        public Profile()
+        public Competidors()
         {
-            this.Profile_Object = new HashSet<Profile_Object>();
-            this.User = new HashSet<User>();
+            this.Opportunities = new HashSet<Opportunities>();
         }
     
-        public int ProfileId { get; set; }
+        public int CompetidorId { get; set; }
         public string Name { get; set; }
-        public string AbbrevationName { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<int> Strenght { get; set; }
+        public Nullable<int> Weakness { get; set; }
     
-        public virtual ICollection<Profile_Object> Profile_Object { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        public virtual Industry Industry { get; set; }
+        public virtual Industry Industry1 { get; set; }
+        public virtual ICollection<Opportunities> Opportunities { get; set; }
     }
 }

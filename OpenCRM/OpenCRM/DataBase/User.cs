@@ -28,6 +28,8 @@ namespace OpenCRM.DataBase
             this.Contact = new HashSet<Contact>();
             this.Contact1 = new HashSet<Contact>();
             this.Contact2 = new HashSet<Contact>();
+            this.Inventory = new HashSet<Inventory>();
+            this.Inventory1 = new HashSet<Inventory>();
             this.Leads = new HashSet<Leads>();
             this.Leads1 = new HashSet<Leads>();
             this.Leads2 = new HashSet<Leads>();
@@ -61,6 +63,8 @@ namespace OpenCRM.DataBase
         public virtual ICollection<Contact> Contact { get; set; }
         public virtual ICollection<Contact> Contact1 { get; set; }
         public virtual ICollection<Contact> Contact2 { get; set; }
+        public virtual ICollection<Inventory> Inventory { get; set; }
+        public virtual ICollection<Inventory> Inventory1 { get; set; }
         public virtual ICollection<Leads> Leads { get; set; }
         public virtual ICollection<Leads> Leads1 { get; set; }
         public virtual ICollection<Leads> Leads2 { get; set; }

@@ -12,14 +12,14 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Opportunities_Delivery_Status
+    public partial class Opportunities_Status
     {
-        public Opportunities_Delivery_Status()
+        public Opportunities_Status()
         {
             this.Opportunities = new HashSet<Opportunities>();
         }
     
-        public int OpportunityDeliveryStatusId { get; set; }
+        public int OpportunityStatusId { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<Opportunities> Opportunities { get; set; }

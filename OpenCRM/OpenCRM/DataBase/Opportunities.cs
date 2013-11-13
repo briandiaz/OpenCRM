@@ -29,25 +29,27 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> CloseDate { get; set; }
         public string NextStep { get; set; }
         public Nullable<int> OpportunityStageId { get; set; }
+        public Nullable<decimal> Probability { get; set; }
         public Nullable<int> CampaignPrimarySourceId { get; set; }
         public string OrderNumber { get; set; }
         public string CurrentGenerator { get; set; }
         public string TrackingNumber { get; set; }
-        public Nullable<int> OpportunityDeliveryStatusId { get; set; }
-        public Nullable<int> OpportunityCompetidorId { get; set; }
+        public Nullable<int> OpportunityStatusId { get; set; }
+        public Nullable<int> CompetidorId { get; set; }
         public Nullable<int> CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
-        public Nullable<int> LeadSourceId { get; set; }
         public Nullable<bool> Private { get; set; }
         public Nullable<System.DateTime> ViewDate { get; set; }
+        public Nullable<bool> HiddenOpportunity { get; set; }
+        public Nullable<int> LeadSourceId { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Campaign Campaign { get; set; }
-        public virtual Opportunities_Competidor Opportunities_Competidor { get; set; }
-        public virtual Opportunities_Delivery_Status Opportunities_Delivery_Status { get; set; }
+        public virtual Competidors Competidors { get; set; }
         public virtual Opportunities_Stage Opportunities_Stage { get; set; }
+        public virtual Opportunities_Status Opportunities_Status { get; set; }
         public virtual Opportunities_Type Opportunities_Type { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

@@ -47,6 +47,7 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<bool> HiddenContact { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Address Address { get; set; }

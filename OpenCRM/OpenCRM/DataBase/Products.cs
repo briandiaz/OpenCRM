@@ -17,8 +17,8 @@ namespace OpenCRM.DataBase
         public Products()
         {
             this.Cases = new HashSet<Cases>();
+            this.Inventory_Products = new HashSet<Inventory_Products>();
             this.Opportunities_Products = new HashSet<Opportunities_Products>();
-            this.Inventory = new HashSet<Inventory>();
         }
     
         public int ProductId { get; set; }
@@ -30,12 +30,12 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
-        public string ProductCode { get; set; }
+        public Nullable<bool> HiddenProduct { get; set; }
     
         public virtual ICollection<Cases> Cases { get; set; }
+        public virtual ICollection<Inventory_Products> Inventory_Products { get; set; }
         public virtual ICollection<Opportunities_Products> Opportunities_Products { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
-        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }
