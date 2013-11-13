@@ -13,6 +13,12 @@ namespace OpenCRM.Models.Objects.Campaigns
 {
     public class CampaignsModel
     {
+        #region Fields
+
+        public List<CampaignsModel> listCampaigns;
+        
+        #endregion
+
         #region Properties
 
         public int CampaignId { get; set; }
@@ -303,7 +309,7 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         public void LoadCampaigns(System.Windows.Controls.Grid Grid,int StatusorType,String SearchKey)
         {
-            var listProducts = new List<CampaignsModel>();
+            listCampaigns = new List<CampaignsModel>();
             try
             {
                 using (var _db = new OpenCRMEntities())
@@ -338,7 +344,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                                 }
 
                         ).ToList();
-                        listProducts = query;
+                        listCampaigns = query;
                     }
                     else
                     {
@@ -370,7 +376,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              }
 
                         ).ToList();
-                        listProducts = query;
+                        listCampaigns = query;
                     }
 
 
@@ -381,8 +387,8 @@ namespace OpenCRM.Models.Objects.Campaigns
 
                 throw;
             }
-            
-            Grid.DataContext = listProducts;
+
+            Grid.DataContext = listCampaigns;
 
         }
 

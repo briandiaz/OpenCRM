@@ -16,6 +16,7 @@ using OpenCRM.Models.Objects.Campaigns;
 using System.Data.SqlClient;
 using OpenCRM.DataBase;
 using OpenCRM.Controllers.Session;
+using OpenCRM.Controllers.Campaign;
 
 
 namespace OpenCRM.Views.Objects.Campaigns
@@ -25,6 +26,9 @@ namespace OpenCRM.Views.Objects.Campaigns
     /// </summary>
     public partial class CampaignsView
     {
+        List<SearchAttribute> _searchTargets;
+        String _searchKey;
+        List<CampaignsModel> _listCampaigns;
         public CampaignsView()
         {
             InitializeComponent();
@@ -132,7 +136,7 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         private List<SearchAttribute> getSearchTargetKeys(SearchAttribute actualAtt)
         {
-            List<SearchAttribute> _searchTargets = new List<SearchAttribute>();
+            _searchTargets = new List<SearchAttribute>();
             try {
                 using (var _db = new OpenCRMEntities())
                 {
@@ -187,12 +191,24 @@ namespace OpenCRM.Views.Objects.Campaigns
                 if (key.ID.Equals(1) && valueSelected != null)
                 {
                      _cmp = new CampaignsModel();
-                     _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, "Status");
+                     _searchKey = "Status";
+                     _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, _searchKey);
+                     _listCampaigns = _cmp.listCampaigns;
+                     CampaignController.currentCampaignIndex = 0;
+                     CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex--;
+                     CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex++;
+
+                     
                 }
                 else if (key.ID.Equals(2) && valueSelected != null)// && ((SearchAttribute)cmbTargetKeyCampaign.SelectedItem).ID == 2)
                 {
                     _cmp = new CampaignsModel();
-                    _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, "Type");
+                    _searchKey = "Type";
+                    _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, _searchKey);
+                    _listCampaigns = _cmp.listCampaigns;
+                    CampaignController.currentCampaignIndex = 0;
+                    CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex--;
+                    CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex++;
                 }
             }
             catch (NullReferenceException ex)
@@ -205,6 +221,30 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             OpenCRM.Controllers.Campaign.CampaignController.CurrentCampaignId = Convert.ToInt32(tbxCampaignId.Text);
             PageSwitcher.Switch("/Views/Objects/Campaigns/Edit.xaml");
+        }
+
+        private void btnNextSlider_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(CampaignController.currentCampaignIndex);
+            if (CampaignController.currentCampaignIndex < _listCampaigns.Count-1)
+            {
+                CampaignController.currentCampaignIndex = CampaignController.currentCampaignIndex + 1;
+                gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
+                CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex - 1;
+                CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex + 1;
+            }
+        }
+
+        private void btnPreviousSlider_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(CampaignController.currentCampaignIndex);
+            if (CampaignController.currentCampaignIndex > 0)
+            {
+                CampaignController.currentCampaignIndex = CampaignController.currentCampaignIndex - 1;
+                gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
+                CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex - 1;
+                CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex + 1;
+            }
         }
         
     }

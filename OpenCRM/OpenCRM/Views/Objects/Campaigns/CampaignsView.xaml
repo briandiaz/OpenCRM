@@ -41,9 +41,9 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="11*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" 
@@ -99,39 +99,39 @@
                       />
             </StackPanel>
             <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">
-                <Grid Name="gridCampaign" Margin="10,20,0,0" Width="700" Height="400" >
-                    <Border  HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="#000000" BorderThickness="5">
-                        <Grid Height="400" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="700" Background="White" />
+                <Grid Name="gridCampaign" Margin="10,20,0,0" Width="650" Height="400" >
+                    <Border  HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="#0174DF" BorderThickness="5">
+                        <Grid Height="400" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="650" Background="White" />
                     </Border>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50,0,0">
                         <Border  HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="#CC119EDA" BorderThickness="5">
-                            <Grid HorizontalAlignment="Left" Name="back" VerticalAlignment="Top" Width="700" Background="White" />
+                            <Grid HorizontalAlignment="Left" Name="back" VerticalAlignment="Top" Width="650" Background="White" />
                         </Border>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="#000000" Width="700">
-                        <TextBlock Text="{Binding Name}" FontSize="36"  Foreground="White" HorizontalAlignment="Center"></TextBlock>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="#CC119EDA" Width="650">
+                        <TextBlock Text="{Binding Name}" FontSize="36"  Foreground="Black" HorizontalAlignment="Center" TextAlignment="Center" Width="600"></TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Height="80" Width="233.33"  Background="#CC119EDA">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Height="80" Width="233.33"  Background="#0174DF">
                         <Image Source="/Assets/Img/Icons/32px/calendar.png" Width="32" Height="32" Margin="10" />
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding StartDate}" FontSize="20"></TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="80"  Width="233.33" Background="#FF60A917">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="80"  Width="233.33" Background="#088A08">
                         <Image Source="/Assets/Img/Icons/32px/lab.png" Margin="10" Width="32" Height="32" />
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedRevenue}" FontSize="20"></TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="80"  Width="233.33" Background="#FFFA6800">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="80"  Width="233.33" Background="#DF3A01">
                         <Image Source="/Assets/Img/Icons/32px/stats.png" Width="32" Height="32" Margin="10" />
                         <TextBlock VerticalAlignment="Bottom" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedResponse}" FontSize="20"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Label VerticalAlignment="Center" Margin="5,0,0,20" Width="400" Height="60" HorizontalAlignment="Center" Content="{Binding Description}" FontSize="16"></Label>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,20" Width="400" Height="60" HorizontalAlignment="Center" Text="{Binding Description}" FontSize="16" FontWeight="SemiBold" TextAlignment="Center"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,275">
                         <TextBlock FontWeight="Bold" FontSize="24px" VerticalAlignment="Top" HorizontalAlignment="Center">Campaign Progress</TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,250">
-                            
+
                         <ProgressBar IsIndeterminate="False"
                                      Width="300"
                                      Height="20"
@@ -141,7 +141,7 @@
                                      />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,150">
-                        
+
                         <controls:ToggleSwitch 
                         Name="cbxCampaignActive"
                         OnLabel="Active" 
@@ -187,6 +187,36 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,200,0,0"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2">
+                <Button Name="btnNextSlider"
+				Grid.Column="2"
+				Grid.Row="3"
+                    VerticalAlignment="Center"
+                                Width="118"
+                                Height="45"
+                                Cursor="Hand" Click="btnNextSlider_Click"
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Img/Icons/32px/arrow-right2.png" Width="32px" Height="32px"/>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="20">Next</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" Margin="0,200,0,0" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0">
+                <Button Name="btnPreviousSlider"
+				Grid.Column="0"
+				Grid.Row="3"
+                    VerticalAlignment="Center"
+                                Width="118"
+                                Height="45"
+                                Cursor="Hand" Click="btnPreviousSlider_Click"
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Img/Icons/32px/arrow-left2.png" Width="32px" Height="32px"/>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="20">Previous</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
         </Grid>
     </controls:MetroContentControl>
-</Page>     
+</Page>
