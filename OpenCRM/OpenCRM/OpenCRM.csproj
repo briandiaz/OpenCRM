@@ -158,6 +158,9 @@
     <Compile Include="DataBase\Case_Type.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\Competidors.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\Contact.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -172,6 +175,9 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Inventory.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Inventory_Products.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Language.cs">
@@ -190,6 +196,9 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Objects_ImgURL.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Objects_Views.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Object_Fields.cs">
@@ -213,16 +222,13 @@
     <Compile Include="DataBase\Opportunities.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\Opportunities_Competidor.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Opportunities_Delivery_Status.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataBase\Opportunities_Products.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities_Stage.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Opportunities_Status.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities_Type.cs">
@@ -241,6 +247,9 @@
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Rating.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Records.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Salutation.cs">
@@ -294,11 +303,14 @@
     <Compile Include="Views\Objects\Leads\LeadsView.xaml.cs">
       <DependentUpon>LeadsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Objects\Opportunities\CreateOpportunity.xaml.cs">
-      <DependentUpon>CreateOpportunity.xaml</DependentUpon>
+    <Compile Include="Views\Objects\Opportunities\CreateEditOpportunity.xaml.cs">
+      <DependentUpon>CreateEditOpportunity.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Opportunities\OpportunitiesView.xaml.cs">
       <DependentUpon>OpportunitiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Opportunities\SearchOpportunities.xaml.cs">
+      <DependentUpon>SearchOpportunities.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Products\CreateProduct.xaml.cs">
       <DependentUpon>CreateProduct.xaml</DependentUpon>
@@ -369,11 +381,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Objects\Opportunities\CreateOpportunity.xaml">
+    <Page Include="Views\Objects\Opportunities\CreateEditOpportunity.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Objects\Opportunities\OpportunitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Opportunities\SearchOpportunities.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -941,6 +957,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Backgrounds\5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
