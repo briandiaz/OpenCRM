@@ -9,7 +9,7 @@
                       mc:Ignorable="d"
                       Title="Opportunities" 
                       Height="Auto" 
-                      Width="Auto" >
+                      Width="Auto">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -31,29 +31,37 @@
                 <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
             </Grid.Background>
 
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="#349CE2" />
+                    <Setter Property="BorderThickness" Value="10" />
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Grid.Resources>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="150"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="20"/>
                 <RowDefinition Height="300*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="700*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-
+            
+            
             <Grid Grid.Row="1" 
                   Grid.Column="1">
-                <Grid Margin="0,0,356,0"
+                
+                <Grid Margin="10,0,0,0"
                       HorizontalAlignment="Left">
                     <Image  Source="/Assets/Img/Icons/Opportunities.png" 
                             Margin="0,10,0,25" 
-                            RenderTransformOrigin="-0.92,0.73" HorizontalAlignment="Left" Width="117" />
+                            RenderTransformOrigin="-0.92,0.73" 
+                            HorizontalAlignment="Left" Width="117" />
 
                     <TabControl Margin="122,64,0,41" HorizontalAlignment="Left" Width="178">
                         <TabItem Header="_Opportunities" FontSize="20px" Margin="-6,-2,-3,2"/>
@@ -64,49 +72,42 @@
                                Margin="124,34,0,85" HorizontalAlignment="Left" Width="77" />
                 </Grid>
 
-                <Button Name="btnEditOpportunity"
-                        Content="Edit"
+                <Button Name="btnSearchOpportunity"
+                        Content="Search"
             		    Margin="560,36,34,59"
                         HorizontalAlignment="Right"
             		    Width="75"
-                        Click="btnEditOpportunity_Click"
-                        />
+                        Click="btnSearchOpportunity_Click"/>
+
+                <Button Name="btnEditOpportunity"
+                        Content="Edit"
+            		    Margin="0,36,212,59"
+                        HorizontalAlignment="Right"
+            		    Width="75"
+                        Click="btnEditOpportunity_Click"/>
 
                 <Button Name="btnNewOpportunity"
                         Content="New" 
-                	    Margin="0,36,125,59"
+                	    Margin="0,36,122,59"
                 	    Width="75" 
                         Click="btnNewOpportunity_Click" 
-                        HorizontalAlignment="Right"
-                        />
+                        HorizontalAlignment="Right"/>
             </Grid>
 
-            <Grid Grid.Row="3" 
-                  Grid.Column="1"
-                  Background="#349CE2">
-                <TextBlock Text="View:"
-                           FontSize="20"
-                           Foreground="White"
-                           VerticalAlignment="Center"
-                           Margin="50,2,572,6"/>
-                <ComboBox Name="cmbSearchTypeOpportunities"
-                          VerticalAlignment="Center"
-                          Margin="110,4,343,5" Height="20"/>
-            </Grid>
+            <Border Grid.Row="2" 
+                    Grid.Column="1">
+                <Grid>
+                    <TextBlock Text="Recent Opportunities"
+        		               FontSize="22"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               Margin="231,20,231,250"/>
 
-            <Grid Grid.Row="5" 
-                  Grid.Column="1" 
-                  Background="#349CE2">
-                <TextBlock Text="Recent Opportunities"
-        		           FontSize="22"
-                           Foreground="White"
-                           HorizontalAlignment="Center"
-                           Margin="231,20,231,250"/>
-
-                <DataGrid Name="DataGridRecentOpportunities"
-                          Style="{DynamicResource MetroDataGrid}" 
-                          Margin="10,72,10,10" />
-            </Grid>
+                    <DataGrid Name="DataGridRecentOpportunities"
+                              Style="{DynamicResource MetroDataGrid}" 
+                              Margin="10,72,10,10" />
+                </Grid>
+            </Border>
         </Grid>
     </controls:MetroContentControl>
 </Page>

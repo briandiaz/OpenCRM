@@ -18,7 +18,7 @@ using OpenCRM.Models.Objects.Oportunities;
 namespace OpenCRM.Views.Objects.Oportunities
 {
     /// <summary>
-    /// Lógica de interacción para OpportunitiesView.xaml
+    /// Lógica de interacción para Opportunities.xaml
     /// </summary>
     public partial class OportunitiesView
     {
@@ -29,30 +29,33 @@ namespace OpenCRM.Views.Objects.Oportunities
             InitializeComponent();
             _opportunitiesModel = new OpportunitiesModel();
 
-            _opportunitiesModel.SearchRecentOportunities(this.DataGridRecentOpportunities);
+            _opportunitiesModel.LoadRecentOportunities(this.DataGridRecentOpportunities);
         }
 
         private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)
         {
             OpportunitiesModel.IsNew = true;
-            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateOpportunity.xaml");
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
         }
 
         private void btnEditOpportunity_Click(object sender, RoutedEventArgs e)
         {
+            if (this.DataGridRecentOpportunities.SelectedIndex == -1)
+                return;
+
             OpportunitiesModel.IsNew = false;
 
-            object selectedItem = this.DataGridRecentOpportunities.SelectedItem;
+            var selectedItem = this.DataGridRecentOpportunities.SelectedItem;
             Type type = selectedItem.GetType();
 
-            var data = new
-            {
-                Id = (int)type.GetProperty("Id").GetValue(selectedItem, null)
-            };
+            OpportunitiesModel.OpportunityIdforEdit = Convert.ToInt32(type.GetProperty("Id").GetValue(selectedItem, null));
 
-            OpportunitiesModel.OpportunityIdforEdit = data.Id;
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
+        }
 
-            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateOpportunity.xaml");
+        private void btnSearchOpportunity_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Opportunities/SearchOpportunities.xaml");
         }
     }
 }
