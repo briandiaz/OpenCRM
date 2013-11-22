@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using OpenCRM.Models.Objects.Oportunities;
+using OpenCRM.Models.Objects.Opportunities;
 
-namespace OpenCRM.Views.Objects.Oportunities
+namespace OpenCRM.Views.Objects.Opportunities
 {
     /// <summary>
     /// Lógica de interacción para Opportunities.xaml
@@ -35,27 +35,31 @@ namespace OpenCRM.Views.Objects.Oportunities
         private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)
         {
             OpportunitiesModel.IsNew = true;
-            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
-        }
-
-        private void btnEditOpportunity_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.DataGridRecentOpportunities.SelectedIndex == -1)
-                return;
-
-            OpportunitiesModel.IsNew = false;
-
-            var selectedItem = this.DataGridRecentOpportunities.SelectedItem;
-            Type type = selectedItem.GetType();
-
-            OpportunitiesModel.OpportunityIdforEdit = Convert.ToInt32(type.GetProperty("Id").GetValue(selectedItem, null));
+            OpportunitiesModel.IsEditing = false;
+            OpportunitiesModel.IsSearching = false;
 
             PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
         }
 
         private void btnSearchOpportunity_Click(object sender, RoutedEventArgs e)
         {
+            OpportunitiesModel.IsNew = false;
+            OpportunitiesModel.IsEditing = false;
+            OpportunitiesModel.IsSearching = true;
+
             PageSwitcher.Switch("/Views/Objects/Opportunities/SearchOpportunities.xaml");
+        }
+
+        public void OpportunityNameHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            var opportunityId = Convert.ToInt32((sender as TextBlock).Tag);
+            OpportunitiesModel.EditOpportunityId = opportunityId;
+
+            OpportunitiesModel.IsEditing = true;
+            OpportunitiesModel.IsNew = false;
+            OpportunitiesModel.IsSearching = false;
+
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
         }
     }
 }
