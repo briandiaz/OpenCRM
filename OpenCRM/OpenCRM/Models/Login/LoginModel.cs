@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using OpenCRM.DataBase;
 using OpenCRM.Views.Login;
 using OpenCRM.Controllers.Session;
+using System.Security.Cryptography;
 
 namespace OpenCRM.Models.Login
 {
@@ -42,23 +43,31 @@ namespace OpenCRM.Models.Login
                 else if (username.Equals(""))
                     ErrorLabel.Content = "You must enter your username.";
                 else
+                {
                     using (var db = new OpenCRMEntities())
                     {
-                        var hashpassword = password.GetHashCode().ToString();
-                        var query = ( 
+                        SHA1 sha1 = SHA1CryptoServiceProvider.Create();
+
+                        var textInBytes = ASCIIEncoding.Default.GetBytes(password);
+                        var hashpassword = BitConverter.ToString(sha1.ComputeHash(textInBytes)).Replace("-", "");
+                        //var hashpassword = password;
+
+                        var query = (
                             from user in db.User
                             where user.UserName == username && user.HashPassword == hashpassword
                             select user
                         );
-                        
+
                         if (query.Any())
                         {
-                            Session.CreateSession(query.First().UserId);
+                            var User = query.First();
+                            Session.CreateSession(User.UserId, User.UserName);
                             ErrorLabel.Content = "";
                             return true;
                         }
                         ErrorLabel.Content = "Username or password are incorrect.";
                     }
+                }
             }
             catch (Exception)
             {
