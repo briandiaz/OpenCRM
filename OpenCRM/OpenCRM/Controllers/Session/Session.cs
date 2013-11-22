@@ -12,6 +12,7 @@ namespace OpenCRM.Controllers.Session
     {
         #region "Values"
         private static int _userId;
+        private static string _userName;
         private static List<AccessRights> _rightAccess;
 
         #endregion
@@ -24,6 +25,10 @@ namespace OpenCRM.Controllers.Session
         public static int UserId 
         {
             get { return _userId; }
+        }
+        public static String UserName
+        {
+            get { return _userName; }
         }
        
         #endregion
@@ -78,10 +83,11 @@ namespace OpenCRM.Controllers.Session
         /// This method create a session of a specific user.
         /// </summary>
         /// <param name="User">A user from login</param>
-        public static void CreateSession(int UserId)
+        public static void CreateSession(int UserId, string UserName)
         {
             _userId = UserId;
             _rightAccess = getUserRightAccess();
+            _userName = UserName;
         }
 
         /// <summary>
