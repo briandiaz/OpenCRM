@@ -20,6 +20,7 @@ namespace OpenCRM.DataBase
             this.Competidors = new HashSet<Competidors>();
             this.Competidors1 = new HashSet<Competidors>();
             this.Leads = new HashSet<Leads>();
+            this.Competidors11 = new HashSet<Competidors>();
         }
     
         public int IndustryId { get; set; }
@@ -29,5 +30,6 @@ namespace OpenCRM.DataBase
         public virtual ICollection<Competidors> Competidors { get; set; }
         public virtual ICollection<Competidors> Competidors1 { get; set; }
         public virtual ICollection<Leads> Leads { get; set; }
+        public virtual ICollection<Competidors> Competidors11 { get; set; }
     }
 }

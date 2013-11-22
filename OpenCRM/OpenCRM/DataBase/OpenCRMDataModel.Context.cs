@@ -58,7 +58,6 @@ namespace OpenCRM.DataBase
         public DbSet<Objects_ImgURL> Objects_ImgURL { get; set; }
         public DbSet<Objects_Views> Objects_Views { get; set; }
         public DbSet<Opportunities> Opportunities { get; set; }
-        public DbSet<Opportunities_Products> Opportunities_Products { get; set; }
         public DbSet<Opportunities_Stage> Opportunities_Stage { get; set; }
         public DbSet<Opportunities_Status> Opportunities_Status { get; set; }
         public DbSet<Opportunities_Type> Opportunities_Type { get; set; }
@@ -71,5 +70,6 @@ namespace OpenCRM.DataBase
         public DbSet<Salutation> Salutation { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Lead_Status> Lead_Status { get; set; }
     }
 }

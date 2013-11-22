@@ -12,13 +12,9 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Opportunities_Products
+    public partial class Lead_Status
     {
-        public int OpportunityProductId { get; set; }
-        public Nullable<int> ProductId { get; set; }
-        public Nullable<int> OpportunityId { get; set; }
-    
-        public virtual Opportunities Opportunities { get; set; }
-        public virtual Products Products { get; set; }
+        public int LeadStatusId { get; set; }
+        public string Name { get; set; }
     }
 }
