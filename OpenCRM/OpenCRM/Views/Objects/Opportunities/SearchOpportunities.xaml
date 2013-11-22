@@ -86,12 +86,7 @@
                               VerticalAlignment="Center"
                               Margin="71,7,569,7" 
                               Height="20"
-                              SelectionChanged="cmbViewsOpportunities_SelectionChanged"
-                              />
-
-                    <Button Name="btnEditOpportunity"
-                    	    Content="Edit"
-                            Margin="823,6,47,7"/>
+                              SelectionChanged="cmbViewsOpportunities_SelectionChanged"/>
                 </Grid>
             </Border>
 
@@ -104,31 +99,38 @@
                     <TextBlock  Text="Search"
                                 FontSize="20"
                                 Foreground="Black"
-                                VerticalAlignment="Center"
-                                Margin="512,11,393,73" Height="36"/>
+                                Margin="516,11,389,0" 
+                                Height="36" 
+                                VerticalAlignment="Top"/>
 
                     <Button Name="btnNewOpportunity"
                     	    Content="New Opportunity"
-                            Margin="34,10,817,0" Height="37" VerticalAlignment="Top"/>
+                            Margin="34,10,817,0" 
+                            Height="37" 
+                            VerticalAlignment="Top"
+                            Click="btnNewOpportunity_Click"/>
 
                     <Button Name="btnRefreshOpportunities"
                     	    Margin="154,10,770,0" 
                             Height="37" 
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            Click="btnRefreshOpportunities_Click">
                         <StackPanel>
                             <Image Source="/Assets/Img/Refresh.png" 
-                                    Width="20" 
-                                    RenderTransformOrigin="0.067,-0.217"/>
+                                   Width="20"/>
                         </StackPanel>
                     </Button>
-                    
+
                     <TextBox Name="tbxSearchOpportunities"
-                             Margin="581,10,59,74"
-                             TextChanged="tbxSearchOpportunities_TextChanged"/>
+                             Margin="581,10,59,0"
+                             Height="36" 
+                             VerticalAlignment="Top"/>
 
                     <Button Name="btnSearchOpportunities"
-                            Margin="911,10,24,74"
-                            Click="btnSearchOpportunities_Click"
+                            Margin="911,10,24,0"
+                            Click="btnSearchOpportunities_Click" 
+                            Height="36" 
+                            VerticalAlignment="Top"
                             >
                         <StackPanel>
                             <Image Source="/Assets/Img/Search.png" 
@@ -138,12 +140,35 @@
                     </Button>
 
                     <DataGrid Name="DataGridOpportunities"
+                              IsReadOnly="True"
+                              ScrollViewer.CanContentScroll="True"
+                              Height="300"
+                              ColumnWidth="Auto"
                               Style="{DynamicResource MetroDataGrid}" 
-                              Margin="34,72,34,10" />
+                              Margin="34,72,0,40" 
+                              HorizontalAlignment="Left" 
+                              Width="897" >
+                        <DataGrid.Columns>
+                            <DataGridHyperlinkColumn Header="Opportunity Name" Width="Auto" Binding="{Binding Opportunity}">
+                                <DataGridHyperlinkColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <EventSetter Event="Hyperlink.Click" Handler="OpportunityNameHyperlink_Click" />
+                                        <Setter Property="Tag" Value="{Binding Path=Id}"/>
+                                    </Style>
+                                </DataGridHyperlinkColumn.ElementStyle>
+                            </DataGridHyperlinkColumn>
+                            <DataGridTextColumn Header="Account Name" Width="Auto" Binding="{Binding Account}"/>
+                            <DataGridTextColumn Header="Product Name" Width="Auto" Binding="{Binding Produdct}"/>
+                            <DataGridTextColumn Header="Amount" Width="Auto" Binding="{Binding Amount}"/>
+                            <DataGridTextColumn Header="Close Date" Width="Auto" Binding="{Binding CloseDate}"/>
+                            <DataGridTextColumn Header="Stage" Width="Auto" Binding="{Binding Stage}"/>
+                            <DataGridTextColumn Header="Opportunity Owner" Width="Auto" Binding="{Binding Owner}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                 </Grid>
             </Border>
-        
+
         </Grid>
     </controls:MetroContentControl>
 </Page>

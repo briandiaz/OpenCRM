@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using OpenCRM.Models.Objects.Oportunities;
+using OpenCRM.Models.Objects.Opportunities;
 using OpenCRM.Controllers.Session;
 using System.Globalization;
 
@@ -32,12 +32,17 @@ namespace OpenCRM.Views.Objects.Opportunities
             InitializeComponent();
             
             _opportunityModel = new OpportunitiesModel();
-            _allOpportunities = _opportunityModel.LoadAllOpportunities();
-
+            
             _opportunityModel.LoadViewsSearchOpportunities(this.cmbViewsOpportunities);
-            this.cmbViewsOpportunities.DisplayMemberPath = "Name";
-            this.cmbViewsOpportunities.SelectedValuePath = "Id";
-            this.cmbViewsOpportunities.SelectedValue = 7;
+            this.DataGridOpportunities.AutoGenerateColumns = false;
+
+            LoadSearchOpportunities();
+        }
+
+        private void LoadSearchOpportunities()
+        {
+            _allOpportunities = _opportunityModel.LoadAllOpportunities();
+            this.cmbViewsOpportunities.SelectedValue = 1;
         }
 
         private void cmbViewsOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +50,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             var selectedItem = (sender as ComboBox).SelectedItem;
             Type type = selectedItem.GetType();
 
-            var selectedItemName = (string)type.GetProperty("Name").GetValue(selectedItem, null);
+            var selectedItemName = Convert.ToString(type.GetProperty("Name").GetValue(selectedItem, null));
 
             var listFilterOpportunities = FilterOpportunity(selectedItemName);
 
@@ -62,11 +67,15 @@ namespace OpenCRM.Views.Objects.Opportunities
             }
             else if (SelectedItemName == "Closing Next Month")
             {
-                filterData = this._allOpportunities.FindAll(x => Convert.ToDateTime(x.CloseDate).Month.Equals(DateTime.Now.AddMonths(1).Month));
+                filterData = this._allOpportunities.FindAll(x => x.CloseDate.Month.Equals(DateTime.Now.AddMonths(1).Month));
+            }
+            else if (SelectedItemName == "Closing This Month")
+            {
+                filterData = this._allOpportunities.FindAll(x => x.CloseDate.Month.Equals(DateTime.Now.Month));
             }
             else if (SelectedItemName == "My Opportunities")
             {
-                filterData = this._allOpportunities.FindAll(x => x.Owner == Session.getUserSession().UserName);
+                filterData = this._allOpportunities.FindAll(x => x.Owner == Session.UserName);
             }
             else if (SelectedItemName == "New Last Week")
             {
@@ -84,9 +93,9 @@ namespace OpenCRM.Views.Objects.Opportunities
             {
                 filterData = this._allOpportunities.FindAll(x => x.Private == true);
             }
-            else if (SelectedItemName == "Recently View Opportunities")
+            else if (SelectedItemName == "Recently Viewed Opportunities")
             {
-                filterData = this._allOpportunities.OrderBy(x => x.ViewDate).ToList();
+                filterData = this._allOpportunities.OrderByDescending(x => x.ViewDate.Date).ToList();
             }
             else
             {
@@ -109,30 +118,32 @@ namespace OpenCRM.Views.Objects.Opportunities
             {
                 var listOpportunities = this.DataGridOpportunities.ItemsSource as List<SearchOppotunitiesData>;
 
-                var listSearchOpportunities = new List<SearchOppotunitiesData>();
-
-                foreach (var item in listOpportunities)
-                {
-                    if (item.Opportunity.Contains(this.tbxSearchOpportunities.Text))
-                    {
-                        listSearchOpportunities.Add(item);
-                    }
-                }
-
-                this.DataGridOpportunities.ItemsSource = listSearchOpportunities;
-            }
-        }
-
-        private void tbxSearchOpportunities_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!this.tbxSearchOpportunities.Text.Equals(string.Empty))
-            {
-                var Data = this.DataGridOpportunities.ItemsSource as List<SearchOppotunitiesData>;
-
-                var filterData = Data.FindAll(x => x.Opportunity.Contains(this.tbxSearchOpportunities.Text));
+                var filterData = listOpportunities.FindAll(x => x.Opportunity.Contains(this.tbxSearchOpportunities.Text));
 
                 this.DataGridOpportunities.ItemsSource = filterData;
             }
+        }
+
+        private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
+        }
+
+        private void btnRefreshOpportunities_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSearchOpportunities();
+        }
+
+        public void OpportunityNameHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            var opportunityId = Convert.ToInt32((sender as TextBlock).Tag);
+            OpportunitiesModel.EditOpportunityId = opportunityId;
+
+            OpportunitiesModel.IsEditing = true;
+            OpportunitiesModel.IsNew = false;
+            OpportunitiesModel.IsSearching = true;
+
+            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
         }
     }
 }
