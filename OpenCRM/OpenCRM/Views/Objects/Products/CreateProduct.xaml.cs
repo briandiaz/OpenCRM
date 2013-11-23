@@ -32,25 +32,28 @@ namespace OpenCRM.Views.Objects.Products
         {
 
             var name = TxtBoxName.Text.ToString();
-            var codigo = Convert.ToInt32(TxtBoxCodigo.Text);
+            var code = TxtBoxCodigo.Text.ToString();
             var precio = Convert.ToDecimal(TxtBoxPrecio.Text);
             var descripcion = TxtBoxDescripcion.Text.ToString();
+            var quantity = Convert.ToInt32(TxtBoxQuantity.Text); 
 
             try
             {
                 using (var _db = new OpenCRMEntities())
                 {
                     var product = _db.Products.Create();
+
                     product.Name = name;
-                    product.ProductId = codigo;
+                    product.Code = code;
                     product.Price = precio;
                     product.Description = descripcion;
+                    product.Quantity = quantity;
                     product.CreateBy = Session.UserId;
                     product.UpdateBy = Session.UserId;
                     product.CreateDate = DateTime.Now;
                     product.UpdateDate = DateTime.Now;
 
-                    if (CheckActive.IsEnabled)
+                    if (cbxCampaignActive.IsEnabled)
                         product.Active = true;
                     else
                         product.Active = false;
@@ -62,6 +65,8 @@ namespace OpenCRM.Views.Objects.Products
                     TxtBoxDescripcion.Text = "";
                     TxtBoxName.Text = "";
                     TxtBoxPrecio.Text = "";
+                    TxtBoxQuantity.Text = "";
+
                     MessageBox.Show("Producto ingresado con Exito");
                     PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
                 }
