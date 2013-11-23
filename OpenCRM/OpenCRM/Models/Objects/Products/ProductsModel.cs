@@ -27,7 +27,7 @@ namespace OpenCRM.Models.Objects.Products
                          new DataGridRecentProducts()
                          {
                              Nombre = products.Name,
-                             Codigo = products.ProductId,
+                             Codigo = products.Code,
                              Description = products.Description
 
                          }
@@ -45,7 +45,6 @@ namespace OpenCRM.Models.Objects.Products
             }
 
             listProducts.ForEach(x => x.Nombre = x.Nombre.PadRight(100));
-
             RecentProductsGrid.ItemsSource = listProducts;
 
         }
@@ -56,7 +55,7 @@ namespace OpenCRM.Models.Objects.Products
     {
         #region Properties
         public string Nombre { get; set; }
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public string Description { get; set; }
         #endregion
     }
