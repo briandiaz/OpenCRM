@@ -41,6 +41,7 @@ namespace OpenCRM.DataBase
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<bool> HiddenCampaign { get; set; }
+        public Nullable<System.DateTime> ViewDate { get; set; }
     
         public virtual ICollection<Campaign> Campaign1 { get; set; }
         public virtual Campaign Campaign2 { get; set; }

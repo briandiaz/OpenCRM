@@ -14,11 +14,6 @@ namespace OpenCRM.DataBase
     
     public partial class Opportunities
     {
-        public Opportunities()
-        {
-            this.Opportunities_Products = new HashSet<Opportunities_Products>();
-        }
-    
         public int OpportunityId { get; set; }
         public Nullable<int> UserId { get; set; }
         public string Name { get; set; }
@@ -29,7 +24,6 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> CloseDate { get; set; }
         public string NextStep { get; set; }
         public Nullable<int> OpportunityStageId { get; set; }
-        public Nullable<decimal> Probability { get; set; }
         public Nullable<int> CampaignPrimarySourceId { get; set; }
         public string OrderNumber { get; set; }
         public string CurrentGenerator { get; set; }
@@ -44,6 +38,7 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> ViewDate { get; set; }
         public Nullable<bool> HiddenOpportunity { get; set; }
         public Nullable<int> LeadSourceId { get; set; }
+        public Nullable<int> ProductId { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Campaign Campaign { get; set; }
@@ -54,7 +49,7 @@ namespace OpenCRM.DataBase
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
-        public virtual ICollection<Opportunities_Products> Opportunities_Products { get; set; }
         public virtual Lead_Source Lead_Source { get; set; }
+        public virtual Products Product { get; set; }
     }
 }

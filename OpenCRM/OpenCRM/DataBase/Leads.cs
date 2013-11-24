@@ -38,6 +38,9 @@ namespace OpenCRM.DataBase
         public Nullable<int> UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<bool> HiddenLead { get; set; }
+        public Nullable<System.DateTime> ViewDate { get; set; }
+        public Nullable<int> LeadStatusId { get; set; }
+        public Nullable<bool> Converted { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual Campaign Campaign { get; set; }
@@ -47,5 +50,6 @@ namespace OpenCRM.DataBase
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
+        public virtual Lead_Status Lead_Status { get; set; }
     }
 }

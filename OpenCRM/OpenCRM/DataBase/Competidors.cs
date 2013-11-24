@@ -27,5 +27,6 @@ namespace OpenCRM.DataBase
         public virtual Industry Industry { get; set; }
         public virtual Industry Industry1 { get; set; }
         public virtual ICollection<Opportunities> Opportunities { get; set; }
+        public virtual Industry Industry11 { get; set; }
     }
 }

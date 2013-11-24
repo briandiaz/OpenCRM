@@ -22,7 +22,7 @@ namespace OpenCRM.DataBase
     
         public int RatingId { get; set; }
         public string Name { get; set; }
-        public Nullable<decimal> Value { get; set; }
+        public Nullable<int> Value { get; set; }
     
         public virtual ICollection<Account> Account { get; set; }
         public virtual ICollection<Leads> Leads { get; set; }

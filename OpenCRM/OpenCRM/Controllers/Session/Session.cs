@@ -67,11 +67,11 @@ namespace OpenCRM.Controllers.Session
                             Modify = profileObjectsFields.Modify.Value
                         }
                 );
-
-                data = query.ToList();
+                return query.ToList();
+                ///data = query.ToList();
             }
 
-            return data;
+           // return data;
         }
 
         /// <summary>
