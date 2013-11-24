@@ -37,24 +37,23 @@ namespace OpenCRM.Views.Objects.Opportunities
             this.DataGridOpportunities.AutoGenerateColumns = false;
 
             LoadSearchOpportunities();
+
+            _allOpportunities = _opportunityModel.LoadAllOpportunities();
         }
 
         private void LoadSearchOpportunities()
         {
-            _allOpportunities = _opportunityModel.LoadAllOpportunities();
-            this.cmbViewsOpportunities.SelectedValue = 1;
-        }
-
-        private void cmbViewsOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedItem = (sender as ComboBox).SelectedItem;
+            var selectedItem = this.cmbViewsOpportunities.SelectedItem;
             Type type = selectedItem.GetType();
 
             var selectedItemName = Convert.ToString(type.GetProperty("Name").GetValue(selectedItem, null));
 
-            var listFilterOpportunities = FilterOpportunity(selectedItemName);
+            this.DataGridOpportunities.ItemsSource = FilterOpportunity(selectedItemName);
+        }
 
-            this.DataGridOpportunities.ItemsSource = listFilterOpportunities;
+        private void cmbViewsOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadSearchOpportunities();
         }
 
         private List<SearchOppotunitiesData> FilterOpportunity(string SelectedItemName)
@@ -126,6 +125,10 @@ namespace OpenCRM.Views.Objects.Opportunities
 
         private void btnNewOpportunity_Click(object sender, RoutedEventArgs e)
         {
+            OpportunitiesModel.IsEditing = false;
+            OpportunitiesModel.IsNew = true;
+            OpportunitiesModel.IsSearching = true;
+
             PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
         }
 
@@ -134,7 +137,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             LoadSearchOpportunities();
         }
 
-        public void OpportunityNameHyperlink_Click(object sender, RoutedEventArgs e)
+        private void OpportunityNameHyperlink_Click(object sender, RoutedEventArgs e)
         {
             var opportunityId = Convert.ToInt32((sender as TextBlock).Tag);
             OpportunitiesModel.EditOpportunityId = opportunityId;
@@ -144,6 +147,22 @@ namespace OpenCRM.Views.Objects.Opportunities
             OpportunitiesModel.IsSearching = true;
 
             PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
+        }
+
+        private void btnExitSearchOpportunity_Click(object sender, RoutedEventArgs e)
+        {
+            OpportunitiesModel.IsEditing = false;
+            OpportunitiesModel.IsNew = false;
+            OpportunitiesModel.IsSearching = false;
+
+            PageSwitcher.Switch("/Views/Objects/Opportunities/OpportunitiesView.xaml");
+        }
+
+        private void btnClearSearch_Click(object sender, RoutedEventArgs e)
+        {
+            this.tbxSearchOpportunities.Text = string.Empty;
+
+            LoadSearchOpportunities();
         }
     }
 }

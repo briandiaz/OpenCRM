@@ -385,7 +385,7 @@ namespace OpenCRM.Views.Objects.Opportunities
 
             this.DataGridProducts.ItemsSource = null;
 
-            this.gridSearchAccount.Visibility = Visibility.Collapsed;
+            this.gridSearchProduct.Visibility = Visibility.Collapsed;
             this.gridProductInformation.Visibility = Visibility.Visible;
         }
 

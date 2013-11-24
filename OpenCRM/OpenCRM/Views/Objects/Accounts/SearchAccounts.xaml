@@ -1,15 +1,11 @@
-﻿<Page x:Class="OpenCRM.Views.Objects.Opportunities.SearchOpportinities"
+﻿<Page x:Class="OpenCRM.Views.Objects.Accounts.SearchAccounts"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-      xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d"
-      Title="Views of Opportunities" 
-      Height="Auto" 
-      Width="Auto" >
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+	  Title="SearchAccounts">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -21,9 +17,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
                 <ResourceDictionary Source="/Resources/DataGridViewAzure.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
     </Page.Resources>
+
 
     <controls:MetroContentControl>
         <Grid>
@@ -33,7 +29,7 @@
 
             <Grid.Resources>
                 <Style TargetType="{x:Type Border}">
-                    <Setter Property="Background" Value="#349CE2" />
+                    <Setter Property="Background" Value="#A300E3" />
                     <Setter Property="BorderThickness" Value="10" />
                     <Setter Property="CornerRadius" Value="10" />
                 </Style>
@@ -58,13 +54,19 @@
 
                 <Grid Margin="10,4,0,4"
                       HorizontalAlignment="Left">
-                    <Image  Source="/Assets/Img/Icons/Opportunities.png" 
+                    <Image  Source="/Assets/Img/Icons/Accounts.png" 
                             Margin="0,-5,0,-6" 
-                            RenderTransformOrigin="-0.92,0.73" 
-                            HorizontalAlignment="Left" Width="94" />
+                            HorizontalAlignment="Left" 
+                            Width="94" />
 
-                    <TabControl Margin="95,38,0,0" HorizontalAlignment="Left" Width="178" Height="45" VerticalAlignment="Top">
-                        <TabItem Header="_Opportunities" FontSize="20px" Margin="-3,2,-6,-2"/>
+                    <TabControl Margin="95,38,0,0" 
+                                HorizontalAlignment="Left" 
+                                Width="178" Height="45" 
+                                VerticalAlignment="Top">
+
+                        <TabItem Header="_Accounts" 
+                                 FontSize="20px" 
+                                 Margin="-3,2,-6,-2"/>
                     </TabControl>
 
                     <TextBlock Text="Search"
@@ -72,12 +74,16 @@
                                Margin="101,15,103,67" />
                 </Grid>
 
-                <Button Name="btnExitSearchOpportunity"
-                        Content="Cancel"
-                        TextBlock.FontSize="20px"
-                        Click="btnExitSearchOpportunity_Click"
-                        Margin="735,30,43,30"
-                        />
+                <Button Name="btnExitSearch"
+                    	Height="54"
+                        TextBlock.FontSize="20"
+                        Margin="800,30,0,0"
+                    	VerticalAlignment="Top"
+                    	Content="Cancel" 
+                    	HorizontalAlignment="Left" 
+                    	Width="140"
+                        Click="btnExitSearch_Click"/>
+
             </Grid>
 
             <Border Grid.Row="2" 
@@ -89,11 +95,14 @@
                                VerticalAlignment="Center"
                                Margin="11,4,845,8"/>
 
-                    <ComboBox Name="cmbViewsOpportunities"
+                    <ComboBox Name="cmbViewsAccount"
                               VerticalAlignment="Center"
                               Margin="71,7,569,7" 
                               Height="20"
-                              SelectionChanged="cmbViewsOpportunities_SelectionChanged"/>
+                              SelectionChanged="cmbViewsAccount_SelectionChanged"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Id"
+                              SelectedValue="15" />
                 </Grid>
             </Border>
 
@@ -103,77 +112,79 @@
 
                 <Grid Background="#FAFAFA">
 
-                    <Button Name="btnNewOpportunity"
-                    	    Content="New Opportunity"
+                    <Button Name="btnNewAccount"
+                    	    Content="New Account"
                             Margin="34,10,817,0" 
                             Height="37" 
                             VerticalAlignment="Top"
-                            Click="btnNewOpportunity_Click"/>
+                            Click="btnNewAccount_Click"/>
 
-                    <Button Name="btnRefreshOpportunities"
+                    <Button Name="btnRefreshAccount"
                     	    Margin="154,10,770,0" 
                             Height="37" 
                             VerticalAlignment="Top"
-                            Click="btnRefreshOpportunities_Click">
+                            Click="btnRefreshAccount_Click">
+
                         <StackPanel>
                             <Image Source="/Assets/Img/Refresh.png" 
-                                   Width="20"/>
+                                    Width="20" />
                         </StackPanel>
                     </Button>
 
-                    <TextBox Name="tbxSearchOpportunities"
-                             Margin="507,10,133,0"
-                             Height="36" 
+                    <TextBox Name="tbxSearchAccount"
+                             Margin="518,10,122,0"
+                              Height="36" 
                              VerticalAlignment="Top"/>
 
-                    <Button Name="btnSearchOpportunities"
-                            Margin="837,10,98,0"
-                            Click="btnSearchOpportunities_Click" 
+                    <Button Name="btnSearchAccount"
+                            Margin="848,10,87,0"
                             Height="36" 
                             VerticalAlignment="Top"
-                            >
+                            Click="btnSearchAccount_Click">
                         <StackPanel>
                             <Image Source="/Assets/Img/Search.png" 
-                                    Width="20" 
-                                    RenderTransformOrigin="0.067,-0.217"/>
+                                    Width="20"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Name="btnClearSearch"
-                    	Content="Clear"
-                    	Margin="872,10,43,0" 
-                    	Height="37" 
-                    	VerticalAlignment="Top"
-                    	Click="btnClearSearch_Click"/>
+                    <Button Name="btnClearSearchAccount"
+                    	    Margin="883,10,0,0"
+                    	    Height="36" 
+                            VerticalAlignment="Top"
+                            Content="Clear" 
+                            HorizontalAlignment="Left"
+                            Click="btnClearSearchAccount_Click"
+                            Width="48"/>
 
-                    <DataGrid Name="DataGridOpportunities"
+                    <DataGrid Name="DataGridAccount"
+                              AutoGenerateColumns="False"
                               IsReadOnly="True"
                               ScrollViewer.CanContentScroll="True"
                               Height="300"
+                              HorizontalAlignment="Left"
+                              Width="897"
                               Style="{DynamicResource MetroDataGrid}" 
-                              Margin="34,72,0,40" 
-                              HorizontalAlignment="Left" 
-                              Width="897" >
+                              Margin="34,72,34,10">
                         <DataGrid.Columns>
-                            <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
+                            <DataGridHyperlinkColumn Header="Account Name" Width="*" Binding="{Binding Name}">
                                 <DataGridHyperlinkColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
-                                        <EventSetter Event="Hyperlink.Click" Handler="OpportunityNameHyperlink_Click" />
+                                        <EventSetter Event="Hyperlink.Click" Handler="AccountNameHyperlink_Click" />
                                         <Setter Property="Tag" Value="{Binding Path=Id}"/>
                                     </Style>
                                 </DataGridHyperlinkColumn.ElementStyle>
                             </DataGridHyperlinkColumn>
-                            <DataGridTextColumn Header="Account Name" Width="*" Binding="{Binding Account}"/>
-                            <DataGridTextColumn Header="Product Name" Width="*" Binding="{Binding Produdct}"/>
-                            <DataGridTextColumn Header="Amount" Width="*" Binding="{Binding Amount}"/>
-                            <DataGridTextColumn Header="Close Date" Width="*" Binding="{Binding CloseDate}"/>
-                            <DataGridTextColumn Header="Stage" Width="*" Binding="{Binding Stage}"/>
-                            <DataGridTextColumn Header="Opportunity Owner" Width="*" Binding="{Binding Owner}"/>
+                            <DataGridTextColumn Header="Account Site" Width="*" Binding="{Binding AccountSite}"/>
+                            <DataGridTextColumn Header="Billing State/Province" Width="*" Binding="{Binding StateName}"/>
+                            <DataGridTextColumn Header="Phone Number" Width="*" Binding="{Binding Phone}"/>
+                            <DataGridTextColumn Header="Type" Width="*" Binding="{Binding Type}"/>
+                            <DataGridTextColumn Header="Account Owner" Width="*" Binding="{Binding Owner}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    
+
                 </Grid>
             </Border>
+
         </Grid>
     </controls:MetroContentControl>
 </Page>

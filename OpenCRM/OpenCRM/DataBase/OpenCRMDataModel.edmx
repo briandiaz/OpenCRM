@@ -3997,9 +3997,9 @@
           <EntitySetMapping Name="Account_SLA">
             <EntityTypeMapping TypeName="OpenCRMModel.Account_SLA">
               <MappingFragment StoreEntitySet="Account_SLA">
+                <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="AccountSLAId" ColumnName="AccountSLAId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

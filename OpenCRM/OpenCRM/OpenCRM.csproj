@@ -310,6 +310,12 @@
     <Compile Include="Views\Objects\Accounts\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Accounts\CreateEditAccount.xaml.cs">
+      <DependentUpon>CreateEditAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Accounts\SearchAccounts.xaml.cs">
+      <DependentUpon>SearchAccounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Campaigns\CampaignsView.xaml.cs">
       <DependentUpon>CampaignsView.xaml</DependentUpon>
     </Compile>
@@ -387,6 +393,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Accounts\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Accounts\CreateEditAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Accounts\SearchAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
