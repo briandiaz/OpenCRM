@@ -232,6 +232,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                 CampaignController.currentCampaignIndex = CampaignController.currentCampaignIndex + 1;
                 gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
                 CampaignController.CurrentCampaignId = _listCampaigns[CampaignController.currentCampaignIndex].CampaignId;
+                CampaignController.CurrentCampaignName = _listCampaigns[CampaignController.currentCampaignIndex].Name;
                 CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex - 1;
                 CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex + 1;
             }
@@ -239,12 +240,12 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private void btnPreviousSlider_Click(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine(CampaignController.currentCampaignIndex);
             if (CampaignController.currentCampaignIndex > 0)
             {
                 CampaignController.currentCampaignIndex = CampaignController.currentCampaignIndex - 1;
                 gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
                 CampaignController.CurrentCampaignId = _listCampaigns[CampaignController.currentCampaignIndex].CampaignId;
+                CampaignController.CurrentCampaignName = _listCampaigns[CampaignController.currentCampaignIndex].Name;
                 CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex - 1;
                 CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex + 1;
             }
@@ -253,6 +254,7 @@ namespace OpenCRM.Views.Objects.Campaigns
         private void btnAddLeads_Click(object sender, RoutedEventArgs e)
         {
             CampaignController.CurrentCampaignId = _listCampaigns[CampaignController.currentCampaignIndex].CampaignId;
+            CampaignController.CurrentCampaignName = _listCampaigns[CampaignController.currentCampaignIndex].Name;
             PageSwitcher.Switch("/Views/Objects/Campaigns/Leads/LeadsView.xaml");
         }
         

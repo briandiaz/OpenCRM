@@ -69,7 +69,7 @@
                    />
 
                 <TabControl VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TabItem Header="_Lead's">
+                    <TabItem Name="tbitemHeader">
                     </TabItem>
                 </TabControl>
 
@@ -91,13 +91,13 @@
                                             <Setter TargetName="Border" Property="Background" Value="#2E9AFE" />
                                             <Setter Property="Foreground" Value="White" />
                                             <Setter Property="FontSize" Value="24" />
-                                            <Setter Property="FontFamily" Value="Segoe WP" />
+                                            <Setter Property="FontFamily" Value="Segoe WP Light" />
                                         </Trigger>
                                         <Trigger Property="IsSelected" Value="False">
                                             <Setter Property="Panel.ZIndex" Value="100" />
                                             <Setter TargetName="Border" Property="Background" Value="White" />
                                             <Setter Property="Foreground" Value="Black" />
-                                            <Setter Property="FontFamily" Value="Segoe WP" />
+                                            <Setter Property="FontFamily" Value="Segoe WP Light" />
                                             <Setter Property="FontSize" Value="24" />
                                         </Trigger>
                                         <Trigger Property="IsEnabled" Value="False">
@@ -114,7 +114,7 @@
                 </TabControl.Resources>
 
 
-                <TabItem Header="Search" Width="130" Height="50" Cursor="Hand">
+                <TabItem Header="Existing Leads" Width="170" Height="50" Cursor="Hand">
                     <Grid>
                         <Grid Width="Auto" Height="Auto" VerticalAlignment="Top">
                             <Grid.RowDefinitions>
@@ -135,8 +135,9 @@
                                  HorizontalAlignment="Left" 
                                  HorizontalContentAlignment="Center" 
                                  FontSize="28px" 
-                                         Height="50" 
-                                         Width="400" 
+                                 FontFamily="Segoe WP Light"
+                                 Height="50" 
+                                 Width="400" 
                                  />
 
                                 <Button VerticalAlignment="Top" 
@@ -343,36 +344,6 @@
                             </StackPanel>
 
                         </Grid>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Update" HorizontalAlignment="Center"  Width="130" Height="50" Cursor="Hand">
-                    <Grid MinWidth="900">
-                        <StackPanel>
-
-                            <Grid MinHeight="500" MinWidth="900">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="2.3*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60*" />
-                                    <ColumnDefinition Width="300*" />
-                                    <ColumnDefinition Width="100*" />
-                                </Grid.ColumnDefinitions>
-
-                            </Grid>
-
-                        </StackPanel>
                     </Grid>
                 </TabItem>
 

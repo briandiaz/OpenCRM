@@ -134,6 +134,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\Campaign\CampaignController.cs" />
+    <Compile Include="Controllers\Lead\LeadsController.cs" />
     <Compile Include="DataBase\Account.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>

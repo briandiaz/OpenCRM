@@ -17,6 +17,7 @@ using OpenCRM.Models.Objects.Campaigns;
 using OpenCRM.Controllers.Campaign;
 using OpenCRM.Models.Objects.Leads;
 using System.Collections.ObjectModel;
+using OpenCRM.Controllers.Lead;
 
 namespace OpenCRM.Views.Objects.Campaigns.Leads
 {
@@ -30,6 +31,7 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
             InitializeComponent();
             dgLeadData.ItemsSource = CampaignsModel.getAllCampaignLeads();
             dgAddLeadData.ItemsSource = CampaignsModel.getAvailableLeads();
+            tbitemHeader.Header = CampaignController.CurrentCampaignName + " Lead's";
         }
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
@@ -95,7 +97,6 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
         ObservableCollection<OpenCRM.DataBase.Leads> _currentGridleads;
         private void UpdateLeadsGrid(DataGrid currentGrid, DataGrid updateGrid)
         {
-
             var _selectedLeads = currentGrid.SelectedItems;
             _currentGridleads = new ObservableCollection<DataBase.Leads>();
             foreach (DataBase.Leads Lead in currentGrid.ItemsSource)
@@ -125,15 +126,15 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
 
         private void btnEditLead_Click(object sender, RoutedEventArgs e)
         {
-            EditLead(dgLeadData);
+            LeadAction(dgLeadData, "/Views/Objects/Leads/CreateLead.xaml");
         }
 
         private void btnEditAddLead_Click(object sender, RoutedEventArgs e)
         {
-            EditLead(dgAddLeadData);
+            LeadAction(dgAddLeadData, "/Views/Objects/Leads/CreateLead.xaml");
         }
 
-        private void EditLead(DataGrid dgrid)
+        private void LeadAction(DataGrid dgrid, String uri)
         {
             if (dgrid.SelectedItem != null)
             {
@@ -141,38 +142,21 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
 
                 var selectedItem = dgrid.SelectedItem;
                 Type type = selectedItem.GetType();
-
+                LeadsController.CurrentPage = "/Views/Objects/Campaigns/Leads/LeadsView.xaml";
                 LeadsModel.LeadIdforEdit = Convert.ToInt32(type.GetProperty("LeadId").GetValue(selectedItem, null));
-
-                PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
-            }
-        }
-
-        private void ViewLead(DataGrid dgrid)
-        {
-            if (dgrid.SelectedItem != null)
-            {
-                LeadsModel.IsNew = false;
-
-                var selectedItem = dgrid.SelectedItem;
-                Type type = selectedItem.GetType();
-
-                LeadsModel.LeadIdforEdit = Convert.ToInt32(type.GetProperty("LeadId").GetValue(selectedItem, null));
-                PageSwitcher.Switch("/Views/Objects/Leads/LeadDetails.xaml");
+                PageSwitcher.Switch(uri);
             }
         }
 
         private void btnViewLead_Click(object sender, RoutedEventArgs e)
         {
-            ViewLead(dgLeadData);
+            LeadAction(dgLeadData, "/Views/Objects/Leads/LeadDetails.xaml");
         }
 
         private void btnViewAddLead_Click(object sender, RoutedEventArgs e)
         {
-            ViewLead(dgAddLeadData);
+            LeadAction(dgAddLeadData, "/Views/Objects/Leads/LeadDetails.xaml");
         }
-
-
 
     }
 }
