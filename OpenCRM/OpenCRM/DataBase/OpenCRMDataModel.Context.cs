@@ -71,9 +71,6 @@ namespace OpenCRM.DataBase
         public DbSet<Salutation> Salutation { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<User> User { get; set; }
-<<<<<<< HEAD
-        //public DbSet<Leads_Source> Lead_Status { get; set; }
-=======
->>>>>>> 849b4259a13ba2262f36b17ba219194866f828f4
+
     }
 }

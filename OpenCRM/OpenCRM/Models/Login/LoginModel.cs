@@ -49,14 +49,9 @@ namespace OpenCRM.Models.Login
                         SHA1 sha1 = SHA1CryptoServiceProvider.Create();
 
                         var textInBytes = ASCIIEncoding.Default.GetBytes(password);
-<<<<<<< HEAD
+
                         //var hashpassword = BitConverter.ToString(sha1.ComputeHash(textInBytes)).Replace("-", "");
                         var hashpassword = password;
-=======
-                        var hashpassword = BitConverter.ToString(sha1.ComputeHash(textInBytes)).Replace("-", "");
-                        hashpassword = password;
->>>>>>> 849b4259a13ba2262f36b17ba219194866f828f4
-
                         var query = (
                             from user in db.User
                             where user.UserName == username && user.HashPassword == hashpassword
