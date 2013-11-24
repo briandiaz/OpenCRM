@@ -503,10 +503,6 @@
     <Resource Include="Assets\Img\opencrm_logo_blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Home\images\blank-cd.png" />
-    <Resource Include="Views\Home\images\placeholder_person.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\Img\Icons\Contacts Folder.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1001,6 +997,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Home\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

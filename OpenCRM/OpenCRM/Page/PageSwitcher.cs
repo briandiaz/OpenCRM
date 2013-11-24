@@ -9,6 +9,7 @@ namespace OpenCRM
     public static class PageSwitcher
     {
         public static MainWindow mainwindow;
+
         /// <summary>
         /// Switch the current page of the mainFrame to any that you specify with the Uri
         /// </summary>
@@ -18,8 +19,8 @@ namespace OpenCRM
             var url = new Uri(newPage, UriKind.Relative);
             mainwindow.frmSource.Navigate(url);
             ShowFrame(true);
-            
         }
+
         /// <summary>
         /// Hides or display the buttons of the main navigation in the window.
         /// </summary>

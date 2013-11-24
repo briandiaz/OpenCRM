@@ -78,7 +78,8 @@ create table [dbo].[Rating](
 create table [dbo].[Country](
 	CountryId int IDENTITY(1, 1),
 	Name nvarchar(50),
-	AbbrevationName char(3),
+	AbbrevationName char(2),
+	AbbrevationName2 char(3),
 	Constraint [PK Country] Primary Key(CountryId)
 );
 
@@ -124,7 +125,7 @@ create table [dbo].[Address](
 	AddressId int IDENTITY(1, 1),
 	Street nvarchar(50),
     City nvarchar(50),
-	ZipCode numeric(5),
+	ZipCode nvarchar(5),
     StateId int,
     AddressTypeId int,
     Constraint [PK Address] Primary Key(AddressId),
@@ -155,7 +156,7 @@ create table [dbo].[Account_SLA](
 	Constraint [PK Account_SLA] Primary Key(AccountSLAId)
 );
 
-create table [dbo].[Account_Type](
+create table [dbo].[Account_Parentype](
 	AccountTypeId int IDENTITY(1, 1),
 	Name nvarchar(50),
 	Constraint [PK Account_Type] Primary Key(AccountTypeId)
@@ -188,7 +189,6 @@ create table [dbo].[Account](
     IndustryId int,
     NumberOfLocation int,
     PhoneNumber nvarchar(20),
-    SlaSerialNumber nvarchar(255),
     RatingId int,
     TickerSymbol nvarchar(255),
     WebSite nvarchar(255),
@@ -197,6 +197,10 @@ create table [dbo].[Account](
     UpdateBy int,
     UpdateDate datetime,
     HiddenAccount bit,
+    ViewDate datetime,
+    Code nvarchar(25),
+	SLAExpiration date,
+    SlaSerialNumber nvarchar(255),
 	Constraint [PK Account] Primary Key(Accountid),
 	Constraint [FK Account Rating] Foreign Key(RatingId) References [dbo].[Rating](RatingId),
 	Constraint [FK Account Industry] Foreign Key(IndustryId) References [dbo].[Industry](IndustryId),
@@ -254,6 +258,7 @@ create table [dbo].[Contact](
 	CreateDate datetime,
 	UpdateBy int,
 	UpdateDate datetime,
+	ViewDate datetime,
 	HiddenContact bit,
 	Constraint [PK Contact] Primary Key(ContactId),
 	Constraint [FK Contact User] Foreign Key(UserId) References [dbo].[User](UserId),
@@ -304,6 +309,7 @@ create table [dbo].[Campaign](
 	CreateDate datetime,
 	UpdateBy int,
 	UpdateDate datetime,
+	ViewDate datetime,
 	HiddenCampaign bit,
 	Constraint [PK Campaign] Primary Key(CampaignId),
 	Constraint [FK Campaign User] Foreign Key(UserId) References [dbo].[User](UserId),
@@ -343,6 +349,7 @@ create table [dbo].[Leads](
 	UpdateBy int,
 	UpdateDate datetime,
 	HiddenLead bit,
+	ViewDate datetime,
 	Constraint [PK Leads] Primary Key(LeadId),
 	Constraint [FK Leads User] Foreign Key(UserId) References [dbo].[User](UserId),
 	Constraint [FK Leads User_Creator] Foreign Key(CreateBy) References [dbo].[User](UserId),
@@ -378,7 +385,7 @@ create table [dbo].[Competidors](
 	Weakness int,
 	Constraint [PK Competidor] Primary Key(CompetidorId),
 	Constraint [FK Competidor Industry_Strenght] Foreign Key(Strenght) References Industry(IndustryId),
-	Constraint [FK Competidor Industry_Weakness] Foreign Key(Strenght) References Industry(IndustryId)
+	Constraint [FK Competidor Industry_Weakness] Foreign Key(Weakness) References Industry(IndustryId)
 );
 
 create table [dbo].[Opportunities_Status](
@@ -397,8 +404,7 @@ create table [dbo].[Opportunities](
 	Amount money,
 	CloseDate date,
 	NextStep nvarchar(max),
-	OpportunityStageId int,
-	Probability numeric(2,2),
+	OpportunityStageId int,	
 	CampaignPrimarySourceId int,
 	LeadSourceId int,
 	OrderNumber nvarchar(255),
@@ -406,6 +412,7 @@ create table [dbo].[Opportunities](
 	TrackingNumber nvarchar(255),
 	OpportunityStatusId int,
 	CompetidorId int,
+	ProductId int,
 	CreateBy int,
 	CreateDate datetime,
 	UpdateBy int,
@@ -418,6 +425,7 @@ create table [dbo].[Opportunities](
 	Constraint [FK Opportunities User_Creator] Foreign Key(CreateBy) References [dbo].[User](UserId),
 	Constraint [FK Opportunities User_Modificator] Foreign Key(UpdateBy) References [dbo].[User](UserId),
 	Constraint [FK Opportunities Account] Foreign Key(AccountId) References [dbo].[Account](AccountId),
+	Constraint [FK Opportunities Products] Foreign Key(ProductId) References [dbo].[Products](ProductId),
 	Constraint [FK Opportunities Campaign] Foreign Key(CampaignPrimarySourceId) References [dbo].[Campaign](CampaignId),
 	Constraint [FK Opportunities Opportunities_Type] Foreign Key(OpportunityTypeId) References [dbo].[Opportunities_Type](OpportunityTypeId),
 	Constraint [FK Opportunities Opportunities_Stage] Foreign Key(OpportunityStageId) References [dbo].[Opportunities_Stage](OpportunityStageId),
@@ -435,28 +443,21 @@ create table [dbo].[Opportunities](
 create table [dbo].[Products](
 	ProductId int IDENTITY(1, 1),
 	Name nvarchar(100),
+	Code nvarchar(25),
 	[Description] nvarchar(max),
 	Active bit,
 	Price money,
+	Quantity int,
 	CreateBy int,
 	CreateDate datetime,
 	UpdateBy int,
 	UpdateDate datetime,
+	ViewDate datetime,
 	HiddenProduct bit,
 	Constraint [PK Products] Primary Key(ProductId),
 	Constraint [FK Products User_Creator] Foreign Key(CreateBy) References [dbo].[User](UserId),
 	Constraint [FK Products User_Modificator] Foreign Key(UpdateBy) References [dbo].[User](UserId)
 );
-
-create table [dbo].[Opportunities_Products](
-	OpportunityProductId int IDENTITY(1, 1),
-	ProductId int,
-	OpportunityId int,
-	Constraint [PK Opportunities_Products] Primary Key(OpportunityProductId),
-	Constraint [FK Opportunities_Products Products] Foreign Key(ProductId) References [dbo].[Products](ProductId),
-	Constraint [FK Opportunities_Products Opportunities] Foreign Key(OpportunityId) References [dbo].[Opportunities](OpportunityId)
-);
-
 
 -------------
 --Inventory--
@@ -535,6 +536,7 @@ create table [dbo].[Cases](
 	CreateDate datetime,
 	UpdateBy int,
 	UpdateDate datetime,
+	ViewDate datetime,
 	HiddenCase bit,
 	Constraint [PK Cases] Primary Key(CaseId),
 	Constraint [FK Cases User] Foreign Key(UserId) References [dbo].[User](UserId),
