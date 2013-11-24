@@ -66,7 +66,7 @@
                     <TabControl Margin="122,64,0,41" 
                                 HorizontalAlignment="Left" 
                                 Width="178">
-                        
+
                         <TabItem Header="_Opportunities" 
                                  FontSize="20px" 
                                  Margin="-6,-2,-3,2"/>
@@ -103,15 +103,17 @@
         		               FontSize="22"
                                Foreground="White"
                                HorizontalAlignment="Center"
-                               Margin="231,20,231,250"/>
+                               Margin="231,20,231,330"/>
 
                     <DataGrid Name="DataGridRecentOpportunities"
                               Height="300"
+                              IsReadOnly="True"
                               ScrollViewer.CanContentScroll="True"  
                               Style="{DynamicResource MetroDataGrid}"
+                              SelectionMode="Single"
                               HorizontalContentAlignment="Center"
                               VerticalContentAlignment="Center"
-                              Margin="10,72,10,10">
+                              Margin="10,72,0,0" HorizontalAlignment="Left" Width="649" VerticalAlignment="Top">
                         <DataGrid.Columns>
                             <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
                                 <DataGridHyperlinkColumn.ElementStyle>
@@ -121,7 +123,7 @@
                                     </Style>
                                 </DataGridHyperlinkColumn.ElementStyle>
                             </DataGridHyperlinkColumn>
-                            <DataGridTextColumn Header="Account Name" Width="*" Binding="{Binding Account}"/>                             
+                            <DataGridTextColumn Header="Account Name" Width="*" Binding="{Binding Account}"/>
                             <DataGridTextColumn Header="Close Date" Width="*" Binding="{Binding CloseDate}" />
                         </DataGrid.Columns>
                     </DataGrid>
