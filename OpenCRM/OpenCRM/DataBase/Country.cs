@@ -22,6 +22,7 @@ namespace OpenCRM.DataBase
         public int CountryId { get; set; }
         public string Name { get; set; }
         public string AbbrevationName { get; set; }
+        public string AbbrevationName2 { get; set; }
     
         public virtual ICollection<State> State { get; set; }
     }

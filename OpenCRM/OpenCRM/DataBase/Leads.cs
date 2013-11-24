@@ -39,11 +39,14 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<bool> HiddenLead { get; set; }
         public Nullable<System.DateTime> ViewDate { get; set; }
+        public Nullable<int> LeadStatusId { get; set; }
+        public Nullable<bool> Converted { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual Campaign Campaign { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual Lead_Source Lead_Source { get; set; }
+        public virtual Lead_Status Lead_Status { get; set; }
         public virtual Rating Rating { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

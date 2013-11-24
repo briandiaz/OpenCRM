@@ -14,7 +14,14 @@ namespace OpenCRM.DataBase
     
     public partial class Lead_Status
     {
+        public Lead_Status()
+        {
+            this.Leads = new HashSet<Leads>();
+        }
+    
         public int LeadStatusId { get; set; }
         public string Name { get; set; }
+    
+        public virtual ICollection<Leads> Leads { get; set; }
     }
 }

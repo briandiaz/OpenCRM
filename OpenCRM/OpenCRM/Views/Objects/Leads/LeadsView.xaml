@@ -7,7 +7,7 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       mc:Ignorable="d"
-                      Title="Opportunities" 
+                      Title="Leads" 
                       Height="Auto" 
                       Width="Auto" >
 
@@ -21,7 +21,29 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
                 <ResourceDictionary Source="/Resources/DataGridViewAzure.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
+            <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                    <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
 
@@ -50,10 +72,15 @@
             <Grid Grid.Row="1" 
                   Grid.Column="1">
                 <Grid Margin="0,0,356,0">
-                    <Image  Source="/Assets/Img/Icons/Opportunities.png" 
-                            Margin="0,10,0,25" 
-                            RenderTransformOrigin="-0.92,0.73" HorizontalAlignment="Left" Width="117" />
 
+                    <Button Style="{DynamicResource NoChromeButton}" Cursor="Hand" HorizontalAlignment="Left" Click="LeadImage_OnClick" >
+                        <Image Source="/Assets/Img/Icons/Leads.png" 
+                            Margin="0,10,0,25" 
+                            RenderTransformOrigin="-0.92,0.73" 
+                            HorizontalAlignment="Left" 
+                            Width="117"/>
+                    </Button>
+                    
                     <TabControl Margin="122,64,0,41" HorizontalAlignment="Left" Width="178">
                         <TabItem Header="_Leads" FontSize="20px" Margin="-6,-2,-3,2"/>
                     </TabControl>
@@ -97,10 +124,10 @@
                            HorizontalAlignment="Center"
                            Margin="231,20,231,250"/>
 
-                <DataGrid Name="DataGridRecentLeadss"
+                <DataGrid Name="DataGridRecentLeads"
                           Style="{DynamicResource MetroDataGrid}" 
                           Margin="10,72,10,10" 
-                          SelectionChanged="DataGridRecentLeads_SelectionChanged"/>
+                          MouseDoubleClick="DataGridRecentLeads_MouseDoubleClick"/>
             </Grid>
         </Grid>
     </controls:MetroContentControl>

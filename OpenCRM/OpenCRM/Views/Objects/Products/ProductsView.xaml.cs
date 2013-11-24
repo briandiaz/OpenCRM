@@ -38,6 +38,11 @@ namespace OpenCRM.Views.Objects.Products
             PageSwitcher.Switch("/Views/Objects/Products/CreateProduct.xaml");
         }
 
+        private void RecentProductsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
        
     }
 

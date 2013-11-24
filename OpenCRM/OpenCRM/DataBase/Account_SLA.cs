@@ -21,7 +21,7 @@ namespace OpenCRM.DataBase
     
         public int AccountSLAId { get; set; }
         public string Name { get; set; }
-        public Nullable<decimal> Value { get; set; }
+        public Nullable<int> Value { get; set; }
     
         public virtual ICollection<Account> Account { get; set; }
     }
