@@ -189,6 +189,9 @@
     <Compile Include="DataBase\Lead_Source.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\Lead_Status.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\Level_Language.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -220,9 +223,6 @@
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Opportunities_Products.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities_Stage.cs">
@@ -281,6 +281,12 @@
     </Compile>
     <Compile Include="Views\Objects\Accounts\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Accounts\CreateEditAccount.xaml.cs">
+      <DependentUpon>CreateEditAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Accounts\SearchAccounts.xaml.cs">
+      <DependentUpon>SearchAccounts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Campaigns\CampaignsView.xaml.cs">
       <DependentUpon>CampaignsView.xaml</DependentUpon>
@@ -350,6 +356,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Accounts\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Accounts\CreateEditAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Accounts\SearchAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -460,10 +474,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\opencrm_logo_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Home\images\blank-cd.png" />
-    <Resource Include="Views\Home\images\placeholder_person.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Icons\Contacts Folder.png" />
