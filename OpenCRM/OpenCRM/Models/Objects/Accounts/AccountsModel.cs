@@ -146,9 +146,9 @@ namespace OpenCRM.Models.Objects.Accounts
             return list;
         }
 
-        public List<Rating> getRating()
+        public List<DataBase.Rating> getRating()
         {
-            var list = new List<Rating>();
+            var list = new List<DataBase.Rating>();
 
             try
             {
