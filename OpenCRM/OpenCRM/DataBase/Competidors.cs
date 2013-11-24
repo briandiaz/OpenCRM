@@ -25,7 +25,8 @@ namespace OpenCRM.DataBase
         public Nullable<int> Weakness { get; set; }
     
         public virtual Industry Industry { get; set; }
-        public virtual ICollection<Opportunities> Opportunities { get; set; }
         public virtual Industry Industry1 { get; set; }
+        public virtual ICollection<Opportunities> Opportunities { get; set; }
+        public virtual Industry Industry11 { get; set; }
     }
 }

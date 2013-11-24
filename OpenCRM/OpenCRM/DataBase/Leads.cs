@@ -46,6 +46,7 @@ namespace OpenCRM.DataBase
         public virtual Campaign Campaign { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual Lead_Source Lead_Source { get; set; }
+        public virtual Lead_Status Lead_Status { get; set; }
         public virtual Rating Rating { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

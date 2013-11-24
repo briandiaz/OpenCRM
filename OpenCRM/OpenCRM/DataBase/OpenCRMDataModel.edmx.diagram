@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="458b364fa2994a5bb3a56df921760ebb" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="458b364fa2994a5bb3a56df921760ebb" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="OpenCRMModel.Account" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Account_Ownership" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Account_Priority" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Account_SLA" Width="1.5" PointX="3" PointY="32.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Account_Type" Width="1.5" PointX="3" PointY="35.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Account_Up_Sell_Opportunity" Width="1.5" PointX="3" PointY="37.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OpenCRMModel.Address" Width="1.5" PointX="3" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenCRMModel.Address" Width="1.5" PointX="2.875" PointY="40.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Address_Type" Width="1.5" PointX="0.75" PointY="39.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Campaign" Width="1.5" PointX="8.25" PointY="24.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Campaign_Status" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
@@ -41,15 +41,18 @@
         <EntityTypeShape EntityType="OpenCRMModel.Opportunities_Stage" Width="1.5" PointX="14.25" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Opportunities_Status" Width="1.5" PointX="14.25" PointY="33.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Opportunities_Type" Width="1.5" PointX="14.25" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenCRMModel.Opportunities_Lead_Source" Width="1.5" PointX="14.25" PointY="35.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Products" Width="1.5" PointX="5.25" PointY="47.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Profile" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Profile_Object" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Profile_Object_Fields" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Rating" Width="1.5" PointX="3" PointY="50.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OpenCRMModel.Records" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OpenCRMModel.Records" Width="1.5" PointX="0.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.Salutation" Width="1.5" PointX="11.25" PointY="33.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.State" Width="1.5" PointX="0.75" PointY="42.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenCRMModel.User" Width="1.5" PointX="3" PointY="24.125" IsExpanded="true" />
+        <!-- <EntityTypeShape EntityType="OpenCRMModel.Lead_Status" Width="1.5" PointX="8.6626712887839741" PointY="27.310601366362814" /> -->
+
         <AssociationConnector Association="OpenCRMModel.FK_Account_Account_Ownership" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.FK_Account_Account_Parent" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.FK_Account_Account_Priority" ManuallyRouted="false" />
@@ -129,9 +132,8 @@
         <AssociationConnector Association="OpenCRMModel.FK_Profile_Object_Profile" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.PK_User_Profile" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.FK_Profile_Object_Fields_Profile_Object" ManuallyRouted="false" />
-        <AssociationConnector Association="OpenCRMModel.FK_Opportunities_Lead_Source" />
+        <AssociationConnector Association="OpenCRMModel.FK_Opportunities_Lead_Source" ManuallyRouted="false" />
         <AssociationConnector Association="OpenCRMModel.FK_Opportunities_Products" />
-        <EntityTypeShape EntityType="OpenCRMModel.Lead_Status" Width="1.5" PointX="7.9542545191730625" PointY="17.154610165001177" />
         <AssociationConnector Association="OpenCRMModel.FK_Competidor_Industry_Weakness1" />
         <AssociationConnector Association="OpenCRMModel.FK_LeadStatus" />
       </Diagram>

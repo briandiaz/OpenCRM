@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="OpenCRMModelStoreContainer">
           <EntitySet Name="Account" EntityType="OpenCRMModel.Store.Account" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Account_Ownership" EntityType="OpenCRMModel.Store.Account_Ownership" store:Type="Tables" Schema="dbo" />
@@ -1876,7 +1876,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OpenCRMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2284,6 +2285,7 @@
           <Property Name="IndustryId" Type="Int32" />
           <Property Name="NumberOfLocation" Type="Int32" />
           <Property Name="PhoneNumber" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="SlaSerialNumber" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
           <Property Name="RatingId" Type="Int32" />
           <Property Name="TickerSymbol" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="WebSite" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
@@ -2311,7 +2313,6 @@
           <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Account" FromRole="Account" ToRole="Opportunities" />
           <Property Type="DateTime" Name="ViewDate" Precision="3" />
           <Property Type="String" Name="Code" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SlaSerialNumber" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="SLAExpiration" Precision="0" />
         </EntityType>
         <EntityType Name="Account_Ownership">
@@ -2515,8 +2516,9 @@
           <Property Name="Strenght" Type="Int32" />
           <Property Name="Weakness" Type="Int32" />
           <NavigationProperty Name="Industry" Relationship="OpenCRMModel.FK_Competidor_Industry_Strenght" FromRole="Competidors" ToRole="Industry" />
+          <NavigationProperty Name="Industry1" Relationship="OpenCRMModel.FK_Competidor_Industry_Weakness" FromRole="Competidors" ToRole="Industry" />
           <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Competidor" FromRole="Competidors" ToRole="Opportunities" />
-          <NavigationProperty Name="Industry1" Relationship="OpenCRMModel.FK_Competidor_Industry_Weakness1" FromRole="Competidors" ToRole="Industry" />
+          <NavigationProperty Name="Industry11" Relationship="OpenCRMModel.FK_Competidor_Industry_Weakness1" FromRole="Competidors" ToRole="Industry" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -2814,8 +2816,8 @@
           <NavigationProperty Name="User" Relationship="OpenCRMModel.FK_Products_User_Creator" FromRole="Products" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="OpenCRMModel.FK_Products_User_Modificator" FromRole="Products" ToRole="User" />
           <Property Type="String" Name="Code" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Products" FromRole="Products" ToRole="Opportunities" />
           <Property Type="Int32" Name="Quantity" />
+          <NavigationProperty Name="Opportunities" Relationship="OpenCRMModel.FK_Opportunities_Products" FromRole="Products" ToRole="Opportunities" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -3942,7 +3944,6 @@
             <EntityTypeMapping TypeName="OpenCRMModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="SLAExpiration" ColumnName="SLAExpiration" />
-                <ScalarProperty Name="SlaSerialNumber" ColumnName="SlaSerialNumber" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
@@ -3965,6 +3966,7 @@
                 <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
                 <ScalarProperty Name="NumberOfLocation" ColumnName="NumberOfLocation" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SlaSerialNumber" ColumnName="SlaSerialNumber" />
                 <ScalarProperty Name="RatingId" ColumnName="RatingId" />
                 <ScalarProperty Name="TickerSymbol" ColumnName="TickerSymbol" />
                 <ScalarProperty Name="WebSite" ColumnName="WebSite" />

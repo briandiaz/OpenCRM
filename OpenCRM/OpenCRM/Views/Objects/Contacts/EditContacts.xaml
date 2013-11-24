@@ -1,0 +1,611 @@
+﻿<Page x:Class="OpenCRM.Views.Objects.Contacts.EditContacts"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+                      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d"
+                      Title="Campaigns" 
+                      MinHeight="1024" 
+                      MinWidth="768"
+                      >
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
+    <controls:MetroContentControl>
+        <Grid>
+
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="117*"/>
+                <ColumnDefinition Width="604*"/>
+                <ColumnDefinition Width="47*"/>
+            </Grid.ColumnDefinitions>
+
+            <TabControl Grid.Row="0" Grid.Column="0">
+                <TabItem Header="_Contacts" FontSize="20px" RenderTransformOrigin="0.487,0.778" Margin="1,6,-1,-6"/>
+            </TabControl>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1">
+
+                <StackPanel Grid.Row="1" 
+                        Grid.Column="1" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Right" Width="158">
+
+                    <Button 
+                    x:Name="btnEditContact"
+                    VerticalAlignment="Center"
+                    Margin="2,48,2,133"
+                    Width="75" Click="btnEditContact_Click" >
+
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"/>
+                            <TextBlock VerticalAlignment="Center"><Run Text="Create"/></TextBlock>
+                        </StackPanel>
+
+                    </Button>
+
+                    <Button 
+                        x:Name="btnCreateContact"
+                        VerticalAlignment="Center"
+                        Margin="2,50,2,131"
+                        Width="75" 
+                        Click="btnCreateContact_Click">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/Img/Icons/32px/cancel-circle.png" Width="32" Height="32px"/>
+                            <TextBlock VerticalAlignment="Center"><Run Text="Cancel"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+
+
+                </StackPanel>
+
+                <Image Source="/Assets/Img/Icons/Contacts.png" 
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       Height="100"
+                       Grid.Row="1"
+                       VerticalAlignment="Top"
+                       Width="100"/>
+
+            </Grid>
+
+            <ScrollViewer Grid.Row="2"
+                          Grid.Column="1"
+                          Height="680"
+                          Width="auto"
+                          >
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="34*" />
+                        <RowDefinition Height="326*"/>
+                        <RowDefinition Height="34*" />
+                        <RowDefinition Height="511*"/>
+                        <RowDefinition Height="34*" />
+                        <RowDefinition Height="400*"/>
+                        <RowDefinition Height="34*" />
+                        <RowDefinition Height="400*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="#1179BE" />
+                            <Setter Property="BorderThickness" Value="5" />
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                    </Grid.Resources>
+
+                    <Grid Grid.Row="0" 
+                          Background="#349CE2"
+                          Margin="0,5,0,0">
+                        <Border>
+                            <TextBlock Text="Contact Information"
+                              TextAlignment="Center"
+                              FontSize="22"
+                              Foreground="White"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+
+                        <Label Content="Contact Owner"
+                           HorizontalAlignment="Left"
+                           Margin="37,5,0,0" 
+                           VerticalAlignment="Top"/>
+
+                        <Label Content="First Name"
+                           HorizontalAlignment="Left"
+                           Margin="40,38,0,0" 
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Last Name"
+                           HorizontalAlignment="Left"
+                           Margin="41,72,0,0"
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Account Name"
+                           HorizontalAlignment="Left"
+                           Margin="41,104,0,0"
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Title"
+                           HorizontalAlignment="Left"
+                           Margin="41,140,0,0"
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Department"
+                           HorizontalAlignment="Left"
+                           Margin="41,173,0,0"
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="BirthDate"
+                           HorizontalAlignment="Left"
+                           Margin="40,205,0,0"
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Reports To"
+                           HorizontalAlignment="Left"
+                           Margin="40,237,0,0"
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Lead Source"
+                           HorizontalAlignment="Left"
+                           Margin="41,273,0,0"
+                           VerticalAlignment="Top"
+                           RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <TextBox
+                            Name="TxtBoxContactName"
+                            HorizontalAlignment="Left"
+                            Height="23" Margin="134,38,0,0"
+                            TextWrapping="Wrap"
+                            controls:TextboxHelper.Watermark="Contact Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxContactLastName"
+                	        HorizontalAlignment="Left"
+                            Height="23"
+                            Margin="134,71,0,0"
+                            TextWrapping="Wrap"
+                            controls:TextboxHelper.Watermark="Last Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+
+                        <TextBox 
+                            Name="TxtBoxConctactAccountName"
+                            HorizontalAlignment="Left" 
+                            Height="23" Margin="134,105,0,0" 
+                            TextWrapping="Wrap" 
+                            controls:TextboxHelper.Watermark="Account Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            VerticalAlignment="Top" 
+                            Width="120"/>
+
+                        <TextBox
+                            Name="TxtBoxConctactTitle"
+                            HorizontalAlignment="Left"
+                            Height="23"
+                            Margin="134,140,0,0"
+                            TextWrapping="Wrap"
+                            controls:TextboxHelper.Watermark="Conctact Title"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+
+                        <TextBox 
+                            Name="TxtBoxConctactDepartment"
+                            HorizontalAlignment="Left"
+                            Height="23"
+                            Margin="134,174,0,0"
+                            TextWrapping="Wrap"
+                            controls:TextboxHelper.Watermark="Department"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+
+                        <TextBox
+                            Name="TxtBoxConctactBirthDate"
+                            HorizontalAlignment="Left"
+                            Height="23"
+                            Margin="134,206,0,0"
+                            TextWrapping="Wrap"
+                            controls:TextboxHelper.Watermark="Birth Date"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+
+                        <TextBox
+                            Name="TxtBoxConctactReportsTo"
+                            HorizontalAlignment="Left"
+                            Height="23"
+                            Margin="134,239,0,0"
+                            TextWrapping="Wrap"
+                            controls:TextboxHelper.Watermark="Reports To"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+
+                        <ComboBox 
+                            Name="TxtBoxConctactLeadSource"
+                            HorizontalAlignment="Left"
+                            Margin="134,274,0,0"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+
+                        <Label Content="Phone"
+                	        HorizontalAlignment="Left"
+                	        Margin="306,9,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Home Phone"
+                	        HorizontalAlignment="Left"
+                	        Margin="306,40,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Mobile"
+                	        HorizontalAlignment="Left"
+                	        Margin="306,73,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Other Phone"
+                	        HorizontalAlignment="Left"
+                	        Margin="306,106,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Fax"
+                	        HorizontalAlignment="Left"
+                	        Margin="306,142,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Email"
+                	        HorizontalAlignment="Left"
+                	        Margin="306,175,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Assistant"
+                	        HorizontalAlignment="Left"
+                	        Margin="306,207,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <Label Content="Assistant Phone"
+                	        HorizontalAlignment="Left"
+                	        Margin="288,241,0,0" 
+                	        VerticalAlignment="Top"
+                	        RenderTransformOrigin="-2.967,-0.025"/>
+
+                        <TextBox
+                             Name="TxtBoxPhone"
+                             HorizontalAlignment="Left"
+                             Height="23"
+                             Margin="392,10,0,0"
+                             TextWrapping="Wrap"
+                             controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                             VerticalAlignment="Top"
+                             Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxHomePhone"
+                	        HorizontalAlignment="Left"
+                	        Height="23"
+                	        Margin="392,41,0,0"
+                	        TextWrapping="Wrap"
+                	        controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                	        VerticalAlignment="Top"
+                	        Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxMobile"
+                	        HorizontalAlignment="Left"
+                	        Height="23"
+                	        Margin="392,73,0,0"
+                	        TextWrapping="Wrap"
+                	        controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                	        VerticalAlignment="Top"
+                	        Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxOtherPhone"
+                	        HorizontalAlignment="Left"
+                	        Height="23"
+                	        Margin="392,107,0,0"
+                	        TextWrapping="Wrap"
+                	        controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                	        VerticalAlignment="Top"
+                	        Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxFax"
+                	        HorizontalAlignment="Left"
+                	        Height="23"
+                	        Margin="392,141,0,0"
+                	        TextWrapping="Wrap"
+                	        controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                	        VerticalAlignment="Top"
+                	        Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxEmail"
+                	        HorizontalAlignment="Left"
+                	        Height="23"
+                	        Margin="392,176,0,0"
+                	        TextWrapping="Wrap"
+                	        controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                	        VerticalAlignment="Top"
+                	        Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxAssistant"
+                	        HorizontalAlignment="Left"
+                	        Height="23"
+                	        Margin="392,208,0,0"
+                	        TextWrapping="Wrap"
+                	        controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                	        VerticalAlignment="Top"
+                	        Width="120"/>
+
+                        <TextBox
+                	        Name="TxtBoxAssistantPhone"
+                	        HorizontalAlignment="Left"
+                	        Height="23"
+                	        Margin="391,242,0,0"
+                	        TextWrapping="Wrap"
+                	        controls:TextboxHelper.Watermark="First Name"
+                            controls:TextboxHelper.ClearTextButton="True"
+                	        VerticalAlignment="Top"
+                	        Width="120"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="2" 
+                          Background="#349CE2"
+                          Margin="0,5,0,0">
+                        <Border>
+                            <TextBlock Text="Address Information"
+                               TextAlignment="Center"
+                                FontSize="22"
+                               Foreground="White"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+
+
+                        <Label Content="Mailing Street"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left"
+                   Margin="50,31,0,0"
+                   Grid.Row="5"
+                   VerticalAlignment="Top"/>
+
+                        <Label Content="Mailing City"
+            	Grid.Column="1"
+            	HorizontalAlignment="Left"
+            	Margin="67,67,0,0"
+            	Grid.Row="5"
+            	VerticalAlignment="Top"/>
+
+                        <Label Content="Mailing State/Province"
+            	Grid.Column="1"
+            	HorizontalAlignment="Left"
+            	Margin="10,99,0,0"
+            	Grid.Row="5"
+            	VerticalAlignment="Top"/>
+
+                        <Label Content="Mailing Zip/PostaCode"
+            	Grid.Column="1"
+            	HorizontalAlignment="Left"
+            	Margin="10,130,0,0"
+            	Grid.Row="5"
+            	VerticalAlignment="Top"/>
+
+                        <Label Content="Mailing Country"
+            	Grid.Column="1"
+            	HorizontalAlignment="Left"
+            	Margin="45,166,0,0"
+            	Grid.Row="5"
+            	VerticalAlignment="Top"/>
+
+                        <TextBox
+                    Name="TxtBoxMailinStreet"
+                    Grid.Column="1" 
+                     HorizontalAlignment="Left"
+                     Height="23"
+                     Margin="141,31,0,0"
+                     Grid.Row="5"
+                     TextWrapping="Wrap"
+                     controls:TextboxHelper.Watermark="First Name"
+                    controls:TextboxHelper.ClearTextButton="True"
+                     VerticalAlignment="Top"
+                     Width="120"/>
+
+                        <TextBox
+            	Name="TxtBoxMailinCity"
+            	Grid.Column="1" 
+            	HorizontalAlignment="Left"
+            	Height="23"
+            	Margin="140,67,0,0"
+            	Grid.Row="5"
+            	TextWrapping="Wrap"
+            	controls:TextboxHelper.Watermark="First Name"
+                controls:TextboxHelper.ClearTextButton="True"
+            	VerticalAlignment="Top"
+            	Width="120"/>
+
+                        <TextBox
+                Name="TxtBoxMailinState"
+            	Grid.Column="1" 
+            	HorizontalAlignment="Left"
+            	Height="23"
+            	Margin="141,100,0,0"
+            	Grid.Row="5"
+            	TextWrapping="Wrap"
+            	controls:TextboxHelper.Watermark="First Name"
+                controls:TextboxHelper.ClearTextButton="True"
+            	VerticalAlignment="Top"
+            	Width="120"/>
+
+                        <TextBox
+            	Name="TxtBoxMailinPostalCode"
+            	Grid.Column="1" 
+            	HorizontalAlignment="Left"
+            	Height="23"
+            	Margin="140,131,0,0"
+            	Grid.Row="5"
+            	TextWrapping="Wrap"
+            	controls:TextboxHelper.Watermark="First Name"
+                controls:TextboxHelper.ClearTextButton="True" 
+            	VerticalAlignment="Top"
+            	Width="120"/>
+
+                        <TextBox
+            	Name="TxtBoxMailinCountry"
+            	Grid.Column="1" 
+            	HorizontalAlignment="Left"
+            	Height="23"
+            	Margin="140,167,0,0"
+            	Grid.Row="5"
+            	TextWrapping="Wrap"
+            	controls:TextboxHelper.Watermark="First Name"
+                controls:TextboxHelper.ClearTextButton="True"
+            	VerticalAlignment="Top"
+            	Width="120"/>
+
+
+                    </Grid>
+
+                    <Grid Grid.Row="4" 
+                          Background="#349CE2"
+                          Margin="0,5,0,0">
+                        <Border>
+                            <TextBlock Text="Additional Information"
+                               TextAlignment="Center"
+                                FontSize="22"
+                                Foreground="White"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+
+                        <Label Content="Lenguages"
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       Margin="36,31,0,0"
+                       Grid.Row="7"
+                       VerticalAlignment="Top"/>
+
+                        <TextBox Grid.Column="1"
+                         HorizontalAlignment="Left"
+                         Height="25" Margin="108,32,0,0"
+                         Grid.Row="7" 
+                         TextWrapping="Wrap"
+                         controls:TextboxHelper.Watermark="First Name"
+                         controls:TextboxHelper.ClearTextButton="True"
+                         VerticalAlignment="Top" 
+                         Width="136"/>
+
+                        <Label Content="Level"
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       Margin="362,31,0,0" 
+                       Grid.Row="7" 
+                       VerticalAlignment="Top"/>
+
+                        <ComboBox Grid.Column="1"
+                      HorizontalAlignment="Left" 
+                      Margin="404,32,0,0"
+                      Grid.Row="7" 
+                      VerticalAlignment="Top"
+                      Width="120"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="6" 
+                          Background="#349CE2"
+                          Margin="0,5,0,0">
+                        <Border>
+                            <TextBlock Text="Description Information"
+                               TextAlignment="Center"
+                               FontSize="22"
+                               Foreground="White"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="7">
+                        <Label Content="Description"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           Margin="24,23,0,0"
+                           Grid.Row="9"
+                           VerticalAlignment="Top"/>
+
+                        <TextBox
+                            Name="TxtBoxDescription"
+                            Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             Height="110"
+                             Margin="99,24,0,0"
+                             Grid.Row="9"
+                             TextWrapping="Wrap"
+                             controls:TextboxHelper.Watermark="Enter Description"
+                             controls:TextboxHelper.ClearTextButton="True"
+                             VerticalAlignment="Top"
+                             Width="445"/>
+
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+
+        </Grid>
+
+    </controls:MetroContentControl>
+</Page>

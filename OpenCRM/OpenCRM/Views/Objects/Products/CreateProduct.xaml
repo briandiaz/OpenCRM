@@ -42,9 +42,11 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="600*"/>
                 <ColumnDefinition Width="600*"/>
                 <ColumnDefinition Width="200*"/>
+
             </Grid.ColumnDefinitions>
 
 
@@ -64,21 +66,30 @@
                VerticalAlignment="Top"
                Width="100"/>
 
+            <Border  Grid.Row="2" 
+                     Grid.Column="1"
+                     Background="#1179BE" 
+                     Margin="0,4,0,0"
+                     />
+
             <Grid Grid.Row="2"
                       Grid.Column="1">
-                <Border BorderBrush="#1179BE">
-                    <Grid Background="#1179BE"
-                          Margin="0,20,0,0">
-                        <TextBlock  Text="Products Information"
-                                        VerticalAlignment="Center"
-                                        TextAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        Foreground="White"
-                                        FontSize="16px"
-                                        Margin="34,8,0,8" />
-                    </Grid>
-                </Border>
+                <TextBlock  Text="Products Information"
+                        VerticalAlignment="Center"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Foreground="White"
+                        FontSize="16px"
+                        Margin="270,15,2,11" />
+
             </Grid>
+
+
+            <Border  
+                     Margin="0,4,0,0"
+                     Grid.Row="2"
+                     Grid.Column="2"
+                     Background="#1179BE" />
 
             <TextBox
                    controls:TextboxHelper.Watermark="Enter Product Name"
@@ -93,8 +104,8 @@
                      VerticalAlignment="Top"
                      Width="220"
                      />
-            
-            <Label Content="ID"
+
+            <Label Content="Code"
                    Grid.Column="1"
                    HorizontalAlignment="Left"
                    Margin="27,73,0,0"
@@ -104,16 +115,7 @@
                    Height="25"
                    Width="56"/>
 
-            <Label Content="Description"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   Margin="27,150,0,0"
-                   Grid.Row="3" 
-                   VerticalAlignment="Top"
-                   RenderTransformOrigin="0.508,-0.467"
-                   Height="25"
-                   Width="73"/>
-            
+
             <Label Content="Price"
                    Grid.Column="1"
                    HorizontalAlignment="Left"
@@ -125,7 +127,7 @@
                    Width="56"/>
 
             <TextBox
-                    controls:TextboxHelper.Watermark="Enter Product ID"
+                    controls:TextboxHelper.Watermark="Enter Product Code"
                     controls:TextboxHelper.ClearTextButton="True"
                     Name="TxtBoxCodigo"
                     Grid.Column="1"
@@ -135,22 +137,32 @@
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
                      Width="220" RenderTransformOrigin="0.482,2.154" />
-            
-            <TextBox 
-                   controls:TextboxHelper.Watermark="Enter Product Price"
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,30,0,0"
+                        HorizontalAlignment="Center"
+                        Grid.Column="2" Grid.Row="3">
+
+
+                <Label Content="Description"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Height="25"
+                   Width="73"/>
+
+                <TextBox 
+                   controls:TextboxHelper.Watermark="Enter Product Description"
                    controls:TextboxHelper.ClearTextButton="True"
                     Name="TxtBoxDescripcion"
-                    Grid.Column="1"
-                     HorizontalAlignment="Left"
                      Height="98"
-                     Margin="105,153,0,0"
-                     Grid.Row="3"
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
-                     Width="317"/>
-            
+                     Width="317"
+                    />
+            </StackPanel>
+
             <TextBox
-                controls:TextboxHelper.Watermark="Enter Product Description "
+                controls:TextboxHelper.Watermark="Enter Product Price "
                 controls:TextboxHelper.ClearTextButton="True"
                     Name="TxtBoxPrecio"
                     Grid.Column="1"
@@ -161,9 +173,9 @@
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
                      Width="220"/>
-            
+
             <Button 
-                    Grid.Column="1"
+                    Grid.Column="2"
                     HorizontalAlignment="Right"
                     Grid.Row="1"
                     VerticalAlignment="Top"
@@ -174,15 +186,17 @@
                     <TextBlock VerticalAlignment="Center"><Run Text="Create"/></TextBlock>
                 </StackPanel>
             </Button>
-            
-            <CheckBox 
-                      Name="CheckActive"
-                      Content="Active"
-                      Grid.Column="1"
-                      HorizontalAlignment="Left"
-                      Margin="370,44,0,0"
-                      Grid.Row="3"
-                      VerticalAlignment="Top"/>
+
+            <controls:ToggleSwitch 
+                        Name="cbxCampaignActive"
+                        OnLabel="Yes" 
+                        OffLabel="No"
+                        Grid.Row="3"
+                        Width="100"
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" Margin="368,39,0,292" Grid.ColumnSpan="2"
+                                   />
 
             <Label Content="Name" 
                    Grid.Column="1" 
@@ -193,7 +207,7 @@
                    RenderTransformOrigin="-0.053,0.038"
                    />
             <Button 
-            	Grid.Column="1"
+            	Grid.Column="2"
             	HorizontalAlignment="Right"
             	Grid.Row="1"
             	VerticalAlignment="Top"
@@ -204,6 +218,35 @@
                     <TextBlock VerticalAlignment="Center"><Run Text="Cancel"/></TextBlock>
                 </StackPanel>
             </Button>
+            <Label Content="Active"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left"
+                   Margin="415,27,0,0"
+                   Grid.Row="3"
+                   VerticalAlignment="Top"
+                   Grid.ColumnSpan="2"/>
+            <Label Content="Quantity"
+            	Grid.Column="1"
+            	HorizontalAlignment="Left"
+            	Margin="27,151,0,0"
+            	Grid.Row="3"
+            	VerticalAlignment="Top"
+            	RenderTransformOrigin="0.508,-0.467"
+            	Height="25"
+            	Width="56"/>
+            <TextBox
+            	controls:TextboxHelper.Watermark="Enter Product Quantity "
+            	controls:TextboxHelper.ClearTextButton="True"
+            	x:Name="TxtBoxQuantity"
+            	Grid.Column="1"
+            	HorizontalAlignment="Left"
+            	Height="14"
+            	Margin="105,151,0,0"
+            	Grid.Row="3"
+            	TextWrapping="Wrap"
+            	VerticalAlignment="Top"
+            	Width="220"/>
+
 
         </Grid>
     </controls:MetroContentControl>
