@@ -70,6 +70,6 @@ namespace OpenCRM.DataBase
         public DbSet<Salutation> Salutation { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Lead_Status> Lead_Status { get; set; }
+        //public DbSet<Leads_Source> Lead_Status { get; set; }
     }
 }

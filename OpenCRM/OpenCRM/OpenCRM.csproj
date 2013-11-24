@@ -222,9 +222,6 @@
     <Compile Include="DataBase\Opportunities.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\Opportunities_Products.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataBase\Opportunities_Stage.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -290,6 +287,9 @@
     </Compile>
     <Compile Include="Views\Objects\Campaigns\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Campaigns\Leads\LeadsView.xaml.cs">
+      <DependentUpon>LeadsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Cases\CasesView.xaml.cs">
       <DependentUpon>CasesView.xaml</DependentUpon>
@@ -362,6 +362,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Campaigns\Edit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Campaigns\Leads\LeadsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -460,10 +464,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\opencrm_logo_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Home\images\blank-cd.png" />
-    <Resource Include="Views\Home\images\placeholder_person.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Icons\Contacts Folder.png" />
@@ -960,6 +960,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Home\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

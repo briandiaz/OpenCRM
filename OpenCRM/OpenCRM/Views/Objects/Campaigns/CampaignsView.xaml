@@ -168,6 +168,17 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
+                    <Button Name="btnAddLeads"
+                                Width="100"
+                                Height="35"
+                                Cursor="Hand"
+                            Style="{DynamicResource SquareButtonStyle}" Margin="266,245,284,120" Click="btnAddLeads_Click"
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/Img/Icons/32px/plus.png" Width="16" Height="16px"/>
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="19">Leads</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" 

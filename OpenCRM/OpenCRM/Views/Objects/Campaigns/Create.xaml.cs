@@ -41,11 +41,21 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public int? _campaignTypeId
         {
-            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null; }
+            get { return (Convert.ToInt32(cmbCampaignType.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null; }
+            set
+            {
+                int? cmptype = (Convert.ToInt32(cmbCampaignType.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null;
+                cmptype = value;
+            }
         }
         public int? _campaignStatusId
         {
-            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null; }
+            get { return (Convert.ToInt32(cmbCampaignStatus.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null; }
+            set
+            {
+                int? cmpstatus = (Convert.ToInt32(cmbCampaignStatus.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null;
+                cmpstatus = value;
+            }
         }
         public DateTime _startDate
         {
@@ -125,7 +135,7 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private CampaignStatus _campaignStatus = new CampaignStatus();
         private CampaignType _campaignType = new CampaignType();
-        private AccountOwner _accountOwner = new AccountOwner();
+        //private User _accountOwner;// = new AccountOwner();
         private CampaignsModel _campaigns = new CampaignsModel();
 
         public Create()
@@ -143,7 +153,7 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private void loadComboboxes()
         {
-            cmbCampaignOwner.ItemsSource = _accountOwner.getCampaignOwner();
+            cmbCampaignOwner.ItemsSource = AccountOwner.getCampaignOwner();
             cmbCampaignOwner.DisplayMemberPath = "Name";
             cmbCampaignOwner.SelectedValuePath = "OwnerID";
             cmbCampaignOwner.SelectedIndex = 0;
@@ -222,6 +232,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                     if (campaign.Save())
                     {
                         System.Windows.MessageBox.Show("Campaign created successfully", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Exclamation);
+
                     }
                     else
                     {
@@ -272,6 +283,22 @@ namespace OpenCRM.Views.Objects.Campaigns
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Campaigns/CampaignsView.xaml"); 
+        }
+
+        private void cmbCampaignStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbCampaignStatus.SelectedItem != null)
+            {
+                _campaignStatusId = Convert.ToInt32(cmbCampaignStatus.SelectedValue);
+            }
+        }
+
+        private void cmbCampaignType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbCampaignType.SelectedItem != null)
+            {
+                _campaignTypeId = Convert.ToInt32(cmbCampaignType.SelectedValue);
+            }
         }
             
     }

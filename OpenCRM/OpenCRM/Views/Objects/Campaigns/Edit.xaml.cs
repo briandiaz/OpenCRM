@@ -26,7 +26,7 @@ namespace OpenCRM.Views.Objects.Campaigns
     {
         public int _userId
         {
-            get { return ((AccountOwner)(cmbCampaignOwner.SelectedItem)).OwnerID; }
+            get { return ((User)(cmbCampaignOwner.SelectedItem)).UserId; }
         }
         public String _name
         {
@@ -217,7 +217,7 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         private void loadComboboxes()
         {
-            cmbCampaignOwner.ItemsSource = _accountOwner.getCampaignOwner();
+            cmbCampaignOwner.ItemsSource = AccountOwner.getCampaignOwner();
             cmbCampaignOwner.DisplayMemberPath = "Name";
             cmbCampaignOwner.SelectedValuePath = "OwnerID";
             cmbCampaignOwner.SelectedIndex = 0;
