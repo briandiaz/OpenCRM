@@ -133,6 +133,7 @@
         <AssociationConnector Association="OpenCRMModel.FK_Opportunities_Products" />
         <EntityTypeShape EntityType="OpenCRMModel.Lead_Status" Width="1.5" PointX="7.9542545191730625" PointY="17.154610165001177" />
         <AssociationConnector Association="OpenCRMModel.FK_Competidor_Industry_Weakness1" />
+        <AssociationConnector Association="OpenCRMModel.FK_LeadStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
