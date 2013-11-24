@@ -182,11 +182,25 @@
                                         HorizontalAlignment="Left"
                                         BorderBrush="Blue"
                                         Background="White"
-                                        BorderThickness="2"
+                                        BorderThickness="2" Click="btnEditLead_Click"
                                         >
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/Assets/Img/Icons/32px/loop.png" Height="28" />
                                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Edit</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnViewLead"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Orange"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnViewLead_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/info.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >View</TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Name="btnRemoveLead"
@@ -278,11 +292,25 @@
                                         HorizontalAlignment="Left"
                                         BorderBrush="Blue"
                                         Background="White"
-                                        BorderThickness="2"
+                                        BorderThickness="2" Click="btnEditAddLead_Click"
                                         >
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/Assets/Img/Icons/32px/loop.png" Height="28" />
                                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Edit</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnViewAddLead"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Orange"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnViewAddLead_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/info.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >View</TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Name="btnRemoveAddLead"

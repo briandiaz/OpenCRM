@@ -303,7 +303,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return _campaignLeads;
         }
-        public void AddLeadsToCampaign(List<Lead> Leads)
+        public Boolean AddLeadsToCampaign(List<Lead> Leads)
         {
             try
             {
@@ -317,6 +317,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                     }
                     _db.SaveChanges();
                     MessageBox.Show("Leads Added", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return true;
                 }
             }
             catch (SqlException ex)
@@ -327,6 +328,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
+            return false;
         }
         public Boolean RemoveCampaignLeads(List<Lead> Leads)
         {

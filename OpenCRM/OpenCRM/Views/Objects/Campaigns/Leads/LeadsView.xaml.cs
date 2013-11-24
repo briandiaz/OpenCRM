@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using OpenCRM.DataBase;
 using OpenCRM.Models.Objects.Campaigns;
 using OpenCRM.Controllers.Campaign;
+using OpenCRM.Models.Objects.Leads;
+using System.Collections.ObjectModel;
 
 namespace OpenCRM.Views.Objects.Campaigns.Leads
 {
@@ -45,35 +47,129 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
                     _leads.Add(new Lead(((OpenCRM.DataBase.Leads)Lead).LeadId));
                 }
                 CampaignsModel campaign = new CampaignsModel(CampaignController.CurrentCampaignId);
-                campaign.AddLeadsToCampaign(_leads);
+                if (campaign.AddLeadsToCampaign(_leads))
+                {
+                    UpdateLeadsGrid(dgAddLeadData,dgLeadData);
+                }
             }
             else
             {
                 MessageBox.Show("You must select at least 1 Lead to Add","Warning!",MessageBoxButton.OK,MessageBoxImage.Warning);
             }
         }
-
+        private void UpdateExistingLeadsGrid()
+        {
+            var _selectedLeads = dgAddLeadData.SelectedItems;
+            var _currentAddedLeads = (List<OpenCRM.DataBase.Leads>)dgLeadData.ItemsSource;
+            dgLeadData.ItemsSource = null;
+            foreach (OpenCRM.DataBase.Leads Lead in _selectedLeads)
+            {
+                _currentAddedLeads.Add(Lead);
+            }
+            dgLeadData.ItemsSource = _currentAddedLeads;
+            dgLeadData.Items.Refresh();
+            dgAddLeadData.ItemsSource = null;
+            dgAddLeadData.Items.Refresh();
+        }
 
         private void btnRemoveLead_Click(object sender, RoutedEventArgs e)
         {
-            if (dgAddLeadData.SelectedItems != null)
+            if (dgLeadData.SelectedItems != null)
             {
                 List<Lead> _leads = new List<Lead>();
-                foreach (var Lead in dgAddLeadData.SelectedItems)
+                foreach (var Lead in dgLeadData.SelectedItems)
                 {
                     _leads.Add(new Lead(((OpenCRM.DataBase.Leads)Lead).LeadId));
                 }
                 CampaignsModel campaign = new CampaignsModel(CampaignController.CurrentCampaignId);
                 if (campaign.RemoveCampaignLeads(_leads))
                 {
-                    dgLeadData.ItemsSource = null;
-                    dgLeadData.Items.Refresh();
+                    UpdateLeadsGrid(dgLeadData,dgAddLeadData);
                 }
             }
             else
             {
                 MessageBox.Show("You must select at least 1 Lead to Add", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+        ObservableCollection<OpenCRM.DataBase.Leads> _currentGridleads;
+        private void UpdateLeadsGrid(DataGrid currentGrid, DataGrid updateGrid)
+        {
+
+            var _selectedLeads = currentGrid.SelectedItems;
+            _currentGridleads = new ObservableCollection<DataBase.Leads>();
+            foreach (DataBase.Leads Lead in currentGrid.ItemsSource)
+            {
+                _currentGridleads.Add(Lead);
+            }
+            var _currentAvailableLeads = (List<OpenCRM.DataBase.Leads>)updateGrid.ItemsSource;
+            updateGrid.ItemsSource = null;
+            foreach (OpenCRM.DataBase.Leads Lead in _selectedLeads)
+            {
+                _currentAvailableLeads.Add(Lead);
+            }
+            updateGrid.ItemsSource = _currentAvailableLeads;
+            updateGrid.Items.Refresh();
+            foreach (OpenCRM.DataBase.Leads Lead in _selectedLeads)
+            {
+                _currentGridleads.Remove(Lead);
+            }
+            var currentGridItemsSource = new List<DataBase.Leads>();
+            foreach (DataBase.Leads Lead in _currentGridleads)
+            {
+                currentGridItemsSource.Add(Lead);
+            }
+            currentGrid.ItemsSource = currentGridItemsSource;
+            currentGrid.Items.Refresh();
+        }
+
+        private void btnEditLead_Click(object sender, RoutedEventArgs e)
+        {
+            EditLead(dgLeadData);
+        }
+
+        private void btnEditAddLead_Click(object sender, RoutedEventArgs e)
+        {
+            EditLead(dgAddLeadData);
+        }
+
+        private void EditLead(DataGrid dgrid)
+        {
+            if (dgrid.SelectedItem != null)
+            {
+                LeadsModel.IsNew = false;
+
+                var selectedItem = dgrid.SelectedItem;
+                Type type = selectedItem.GetType();
+
+                LeadsModel.LeadIdforEdit = Convert.ToInt32(type.GetProperty("LeadId").GetValue(selectedItem, null));
+
+                PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
+            }
+        }
+
+        private void ViewLead(DataGrid dgrid)
+        {
+            if (dgrid.SelectedItem != null)
+            {
+                LeadsModel.IsNew = false;
+
+                var selectedItem = dgrid.SelectedItem;
+                Type type = selectedItem.GetType();
+
+                LeadsModel.LeadIdforEdit = Convert.ToInt32(type.GetProperty("LeadId").GetValue(selectedItem, null));
+                PageSwitcher.Switch("/Views/Objects/Leads/LeadDetails.xaml");
+            }
+        }
+
+        private void btnViewLead_Click(object sender, RoutedEventArgs e)
+        {
+            ViewLead(dgLeadData);
+        }
+
+        private void btnViewAddLead_Click(object sender, RoutedEventArgs e)
+        {
+            ViewLead(dgAddLeadData);
         }
 
 
