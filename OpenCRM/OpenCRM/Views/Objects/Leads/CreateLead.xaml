@@ -1,7 +1,7 @@
 ﻿<Page   x:Class="OpenCRM.Views.Objects.Leads.CreateLead"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Height="Auto" 
         Width="Auto"
-	    Title="Create Opportunity">
+	    Title="Create Lead">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -21,11 +21,33 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
                 <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                    <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Height="1050">
+    <Grid Height="805">
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
         </Grid.Background>
@@ -51,12 +73,14 @@
                    FontSize="20px"
                    Margin="81,47,513,26"/>
 
-            <Image Source="/Assets/Img/Icons/Opportunities.png" 
-                   HorizontalAlignment="Left"
-                   Height="69"
-                   VerticalAlignment="Top"
-                   Width="66" 
-                   Margin="10,20,0,0" />
+            <Button Style="{DynamicResource NoChromeButton}" Cursor="Hand" HorizontalAlignment="Left" Click="LeadImage_OnClick" >
+                <Image Source="/Assets/Img/Icons/Leads.png" 
+                        HorizontalAlignment="Left"
+                        Height="69"
+                        VerticalAlignment="Top"
+                        Width="66"
+                        Margin="10,0,0,0"/>
+            </Button>
 
             <Button Name="btnSaveNewLead"
                     Content="Save"
@@ -73,7 +97,9 @@
 
         <ScrollViewer Grid.Row="1"
                       Grid.Column="1"
-                      Visibility="Visible" Margin="0,0,0,100">
+                      Visibility="Visible"
+                      Height="615"
+                      Width="Auto">
 
             <Grid Grid.Row="1"
                   Grid.Column="1" Height="940">
@@ -146,6 +172,7 @@
                           Margin="171,122,610,172" />
 
                     <TextBox Name="tbxLastName"
+                        Controls:TextboxHelper.ClearTextButton="True"
                              RenderTransformOrigin="-5.28,-12.3" 
                              Margin="181,122,416,172" />
 
@@ -157,6 +184,7 @@
                                 Height="22" />
 
                     <TextBox Name="tbxCompany"
+                        Controls:TextboxHelper.ClearTextButton="True"
         	                 RenderTransformOrigin="-5.28,-12.3" 
         	                 Margin="181,170,416,124" />
 
@@ -195,7 +223,10 @@
                     	Margin="10,40,625,-58" Grid.Row="1" />
 
                     <ComboBox Name="cmbLeadSource"
-                              Margin="181,271,416,24" />
+                              Margin="181,271,416,24" 
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="LeadSourceId"
+                              SelectedValue="1"/>
 
                     <TextBlock  Text="Phone"
                                 TextAlignment="Right"
@@ -205,6 +236,7 @@
                                 Height="20" />
 
                     <TextBox Name="tbxPhone"
+                        Controls:TextboxHelper.ClearTextButton="True"
         	                 RenderTransformOrigin="-5.28,-12.3" 
         	                 Margin="558,22,39,272" />
 
@@ -223,6 +255,7 @@
                                 Height="26" />
 
                     <TextBox Name="tbxFax"
+                        Controls:TextboxHelper.ClearTextButton="True"
         	                 RenderTransformOrigin="-5.28,-12.3" 
         	                 Margin="558,122,39,172" />
 
@@ -258,90 +291,52 @@
                     	Margin="418,326,243,-18" 
                     	Height="22" Grid.RowSpan="2" />
                     <TextBox x:Name="tbxFirstName"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="181,72,416,222" />
                     <Grid Background="#DA3232"
                     	Margin="171,170,610,124" />
                     <TextBox x:Name="tbxMobile"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="558,72,39,222" />
                     <TextBox x:Name="tbxEmail"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="558,170,39,124" />
                     <ComboBox x:Name="cmbLeadStatus"
-                    	Margin="558,218,39,77" />
+                    	Margin="558,218,39,77"
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="LeadStatusId"
+                        SelectedValue="1"/>
                     <ComboBox x:Name="cmbRating"
-                    	Margin="558,271,39,24" />
+                    	Margin="558,271,39,24"
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="RatingId"
+                        SelectedValue="1"/>
                     <TextBox x:Name="tbxNoEmployees"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="558,321,39,-25" Grid.RowSpan="2" />
                     <ComboBox x:Name="cmbIndustry"
-                    	Margin="181,34,416,-65" Grid.Row="1" Height="33" VerticalAlignment="Top" />
-                    <TextBox x:Name="tbxCampaign"
+                    	Margin="181,34,416,-65" Grid.Row="1" Height="33" VerticalAlignment="Top" 
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="IndustryId"
+                        SelectedValue="1"/>
+                    <TextBox x:Name="tbxLeadCampaign"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="181,317,416,-21" Grid.RowSpan="2" />
                     <TextBox Name="tbxTitle"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="181,218,416,76" />
-                </Grid>
-
-                <Grid Name="gridSearchAccount"
-                      Grid.Row="1"
-                      Background="#FAFAFA"
-                      Visibility="Collapsed">
-                    <Image Source="/Assets/Img/Search.png" 
-                           HorizontalAlignment="Left"
-                           Height="40"
-                           VerticalAlignment="Top"
-                           Width="40" 
-                           Margin="30,20,0,0" />
-
-                    <Label Content="Lookup Accounts"
-                           VerticalAlignment="Top"
-                           FontSize="28px"
-                           Margin="75,13,464,0"/>
-
-                    <TextBox Name="tbxSearchAccount"
-                             RenderTransformOrigin="-5.28,-12.3" 
-                             Margin="30,65,567,231" />
-
-                    <Button Name="btnSearchAccountLookUp"
-                            Margin="224,65,527,231"
-                            Click="btnSearchCampaignLookUp_Click">
-                        <StackPanel>
-                            <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button Name="btnClearAccountLookUp"
-                            Content="Clear"
-                            RenderTransformOrigin="3.322,0.756" 
-                            Margin="264,65,464,231"
-                            Click="btnClearCampaignLookUp_Click"/>
-
-                    <Button Name="btnCancelAccountLookUp"
-                            Content="Cancel"
-                            RenderTransformOrigin="3.322,0.756" 
-                            Margin="698,65,30,231"
-                            Click="btnCancelCampaignLookUp_Click"/>
-
-                    <Button Name="btnAcceptAccountLookUp"
-                            Content="Accept"
-                            RenderTransformOrigin="3.322,0.756" 
-                            Margin="635,65,93,231"
-                            Click="btnAcceptCampaignLookUp_Click"/>
-
-                    <DataGrid Name="DataGridAccount"
-                              Style="{DynamicResource MetroDataGrid}" 
-                              Margin="30,122,30,30" />
-
-
                 </Grid>
 
                 <Grid Name="gridSearchCampaign"
                       Grid.Row="1"
                       Background="#FAFAFA"
-                      Visibility="Collapsed">
+                      Visibility="Hidden">
                     <Image Source="/Assets/Img/Search.png" 
                            HorizontalAlignment="Left"
                            Height="40"
@@ -355,40 +350,39 @@
                            Margin="75,13,464,0"/>
 
                     <TextBox Name="tbxSearchCampaign"
+                        Controls:TextboxHelper.ClearTextButton="True"
                              RenderTransformOrigin="-5.28,-12.3" 
-                             Margin="30,65,567,231" />
+                             Margin="30,65,567,318" />
 
                     <Button Name="btnSearchCampaignLookUp"
-                            Margin="224,65,527,231"
+                            Margin="224,65,527,318"
                             Click="btnSearchCampaignLookUp_Click">
                         <StackPanel>
                             <Image Source="/Assets/Img/Search.png" Width="20" RenderTransformOrigin="0.067,-0.217"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Name="btnClearCampaingLookUp"
+                    <Button Name="btnClearCampaignLookUp"
                             Content="Clear"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="264,65,464,231"
-                            Click="btnClearCampaingLookUp_Click"/>
+                            Margin="264,65,464,318"
+                            Click="btnClearCampaignLookUp_Click"/>
 
                     <Button Name="btnCancelCampaignLookUp"
                             Content="Cancel"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="698,65,30,231"
+                            Margin="698,65,30,318"
                             Click="btnCancelCampaignLookUp_Click"/>
 
                     <Button Name="btnAcceptCampaignLookUp"
                             Content="Accept"
                             RenderTransformOrigin="3.322,0.756" 
-                            Margin="635,65,93,231"
+                            Margin="635,65,93,318"
                             Click="btnAcceptCampaignLookUp_Click"/>
 
                     <DataGrid Name="DataGridCampaign"
                               Style="{DynamicResource MetroDataGrid}" 
-                              Margin="30,122,30,30"/>
-
-
+                              Margin="30,122,30,30" />
                 </Grid>
 
                 <Grid Grid.Row="2"
@@ -436,6 +430,7 @@
                                 Height="24" />
 
                     <TextBox Name="tbxCity"
+                        Controls:TextboxHelper.ClearTextButton="True"
                              RenderTransformOrigin="-5.28,-12.3" 
                              Margin="180,111,417,183" />
 
@@ -447,6 +442,7 @@
                                 Height="22" />
 
                     <TextBox Name="tbxStateProvince"
+                        Controls:TextboxHelper.ClearTextButton="True"
         	                 RenderTransformOrigin="-5.28,-12.3" 
         	                 Margin="180,159,417,135" />
 
@@ -460,12 +456,15 @@
 
 
                     <TextBox x:Name="tbxStreet"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="180,61,417,233" />
                     <TextBox x:Name="tbxCountry"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="560,113,37,183" />
                     <TextBox Name="tbxZipPostalCode"
+                        Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="560,60,37,234" />
                 </Grid>
@@ -495,9 +494,10 @@
             	        Height="20" />
 
                     <TextBox Name="tbxLeadDescription"
-            	             RenderTransformOrigin="-5.28,-12.3" 
-            	             Margin="182,28,156,194" 
-                             VerticalAlignment="Center" Height="128"/>
+                        Controls:TextboxHelper.ClearTextButton="True"
+            	        RenderTransformOrigin="-5.28,-12.3" 
+            	        Margin="182,28,156,194" 
+                        VerticalAlignment="Center" Height="128"/>
                 </Grid>
 
             </Grid>
