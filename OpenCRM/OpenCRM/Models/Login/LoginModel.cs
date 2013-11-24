@@ -44,7 +44,7 @@ namespace OpenCRM.Models.Login
                 else
                     using (var db = new OpenCRMEntities())
                     {
-                        var hashpassword = password.GetHashCode().ToString();
+                        var hashpassword = password;//.GetHashCode().ToString();
                         var query = ( 
                             from user in db.User
                             where user.UserName == username && user.HashPassword == hashpassword

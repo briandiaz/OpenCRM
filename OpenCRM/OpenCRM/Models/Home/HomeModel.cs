@@ -53,6 +53,7 @@ namespace OpenCRM.Models.Home
         private List<HomeData> getHomeTitles()
         {
             List<HomeData> data = new List<HomeData>();
+
             using (var _db = new OpenCRMEntities()){
                 var objetos = (
                     from x in Session.RightAccess
@@ -62,7 +63,7 @@ namespace OpenCRM.Models.Home
                         temp.Key
                     }
                 ).ToList();
-
+                      
                 objetos.ForEach(
                     x => data.Add(new HomeData()
                     {
@@ -72,7 +73,7 @@ namespace OpenCRM.Models.Home
                     }
                     )
                 );
-            }
+            }         
 
             return data;
         }
