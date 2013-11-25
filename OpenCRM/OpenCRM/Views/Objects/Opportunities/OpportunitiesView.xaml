@@ -111,7 +111,7 @@
                               Style="{DynamicResource MetroDataGrid}"
                               HorizontalContentAlignment="Center"
                               VerticalContentAlignment="Center"
-                              Margin="10,72,10,10">
+                              Margin="10,72,10,10" SelectionChanged="DataGridRecentOpportunities_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
                                 <DataGridHyperlinkColumn.ElementStyle>
