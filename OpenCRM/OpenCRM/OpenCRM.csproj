@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -334,19 +334,17 @@
     <Compile Include="Views\Objects\Contacts\ContactsView.xaml.cs">
       <DependentUpon>ContactsView.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Views\Objects\Contacts\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Contacts\EditContacts.xaml.cs">
       <DependentUpon>EditContacts.xaml</DependentUpon>
-=======
+    </Compile>
     <Compile Include="Views\Objects\Leads\LeadConvertion.xaml.cs">
       <DependentUpon>LeadConvertion.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Leads\LeadDetails.xaml.cs">
       <DependentUpon>LeadDetails.xaml</DependentUpon>
->>>>>>> fc41648662ded0daaa1b51db2ac71a1d5b9114e7
     </Compile>
     <Compile Include="Views\Objects\Leads\CreateLead.xaml.cs">
       <DependentUpon>CreateLead.xaml</DependentUpon>
@@ -439,7 +437,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
     <Page Include="Views\Objects\Contacts\CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -447,7 +444,7 @@
     <Page Include="Views\Objects\Contacts\EditContacts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-=======
+    </Page>
     <Page Include="Views\Objects\Leads\LeadConvertion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -455,7 +452,6 @@
     <Page Include="Views\Objects\Leads\LeadDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
->>>>>>> fc41648662ded0daaa1b51db2ac71a1d5b9114e7
     </Page>
     <Page Include="Views\Objects\Leads\CreateLead.xaml">
       <SubType>Designer</SubType>
@@ -1046,11 +1042,8 @@
     <Resource Include="Assets\Img\Refresh.png" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Folder Include="Controllers\Products\" />
-=======
     <Folder Include="Views\Home\images\" />
->>>>>>> fc41648662ded0daaa1b51db2ac71a1d5b9114e7
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
