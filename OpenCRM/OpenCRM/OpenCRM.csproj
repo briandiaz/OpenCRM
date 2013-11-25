@@ -189,6 +189,9 @@
     <Compile Include="DataBase\Lead_Source.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\Lead_Status.cs">
+      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\Level_Language.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -220,9 +223,6 @@
       <DependentUpon>OpenCRMDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities.cs">
-      <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\Opportunities_Products.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Opportunities_Stage.cs">
@@ -297,6 +297,12 @@
     <Compile Include="Views\Objects\Contacts\ContactsView.xaml.cs">
       <DependentUpon>ContactsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Contacts\CreateContact.xaml.cs">
+      <DependentUpon>CreateContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Contacts\EditContacts.xaml.cs">
+      <DependentUpon>EditContacts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Leads\CreateLead.xaml.cs">
       <DependentUpon>CreateLead.xaml</DependentUpon>
     </Compile>
@@ -314,6 +320,9 @@
     </Compile>
     <Compile Include="Views\Objects\Products\CreateProduct.xaml.cs">
       <DependentUpon>CreateProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Products\EditProductView.xaml.cs">
+      <DependentUpon>EditProductView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Products\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
@@ -373,6 +382,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Objects\Contacts\CreateContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Contacts\EditContacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Objects\Leads\CreateLead.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -394,6 +411,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Products\CreateProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Products\EditProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -460,10 +481,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\opencrm_logo_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Home\images\blank-cd.png" />
-    <Resource Include="Views\Home\images\placeholder_person.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Icons\Contacts Folder.png" />
@@ -960,6 +977,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Products\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

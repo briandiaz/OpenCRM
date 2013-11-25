@@ -421,12 +421,12 @@ namespace OpenCRM.Models.Objects.Opportunities
                     opportunity.TrackingNumber = this.Data.TrackingNumber;
 
                     //Product
-                    opportunity.Product = db.Products.FirstOrDefault(
+                    opportunity.Products = db.Products.FirstOrDefault(
                         x => x.ProductId == this.Data.ProductId
                     );
 
-                    if (opportunity.Product != null)
-                        opportunity.Product.Quantity = this.Data.Quantity;
+                    if (opportunity.Products != null)
+                        opportunity.Products.Quantity = this.Data.Quantity;
 
                     //Competidor
                     opportunity.Competidors = db.Competidors.FirstOrDefault(

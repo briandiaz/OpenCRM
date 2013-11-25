@@ -48,7 +48,7 @@
             <controls:Panorama x:Name="MainPanorama" 
                             VerticalAlignment="Stretch"
                             Margin="125,25,25,25" 
-                            ItemBox="140" 
+                            ItemBox="170" 
                             ItemsSource="{Binding Groups}"/>
         </controls:MetroContentControl>
     </Grid>
