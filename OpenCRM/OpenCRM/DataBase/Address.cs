@@ -30,7 +30,6 @@ namespace OpenCRM.DataBase
         public string ZipCode { get; set; }
         public Nullable<int> StateId { get; set; }
         public Nullable<int> AddressTypeId { get; set; }
-    
         public virtual ICollection<Account> Account { get; set; }
         public virtual ICollection<Account> Account1 { get; set; }
         public virtual Address_Type Address_Type { get; set; }

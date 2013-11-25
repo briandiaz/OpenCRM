@@ -51,5 +51,6 @@ namespace OpenCRM.DataBase
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
+        public virtual Products Product { get; set; }
     }
 }

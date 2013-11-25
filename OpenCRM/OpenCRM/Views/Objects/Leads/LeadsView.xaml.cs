@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCRM.Models.Objects.Leads;
 
 namespace OpenCRM.Views.Objects.Leads
 {
@@ -23,21 +24,51 @@ namespace OpenCRM.Views.Objects.Leads
         public LeadsView()
         {
             InitializeComponent();
+            LeadsModel _leadsModel = new LeadsModel();
+            _leadsModel.LoadRecentLeads(this.DataGridRecentLeads);
         }
 
         private void btn_NewLead_OnClick(object sender, RoutedEventArgs e)
         {
+            LeadsModel.IsNew = true;
             PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
         }
 
         private void btn_EditLead_OnClick(object sender, RoutedEventArgs e)
         {
+            if (this.DataGridRecentLeads.SelectedIndex == -1)
+                return;
+
+            LeadsModel.IsNew = false;
+
+            var selectedItem = this.DataGridRecentLeads.SelectedItem;
+            Type type = selectedItem.GetType();
+
+            LeadsModel.LeadIdforEdit = Convert.ToInt32(type.GetProperty("LeadId").GetValue(selectedItem, null));
+
             PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
         }
 
-        private void DataGridRecentLeads_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DataGridRecentLeads_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var itemType = (sender as DataGridRow).Item.GetType();
+            //if ((sender as DataGrid).)
+            {
+                if (this.DataGridRecentLeads.SelectedIndex == -1)
+                    return;
+
+                LeadsModel.IsNew = false;
+
+                var selectedItem = this.DataGridRecentLeads.SelectedItem;
+                Type type = selectedItem.GetType();
+
+                LeadsModel.LeadIdforEdit = Convert.ToInt32(type.GetProperty("LeadId").GetValue(selectedItem, null));
+                PageSwitcher.Switch("/Views/Objects/Leads/LeadDetails.xaml");
+            }
+        }
+
+        private void LeadImage_OnClick(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");            
         }
     }
 }

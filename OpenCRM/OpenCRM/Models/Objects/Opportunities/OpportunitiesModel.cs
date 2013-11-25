@@ -53,11 +53,16 @@ namespace OpenCRM.Models.Objects.Opportunities
                 {
                     var query = (
                         from opportunity in db.Opportunities
+                        from account in db.Account
+                        where 
+                            opportunity.UserId == Session.UserId &&
+                            opportunity.AccountId == account.AccountId
                         orderby opportunity.ViewDate descending
                         select new RecentOppotunitiesData()
                         {
                             Id = opportunity.OpportunityId, 
-                            Opportunity = opportunity.Name, 
+                            Opportunity = opportunity.Name,
+                            Account = account.Name,
                             CloseDate = opportunity.CloseDate.Value
                         }
                     ).ToList();
@@ -65,7 +70,7 @@ namespace OpenCRM.Models.Objects.Opportunities
                     DataGridRecentOpportunities.AutoGenerateColumns = false;
 
                     DataGridRecentOpportunities.ItemsSource = query.Select(
-                        x => new { x.Id, x.Opportunity, CloseDate = x.CloseDate.ToShortDateString() }
+                        x => new { x.Id, x.Opportunity, x.Account, CloseDate = x.CloseDate.ToShortDateString() }
                     ).Take(25);
                 }
             }
@@ -282,6 +287,15 @@ namespace OpenCRM.Models.Objects.Opportunities
                         ).Name;
                     else
                         EditOpportunities.tbxOpportunityCampaign.Text = string.Empty;
+
+                    if (selectedOpportunity.ProductId.HasValue)
+                    {
+                        EditOpportunities.tbxOpportunityProduct.Text = db.Products.FirstOrDefault(
+                            x => x.ProductId == selectedOpportunity.ProductId.Value
+                        ).Name;
+                    }
+                    else
+                        EditOpportunities.tbxOpportunityProduct.Text = string.Empty;
 
                     EditOpportunities.tbxOpportunityOrderNumber.Text = selectedOpportunity.OrderNumber;
                     EditOpportunities.tbxCurrentGenerator.Text = selectedOpportunity.CurrentGenerator;
@@ -670,8 +684,8 @@ namespace OpenCRM.Models.Objects.Opportunities
                             Id = product.ProductId,
                             Name = product.Name,
                             Code = product.Code,
-                            Price = product.Price.Value,
-                            Quantity = product.Quantity.Value
+                            Price = (product.Price.HasValue) ? product.Price.Value : decimal.Zero,
+                            Quantity = (product.Quantity.HasValue) ? product.Quantity.Value : 0
                         }
                     ).ToList();
 
@@ -782,6 +796,7 @@ namespace OpenCRM.Models.Objects.Opportunities
         #region "Properties"
         public int Id { get; set; }
         public string Opportunity { get; set; }
+        public string Account { get; set; }
         public DateTime CloseDate { get; set; }
 
         #endregion
@@ -790,7 +805,6 @@ namespace OpenCRM.Models.Objects.Opportunities
     public class SearchOppotunitiesData : RecentOppotunitiesData
     {
         #region "Properties"
-        public string Account { get; set; }
         public decimal Amount { get; set; }
         public DateTime CreateDate { get; set; }
         public string Stage { get; set; }

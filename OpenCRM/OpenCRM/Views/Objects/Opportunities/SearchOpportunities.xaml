@@ -71,6 +71,13 @@
                                FontSize="24" 
                                Margin="101,15,103,67" />
                 </Grid>
+
+                <Button Name="btnExitSearchOpportunity"
+                        Content="Cancel"
+                        TextBlock.FontSize="20px"
+                        Click="btnExitSearchOpportunity_Click"
+                        Margin="735,30,43,30"
+                        />
             </Grid>
 
             <Border Grid.Row="2" 
@@ -96,13 +103,6 @@
 
                 <Grid Background="#FAFAFA">
 
-                    <TextBlock  Text="Search"
-                                FontSize="20"
-                                Foreground="Black"
-                                Margin="516,11,389,0" 
-                                Height="36" 
-                                VerticalAlignment="Top"/>
-
                     <Button Name="btnNewOpportunity"
                     	    Content="New Opportunity"
                             Margin="34,10,817,0" 
@@ -122,12 +122,12 @@
                     </Button>
 
                     <TextBox Name="tbxSearchOpportunities"
-                             Margin="581,10,59,0"
+                             Margin="507,10,133,0"
                              Height="36" 
                              VerticalAlignment="Top"/>
 
                     <Button Name="btnSearchOpportunities"
-                            Margin="911,10,24,0"
+                            Margin="837,10,98,0"
                             Click="btnSearchOpportunities_Click" 
                             Height="36" 
                             VerticalAlignment="Top"
@@ -139,17 +139,23 @@
                         </StackPanel>
                     </Button>
 
+                    <Button Name="btnClearSearch"
+                    	Content="Clear"
+                    	Margin="872,10,43,0" 
+                    	Height="37" 
+                    	VerticalAlignment="Top"
+                    	Click="btnClearSearch_Click"/>
+
                     <DataGrid Name="DataGridOpportunities"
                               IsReadOnly="True"
                               ScrollViewer.CanContentScroll="True"
                               Height="300"
-                              ColumnWidth="Auto"
                               Style="{DynamicResource MetroDataGrid}" 
                               Margin="34,72,0,40" 
                               HorizontalAlignment="Left" 
                               Width="897" >
                         <DataGrid.Columns>
-                            <DataGridHyperlinkColumn Header="Opportunity Name" Width="Auto" Binding="{Binding Opportunity}">
+                            <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
                                 <DataGridHyperlinkColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <EventSetter Event="Hyperlink.Click" Handler="OpportunityNameHyperlink_Click" />
@@ -157,18 +163,17 @@
                                     </Style>
                                 </DataGridHyperlinkColumn.ElementStyle>
                             </DataGridHyperlinkColumn>
-                            <DataGridTextColumn Header="Account Name" Width="Auto" Binding="{Binding Account}"/>
-                            <DataGridTextColumn Header="Product Name" Width="Auto" Binding="{Binding Produdct}"/>
-                            <DataGridTextColumn Header="Amount" Width="Auto" Binding="{Binding Amount}"/>
-                            <DataGridTextColumn Header="Close Date" Width="Auto" Binding="{Binding CloseDate}"/>
-                            <DataGridTextColumn Header="Stage" Width="Auto" Binding="{Binding Stage}"/>
-                            <DataGridTextColumn Header="Opportunity Owner" Width="Auto" Binding="{Binding Owner}"/>
+                            <DataGridTextColumn Header="Account Name" Width="*" Binding="{Binding Account}"/>
+                            <DataGridTextColumn Header="Product Name" Width="*" Binding="{Binding Produdct}"/>
+                            <DataGridTextColumn Header="Amount" Width="*" Binding="{Binding Amount}"/>
+                            <DataGridTextColumn Header="Close Date" Width="*" Binding="{Binding CloseDate}"/>
+                            <DataGridTextColumn Header="Stage" Width="*" Binding="{Binding Stage}"/>
+                            <DataGridTextColumn Header="Opportunity Owner" Width="*" Binding="{Binding Owner}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-
+                    
                 </Grid>
             </Border>
-
         </Grid>
     </controls:MetroContentControl>
 </Page>
