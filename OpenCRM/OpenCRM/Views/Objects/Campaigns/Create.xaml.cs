@@ -26,7 +26,7 @@ namespace OpenCRM.Views.Objects.Campaigns
     {
         public int _userId
         {
-            get { return Session.UserId; }
+            get { return ((User)(cmbCampaignOwner.SelectedItem)).UserId; }
         }
         public String _name
         {
@@ -41,73 +41,81 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public int? _campaignTypeId
         {
-            get { return (Convert.ToInt32(cmbCampaignType.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null; }
+            get { return (cmbCampaignType.SelectedItem != null) ? ((CampaignType)cmbCampaignType.SelectedItem).CampaignTypeId : (int?)null; }
             set
             {
-                int? cmptype = (Convert.ToInt32(cmbCampaignType.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null;
-                cmptype = value;
+                int? _campaignType = (cmbCampaignType.SelectedItem != null) ? ((CampaignType)cmbCampaignType.SelectedItem).CampaignTypeId : (int?)null;
+                _campaignType = value;
             }
         }
         public int? _campaignStatusId
         {
-            get { return (Convert.ToInt32(cmbCampaignStatus.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null; }
+            get { return (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null; }
             set
             {
-                int? cmpstatus = (Convert.ToInt32(cmbCampaignStatus.SelectedValue) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null;
-                cmpstatus = value;
+                int? _campaignStatus = (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null;
+                _campaignStatus = value;
             }
         }
-        public DateTime _startDate
+        public DateTime? _startDate
         {
-            get { return dpkCampaignStartDate.SelectedDate.Value; }
+            get { return (dpkCampaignStartDate.SelectedDate != null) ? dpkCampaignStartDate.SelectedDate.Value : (DateTime?)null; }
         }
-        public DateTime _endDate
+        public DateTime? _endDate
         {
-            get { return dpkCampaignEndDate.SelectedDate.Value; }
+            get { return (dpkCampaignEndDate.SelectedDate != null) ? dpkCampaignEndDate.SelectedDate.Value : (DateTime?)null; }
         }
         public decimal? _expectedRevenue
         {
-            get {
-                return (tbxCampaignExpectedRevenue.Text != "") ? Convert.ToDecimal(tbxCampaignExpectedRevenue.Text) : default(decimal); 
+            get
+            {
+                return (tbxCampaignExpectedRevenue.Text != "") ? Convert.ToDecimal(tbxCampaignExpectedRevenue.Text) : default(decimal);
             }
         }
         public decimal? _budgetedCost
         {
-            get {
-                return (tbxCampaignBudgetedCost.Text != "") ? Convert.ToDecimal(tbxCampaignBudgetedCost.Text) : default(decimal); 
+            get
+            {
+                return (tbxCampaignBudgetedCost.Text != "") ? Convert.ToDecimal(tbxCampaignBudgetedCost.Text) : default(decimal);
             }
         }
         public decimal? _actualCost
         {
-            get {
-                return (tbxCampaignActualCost.Text != "") ? Convert.ToDecimal(tbxCampaignActualCost.Text) : default(decimal); 
+            get
+            {
+                return (tbxCampaignActualCost.Text != "") ? Convert.ToDecimal(tbxCampaignActualCost.Text) : default(decimal);
             }
         }
         public decimal? _expectedResponse
         {
-            get {
-                return (tbxCampaignExpectedResponse.Value != -1) ? Convert.ToDecimal(tbxCampaignExpectedResponse.Value/100) : default(decimal); 
+            get
+            {
+                return (tbxCampaignExpectedResponse.Value != -1) ? Convert.ToDecimal(tbxCampaignExpectedResponse.Value / 100) : default(decimal);
             }
         }
         public int? _numberSent
         {
-            get {
-                return (tbxCampaignNumSent.Text != "") ? Convert.ToInt32(tbxCampaignNumSent.Text) : (int?)null; 
+            get
+            {
+                return (tbxCampaignNumSent.Text != "") ? Convert.ToInt32(tbxCampaignNumSent.Text) : (int?)null;
             }
         }
         public int? _campaignParent
         {
-            get 
+            get { return (cmbCampaignParent.SelectedIndex != -1) ? ((CampaignsModel)cmbCampaignParent.SelectedItem).CampaignId : (int?)null; }
+            set
             {
-                return (Convert.ToInt32(cmbCampaignParent.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignParent.SelectedValue) : (int?)null; 
+                int? _campaign = (cmbCampaignParent.SelectedIndex != -1) ? ((CampaignsModel)cmbCampaignParent.SelectedItem).CampaignId : (int?)null;
+                _campaign = value;
             }
         }
         public String _description
         {
-            get {
+            get
+            {
                 if (tbxCampaignDescription.Text == "")
                 {
-                    MessageBox.Show("You must insert a Description!","Warning!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show("You must insert a Description!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return String.Empty;
                 }
                 else
@@ -122,7 +130,7 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public DateTime _createDate
         {
-            get { return DateTime.Now;  }
+            get { return DateTime.Now; }
         }
         public int _updateBy
         {
@@ -214,8 +222,8 @@ namespace OpenCRM.Views.Objects.Campaigns
                         Active = _active,
                         CampaignTypeId = _campaignTypeId,
                         CampaignStatusId = _campaignStatusId,
-                        StartDate = _startDate,
-                        EndDate = _endDate,
+                        StartDate = _startDate.Value,
+                        EndDate = _endDate.Value,
                         ExpectedRevenue = _expectedRevenue,
                         BudgetedCost = _budgetedCost,
                         ActualCost = _actualCost,

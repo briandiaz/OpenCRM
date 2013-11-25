@@ -53,13 +53,13 @@
                         HorizontalAlignment="Center">
                 <Button Name="btnGoBack"
                         Click="btnGoBack_Click"
-                        Width="118"
-                        Height="45"
+                        Width="50"
+                        Height="50"
                         Cursor="Hand"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
                         >
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/Img/Icons/32px/arrow-left3.png" Width="32px" Height="32px"/>
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="20">Go Back</TextBlock>
+                        <Image Source="/Assets/Img/Icons/32px/arrow-left2.png" Width="32px" Height="32px"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -111,33 +111,37 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="#CC119EDA" Width="650">
                         <TextBlock Text="{Binding Name}" FontSize="36"  Foreground="Black" HorizontalAlignment="Center" TextAlignment="Center" Width="600"></TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Height="80" Width="233.33"  Background="#0174DF">
-                        <Image Source="/Assets/Img/Icons/32px/calendar.png" Width="32" Height="32" Margin="10" />
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding StartDate}" FontSize="20"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="80"  Width="233.33" Background="#088A08">
-                        <Image Source="/Assets/Img/Icons/32px/lab.png" Margin="10" Width="32" Height="32" />
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedRevenue}" FontSize="20"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="80"  Width="233.33" Background="#DF3A01">
-                        <Image Source="/Assets/Img/Icons/32px/stats.png" Width="32" Height="32" Margin="10" />
-                        <TextBlock VerticalAlignment="Bottom" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedResponse}" FontSize="20"></TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,50,0,0" Width="650">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Height="80" Width="216"  Background="#0174DF" ToolTip="Start Date">
+                            <Image Source="/Assets/Img/Icons/32px-white/calendar.png" Width="32" Height="32" Margin="10" />
+                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding StartDate}" FontSize="20" Foreground="White"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="80"  Width="216" Background="#DF3A01" ToolTip="Stats">
+                            <Image Source="/Assets/Img/Icons/32px-white/stats.png" Width="32" Height="32" Margin="10" />
+                            <TextBlock VerticalAlignment="Bottom" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedResponse}" FontSize="20" Foreground="White"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="80"  Width="213" Background="#088A08" ToolTip="Expected Revenue">
+                            <Image Source="/Assets/Img/Icons/32px-white/lab.png" Margin="10" Width="32" Height="32" />
+                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedRevenue}" FontSize="20" Foreground="White"></TextBlock>
+                        </StackPanel>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30">
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,20" Width="400" Height="60" HorizontalAlignment="Center" Text="{Binding Description}" FontSize="16" FontWeight="SemiBold" TextAlignment="Center"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,275">
-                        <TextBlock FontWeight="Bold" FontSize="24px" VerticalAlignment="Top" HorizontalAlignment="Center">Campaign Progress</TextBlock>
+                        <TextBlock FontWeight="Bold" FontSize="16px" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Segoe UI">Progress</TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,250">
 
                         <ProgressBar IsIndeterminate="False"
-                                     Width="300"
+                                     Width="250"
                                      Height="20"
                                      Maximum="100"
                                      Minimum="0"
                                      Value="{Binding ExpectedResponse}"
+                                     ToolTip="Campaign Progress"
                                      />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,150">
@@ -155,30 +159,44 @@
                                    />
                     </StackPanel>
                     <TextBox Visibility="Hidden" Text="{Binding CampaignId}" Name="tbxCampaignId" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,20,150">
-                        <Button Name="btnEdit"
-                                Click="btnEdit_Click"
-                                Width="118"
-                                Height="45"
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,20,130">
+                        <Button Name="btnDetails"
+                                
+                                Width="50"
+                                Height="50"
                                 Cursor="Hand"
+                                Style="{DynamicResource MetroCircleButtonStyle}"
+                                ToolTip="Campaign Details"
                             >
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Assets/Img/Icons/32px/pencil2.png" Width="32px" Height="32px"/>
-                                <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="20">Edit</TextBlock>
+                                <Image Source="/Assets/Img/Icons/32px/info3.png"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Name="btnAddLeads"
+                                Width="50"
+                                Height="50"
+                                Cursor="Hand"
+                                Style="{DynamicResource MetroCircleButtonStyle}"
+                                Click="btnAddLeads_Click"
+                            >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Assets/Img/Icons/32px/address-book.png" Width="27px" Height="27px"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Name="btnEdit"
+                                Click="btnEdit_Click"
+                                Width="50"
+                                Height="50"
+                                Cursor="Hand"
+                                Style="{DynamicResource MetroCircleButtonStyle}"
+                                BorderBrush="Black"
+                                ToolTip="Edit Campaign"
+                            >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Assets/Img/Icons/32px/pencil.png" Width="27px" Height="27px"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                    <Button Name="btnAddLeads"
-                                Width="100"
-                                Height="35"
-                                Cursor="Hand"
-                            Style="{DynamicResource SquareButtonStyle}" Margin="266,245,284,120" Click="btnAddLeads_Click"
-                            >
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/Img/Icons/32px/plus.png" Width="16" Height="16px"/>
-                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="19">Leads</TextBlock>
-                        </StackPanel>
-                    </Button>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" 
@@ -191,6 +209,7 @@
                         Width="118"
                         Height="45"
                         Cursor="Hand"
+                        Style="{DynamicResource SquareButtonStyle}"
                         >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/Img/Icons/32px/file3.png" Width="32px" Height="32px"/>
@@ -198,33 +217,37 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,200,0,0"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2">
+            <StackPanel Orientation="Horizontal" Margin="0,210,0,0"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2">
                 <Button Name="btnNextSlider"
-				Grid.Column="2"
-				Grid.Row="3"
-                    VerticalAlignment="Center"
-                                Width="118"
-                                Height="45"
-                                Cursor="Hand" Click="btnNextSlider_Click"
-                            >
+				        Grid.Column="2"
+				        Grid.Row="3"
+                        VerticalAlignment="Center"
+                        Width="118"
+                        Height="45"
+                        Cursor="Hand" Click="btnNextSlider_Click"
+                        Style="{DynamicResource SquareButtonStyle}"
+                        ToolTip="Next Campaign"
+                        >
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Next" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light" />
                         <Image Source="/Assets/Img/Icons/32px/arrow-right2.png" Width="32px" Height="32px"/>
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="20">Next</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" Margin="0,200,0,0" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0">
+            <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" Margin="0,210,0,0" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0">
                 <Button Name="btnPreviousSlider"
-				Grid.Column="0"
-				Grid.Row="3"
-                    VerticalAlignment="Center"
-                                Width="118"
-                                Height="45"
-                                Cursor="Hand" Click="btnPreviousSlider_Click"
-                            >
+				        Grid.Column="0"
+				        Grid.Row="3"
+                        VerticalAlignment="Center"
+                        Width="118"
+                        Height="50"
+                        Cursor="Hand" Click="btnPreviousSlider_Click"
+                        ToolTip="Previous Campaign"
+                        Style="{DynamicResource SquareButtonStyle}"
+                        >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/Img/Icons/32px/arrow-left2.png" Width="32px" Height="32px"/>
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="20">Previous</TextBlock>
+                        <TextBlock Text="Previous" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe WP Light" />
                     </StackPanel>
                 </Button>
             </StackPanel>

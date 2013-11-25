@@ -271,7 +271,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == CampaignController.CurrentCampaignId).ToList();
+                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == CampaignController.CurrentCampaignId && x.Converted != true).ToList();
                 }
             }
             catch (SqlException ex)
@@ -290,7 +290,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             try {
                 using (var _db = new OpenCRMEntities())
                 { 
-                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == null).ToList();
+                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == null && x.Converted != true).ToList();
                 }
             }
             catch (SqlException ex)
