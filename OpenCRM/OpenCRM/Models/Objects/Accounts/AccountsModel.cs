@@ -381,14 +381,17 @@ namespace OpenCRM.Models.Objects.Accounts
 
                     EditAccount.tbxAccountSite.Text = selectedAccount.AccountSite;
 
-                    EditAccount.cmbAccountType.SelectedValue = selectedAccount.AccountTypeId.Value;
+                    if (selectedAccount.AccountTypeId.HasValue)
+                        EditAccount.cmbAccountType.SelectedValue = selectedAccount.AccountTypeId.Value;
 
-                    EditAccount.cmbAccountIndustry.SelectedValue = selectedAccount.IndustryId.Value;
+                    if (selectedAccount.IndustryId.HasValue)
+                        EditAccount.cmbAccountIndustry.SelectedValue = selectedAccount.IndustryId.Value;
 
-                    EditAccount.tbxAccountAnnualRevenue.Text = (selectedAccount.AnualRevenue.HasValue) ? 
-                        selectedAccount.AnualRevenue.Value.ToString() : string.Empty;
+                    if (selectedAccount.AnualRevenue.HasValue)
+                        EditAccount.tbxAccountAnnualRevenue.Text = selectedAccount.AnualRevenue.Value.ToString();
 
-                    EditAccount.cmbAccountRating.SelectedValue = selectedAccount.RatingId.Value;
+                    if (selectedAccount.RatingId.HasValue)
+                        EditAccount.cmbAccountRating.SelectedValue = selectedAccount.RatingId.Value;
 
                     EditAccount.tbxAccountPhone.Text = selectedAccount.PhoneNumber;
 
@@ -398,10 +401,11 @@ namespace OpenCRM.Models.Objects.Accounts
 
                     EditAccount.tbxAccountTickerSymbol.Text = selectedAccount.TickerSymbol;
 
-                    EditAccount.cmbAccountOwnership.SelectedValue = selectedAccount.AccountOwnerShipId.Value;
+                    if (selectedAccount.AccountOwnerShipId.HasValue)
+                        EditAccount.cmbAccountOwnership.SelectedValue = selectedAccount.AccountOwnerShipId.Value;
 
-                    EditAccount.tbxAccountEmployees.Text = 
-                        selectedAccount.Employees.HasValue ? selectedAccount.Employees.Value.ToString() : string.Empty;
+                    if (selectedAccount.Employees.HasValue)
+                        EditAccount.tbxAccountEmployees.Text = selectedAccount.Employees.Value.ToString();
 
                     if (selectedAccount.AccountBillingId.HasValue)
                     {
@@ -437,24 +441,27 @@ namespace OpenCRM.Models.Objects.Accounts
                         }
                     }
 
-                    EditAccount.cmbAccountCustomerPriority.SelectedValue = selectedAccount.AccountPriorityId.Value;
+                    if (selectedAccount.AccountPriorityId.HasValue)
+                        EditAccount.cmbAccountCustomerPriority.SelectedValue = selectedAccount.AccountPriorityId.Value;
 
                     if (selectedAccount.AccountSLAId.HasValue)
-                    {
-                        EditAccount.cmbAccountSLA.SelectedValue = selectedAccount.Account_SLA.AccountSLAId;
-                    }
+                        EditAccount.cmbAccountSLA.SelectedValue = selectedAccount.AccountSLAId.Value;
 
-                    EditAccount.tbxAccountSLAExpirationDate.Text = (selectedAccount.SLAExpiration.HasValue) ? 
-                        selectedAccount.SLAExpiration.Value.ToShortDateString() : string.Empty;
+                    if (selectedAccount.SLAExpiration.HasValue)
+                        EditAccount.tbxAccountSLAExpirationDate.Text = selectedAccount.SLAExpiration.Value.ToShortDateString();
                     
                     EditAccount.tbxAccountSLASerialNumber.Text = selectedAccount.SlaSerialNumber;
 
-                    EditAccount.tbxAccountNumberLocations.Text = (selectedAccount.NumberOfLocation.HasValue) ? 
-                        selectedAccount.NumberOfLocation.Value.ToString() : string.Empty;
+                    if (selectedAccount.NumberOfLocation.HasValue)
+                        EditAccount.tbxAccountNumberLocations.Text =  selectedAccount.NumberOfLocation.Value.ToString();
+                    
+                    if (selectedAccount.AccountUpSellOpportunityId.HasValue)
+                        EditAccount.cmbAccountUpsellOpportunity.SelectedValue = selectedAccount.AccountUpSellOpportunityId.Value;
 
-                    EditAccount.cmbAccountUpsellOpportunity.SelectedValue = selectedAccount.AccountUpSellOpportunityId.Value;
-
-                    EditAccount.ckbAccountActive.IsChecked = selectedAccount.Active.Value;
+                    if (selectedAccount.Active.HasValue)
+                        EditAccount.ckbAccountActive.IsChecked = selectedAccount.Active.Value;
+                    else
+                        EditAccount.ckbAccountActive.IsChecked = false;
 
                     EditAccount.tbxAccountDescription.Text = selectedAccount.Description;
                 }
@@ -788,31 +795,6 @@ namespace OpenCRM.Models.Objects.Accounts
             }
         }
 
-        public void SaveViewDate()
-        {
-            try
-            {
-                using (var db = new OpenCRMEntities())
-                {
-                    var account = db.Account.FirstOrDefault(
-                        x => x.AccountId == this.Data.AccountId
-                    );
-
-                    account.ViewDate = this.Data.ViewDate;
-
-                    db.SaveChanges();
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
         #endregion
 
         #endregion
@@ -832,6 +814,7 @@ namespace OpenCRM.Models.Objects.Accounts
                     ).ToList();
 
                     ComboBoxViews.ItemsSource = query;
+                    ComboBoxViews.SelectedValue = query.Find(x => x.Name == "Recently Viewed Accounts").Id;
                 }
             }
             catch (SqlException ex)
@@ -849,8 +832,10 @@ namespace OpenCRM.Models.Objects.Accounts
                 {
                     var query = (
                         from accounts in db.Account
-                        where
-                            accounts.UserId == Session.UserId
+                        where accounts.UserId == Session.UserId
+                        join sla in db.Account_SLA
+                            on accounts.AccountSLAId equals sla.AccountSLAId into SLA
+                        from accountSLA in SLA.DefaultIfEmpty()
                         select new SearchAccountsData()
                         {
                             Id = accounts.AccountId,
@@ -858,12 +843,12 @@ namespace OpenCRM.Models.Objects.Accounts
                             Name = accounts.Name,
                             Owner = Session.UserName,
                             Phone = accounts.PhoneNumber,
-                            SLA = accounts.Account_SLA.Name,
-                            SLAValue = accounts.Account_SLA.Value.Value,
+                            SLA = accountSLA.Name,
+                            SLAValue = accountSLA.AccountSLAId,
                             StateName = accounts.Address.State.Name,
-                            Type = accounts.Account_Type.Name,
-                            ViewDate = accounts.ViewDate.Value,
-                            CreateDate = accounts.CreateDate.Value
+                            Type = accounts.AccountTypeId.HasValue ? accounts.Account_Type.Name : "",
+                            ViewDate = accounts.ViewDate,
+                            CreateDate = accounts.CreateDate
                         }
                     ).ToList();
 
@@ -880,6 +865,206 @@ namespace OpenCRM.Models.Objects.Accounts
             }
 
             return data;
+        }
+
+        #endregion
+
+        #region "Account Details"
+        public void LoadAccountDetails(AccountDetails AccountDetails)
+        {
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var selectedAccount = db.Account.FirstOrDefault(
+                        x => x.AccountId == EditingAccountId
+                    );
+
+                    AccountDetails.lblTitleAccount.Text = selectedAccount.Name;
+
+                    AccountDetails.lblAccountOwner.Content = selectedAccount.User.UserName;
+
+                    AccountDetails.lblAccountName.Content = selectedAccount.Name;
+
+                    if (selectedAccount.AccountParent.HasValue)
+                    {
+                        AccountDetails.lblParentAccount.Content = db.Account.FirstOrDefault(
+                           x => x.AccountId == selectedAccount.AccountParent
+                            ).Name;
+                    }
+
+                    AccountDetails.lblAccountSite.Content = selectedAccount.AccountSite;
+
+                    if (selectedAccount.AccountTypeId.HasValue)
+                    {
+                        if (!selectedAccount.AccountTypeId.Value.Equals(1))
+                            AccountDetails.lblAccountType.Content = db.Account_Type.FirstOrDefault(
+                                x => x.AccountTypeId == selectedAccount.AccountTypeId
+                            ).Name;
+                    }
+
+                    if (selectedAccount.IndustryId.HasValue)
+                    {
+                        if (!selectedAccount.IndustryId.Value.Equals(1))
+                            AccountDetails.lblIndustry.Content = db.Industry.FirstOrDefault(
+                                x => x.IndustryId == selectedAccount.IndustryId
+                            ).Name;
+                    }
+
+                    if (selectedAccount.AnualRevenue.HasValue)
+                    {
+                        AccountDetails.lblAnnualRevenue.Content = selectedAccount.AnualRevenue.ToString();
+                    }
+
+                    if (selectedAccount.RatingId.HasValue)
+                    {
+                        if (!selectedAccount.RatingId.Value.Equals(1))
+                            AccountDetails.lblRating.Content = db.Rating.FirstOrDefault(
+                                x => x.RatingId == selectedAccount.RatingId
+                            ).Name;
+                    }
+
+                    AccountDetails.lblPhone.Content = selectedAccount.PhoneNumber;
+                    AccountDetails.lblFax.Content = selectedAccount.FaxNumber;
+                    AccountDetails.lblWebsite.Content = selectedAccount.WebSite;
+                    AccountDetails.lblTickerSymbol.Content = selectedAccount.TickerSymbol;
+
+                    if (selectedAccount.AccountOwnerShipId.HasValue)
+                    {
+                        if (!selectedAccount.AccountOwnerShipId.Value.Equals(1))
+                            AccountDetails.lblOwnership.Content = db.Account_Ownership.FirstOrDefault(
+                                x => x.AccountOwnershipId == selectedAccount.AccountOwnerShipId
+                            ).Name;
+                    }
+
+                    if (selectedAccount.Employees.HasValue)
+	                {
+		                AccountDetails.lblEmployee.Content = selectedAccount.Employees;
+	                }
+                    
+                    if (selectedAccount.AccountBillingId.HasValue)
+                    {
+                        var billing = selectedAccount.Address.Street + " " + selectedAccount.Address.City;
+                        
+                        if(selectedAccount.Address.StateId.HasValue)
+                        {
+                            billing += ", " + selectedAccount.Address.State.Name;
+
+                            if (selectedAccount.Address.State.CountryId.HasValue)
+                                billing += ", " + selectedAccount.Address.State.Country.Name;
+                        }
+
+                        billing += " " + selectedAccount.Address.ZipCode;
+
+                        AccountDetails.lblBilling.Text = billing;
+                    }
+
+                    if (selectedAccount.AccountShippingId.HasValue)
+                    {
+                        var shipping = selectedAccount.Address1.Street + " " + selectedAccount.Address1.City;
+
+                        if (selectedAccount.Address1.StateId.HasValue)
+                        {
+                            shipping += ", " + selectedAccount.Address1.State.Name;
+
+                            if (selectedAccount.Address1.State.CountryId.HasValue)
+                                shipping += ", " + selectedAccount.Address1.State.Country.Name;
+                        }
+
+                        shipping += " " + selectedAccount.Address1.ZipCode;
+
+                        AccountDetails.lblShipping.Text = shipping;
+                    }
+
+                    if (selectedAccount.AccountPriorityId.HasValue)
+                    {
+                        if (!selectedAccount.AccountPriorityId.Value.Equals(1))
+                            AccountDetails.lblCustomerPriority.Content = selectedAccount.Account_Priority.Name;
+                    }
+
+                    if (selectedAccount.SLAExpiration.HasValue)
+                    {
+                        AccountDetails.lblSLAExpirationDate.Content = selectedAccount.SLAExpiration.Value.ToShortDateString();
+                    }
+
+                    if (selectedAccount.NumberOfLocation.HasValue)
+                    {
+                        AccountDetails.lblNumberofLocations.Content = selectedAccount.NumberOfLocation.ToString();
+                    }
+
+                    if (selectedAccount.Active.HasValue)
+                    {
+                        AccountDetails.lblActive.IsChecked = selectedAccount.Active;
+                    }
+
+                    if (selectedAccount.AccountSLAId.HasValue)
+                    {
+                        if (!selectedAccount.AccountSLAId.Value.Equals(1))
+                            AccountDetails.lblSLA.Content = selectedAccount.Account_SLA.Name;
+                    }
+
+                    if (selectedAccount.AccountUpSellOpportunityId.HasValue)
+                    {
+                        if (!selectedAccount.AccountUpSellOpportunityId.Value.Equals(1))
+                            AccountDetails.lblUpsellOpportunity.Content = selectedAccount.Account_Up_Sell_Opportunity.Name;
+                    }
+
+                    AccountDetails.lblDescription.Content = selectedAccount.Description;
+
+                    if (selectedAccount.CreateBy.HasValue)
+                    {
+                        AccountDetails.lblCreateBy.Content = selectedAccount.User1.UserName;
+                    }
+
+                    if (selectedAccount.CreateDate.HasValue)
+                    {
+                        AccountDetails.lblCreateDate.Content = selectedAccount.CreateDate;
+                    }
+
+                    if (selectedAccount.UpdateBy.HasValue)
+                    {
+                        AccountDetails.lblUpdateBy.Content = selectedAccount.User2.UserName;
+                    }
+
+                    if (selectedAccount.UpdateDate.HasValue)
+                    {
+                        AccountDetails.lblUpdateDate.Content = selectedAccount.UpdateDate;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString()); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void SaveViewDate()
+        {
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var account = db.Account.FirstOrDefault(
+                        x => x.AccountId == EditingAccountId
+                    );
+
+                    account.ViewDate = DateTime.Now;
+
+                    db.SaveChanges();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         #endregion
@@ -958,11 +1143,10 @@ namespace OpenCRM.Models.Objects.Accounts
         public string Phone { get; set; }
         public string Type { get; set; }
         public string Owner { get; set; }
-        public DateTime ViewDate { get; set; }
-        public DateTime CreateDate { get; set; }
+        public Nullable<DateTime> ViewDate { get; set; }
+        public Nullable<DateTime> CreateDate { get; set; }
         public string SLA { get; set; }
-        public int SLAValue { get; set; }
-
+        public Nullable<int> SLAValue { get; set; }
 
         #endregion
     }
