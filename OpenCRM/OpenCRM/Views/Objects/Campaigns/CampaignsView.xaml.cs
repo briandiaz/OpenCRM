@@ -27,13 +27,14 @@ namespace OpenCRM.Views.Objects.Campaigns
     public partial class CampaignsView
     {
         List<SearchAttribute> _searchTargets;
-        String _searchKey;
         List<CampaignsModel> _listCampaigns;
-        
+        CampaignsModel Campaign;
+        SearchAttribute thisTarget;
+
         public CampaignsView()
         {
             InitializeComponent();
-            loadKeyType();
+            LoadSearchAttributes();
         }
 
         private void bntCreate_Click(object sender, RoutedEventArgs e)
@@ -46,94 +47,212 @@ namespace OpenCRM.Views.Objects.Campaigns
             PageSwitcher.Switch("/Views/Home/HomeView.xaml");
         }
 
-        private void loadKeyType()
+        private void LoadSearchAttributes()
         {
             List<SearchAttribute> _keyTypes = new List<SearchAttribute>();
+
             SearchAttribute keyType = new SearchAttribute(1, "Type");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(2, "Status");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(3, "Active");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(4, "Name");
             _keyTypes.Add(keyType);
+
             keyType = new SearchAttribute(5, "Start Date");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(6, "End Date");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(7, "Expected Revenue");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(8, "Expected Response");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(9, "Number Sent");
             _keyTypes.Add(keyType);
+            
             keyType = new SearchAttribute(10, "Actual Cost");
             _keyTypes.Add(keyType);
+
             keyType = new SearchAttribute(11, "Budgeted Cost");
             _keyTypes.Add(keyType);
-            keyType = new SearchAttribute(12, "Created By");
+            
+            keyType = new SearchAttribute(12, "Created Date");
             _keyTypes.Add(keyType);
-            keyType = new SearchAttribute(13, "Updated By");
+            
+            keyType = new SearchAttribute(13, "Updated Date");
             _keyTypes.Add(keyType);
+            
+            keyType = new SearchAttribute(14, "All Campaigns");
+            _keyTypes.Add(keyType);
+
+            keyType = new SearchAttribute(15, "Description");
+            _keyTypes.Add(keyType);
+            
+            _keyTypes = _keyTypes.OrderBy(x => x.Name).ToList();
             cmbTargetKeyCampaign.ItemsSource = _keyTypes;
+
             cmbTargetKeyCampaign.DisplayMemberPath = "Name";
             cmbTargetKeyCampaign.SelectedValuePath = "ID";
-            cmbTargetKeyCampaign.SelectedIndex = 0;
+            cmbTargetKeyCampaign.SelectedValue = 14;
         }
 
         private void cmbTargetKeyCampaign_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SearchAttribute thisTarget = (SearchAttribute)cmbTargetKeyCampaign.SelectedItem;
-            switch (thisTarget.ID)
+            thisTarget = (SearchAttribute)cmbTargetKeyCampaign.SelectedItem;
+            Campaign = new CampaignsModel();
+            switch (thisTarget.Name)
             {
-                case 1:
-                case 2:
+                case "Type":
+                case "Status":
                     cmbTargetValueCampaign.ItemsSource = null;
                     cmbTargetValueCampaign.ItemsSource = getSearchTargetKeys(thisTarget);
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Visible;
+                    
+                    DatePickerKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    TextBoxKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    ToggleKeywordsVisibility(System.Windows.Visibility.Collapsed);
 
                     cmbTargetValueCampaign.DisplayMemberPath = "Name";
                     cmbTargetValueCampaign.SelectedValuePath = "ID";
                     cmbTargetValueCampaign.SelectedIndex = 0;
+
+                    CmbTargetValueCampaignVisibility(System.Windows.Visibility.Visible);
+                    
                     break;
-                case 3:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
+                case "Active":
+                    CmbTargetValueCampaignVisibility(System.Windows.Visibility.Collapsed);
+                    DatePickerKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    TextBoxKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    ToggleKeywordsVisibility(System.Windows.Visibility.Visible);
                     break;
-                case 4:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
+                case "Name":
+                case "Description":
+                case "Number Sent":
+                case "Expected Response":
+                case "Expected Revenue":
+                case "Budgeted Cost":
+                case "Actual Cost":
+                    CmbTargetValueCampaignVisibility(System.Windows.Visibility.Collapsed);
+                    DatePickerKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    ToggleKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    TextBoxKeywordsVisibility(System.Windows.Visibility.Visible);
                     break;
-                case 5:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
+                case "Start Date":
+                case "End Date":
+                case "Created Date":
+                case "Updated Date":
+                    CmbTargetValueCampaignVisibility(System.Windows.Visibility.Collapsed);
+                    TextBoxKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    ToggleKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    DatePickerKeywordsVisibility(System.Windows.Visibility.Visible);
                     break;
-                case 6:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
-                    break;
-                case 7:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
-                    break;
-                case 8:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
-                    break;
-                case 9:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
-                    break;
-                case 10:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
-                    break;
-                case 11:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
-                    break;
-                case 12:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
-                    break;
-                case 13:
-                    cmbTargetValueCampaign.Visibility = System.Windows.Visibility.Hidden;
+                case "All Campaigns":
+                    CmbTargetValueCampaignVisibility(System.Windows.Visibility.Collapsed);
+                    TextBoxKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    ToggleKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    DatePickerKeywordsVisibility(System.Windows.Visibility.Collapsed);
+                    GetCampaigns(Campaign.getAllCampaignsFromUser());
                     break;
             }
         }
-        private List<CampaignsModel> getCampaignsBySearch(String atts)
+        private void CmbTargetValueCampaignVisibility(System.Windows.Visibility Visibility)
         {
-            return null;
+            cmbTargetValueCampaign.Visibility = Visibility;
+        }
+        private void TextBoxKeywordsVisibility(System.Windows.Visibility Visibility)
+        {
+            tbxCampaignSearchKeywords.Visibility = Visibility;
+        }
+        private void DatePickerKeywordsVisibility(System.Windows.Visibility Visibility)
+        {
+            dpkCampaignSearchDate.Visibility = Visibility;
+        }
+        private void ToggleKeywordsVisibility(System.Windows.Visibility Visibility)
+        {
+            cbxCampaignSearchActive.Visibility = Visibility;
+        }
+
+        private void cbxCampaignSearchActive_Checked(object sender, RoutedEventArgs e)
+        {
+            if (thisTarget.Name.Equals("Active"))
+            {
+                GetCampaigns(Campaign.SearchCampaignsByActive(cbxCampaignSearchActive.IsChecked.Value));
+            }
+        }
+
+        private void tbxCampaignSearchKeywords_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                switch (thisTarget.Name)
+                {
+
+                    case "Name":
+                        GetCampaigns(Campaign.SearchCampaignsByName(tbxCampaignSearchKeywords.Text));
+                        break;
+                    case "Description":
+                        GetCampaigns(Campaign.SearchCampaignsByDescription(tbxCampaignSearchKeywords.Text));
+                        break;
+                    case "Number Sent":
+                        GetCampaigns(Campaign.SearchCampaignsByNumberSent(Int32.Parse(tbxCampaignSearchKeywords.Text)));
+                        break;
+                    case "Expected Response":
+                        GetCampaigns(Campaign.SearchCampaignsByExpectedResponse(Decimal.Parse(tbxCampaignSearchKeywords.Text)));
+                        break;
+                    case "Expected Revenue":
+                        GetCampaigns(Campaign.SearchCampaignsByExpectedRevenue(Decimal.Parse(tbxCampaignSearchKeywords.Text)));
+                        break;
+                    case "Budgeted Cost":
+                        GetCampaigns(Campaign.SearchCampaignsByBudgetedCost(Decimal.Parse(tbxCampaignSearchKeywords.Text)));
+                        break;
+                    case "Actual Cost":
+                        GetCampaigns(Campaign.SearchCampaignsByActualCost(Decimal.Parse(tbxCampaignSearchKeywords.Text)));
+                        break;
+                }
+            }
+        }
+
+        private void dpkCampaignSearchDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (thisTarget.Name)
+            {
+                case "Start Date":
+                    if (dpkCampaignSearchDate.SelectedDate.HasValue)
+                        GetCampaigns(Campaign.SearchCampaignsByStartDate(dpkCampaignSearchDate.SelectedDate.Value));
+                    break;
+                case "End Date":
+                    if (dpkCampaignSearchDate.SelectedDate.HasValue)
+                        GetCampaigns(Campaign.SearchCampaignsByEndDate(dpkCampaignSearchDate.SelectedDate.Value));
+                    break;
+                case "Created Date":
+                    if (dpkCampaignSearchDate.SelectedDate.HasValue)
+                        GetCampaigns(Campaign.SearchCampaignsByCreateDate(dpkCampaignSearchDate.SelectedDate.Value));
+                    break;
+                case "Updated Date":
+                    if (dpkCampaignSearchDate.SelectedDate.HasValue)
+                        GetCampaigns(Campaign.SearchCampaignsByUpdateDate(dpkCampaignSearchDate.SelectedDate.Value));
+                    break;
+            }
+        }
+        private void GetCampaigns(List<CampaignsModel> QueryCampaigns)
+        {
+            _listCampaigns = QueryCampaigns;
+            if (_listCampaigns.Count > 0)
+            {
+                CampaignController.currentCampaignIndex = 0;
+                gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
+            }
+            else
+            {
+                MessageBox.Show("Sorry, But there wasn't found any Campaign with your search keywords :( Please try Again with different arguments or check that your keywords are right.","Not Found",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
         }
         private List<SearchAttribute> getSearchTargetKeys(SearchAttribute actualAtt)
         {
@@ -181,40 +300,16 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private void cmbTargetValueCampaign_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedSearchKey((SearchAttribute)cmbTargetKeyCampaign.SelectedItem, (SearchAttribute)cmbTargetValueCampaign.SelectedItem);
-        }
-
-        private void SelectedSearchKey(SearchAttribute key,SearchAttribute valueSelected)
-        {
-            try
+            if (cmbTargetValueCampaign.SelectedItem != null)
             {
-                CampaignsModel _cmp;
-                if (key.ID.Equals(1) && valueSelected != null)
+                if (thisTarget.Name.Equals("Status"))
                 {
-                     _cmp = new CampaignsModel();
-                     _searchKey = "Status";
-                     _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, _searchKey);
-                     _listCampaigns = _cmp.listCampaigns;
-                     CampaignController.currentCampaignIndex = 0;
-                     CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex--;
-                     CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex++;
-
-                     
+                    GetCampaigns(Campaign.SearchCampaignsByStatus(Convert.ToInt32(cmbTargetValueCampaign.SelectedValue)));
                 }
-                else if (key.ID.Equals(2) && valueSelected != null)// && ((SearchAttribute)cmbTargetKeyCampaign.SelectedItem).ID == 2)
+                else if (thisTarget.Name.Equals("Type"))
                 {
-                    _cmp = new CampaignsModel();
-                    _searchKey = "Type";
-                    _cmp.LoadCampaigns(gridCampaign, valueSelected.ID, _searchKey);
-                    _listCampaigns = _cmp.listCampaigns;
-                    CampaignController.currentCampaignIndex = 0;
-                    CampaignController.previousCampaignIndex = CampaignController.currentCampaignIndex--;
-                    CampaignController.nextCampaignIndex = CampaignController.currentCampaignIndex++;
+                    GetCampaigns(Campaign.SearchCampaignsByType(Convert.ToInt32(cmbTargetValueCampaign.SelectedValue)));
                 }
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -226,7 +321,6 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private void btnNextSlider_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(CampaignController.currentCampaignIndex);
             if (CampaignController.currentCampaignIndex < _listCampaigns.Count-1)
             {
                 CampaignController.currentCampaignIndex = CampaignController.currentCampaignIndex + 1;
@@ -257,6 +351,8 @@ namespace OpenCRM.Views.Objects.Campaigns
             CampaignController.CurrentCampaignName = _listCampaigns[CampaignController.currentCampaignIndex].Name;
             PageSwitcher.Switch("/Views/Objects/Campaigns/Leads/LeadsView.xaml");
         }
+
+
         
     }
     public class SearchAttribute {
