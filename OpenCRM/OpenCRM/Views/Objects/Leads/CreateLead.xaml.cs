@@ -156,7 +156,14 @@ namespace OpenCRM.Views.Objects.Leads
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch(LeadsController.CurrentPage);
+            if (LeadsController.FromCampaign)
+            {
+                PageSwitcher.Switch(LeadsController.GoBackPage);
+            }
+            else
+            {
+                PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
+            }
         }
     }
 }

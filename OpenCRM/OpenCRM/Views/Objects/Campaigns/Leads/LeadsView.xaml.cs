@@ -142,7 +142,8 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
 
                 var selectedItem = dgrid.SelectedItem;
                 Type type = selectedItem.GetType();
-                LeadsController.CurrentPage = "/Views/Objects/Campaigns/Leads/LeadsView.xaml";
+                LeadsController.GoBackPage = "/Views/Objects/Campaigns/Leads/LeadsView.xaml";
+                LeadsController.FromCampaign = true;
                 LeadsModel.LeadIdforEdit = Convert.ToInt32(type.GetProperty("LeadId").GetValue(selectedItem, null));
                 PageSwitcher.Switch(uri);
             }

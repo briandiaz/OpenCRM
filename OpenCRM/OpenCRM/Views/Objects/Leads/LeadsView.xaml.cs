@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCRM.Models.Objects.Leads;
+using OpenCRM.Controllers.Lead;
 
 namespace OpenCRM.Views.Objects.Leads
 {
@@ -26,18 +27,22 @@ namespace OpenCRM.Views.Objects.Leads
             InitializeComponent();
             LeadsModel _leadsModel = new LeadsModel();
             _leadsModel.LoadRecentLeads(this.DataGridRecentLeads);
+            LeadsController.FromCampaign = false;
         }
 
         private void btn_NewLead_OnClick(object sender, RoutedEventArgs e)
         {
             LeadsModel.IsNew = true;
             PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
+            LeadsController.GoBackPage = "/Views/Objects/Leads/LeadsView.xaml";
         }
+        
 
         private void btn_EditLead_OnClick(object sender, RoutedEventArgs e)
         {
             if (this.DataGridRecentLeads.SelectedIndex == -1)
                 return;
+
 
             LeadsModel.IsNew = false;
 
