@@ -249,6 +249,7 @@ namespace OpenCRM.Views.Objects.Campaigns
             {
                 CampaignController.currentCampaignIndex = 0;
                 gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
+                //lblExpectedResponse.Text = (Decimal.Parse(_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.Value.ToString()) * 100).ToString();
             }
             else
             {
@@ -351,6 +352,11 @@ namespace OpenCRM.Views.Objects.Campaigns
             CampaignController.CurrentCampaignId = _listCampaigns[CampaignController.currentCampaignIndex].CampaignId;
             CampaignController.CurrentCampaignName = _listCampaigns[CampaignController.currentCampaignIndex].Name;
             PageSwitcher.Switch("/Views/Objects/Campaigns/Leads/LeadsView.xaml");
+        }
+
+        private void btnDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Objects/Campaigns/Dashboard/Dashboard.xaml");
         }
 
 

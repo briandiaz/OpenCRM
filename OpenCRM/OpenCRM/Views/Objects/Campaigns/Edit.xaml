@@ -123,15 +123,15 @@
                     </StackPanel>
                 </Button>
 
-                <Button Name="btnSaveandNew" 
+                <Button Name="btnDelete" 
                         VerticalAlignment="Center" 
                         Margin="2" 
-                        Click="btnSaveandNew_Click"
+                        Click="btnDelete_Click"
                         Cursor="Hand"
                         >
                     <StackPanel Orientation="Horizontal" >
-                        <Image Source="/Assets/Img/Icons/32px/checkmark2.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Save And New</TextBlock>
+                        <Image Source="/Assets/Img/Icons/32px/close.png" Width="15" Height="15" />
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Delete</TextBlock>
                     </StackPanel>
                 </Button>
 
