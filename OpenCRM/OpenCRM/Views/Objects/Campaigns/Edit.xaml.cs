@@ -24,6 +24,7 @@ namespace OpenCRM.Views.Objects.Campaigns
     /// </summary>
     public partial class Edit : Page
     {
+        #region "Properties"
         public int _userId
         {
             get { return ((User)(cmbCampaignOwner.SelectedItem)).UserId; }
@@ -140,10 +141,17 @@ namespace OpenCRM.Views.Objects.Campaigns
             get { return DateTime.Now; }
         }
 
+        #endregion
+
+        #region Fields
+        
         private CampaignStatus _campaignStatus = new CampaignStatus();
         private CampaignType _campaignType = new CampaignType();
         private AccountOwner _accountOwner = new AccountOwner();
         private CampaignsModel _cmp = new CampaignsModel();
+        
+        #endregion
+        
         
         public Edit()
         {
@@ -239,14 +247,10 @@ namespace OpenCRM.Views.Objects.Campaigns
             cmbCampaignType.DisplayMemberPath = "Name";
             cmbCampaignType.SelectedValuePath = "CampaignTypeId";
 
-            //List<CampaignStatus> _CampaignStatuses = _campaignStatus.getAllCampaignStatuses();
-
             cmbCampaignStatus.ItemsSource = _campaignStatus.getAllCampaignStatuses();
 
             cmbCampaignStatus.DisplayMemberPath = "Name";
             cmbCampaignStatus.SelectedValuePath = "CampaignStatusID";
-
-            //List<CampaignsModel> _CampaignsModel = _cmp.getAllCampaignsFromUser();
 
             cmbCampaignParent.ItemsSource = _cmp.getAllCampaignsFromUser();
 
