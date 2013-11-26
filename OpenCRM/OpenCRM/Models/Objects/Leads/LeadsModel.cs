@@ -407,6 +407,9 @@ namespace OpenCRM.Models.Objects.Leads
                     account.CreateDate = DateTime.Now;
                     account.UpdateBy = user;
                     account.UpdateDate = DateTime.Now;
+                    account.AccountTypeId = 1;
+                    account.AccountSLAId = 1;
+                    account.IndustryId = 1;
                     if(selectedLead.Address != null)
                         account.Address = selectedLead.Address;
                     db.Account.Add(account);
@@ -438,6 +441,7 @@ namespace OpenCRM.Models.Objects.Leads
                         opportunity.UpdateBy = user;
                         opportunity.CreateDate = DateTime.Now;
                         opportunity.UpdateDate = DateTime.Now;
+                        opportunity.ViewDate = DateTime.Now;
                         db.Opportunities.Add(opportunity);
                     }
                     selectedLead.Converted = true;
