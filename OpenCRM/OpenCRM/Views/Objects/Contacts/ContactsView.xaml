@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>
@@ -43,29 +44,37 @@
                 <RowDefinition Height="500*"/>
             </Grid.RowDefinitions>
 
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="#A300E3" />
+                    <Setter Property="BorderThickness" Value="5" />
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Grid.Resources>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100*"/>
                 <ColumnDefinition Width="600*"/>
                 <ColumnDefinition Width="200*"/>
             </Grid.ColumnDefinitions>
 
-            <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_Contacts" FontSize="20px" RenderTransformOrigin="0.487,0.778" Margin="1,6,-1,-6"/>
-            </TabControl>
+            <TabControl Grid.Row="0" Grid.Column="0"/>
+            
 
             <Grid Grid.Row="2" 
                   Grid.Column="1"
-                 Background="#349CE2"
+                 Background="#A300E3"
                   Margin="0,5,0,0">
+                <Border>
                 <TextBlock 
                            Text="View:"
                            FontSize="20"
-                           Background="#349CE2"
+                           
                           
                            Foreground="White"
                            VerticalAlignment="Bottom"
                            Margin="99,0,337,0"/>
-
+                </Border>
                 <ComboBox 
                           Name="cmbSearchTypeContacts"
                           VerticalAlignment="Bottom"
@@ -105,18 +114,17 @@
 
             <Grid Grid.Row="3" 
                   Grid.Column="1"
-                  Background="#349CE2"
+                  Background="#A300E3"
                   Margin="0,20,0,0">
-
-                <TextBlock Text="Recent Contacts"
+               
+                <TextBlock
+                    Text="Recent Contacts"
                            TextAlignment="Center"
         		           FontSize="22"
                            Foreground="White"
-                           Margin="217,25,263,390"/>
-
-
-                <DataGrid 
+                           />
                 
+                <DataGrid 
                 IsReadOnly="True"
                 Name="RecentContactsGrid"
                 Margin="0,60,0,0"    
@@ -138,6 +146,12 @@
                Grid.Row="1"
                VerticalAlignment="Top"
                Width="100"/>
+            <Label Content="Recent Contacts"
+                   FontSize="15px"
+                   Grid.Column="1" HorizontalAlignment="Left" Margin="124,10,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+            <Label Content="Contacts"
+                   FontSize="30px"
+                   Grid.Column="1" HorizontalAlignment="Left" Margin="117,44,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         </Grid>
     </controls:MetroContentControl>

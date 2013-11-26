@@ -40,12 +40,48 @@ namespace OpenCRM.Views.Objects.Products
 
         private void RecentProductsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-        public void OpportunityNameHyperlink_Click(object sender, RoutedEventArgs e)
-        {
            
         }
+        public void ProdutNameHyperlink_Click(object sender, RoutedEventArgs e)
+        {  
+            var ProductId = Convert.ToInt32((sender as TextBlock).Tag);
+            ProductsModel.EditProductId = ProductId;
+
+            ProductsModel.IsEditing = true;
+            ProductsModel.IsNew = false;
+            ProductsModel.IsSearching = false;
+
+            PageSwitcher.Switch("/Views/Objects/Products/ProductDetails.xaml");     
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            ProductsModel.IsNew = false;
+            ProductsModel.IsEditing = true;
+
+            try
+            {
+                var selectedItem = this.RecentProductsGrid.SelectedItem;
+                Type type = selectedItem.GetType();
+
+                ProductsModel.EditProductId = Convert.ToInt32(type.GetProperty("ProductId").GetValue(selectedItem, null));
+
+                PageSwitcher.Switch("/Views/Objects/Products/ProductDetails.xaml");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Select a Product");
+                MessageBox.Show(ex.ToString());
+            }
+            
+        }
+
+        private void cmbSearchProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
 
        
     }

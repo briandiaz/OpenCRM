@@ -29,16 +29,12 @@ namespace OpenCRM.Views.Objects.Products
         public CreateProduct()
         {
             InitializeComponent();
+
             _productModel = new ProductsModel();
-
-            if (ProductsModel.IsNew)
-            {
-                
-            }
-
+           
             if(ProductsModel.IsEditing)
             {
-                
+                _productModel.LoadEditProduct(this);
             }
             
         }
@@ -115,9 +111,8 @@ namespace OpenCRM.Views.Objects.Products
 
             if (canSaveProduct())
             {
-                ProductsModel.IsEditing = false;
-                ProductsModel.IsNew = true;
-                ProductsModel.IsSearching = false;
+
+                 ProductsModel.IsEditing = false;
                 _productModel.Save(this);
                 
             }

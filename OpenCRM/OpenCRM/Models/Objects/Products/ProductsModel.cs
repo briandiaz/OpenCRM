@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace OpenCRM.Models.Objects.Products
         public static bool IsNew { get; set; }
         public static bool IsEditing { get; set; }
         public static bool IsSearching { get; set; }
+        public static int EditProductId { get; set; }
 
         public ProductsData Data { get; set; }
         #endregion
@@ -51,6 +53,7 @@ namespace OpenCRM.Models.Objects.Products
                         select
                          new DataGridRecentProducts()
                          {
+                             ProductId = products.ProductId,
                              Nombre = products.Name,
                              Codigo = products.Code,
                              Description = products.Description
@@ -63,14 +66,14 @@ namespace OpenCRM.Models.Objects.Products
                     listProducts = query;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.ToString());
             }
 
-            listProducts.ForEach(x => x.Nombre = x.Nombre.PadRight(100));
-            listProducts.ForEach(x => x.Codigo = x.Codigo.PadRight(50));
+            //listProducts.ForEach(x => x.Nombre = x.Nombre.PadRight(100));
+           // listProducts.ForEach(x => x.Codigo = x.Codigo.PadRight(50));
             RecentProductsGrid.ItemsSource = listProducts;
         }
         #endregion
@@ -79,6 +82,8 @@ namespace OpenCRM.Models.Objects.Products
 
         public void Save(CreateProduct createProduct)
         {
+            
+
             this.Data.name = createProduct.TxtBoxName.Text;
             this.Data.code = createProduct.TxtBoxCodigo.Text;
             this.Data.description = createProduct.TxtBoxDescripcion.Text;
@@ -110,14 +115,14 @@ namespace OpenCRM.Models.Objects.Products
                 {
                     DataBase.Products product = null;
 
-                    if (IsNew)
-                    {
-                        product = _db.Products.Create();
-                    }
-                    if (IsEditing)
-                    {
-                        product = _db.Products.FirstOrDefault(x => x.ProductId == this.Data.productId);
-                    }
+                     if (IsEditing)
+                     {
+                         product = _db.Products.FirstOrDefault(x => x.ProductId == EditProductId);
+                     }
+                     else
+                     {
+                         product = _db.Products.Create();
+                     }
 
                     product.Name = this.Data.name;
                     product.Code = this.Data.code;
@@ -136,6 +141,7 @@ namespace OpenCRM.Models.Objects.Products
                     }
 
                     _db.SaveChanges();
+
                     MessageBox.Show("Producto Guardado con Exito");
                     PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
 
@@ -153,13 +159,76 @@ namespace OpenCRM.Models.Objects.Products
 
         #region Edit
 
-        public void LoadEditProducts(EditContacts EditProducts)
+        
+        public void LoadProductDetails(ProductDetails productDetails)
         {
-            
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var selectedProduct = _db.Products.FirstOrDefault(x => x.ProductId == EditProductId);
+
+                    productDetails.lblProductName.Content = selectedProduct.Name;
+                    productDetails.lblProductCode.Content = selectedProduct.Code;
+                    productDetails.lblCreatedBy.Content = selectedProduct.User1.UserName;
+                    productDetails.lblProductDescription.Content = selectedProduct.Description;
+
+                    if (selectedProduct.Active == true)
+                    {
+                        productDetails.lblActive.Content = "Yes";
+                    }
+                    else
+                    {
+                        productDetails.lblActive.Content = "NO";
+                    }
+
+                    productDetails.lblLastModifiedBy.Content = selectedProduct.User1.UserName;
+
+                }
+            }
+            catch (SqlException ex) 
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void LoadEditProduct(CreateProduct editProductView)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var selectedproduct = _db.Products.FirstOrDefault(x => x.ProductId == EditProductId);
+
+                    editProductView.TxtBoxName.Text = selectedproduct.Name;
+                    editProductView.TxtBoxCodigo.Text = selectedproduct.Code;
+                    editProductView.TxtBoxDescripcion.Text = selectedproduct.Description;
+                    editProductView.TxtBoxPrecio.Text = Convert.ToString(selectedproduct.Price);
+                    editProductView.TxtBoxQuantity.Text = Convert.ToString(selectedproduct.Quantity);
+                    //editProductView.cbxCampaignActive.IsChecked.Value = selectedproduct.Active;
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         #endregion
 
+        #region Search 
+        
+        #endregion
 
         #endregion
 
@@ -168,6 +237,7 @@ namespace OpenCRM.Models.Objects.Products
     class DataGridRecentProducts
     {
         #region Properties
+        public int ProductId { get; set; }
         public string Nombre { get; set; }
         public string Codigo { get; set; }
         public string Description { get; set; }
