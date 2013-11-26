@@ -396,6 +396,7 @@
 
                     <DataGrid Name="DataGridCampaign"
                               Style="{DynamicResource MetroDataGrid}" 
+                              MinColumnWidth="120"
                               Margin="30,122,30,30" />
                 </Grid>
 
