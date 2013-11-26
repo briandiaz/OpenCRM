@@ -24,6 +24,7 @@ namespace OpenCRM.Views.Objects.Campaigns
     /// </summary>
     public partial class Edit : Page
     {
+        #region "Properties"
         public int _userId
         {
             get { return ((User)(cmbCampaignOwner.SelectedItem)).UserId; }
@@ -41,23 +42,28 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public int? _campaignTypeId
         {
-            //get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignType.SelectedValue) : (int?)null; }
-            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex)); }
-            set { }
+            get { return (cmbCampaignType.SelectedItem != null) ? ((CampaignType)cmbCampaignType.SelectedItem).CampaignTypeId : (int?)null; }
+            set
+            {
+                int? _campaignType = (cmbCampaignType.SelectedItem != null) ? ((CampaignType)cmbCampaignType.SelectedItem).CampaignTypeId : (int?)null;
+                _campaignType = value;
+            }
         }
         public int? _campaignStatusId
         {
-            //get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex) != -1) ? Convert.ToInt32(cmbCampaignStatus.SelectedValue) : (int?)null; }
-            get { return (Convert.ToInt32(cmbCampaignType.SelectedIndex)); }
-            set { }
+            get { return (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null; }
+            set{
+                int? _campaignStatus = (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null;
+                _campaignStatus = value;
+            }
         }
-        public DateTime _startDate
+        public DateTime? _startDate
         {
-            get { return dpkCampaignStartDate.SelectedDate.Value; }
+            get { return (dpkCampaignStartDate.SelectedDate.HasValue) ? dpkCampaignStartDate.SelectedDate.Value : (DateTime?)null; }
         }
-        public DateTime _endDate
+        public DateTime? _endDate
         {
-            get { return dpkCampaignEndDate.SelectedDate.Value; }
+            get { return (dpkCampaignEndDate.SelectedDate.HasValue) ? dpkCampaignEndDate.SelectedDate.Value : (DateTime?)null; }
         }
         public decimal? _expectedRevenue
         {
@@ -96,11 +102,12 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public int? _campaignParent
         {
-            get
+            get { return (cmbCampaignParent.SelectedIndex != -1) ? ((CampaignsModel)cmbCampaignParent.SelectedItem).CampaignId : (int?)null; }
+            set
             {
-                return (Convert.ToInt32(cmbCampaignParent.SelectedValue));
+                int? _campaign = (cmbCampaignParent.SelectedIndex != -1) ? ((CampaignsModel)cmbCampaignParent.SelectedItem).CampaignId : (int?)null;
+                _campaign = value;
             }
-            set { }
         }
         public String _description
         {
@@ -134,15 +141,22 @@ namespace OpenCRM.Views.Objects.Campaigns
             get { return DateTime.Now; }
         }
 
+        #endregion
+
+        #region Fields
+        
         private CampaignStatus _campaignStatus = new CampaignStatus();
         private CampaignType _campaignType = new CampaignType();
         private AccountOwner _accountOwner = new AccountOwner();
         private CampaignsModel _cmp = new CampaignsModel();
         
+        #endregion
+        
+        
         public Edit()
         {
             InitializeComponent();
-            gridCampaign.DataContext = _cmp.getCampaignByID(Convert.ToInt32(OpenCRM.Controllers.Campaign.CampaignController.CurrentCampaignId));
+            gridCampaign.DataContext = _cmp.getCampaignByID(Convert.ToInt32(Controllers.Campaign.CampaignController.CurrentCampaignId));
             loadComboboxes();
         }
 
@@ -165,8 +179,8 @@ namespace OpenCRM.Views.Objects.Campaigns
                         Active = _active,
                         CampaignTypeId = _campaignTypeId,
                         CampaignStatusId = _campaignStatusId,
-                        StartDate = _startDate,
-                        EndDate = _endDate,
+                        StartDate = (_startDate.HasValue) ?_startDate.Value : (DateTime?)null,
+                        EndDate = (_endDate.HasValue) ? _endDate.Value : (DateTime?)null,
                         ExpectedRevenue = _expectedRevenue,
                         BudgetedCost = _budgetedCost,
                         ActualCost = _actualCost,
@@ -233,14 +247,10 @@ namespace OpenCRM.Views.Objects.Campaigns
             cmbCampaignType.DisplayMemberPath = "Name";
             cmbCampaignType.SelectedValuePath = "CampaignTypeId";
 
-            //List<CampaignStatus> _CampaignStatuses = _campaignStatus.getAllCampaignStatuses();
-
             cmbCampaignStatus.ItemsSource = _campaignStatus.getAllCampaignStatuses();
 
             cmbCampaignStatus.DisplayMemberPath = "Name";
             cmbCampaignStatus.SelectedValuePath = "CampaignStatusID";
-
-            //List<CampaignsModel> _CampaignsModel = _cmp.getAllCampaignsFromUser();
 
             cmbCampaignParent.ItemsSource = _cmp.getAllCampaignsFromUser();
 
@@ -252,29 +262,16 @@ namespace OpenCRM.Views.Objects.Campaigns
         private void cmbCampaignType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            if (cmbCampaignType.SelectedValue != null)
-            {
-                _campaignTypeId = Convert.ToInt32(cmbCampaignType.SelectedValue);
-                MessageBox.Show(_campaignTypeId.ToString());
-            }
         }
 
         private void cmbCampaignStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbCampaignStatus.SelectedValue != null)
-            {
-                _campaignStatusId = Convert.ToInt32(cmbCampaignStatus.SelectedValue);
-                MessageBox.Show(_campaignStatusId.ToString());
-            }
+
         }
 
         private void cmbCampaignParent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbCampaignParent.SelectedValue != null)
-            {
-                _campaignParent = Convert.ToInt32(cmbCampaignParent.SelectedValue);
-                MessageBox.Show(_campaignParent.ToString());
-            }
+
         }
     }
 }

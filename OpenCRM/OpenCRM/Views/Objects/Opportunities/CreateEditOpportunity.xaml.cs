@@ -95,6 +95,16 @@ namespace OpenCRM.Views.Objects.Opportunities
                 this.borderObligationName.Background = this.gridObligationName.Background;
             }
 
+            if (this.tbxOpportunityProduct.Text != String.Empty)
+            {                
+                int valueRemaining = 0;
+                if (Int32.TryParse(this.lblOpportunityLeft.Content.ToString(), out valueRemaining))
+                {
+                    if (valueRemaining < 0)
+                        canSave = false;
+                }
+            }
+
             return canSave;
         }
 
@@ -318,13 +328,24 @@ namespace OpenCRM.Views.Objects.Opportunities
         {
             if (!this.tbxOpportunityProduct.Text.Equals(String.Empty))
             {
-                var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxOpportunityProduct.Text);
-                int value;
+                if (OpportunitiesModel.IsNew)
+                {
+                    var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxOpportunityProduct.Text);
+                    int value;
 
-                if (Int32.TryParse(this.tbxOpportunityQuantity.Text, out value))
-                    this.lblOpportunityLeft.Content = Convert.ToString(selectItem.Quantity-value);
+                    if (Int32.TryParse(this.tbxOpportunityQuantity.Text, out value))
+                        this.lblOpportunityLeft.Content = Convert.ToString(selectItem.Quantity - value);
+                    else
+                        this.lblOpportunityLeft.Content = selectItem.Quantity.ToString();
+                }
                 else
-                    this.lblOpportunityLeft.Content = selectItem.Quantity.ToString();                
+                {
+                    int value;
+                    if (Int32.TryParse(this.tbxOpportunityQuantity.Text, out value))
+                        this.lblOpportunityLeft.Content = Convert.ToString(_opportunitiesModel.Data.ProductQuantity - value);
+                    else
+                        this.lblOpportunityLeft.Content = _opportunitiesModel.Data.ProductQuantity.ToString();
+                }
             }
         }
 
@@ -344,8 +365,15 @@ namespace OpenCRM.Views.Objects.Opportunities
 
         private void tbxOpportunityProduct_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxOpportunityProduct.Text);
-            this.lblOpportunityLeft.Content = selectItem.Quantity.ToString();
+            if (OpportunitiesModel.IsNew)
+            {
+                var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxOpportunityProduct.Text);
+                this.lblOpportunityLeft.Content = selectItem.Quantity.ToString();
+            }
+            else
+            {
+                this.lblOpportunityLeft.Content = _opportunitiesModel.Data.ProductQuantity;
+            }
         }
         
         #region "Search"
@@ -374,10 +402,12 @@ namespace OpenCRM.Views.Objects.Opportunities
             var data = new
             {
                 Id = (int)type.GetProperty("Id").GetValue(selectedItem, null),
-                Name = (string)type.GetProperty("Name").GetValue(selectedItem, null)
+                Name = (string)type.GetProperty("Name").GetValue(selectedItem, null),
+                Quantity = (int)type.GetProperty("Quantity").GetValue(selectedItem, null),
             };
 
             this._opportunitiesModel.Data.ProductId = data.Id;
+            this._opportunitiesModel.Data.ProductQuantity = data.Quantity;
             this.tbxOpportunityProduct.Text = data.Name;
 
             this.DataGridProducts.ItemsSource = null;

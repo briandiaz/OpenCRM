@@ -61,5 +61,10 @@ namespace OpenCRM.Views.Objects.Opportunities
 
             PageSwitcher.Switch("/Views/Objects/Opportunities/OpportunitiesDetails.xaml");
         }
+
+        private void DataGridRecentOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

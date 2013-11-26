@@ -42,6 +42,10 @@ namespace OpenCRM.Views.Objects.Products
         {
 
         }
+        public void OpportunityNameHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
 
        
     }

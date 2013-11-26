@@ -56,10 +56,10 @@
                         HorizontalAlignment="Right" Width="158">
 
                     <Button 
-                    x:Name="btnEditContact"
+                    Name="btnCrearContacto"
                     VerticalAlignment="Center"
                     Margin="2,48,2,133"
-                    Width="75" Click="btnEditContact_Click" >
+                    Width="75" Click="btnCrearContacto_Click"  >
 
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"/>

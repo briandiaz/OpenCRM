@@ -36,8 +36,8 @@ namespace OpenCRM.DataBase
     
         public virtual ICollection<Cases> Cases { get; set; }
         public virtual ICollection<Inventory_Products> Inventory_Products { get; set; }
-        public virtual ICollection<Opportunities> Opportunities { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        public virtual ICollection<Opportunities> Opportunities { get; set; }
     }
 }

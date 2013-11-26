@@ -89,7 +89,16 @@
                      Margin="0,4,0,0"
                      Grid.Row="2"
                      Grid.Column="2"
-                     Background="#1179BE" />
+                     Background="#1179BE" >
+                
+                <TextBlock  Text=" = Required Information"
+            		VerticalAlignment="Center"
+            		TextAlignment="Center"
+            		HorizontalAlignment="Center"
+            		Foreground="White"
+            		FontSize="16px" Margin="178,10,62,12"
+            		 />
+            </Border>
 
             <TextBox
                    controls:TextboxHelper.Watermark="Enter Product Name"
@@ -187,6 +196,14 @@
                 </StackPanel>
             </Button>
 
+            <Grid Grid.Column="1"
+                  Grid.Row="3" 
+                  Name="gridObligationCloseDate"
+                          Background="#DA3232"
+            	          Margin="94,35,691,305"
+                          Width="6"
+                          Visibility="Visible" />
+
             <controls:ToggleSwitch 
                         Name="cbxCampaignActive"
                         OnLabel="Yes" 
@@ -246,6 +263,21 @@
             	TextWrapping="Wrap"
             	VerticalAlignment="Top"
             	Width="220"/>
+            
+            <Grid Grid.Column="1"
+            	Grid.Row="3" 
+            	Name="gridProductObligation"
+            	Background="#DA3232"
+            	Margin="94,35,691,305"
+            	Width="6"
+            	Visibility="Visible" />
+            <Grid Grid.Column="2"
+            	Grid.Row="2" 
+            	x:Name="gridProductObligation_Copy"
+            	Background="#DA3232"
+            	Margin="154,12,230,10"
+            	Width="6"
+            	Visibility="Visible" />
 
 
         </Grid>

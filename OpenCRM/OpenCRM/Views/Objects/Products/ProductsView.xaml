@@ -22,7 +22,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
                 <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
     </Page.Resources>
 
@@ -118,6 +117,7 @@
             <DataGrid 
                 
                 IsReadOnly="True"
+                SelectionMode="Single"
                 Name="RecentProductsGrid"
                 Margin="0,60,0,0"    
                 Style="{DynamicResource MetroDataGrid}"
@@ -126,9 +126,44 @@
                 Grid.Row="3" 
                 VerticalAlignment="Top"
                 MinWidth="1000"
-                MinHeight="400" SelectionChanged="RecentProductsGrid_SelectionChanged" 
-         >
+                MinHeight="400" SelectionChanged="RecentProductsGrid_SelectionChanged">
+           <!-- <DataGrid.Columns>
+                <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <EventSetter Event="Hyperlink.Click" Handler="OpportunityNameHyperlink_Click" />
+                            <Setter Property="Tag" Value="{Binding Path=Id}"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+                        <DataGridTextColumn Header="Product Name" Width="*" Binding="{Binding Nombre}"/>
+                        <DataGridTextColumn Header="Product Code" Width="*" Binding="{Binding Codigo}" />
+                        <DataGridTextColumn Header="Descripcion Code" Width="*" Binding="{Binding Descripcion}" />
+                    </DataGrid.Columns>-->
+            
             </DataGrid>
+
+                <!-- <DataGrid Name="DataGridRecentOpportunities"
+                              Height="300"
+                              ScrollViewer.CanContentScroll="True"  
+                              Style="{DynamicResource MetroDataGrid}"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Center"
+                              Margin="10,72,10,10">
+                        <DataGrid.Columns>
+                            <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
+                                <DataGridHyperlinkColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <EventSetter Event="Hyperlink.Click" Handler="OpportunityNameHyperlink_Click" />
+                                        <Setter Property="Tag" Value="{Binding Path=Id}"/>
+                                    </Style>
+                                </DataGridHyperlinkColumn.ElementStyle>
+                            </DataGridHyperlinkColumn>
+                            <DataGridTextColumn Header="Account Name" Width="*" Binding="{Binding Account}"/>                             
+                            <DataGridTextColumn Header="Close Date" Width="*" Binding="{Binding CloseDate}" />
+                        </DataGrid.Columns>
+                    </DataGrid>-->
+                
             </Grid>
             <Image Source="/Assets/Img/Icons/Products.png" 
                Grid.Column="1"

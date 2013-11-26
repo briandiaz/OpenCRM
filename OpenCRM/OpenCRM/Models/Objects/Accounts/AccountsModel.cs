@@ -707,7 +707,8 @@ namespace OpenCRM.Models.Objects.Accounts
 
                     account.Name = this.Data.Name;
 
-                    account.AccountParent = db.Account.FirstOrDefault(x => x.AccountId == this.Data.AccountParent).AccountId;
+                    if (this.Data.AccountParent != 0)
+                        account.AccountParent = db.Account.FirstOrDefault(x => x.AccountId == this.Data.AccountParent).AccountId;
 
                     account.Code = this.Data.Code;
 

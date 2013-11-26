@@ -107,13 +107,16 @@
 
                     <DataGrid Name="DataGridRecentOpportunities"
                               Height="300"
+                              AutoGenerateColumns="False"
                               IsReadOnly="True"
                               ScrollViewer.CanContentScroll="True"  
                               Style="{DynamicResource MetroDataGrid}"
                               SelectionMode="Single"
                               HorizontalContentAlignment="Center"
                               VerticalContentAlignment="Center"
-                              Margin="10,72,0,0" HorizontalAlignment="Left" Width="649" VerticalAlignment="Top">
+                              Margin="10,72,10,10" 
+                              SelectionChanged="DataGridRecentOpportunities_SelectionChanged">
+
                         <DataGrid.Columns>
                             <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
                                 <DataGridHyperlinkColumn.ElementStyle>

@@ -67,11 +67,7 @@ namespace OpenCRM.Models.Objects.Opportunities
                         }
                     ).ToList();
 
-                    DataGridRecentOpportunities.AutoGenerateColumns = false;
-
-                    DataGridRecentOpportunities.ItemsSource = query.Select(
-                        x => new { x.Id, x.Opportunity, x.Account, x.CloseDate }
-                    ).Take(25);
+                    DataGridRecentOpportunities.ItemsSource = query;
                 }
             }
             catch (SqlException ex)
@@ -274,9 +270,6 @@ namespace OpenCRM.Models.Objects.Opportunities
 
                     EditOpportunities.cmbLeadSource.SelectedValue = (selectedOpportunity.LeadSourceId.HasValue) ? selectedOpportunity.LeadSourceId : 1;
 
-                    if (selectedOpportunity.Amount.HasValue)
-                        EditOpportunities.tbxOpportunityAmount.Text = selectedOpportunity.Amount.Value.ToString();
-
                     if (selectedOpportunity.CloseDate.HasValue)
                         EditOpportunities.tbxOpportunityCloseDate.Text = selectedOpportunity.CloseDate.Value.ToShortDateString();
 
@@ -290,9 +283,18 @@ namespace OpenCRM.Models.Objects.Opportunities
                         ).Name;
 
                     if (selectedOpportunity.ProductId.HasValue)
-                        EditOpportunities.tbxOpportunityProduct.Text = db.Products.FirstOrDefault(
-                            x => x.ProductId == selectedOpportunity.ProductId
-                        ).Name;
+                    {
+
+                        EditOpportunities.tbxOpportunityProduct.Text = selectedOpportunity.Product.Name;
+
+                        if(selectedOpportunity.Quantity.HasValue)
+                            EditOpportunities.tbxOpportunityQuantity.Text = selectedOpportunity.Quantity.Value.ToString();
+
+                        if (selectedOpportunity.Amount.HasValue)
+                            EditOpportunities.tbxOpportunityAmount.Text = selectedOpportunity.Amount.Value.ToString();
+
+                        EditOpportunities.lblOpportunityLeft.Content = selectedOpportunity.Product.Quantity;
+                    }
 
                     EditOpportunities.tbxOpportunityOrderNumber.Text = selectedOpportunity.OrderNumber;
                     EditOpportunities.tbxCurrentGenerator.Text = selectedOpportunity.CurrentGenerator;
@@ -333,9 +335,6 @@ namespace OpenCRM.Models.Objects.Opportunities
             this.Data.OpportunityTypeId = Convert.ToInt32(CreateEditOpportunities.cmbOpportunityType.SelectedValue);
             this.Data.LeadSourceId = Convert.ToInt32(CreateEditOpportunities.cmbLeadSource.SelectedValue);
 
-            if (CreateEditOpportunities.tbxOpportunityAmount.Text != String.Empty)
-                this.Data.Amount = Convert.ToDecimal(CreateEditOpportunities.tbxOpportunityAmount.Text);
-
             this.Data.CloseDate = Convert.ToDateTime(Convert.ToDateTime(CreateEditOpportunities.tbxOpportunityCloseDate.Text).ToShortDateString());
 
             this.Data.NextStep = CreateEditOpportunities.tbxOpportunityNextStep.Text;
@@ -350,13 +349,14 @@ namespace OpenCRM.Models.Objects.Opportunities
 
             //--Product Id
 
-            if (!(this.Products.Count == 0))
+            if (this.Data.ProductId != 0)
             {
                 int value;
                 if (Int32.TryParse(CreateEditOpportunities.lblOpportunityLeft.Content.ToString(), out value))
                     this.Data.Quantity = value;
-                else
-                    this.Data.Quantity = this.Products.Find(x => x.Id == this.Data.ProductId).Quantity;
+
+                if (CreateEditOpportunities.tbxOpportunityAmount.Text != String.Empty)
+                    this.Data.Amount = Convert.ToDecimal(CreateEditOpportunities.tbxOpportunityAmount.Text);
             }
 
             //--Competidors Id
@@ -430,12 +430,16 @@ namespace OpenCRM.Models.Objects.Opportunities
                     opportunity.TrackingNumber = this.Data.TrackingNumber;
 
                     //Product
-                    opportunity.Product = db.Products.FirstOrDefault(
-                        x => x.ProductId == this.Data.ProductId
-                    );
+                    if (this.Data.ProductId != 0)
+                    {
+                        opportunity.Product = db.Products.FirstOrDefault(
+                            x => x.ProductId == this.Data.ProductId
+                        );
 
-                    if (opportunity.Product != null)
-                        opportunity.Product.Quantity = this.Data.Quantity;
+                        opportunity.Product.Quantity -= this.Data.Quantity;
+
+                        opportunity.Quantity = this.Data.Quantity;
+                    }
 
                     //Competidor
                     opportunity.Competidors = db.Competidors.FirstOrDefault(
@@ -798,9 +802,6 @@ namespace OpenCRM.Models.Objects.Opportunities
                         if (!selectedOpportunity.LeadSourceId.Value.Equals(1))
                             OpportunityDetails.lblLeadSource.Content = selectedOpportunity.Lead_Source.Name;
 
-                    if (selectedOpportunity.Amount.HasValue)
-                        OpportunityDetails.lblAmount.Content = selectedOpportunity.Amount.Value.ToString();
-
                     if (selectedOpportunity.CloseDate.HasValue)
                         OpportunityDetails.lblCloseDate.Content = selectedOpportunity.CloseDate.Value.ToShortDateString();
 
@@ -816,9 +817,17 @@ namespace OpenCRM.Models.Objects.Opportunities
                         ).Name;
 
                     if (selectedOpportunity.ProductId.HasValue)
+                    {
                         OpportunityDetails.lblProduct.Content = db.Products.FirstOrDefault(
                             x => x.ProductId == selectedOpportunity.ProductId.Value
                         ).Name;
+
+                        if (selectedOpportunity.Quantity.HasValue)
+                            OpportunityDetails.lblQuantity.Content = selectedOpportunity.Quantity.Value;
+
+                        if (selectedOpportunity.Amount.HasValue)
+                            OpportunityDetails.lblAmount.Content = selectedOpportunity.Amount.Value.ToString();
+                    }
 
                     OpportunityDetails.lblOrderNumber.Content = selectedOpportunity.OrderNumber;
                     OpportunityDetails.lblCurrentGenerator.Content = selectedOpportunity.CurrentGenerator;
@@ -942,6 +951,7 @@ namespace OpenCRM.Models.Objects.Opportunities
         public DateTime ViewDate { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
+        public int ProductQuantity { get; set; }
 
         #endregion
     }
