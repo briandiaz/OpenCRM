@@ -59,7 +59,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             OpportunitiesModel.IsNew = false;
             OpportunitiesModel.IsSearching = false;
 
-            PageSwitcher.Switch("/Views/Objects/Opportunities/CreateEditOpportunity.xaml");
+            PageSwitcher.Switch("/Views/Objects/Opportunities/OpportunitiesDetails.xaml");
         }
 
         private void DataGridRecentOpportunities_SelectionChanged(object sender, SelectionChangedEventArgs e)

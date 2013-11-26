@@ -42,7 +42,7 @@ namespace OpenCRM.Views.Objects.Accounts
             AccountsModel.IsNew = false;
             AccountsModel.IsSearching = false;
 
-            PageSwitcher.Switch("/Views/Objects/Accounts/CreateEditAccount.xaml");
+            PageSwitcher.Switch("/Views/Objects/Accounts/AccountDetails.xaml");
         }
 
         private void btnSearchAccount_Click(object sender, RoutedEventArgs e)

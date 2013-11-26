@@ -641,7 +641,12 @@
                                 Margin="16,63,616,116" />
 
                     <DatePicker Name="tbxAccountSLAExpirationDate"
-                                Margin="185,62,0,0" HorizontalAlignment="Left" Width="171" Height="31" VerticalAlignment="Top" />
+                                Margin="185,62,0,0"
+                                TextBlock.FontSize="15px"
+                                HorizontalAlignment="Left" 
+                                Width="171" 
+                                Height="31" 
+                                VerticalAlignment="Top" />
 
                     <TextBlock  Text="Number of Locations"
         	                    TextAlignment="Right"

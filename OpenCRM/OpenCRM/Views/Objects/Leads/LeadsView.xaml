@@ -80,7 +80,7 @@
                             HorizontalAlignment="Left" 
                             Width="117"/>
                     </Button>
-                    
+
                     <TabControl Margin="122,64,0,41" HorizontalAlignment="Left" Width="178">
                         <TabItem Header="_Leads" FontSize="20px" Margin="-6,-2,-3,2"/>
                     </TabControl>
@@ -112,22 +112,29 @@
                            Margin="188,2,434,6"/>
                 <ComboBox Name="cmbSearchTypeLeads"
                           VerticalAlignment="Center"
+                          SelectionChanged="cmbSearchTypeLeads_SelectionChanged"
                           Margin="239,4,173,5" Height="20"/>
             </Grid>
 
             <Grid Grid.Row="5" 
                   Grid.Column="1" 
                   Background="#349CE2">
-                <TextBlock Text="Recent Leads"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+               
+                <TextBlock Name="tblType"
+                           Text="Leads"
         		           FontSize="22"
                            Foreground="White"
                            HorizontalAlignment="Center"
-                           Margin="231,20,231,250"/>
-
+                           Margin="271,20,51,250"/>
+                
                 <DataGrid Name="DataGridRecentLeads"
                           Style="{DynamicResource MetroDataGrid}" 
                           Margin="10,72,10,10" 
-                          MouseDoubleClick="DataGridRecentLeads_MouseDoubleClick"/>
+                          MouseDoubleClick="DataGridRecentLeads_MouseDoubleClick" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>
     </controls:MetroContentControl>

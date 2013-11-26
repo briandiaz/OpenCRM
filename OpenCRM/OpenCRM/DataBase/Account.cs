@@ -42,6 +42,7 @@ namespace OpenCRM.DataBase
         public Nullable<int> IndustryId { get; set; }
         public Nullable<int> NumberOfLocation { get; set; }
         public string PhoneNumber { get; set; }
+        public string SlaSerialNumber { get; set; }
         public Nullable<int> RatingId { get; set; }
         public string TickerSymbol { get; set; }
         public string WebSite { get; set; }
@@ -52,7 +53,6 @@ namespace OpenCRM.DataBase
         public Nullable<bool> HiddenAccount { get; set; }
         public Nullable<System.DateTime> ViewDate { get; set; }
         public string Code { get; set; }
-        public string SlaSerialNumber { get; set; }
         public Nullable<System.DateTime> SLAExpiration { get; set; }
     
         public virtual Account_Ownership Account_Ownership { get; set; }

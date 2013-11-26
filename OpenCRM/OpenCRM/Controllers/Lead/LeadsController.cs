@@ -8,6 +8,9 @@ namespace OpenCRM.Controllers.Lead
 {
     class LeadsController
     {
+        public static String GoBackPage { get; set; }
         public static String CurrentPage { get; set; }
+        public static Boolean FromCampaign { get; set; }
+
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCRM.Models.Objects.Leads;
+using OpenCRM.Controllers.Lead;
 
 namespace OpenCRM.Views.Objects.Leads
 {
@@ -21,18 +22,27 @@ namespace OpenCRM.Views.Objects.Leads
     /// </summary>
     public partial class LeadsView : Page
     {
+        LeadsModel _leadsModel;
         public LeadsView()
         {
             InitializeComponent();
-            LeadsModel _leadsModel = new LeadsModel();
-            _leadsModel.LoadRecentLeads(this.DataGridRecentLeads);
+            _leadsModel = new LeadsModel();
+            cmbSearchTypeLeads.Items.Add("Recent Leads");
+            cmbSearchTypeLeads.Items.Add("Converted Leads");
+            cmbSearchTypeLeads.Items.Add("Today's Leads");
+            cmbSearchTypeLeads.Items.Add("All Leads");
+            cmbSearchTypeLeads.SelectedValue = "Recent Leads";
+            _leadsModel.LoadLeads(this.DataGridRecentLeads, "Recent Leads");
+            LeadsController.FromCampaign = false;
         }
 
         private void btn_NewLead_OnClick(object sender, RoutedEventArgs e)
         {
             LeadsModel.IsNew = true;
             PageSwitcher.Switch("/Views/Objects/Leads/CreateLead.xaml");
+            LeadsController.GoBackPage = "/Views/Objects/Leads/LeadsView.xaml";
         }
+        
 
         private void btn_EditLead_OnClick(object sender, RoutedEventArgs e)
         {
@@ -55,7 +65,7 @@ namespace OpenCRM.Views.Objects.Leads
             {
                 if (this.DataGridRecentLeads.SelectedIndex == -1)
                     return;
-
+                
                 LeadsModel.IsNew = false;
 
                 var selectedItem = this.DataGridRecentLeads.SelectedItem;
@@ -69,6 +79,12 @@ namespace OpenCRM.Views.Objects.Leads
         private void LeadImage_OnClick(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");            
+        }
+
+        private void cmbSearchTypeLeads_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            _leadsModel.LoadLeads(this.DataGridRecentLeads, combo.SelectedItem.ToString());
         }
     }
 }

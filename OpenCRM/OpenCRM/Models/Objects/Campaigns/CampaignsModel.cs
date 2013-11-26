@@ -28,8 +28,8 @@ namespace OpenCRM.Models.Objects.Campaigns
         public Boolean Active { get; set; }
         public int? CampaignTypeId { get; set; }
         public int? CampaignStatusId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public decimal? ExpectedRevenue { get; set; }
         public decimal? BudgetedCost { get; set; }
         public decimal? ActualCost { get; set; }
@@ -99,8 +99,8 @@ namespace OpenCRM.Models.Objects.Campaigns
                     _campaign.Active = this.Active;
                     _campaign.CampaignTypeId = this.CampaignTypeId;
                     _campaign.CampaignStatusId = this.CampaignStatusId;
-                    _campaign.StartDate = this.StartDate;
-                    _campaign.EndDate = this.EndDate;
+                    _campaign.StartDate = (this.StartDate.HasValue) ? this.StartDate.Value : (DateTime?)null;
+                    _campaign.EndDate = (this.EndDate.HasValue) ? this.EndDate.Value : (DateTime?)null;
                     _campaign.ExpectedRevenue = this.ExpectedRevenue;
                     _campaign.BudgetedCost = this.BudgetedCost;
                     _campaign.ActualCost = this.ActualCost;
@@ -134,15 +134,14 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    MessageBox.Show(_campaignID.ToString());
                     Campaign _campaign = _db.Campaign.First(x => x.CampaignId == _campaignID);
                     _campaign.UserId = this.UserId;
                     _campaign.Name = this.Name;
                     _campaign.Active = this.Active;
                     _campaign.CampaignTypeId = this.CampaignTypeId;
                     _campaign.CampaignStatusId = this.CampaignStatusId;
-                    _campaign.StartDate = this.StartDate;
-                    _campaign.EndDate = this.EndDate;
+                    _campaign.StartDate = (this.StartDate.HasValue) ? this.StartDate.Value : (DateTime?)null;
+                    _campaign.EndDate = (this.EndDate.HasValue) ? this.EndDate.Value : (DateTime?)null;
                     _campaign.ExpectedRevenue = this.ExpectedRevenue;
                     _campaign.BudgetedCost = this.BudgetedCost;
                     _campaign.ActualCost = this.ActualCost;
@@ -157,6 +156,30 @@ namespace OpenCRM.Models.Objects.Campaigns
                 Console.WriteLine(this.UserId + "-" + this.Name + "-" + this.Active + "-" + this.CampaignTypeId + "-" + this.CampaignStatusId + "-" + this.StartDate + "-" + this.EndDate
                     + "-" + this.ExpectedRevenue + "-" + this.BudgetedCost + "-" + this.ActualCost + "-" + this.ExpectedResponse + "-" + this.NumberSent + "-" + this.CampaignParent + "-"
                     +"-" + this.Description + "-" + this.UpdateBy + "-" + this.UpdateDate);
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
+
+        public Boolean Delete(int CampaingID)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var _campaign = _db.Campaign.FirstOrDefault(x => x.CampaignId == CampaingID);
+                    _db.Campaign.Remove(_campaign);
+
+                    _db.SaveChanges();
+                }
                 return true;
             }
             catch (SqlException ex)
@@ -264,6 +287,139 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         }
 
+        public List<ChartObject> GroupCampaignsByStatus()
+        {
+            List<ChartObject> _chartObjects = new List<ChartObject>();
+            try{
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _campaign in _db.Campaign
+                                 group _campaign by new
+                                 {
+                                    _campaign.Campaign_Status.Name
+                                 } into campaign
+                                 select new ChartObject()
+                                 {
+                                     Quantity = campaign.Count(),
+                                     Name = campaign.Key.Name
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupCampaignsByType()
+        {
+            List<ChartObject> _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _campaign in _db.Campaign
+                                 group _campaign by new
+                                 {
+                                     _campaign.Campaign_Type.Name
+                                 } into campaign
+                                 select new ChartObject()
+                                 {
+                                     Quantity = campaign.Count(),
+                                     Name = campaign.Key.Name
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupCampaignsByExpectedRevenue()
+        {
+            List<ChartObject> _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _campaign in _db.Campaign
+                                 group _campaign by _campaign.ExpectedRevenue
+                                 into campaign
+                                 select new ChartObject()
+                                 {
+                                     Quantity = (int)campaign.Average(x=>x.ExpectedRevenue),
+                                     Name = campaign.Key + ""
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObjectPrice> GroupCampaignsByLeads()
+        {
+            List<ChartObjectPrice> _chartObjects = new List<ChartObjectPrice>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var ranges = new[] { 10000, 100000, 1000000, 2000000, 40000000 };
+                    
+                    var RevenueGroups = _db.Campaign.GroupBy(x => ranges.FirstOrDefault(y => y > x.ExpectedRevenue))
+                                                            .Select(g => new ChartObjectPrice { 
+                                                                Price = g.Key, 
+                                                                Quantity = (int)g.Count() 
+                                                            }
+                      ).ToList();
+                    
+                    var groupedPrizes = ranges.Select(obj => new
+                                            ChartObjectPrice
+                                            {
+                                                Price = obj,
+                                                Quantity = (int)RevenueGroups.Where(ord => ord.Price > obj || ord.Price == 0).Sum(g => g.Quantity)
+                                            }
+                    ).ToList();
+                    _chartObjects = groupedPrizes;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        #region CampaignLeads
+
+
         public static List<OpenCRM.DataBase.Leads> getAllCampaignLeads()
         {
             var _campaignLeads = new List<OpenCRM.DataBase.Leads>();
@@ -271,7 +427,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == CampaignController.CurrentCampaignId).ToList();
+                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == CampaignController.CurrentCampaignId && x.Converted != true).ToList();
                 }
             }
             catch (SqlException ex)
@@ -284,13 +440,15 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return _campaignLeads;
         }
+
         public static List<OpenCRM.DataBase.Leads> getAvailableLeads()
         {
             var _campaignLeads = new List<OpenCRM.DataBase.Leads>();
-            try {
+            try
+            {
                 using (var _db = new OpenCRMEntities())
-                { 
-                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == null).ToList();
+                {
+                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == null && x.Converted != true).ToList();
                 }
             }
             catch (SqlException ex)
@@ -358,6 +516,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return false;
         }
+
         public List<CampaignsModel> getAllCampaignsFromUser(int UserID)
         {
             var _campaignsModel = new List<CampaignsModel>();
@@ -406,90 +565,674 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         }
 
-        public void LoadCampaigns(System.Windows.Controls.Grid Grid,int StatusorType,String SearchKey)
+        #endregion
+
+        #region SearchQueries
+        
+        public List<CampaignsModel> SearchCampaignsByName(String Name)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try {
+                using (var _db = new OpenCRMEntities())
+                { 
+                    var query = 
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.Name.Contains(Name)
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByActive(bool Active)
         {
             listCampaigns = new List<CampaignsModel>();
             try
             {
                 using (var _db = new OpenCRMEntities())
-                { 
-                    if (SearchKey.Equals("Status"))
-                    {
-                        var query =
+                {
+                    var query =
                         (
-                             from _campaign in _db.Campaign
-                             where _campaign.CampaignStatusId == StatusorType
-                             select new CampaignsModel()
-                                {
-                                    CampaignId = _campaign.CampaignId,
-                                    UserId = _campaign.UserId.Value,
-                                    Name = _campaign.Name,
-                                    Active = _campaign.Active.Value,
-                                    CampaignTypeId = _campaign.CampaignTypeId.Value,
-                                    CampaignStatusId = _campaign.CampaignStatusId.Value,
-                                    StartDate = _campaign.StartDate.Value,
-                                    EndDate = _campaign.EndDate.Value,
-                                    ExpectedRevenue = _campaign.ExpectedRevenue.Value,
-                                    BudgetedCost = _campaign.BudgetedCost.Value,
-                                    ActualCost = _campaign.ActualCost.Value,
-                                    ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
-                                    NumberSent = _campaign.NumberSent.Value,
-                                    CampaignParent = _campaign.CampaignParent.Value,
-                                    Description = _campaign.Description,
-                                    CreateBy = _campaign.CreateBy.Value,
-                                    CreateDate = _campaign.CreateDate.Value,
-                                    UpdateBy = _campaign.UpdateBy.Value,
-                                    UpdateDate = _campaign.UpdateDate.Value
-                                }
-
+                         from _campaign in _db.Campaign
+                         where _campaign.Active == Active
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
                         ).ToList();
-                        listCampaigns = query;
-                    }
-                    else
-                    {
-                        var query =
-                        (
-                             from _campaign in _db.Campaign
-                             where _campaign.CampaignTypeId == StatusorType
-                             select new CampaignsModel()
-                             {
-                                 CampaignId = _campaign.CampaignId,
-                                 UserId = _campaign.UserId.Value,
-                                 Name = _campaign.Name,
-                                 Active = _campaign.Active.Value,
-                                 CampaignTypeId = _campaign.CampaignTypeId.Value,
-                                 CampaignStatusId = _campaign.CampaignStatusId.Value,
-                                 StartDate = _campaign.StartDate.Value,
-                                 EndDate = _campaign.EndDate.Value,
-                                 ExpectedRevenue = _campaign.ExpectedRevenue.Value,
-                                 BudgetedCost = _campaign.BudgetedCost.Value,
-                                 ActualCost = _campaign.ActualCost.Value,
-                                 ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
-                                 NumberSent = _campaign.NumberSent.Value,
-                                 CampaignParent = _campaign.CampaignParent.Value,
-                                 Description = _campaign.Description,
-                                 CreateBy = _campaign.CreateBy.Value,
-                                 CreateDate = _campaign.CreateDate.Value,
-                                 UpdateBy = _campaign.UpdateBy.Value,
-                                 UpdateDate = _campaign.UpdateDate.Value
-                             }
-
-                        ).ToList();
-                        listCampaigns = query;
-                    }
-
-
+                    listCampaigns = query;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-
-                throw;
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
-
-            Grid.DataContext = listCampaigns;
-
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
         }
+        public List<CampaignsModel> SearchCampaignsByDescription(String Description)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.Description.Contains(Description)
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByNumberSent(int NumberSent)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.NumberSent == NumberSent
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByActualCost(Decimal Number)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.ActualCost == Number
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByExpectedResponse(Decimal Number)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.ExpectedResponse == Number
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByBudgetedCost(Decimal Number)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where  _campaign.BudgetedCost == Number
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+
+        public List<CampaignsModel> SearchCampaignsByExpectedRevenue(Decimal Number)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.ExpectedRevenue == Number
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByStartDate(DateTime Date)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.StartDate == Date
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByEndDate(DateTime Date)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.EndDate == Date
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByCreateDate(DateTime Date)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.CreateDate == Date
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+        public List<CampaignsModel> SearchCampaignsByUpdateDate(DateTime Date)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.UpdateDate == Date
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+
+        public List<CampaignsModel> SearchCampaignsByStatus(int Status)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.CampaignStatusId == Status
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+
+        public List<CampaignsModel> SearchCampaignsByType(int Type)
+        {
+            listCampaigns = new List<CampaignsModel>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query =
+                        (
+                         from _campaign in _db.Campaign
+                         where _campaign.CampaignTypeId == Type
+                         select new CampaignsModel()
+                         {
+                             CampaignId = _campaign.CampaignId,
+                             UserId = _campaign.UserId.Value,
+                             Name = _campaign.Name,
+                             Active = _campaign.Active.Value,
+                             CampaignTypeId = _campaign.CampaignTypeId.Value,
+                             CampaignStatusId = _campaign.CampaignStatusId.Value,
+                             StartDate = _campaign.StartDate.Value,
+                             EndDate = _campaign.EndDate.Value,
+                             ExpectedRevenue = _campaign.ExpectedRevenue.Value,
+                             BudgetedCost = _campaign.BudgetedCost.Value,
+                             ActualCost = _campaign.ActualCost.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             NumberSent = _campaign.NumberSent.Value,
+                             CampaignParent = _campaign.CampaignParent.Value,
+                             Description = _campaign.Description,
+                             CreateBy = _campaign.CreateBy.Value,
+                             CreateDate = _campaign.CreateDate.Value,
+                             UpdateBy = _campaign.UpdateBy.Value,
+                             UpdateDate = _campaign.UpdateDate.Value
+                         }
+                        ).ToList();
+                    listCampaigns = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return listCampaigns;
+        }
+
+        #endregion
+
+        
         public override string ToString()
         {
             return this.CampaignStatusId + " - " + this.CampaignTypeId;
@@ -507,7 +1250,39 @@ namespace OpenCRM.Models.Objects.Campaigns
             this.ID = id;
         }
     }
+    public class ChartObject
+    {
+        public int Quantity { get; set; }
+        public String Name { get; set; }
+        
+        public ChartObject()
+        { 
+        
+        }
+        public ChartObject(int quantity, String name)
+        {
+            this.Quantity = quantity;
+            this.Name = name;
+        }
 
+    }
+
+    public class ChartObjectPrice
+    {
+        public int Quantity { get; set; }
+        public decimal? Price { get; set; }
+
+        public ChartObjectPrice()
+        {
+
+        }
+        public ChartObjectPrice(int quantity, decimal? Price)
+        {
+            this.Quantity = quantity;
+            this.Price = Price;
+        }
+
+    }
     public class AccountOwner
     {
         #region Properties

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using OpenCRM.Models.Objects.Leads;
+using OpenCRM.Controllers.Lead;
 
 namespace OpenCRM.Views.Objects.Leads
 {
@@ -56,6 +57,18 @@ namespace OpenCRM.Views.Objects.Leads
         private void LeadImage_OnClick(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
+        }
+
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (LeadsController.FromCampaign)
+            {
+                PageSwitcher.Switch(LeadsController.GoBackPage);
+            }
+            else
+            {
+                PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
+            }
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="OpenCRMModelStoreContainer">
           <EntitySet Name="Account" EntityType="OpenCRMModel.Store.Account" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Account_Ownership" EntityType="OpenCRMModel.Store.Account_Ownership" store:Type="Tables" Schema="dbo" />
@@ -776,6 +776,7 @@
           <Property Name="HiddenOpportunity" Type="bit" />
           <Property Name="LeadSourceId" Type="int" />
           <Property Name="ProductId" Type="int" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="Opportunities_Stage">
           <Key>
@@ -1876,8 +1877,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OpenCRMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2771,6 +2771,7 @@
           <NavigationProperty Name="Lead_Source" Relationship="OpenCRMModel.FK_Opportunities_Lead_Source" FromRole="Opportunities" ToRole="Lead_Source" />
           <Property Type="Int32" Name="ProductId" />
           <NavigationProperty Name="Product" Relationship="OpenCRMModel.FK_Opportunities_Products" FromRole="Opportunities" ToRole="Products" />
+          <Property Type="Int32" Name="Quantity" />
         </EntityType>
         <EntityType Name="Opportunities_Stage">
           <Key>
@@ -4334,6 +4335,7 @@
           <EntitySetMapping Name="Opportunities">
             <EntityTypeMapping TypeName="OpenCRMModel.Opportunities">
               <MappingFragment StoreEntitySet="Opportunities">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="LeadSourceId" ColumnName="LeadSourceId" />
                 <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />

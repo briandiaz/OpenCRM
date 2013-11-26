@@ -32,13 +32,9 @@ namespace OpenCRM.Views.Objects.Opportunities
             InitializeComponent();
             
             _opportunityModel = new OpportunitiesModel();
-            
-            _opportunityModel.LoadViewsSearchOpportunities(this.cmbViewsOpportunities);
-            this.DataGridOpportunities.AutoGenerateColumns = false;
-
-            LoadSearchOpportunities();
-
             _allOpportunities = _opportunityModel.LoadAllOpportunities();
+
+            _opportunityModel.LoadViewsSearchOpportunities(this.cmbViewsOpportunities);
         }
 
         private void LoadSearchOpportunities()
@@ -66,11 +62,23 @@ namespace OpenCRM.Views.Objects.Opportunities
             }
             else if (SelectedItemName == "Closing Next Month")
             {
-                filterData = this._allOpportunities.FindAll(x => x.CloseDate.Month.Equals(DateTime.Now.AddMonths(1).Month));
+                filterData = ( 
+                    from item in this._allOpportunities
+                    where item.CloseDate.HasValue
+                    select item
+                ).ToList().FindAll(
+                    item => item.CloseDate.Value.Month.Equals(DateTime.Now.AddMonths(1).Month)
+                );
             }
             else if (SelectedItemName == "Closing This Month")
             {
-                filterData = this._allOpportunities.FindAll(x => x.CloseDate.Month.Equals(DateTime.Now.Month));
+                filterData = ( 
+                    from item in this._allOpportunities
+                    where item.CloseDate.HasValue
+                    select item
+                ).ToList().FindAll(
+                    item => item.CloseDate.Value.Month.Equals(DateTime.Now.Month)
+                );
             }
             else if (SelectedItemName == "My Opportunities")
             {
@@ -78,27 +86,47 @@ namespace OpenCRM.Views.Objects.Opportunities
             }
             else if (SelectedItemName == "New Last Week")
             {
-                filterData = this._allOpportunities.FindAll(
-                    x => WeekYear(x.CreateDate).Equals(WeekYear(DateTime.Now) == 1 ? 52 : WeekYear(DateTime.Now)-1)
+                filterData = (
+                    from opportunity in _allOpportunities
+                    where opportunity.CreateDate.HasValue
+                    select opportunity
+                ).ToList().FindAll(
+                    x => WeekYear(x.CreateDate.Value).Equals(WeekYear(DateTime.Now) == 1 ? 52 : WeekYear(DateTime.Now)-1)
                 );
             }
             else if (SelectedItemName == "New This Week")
             {
-                filterData = this._allOpportunities.FindAll(
-                    x => WeekYear(x.CreateDate).Equals(WeekYear(DateTime.Now))
+                filterData = (
+                     from opportunity in _allOpportunities
+                     where opportunity.CreateDate.HasValue
+                     select opportunity
+                 ).ToList().FindAll(
+                    x => WeekYear(x.CreateDate.Value).Equals(WeekYear(DateTime.Now))
                 );
             }
             else if (SelectedItemName == "Private")
             {
-                filterData = this._allOpportunities.FindAll(x => x.Private == true);
+                filterData = (
+                     from opportunity in _allOpportunities
+                     where opportunity.Private.HasValue
+                     select opportunity
+                 ).ToList().FindAll(
+                    x => x.Private.Value == true
+                );
             }
             else if (SelectedItemName == "Recently Viewed Opportunities")
             {
-                filterData = this._allOpportunities.OrderByDescending(x => x.ViewDate.Date).ToList();
+                filterData = (
+                    from opportunity in _allOpportunities
+                    where opportunity.ViewDate.HasValue
+                    orderby opportunity.ViewDate descending
+                    select
+                        opportunity                    
+                ).ToList();
             }
             else
             {
-                filterData = this._allOpportunities;
+                filterData = _allOpportunities;
             }
 
             return filterData;
