@@ -169,6 +169,30 @@ namespace OpenCRM.Models.Objects.Campaigns
             return false;
         }
 
+        public Boolean Delete(int CampaingID)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var _campaign = _db.Campaign.FirstOrDefault(x => x.CampaignId == CampaingID);
+                    _db.Campaign.Remove(_campaign);
+
+                    _db.SaveChanges();
+                }
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
+
         public CampaignsModel getCampaignByID(int id)
         {
             CampaignsModel _campaignModel = new CampaignsModel();
@@ -261,6 +285,136 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return _campaignsModel;
 
+        }
+
+        public List<ChartObject> GroupCampaignsByStatus()
+        {
+            List<ChartObject> _chartObjects = new List<ChartObject>();
+            try{
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _campaign in _db.Campaign
+                                 group _campaign by new
+                                 {
+                                    _campaign.Campaign_Status.Name
+                                 } into campaign
+                                 select new ChartObject()
+                                 {
+                                     Quantity = campaign.Count(),
+                                     Name = campaign.Key.Name
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupCampaignsByType()
+        {
+            List<ChartObject> _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _campaign in _db.Campaign
+                                 group _campaign by new
+                                 {
+                                     _campaign.Campaign_Type.Name
+                                 } into campaign
+                                 select new ChartObject()
+                                 {
+                                     Quantity = campaign.Count(),
+                                     Name = campaign.Key.Name
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupCampaignsByExpectedRevenue()
+        {
+            List<ChartObject> _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _campaign in _db.Campaign
+                                 group _campaign by _campaign.ExpectedRevenue
+                                 into campaign
+                                 select new ChartObject()
+                                 {
+                                     Quantity = (int)campaign.Average(x=>x.ExpectedRevenue),
+                                     Name = campaign.Key + ""
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObjectPrice> GroupCampaignsByLeads()
+        {
+            List<ChartObjectPrice> _chartObjects = new List<ChartObjectPrice>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var ranges = new[] { 10000, 100000, 1000000, 2000000, 40000000 };
+                    
+                    var RevenueGroups = _db.Campaign.GroupBy(x => ranges.FirstOrDefault(y => y > x.ExpectedRevenue))
+                                                            .Select(g => new ChartObjectPrice { 
+                                                                Price = g.Key, 
+                                                                Quantity = (int)g.Count() 
+                                                            }
+                      ).ToList();
+                    
+                    var groupedPrizes = ranges.Select(obj => new
+                                            ChartObjectPrice
+                                            {
+                                                Price = obj,
+                                                Quantity = (int)RevenueGroups.Where(ord => ord.Price > obj || ord.Price == 0).Sum(g => g.Quantity)
+                                            }
+                    ).ToList();
+                    _chartObjects = groupedPrizes;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
         }
 
         #region CampaignLeads
@@ -1096,7 +1250,39 @@ namespace OpenCRM.Models.Objects.Campaigns
             this.ID = id;
         }
     }
+    public class ChartObject
+    {
+        public int Quantity { get; set; }
+        public String Name { get; set; }
+        
+        public ChartObject()
+        { 
+        
+        }
+        public ChartObject(int quantity, String name)
+        {
+            this.Quantity = quantity;
+            this.Name = name;
+        }
 
+    }
+
+    public class ChartObjectPrice
+    {
+        public int Quantity { get; set; }
+        public decimal? Price { get; set; }
+
+        public ChartObjectPrice()
+        {
+
+        }
+        public ChartObjectPrice(int quantity, decimal? Price)
+        {
+            this.Quantity = quantity;
+            this.Price = Price;
+        }
+
+    }
     public class AccountOwner
     {
         #region Properties

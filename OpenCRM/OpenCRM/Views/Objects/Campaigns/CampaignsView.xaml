@@ -64,6 +64,22 @@
                 </Button>
             </StackPanel>
 
+            <StackPanel Grid.Column="1" 
+                        Grid.Row="0" 
+                        Orientation="Horizontal" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right">
+                <Button Name="btnDashboard"
+                        Width="50"
+                        Height="50"
+                        Cursor="Hand"
+                        Style="{DynamicResource MetroCircleButtonStyle}" Click="btnDashboard_Click"
+                        >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/Img/Icons/32px/pie.png" Width="32px" Height="32px"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
 
                 <Image Source="/Assets/Img/Icons/Campaigns.png" 
@@ -71,6 +87,7 @@
                    Height="100"
                    VerticalAlignment="Top" 
                    Width="100" 
+                   
                    />
 
                 <TabControl VerticalAlignment="Center" HorizontalAlignment="Right">
@@ -156,7 +173,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="80"  Width="216" Background="#DF3A01" ToolTip="Stats">
                             <Image Source="/Assets/Img/Icons/32px-white/stats.png" Width="32" Height="32" Margin="10" />
-                            <TextBlock VerticalAlignment="Bottom" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedResponse}" FontSize="20" Foreground="White"></TextBlock>
+                            <TextBlock VerticalAlignment="Bottom" Margin="5,0,0,0" Name="lblExpectedResponse" HorizontalAlignment="Center" Text="{Binding ExpectedResponse}" FontSize="20" Foreground="White"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="80"  Width="213" Background="#088A08" ToolTip="Expected Revenue">
                             <Image Source="/Assets/Img/Icons/32px-white/lab.png" Margin="10" Width="32" Height="32" />

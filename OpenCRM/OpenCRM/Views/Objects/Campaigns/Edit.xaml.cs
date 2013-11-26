@@ -52,7 +52,8 @@ namespace OpenCRM.Views.Objects.Campaigns
         public int? _campaignStatusId
         {
             get { return (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null; }
-            set{
+            set
+            {
                 int? _campaignStatus = (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null;
                 _campaignStatus = value;
             }
@@ -144,15 +145,15 @@ namespace OpenCRM.Views.Objects.Campaigns
         #endregion
 
         #region Fields
-        
+
         private CampaignStatus _campaignStatus = new CampaignStatus();
         private CampaignType _campaignType = new CampaignType();
         private AccountOwner _accountOwner = new AccountOwner();
         private CampaignsModel _cmp = new CampaignsModel();
-        
+
         #endregion
-        
-        
+
+
         public Edit()
         {
             InitializeComponent();
@@ -179,7 +180,7 @@ namespace OpenCRM.Views.Objects.Campaigns
                         Active = _active,
                         CampaignTypeId = _campaignTypeId,
                         CampaignStatusId = _campaignStatusId,
-                        StartDate = (_startDate.HasValue) ?_startDate.Value : (DateTime?)null,
+                        StartDate = (_startDate.HasValue) ? _startDate.Value : (DateTime?)null,
                         EndDate = (_endDate.HasValue) ? _endDate.Value : (DateTime?)null,
                         ExpectedRevenue = _expectedRevenue,
                         BudgetedCost = _budgetedCost,
@@ -220,10 +221,6 @@ namespace OpenCRM.Views.Objects.Campaigns
             SaveCampaign();
         }
 
-        private void btnSaveandNew_Click(object sender, RoutedEventArgs e)
-        {
-            SaveCampaign();
-        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -272,6 +269,31 @@ namespace OpenCRM.Views.Objects.Campaigns
         private void cmbCampaignParent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            CampaignsModel campaign;
+            try
+            {
+                campaign = new CampaignsModel();
+                if (campaign.Delete(Convert.ToInt32(OpenCRM.Controllers.Campaign.CampaignController.CurrentCampaignId)))
+                {
+                    System.Windows.MessageBox.Show("Campaign deleted successfully", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Exclamation);
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("An error ocurred while the campaign was being deleted", "Error :(!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
     }
 }
