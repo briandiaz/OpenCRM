@@ -86,16 +86,53 @@
 
             <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1">
                 <ComboBox Name="cmbTargetKeyCampaign"
-                      Width="200"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Center" SelectionChanged="cmbTargetKeyCampaign_SelectionChanged"
+                          Width="200"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center" 
+                          FontSize="16"
+                          SelectionChanged="cmbTargetKeyCampaign_SelectionChanged"
                       />
+
+                <controls:ToggleSwitch 
+                        Name="cbxCampaignSearchActive"
+                        OnLabel="Active" 
+                        OffLabel="Not Active"
+                        Width="150"
+                        Margin="15,-10,0,0"
+                        FontFamily="Segoe WP Light"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Cursor="Hand"
+                        Checked="cbxCampaignSearchActive_Checked"
+                        Visibility="Collapsed"
+                                   />
+                <TextBox Name="tbxCampaignSearchKeywords"
+                         Margin="15,0,0,0"
+                         Width="200"
+                         controls:TextboxHelper.ClearTextButton="True"
+                         controls:TextboxHelper.Watermark="Enter Keyword"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Left"
+                         Visibility="Collapsed"
+                         KeyDown="tbxCampaignSearchKeywords_KeyDown" 
+                         />
+                <DatePicker Name="dpkCampaignSearchDate"
+                            Width="200"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            controls:TextboxHelper.ClearTextButton="True"
+                            Margin="15,0,0,0"
+                            SelectedDateChanged="dpkCampaignSearchDate_SelectedDateChanged"
+                            Visibility="Collapsed"
+                            />
+                
                 <ComboBox Name="cmbTargetValueCampaign"
                       Width="200"
-                          Margin="15,0,0,0"
+                      Margin="15,0,0,0"
                       HorizontalAlignment="Left"
-                      VerticalAlignment="Center" SelectionChanged="cmbTargetValueCampaign_SelectionChanged"
-                      Visibility="Hidden"
+                      VerticalAlignment="Center" 
+                      SelectionChanged="cmbTargetValueCampaign_SelectionChanged"
+                      Visibility="Collapsed"
                       />
             </StackPanel>
             <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1">

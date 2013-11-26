@@ -59,11 +59,11 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public DateTime? _startDate
         {
-            get { return (dpkCampaignStartDate.SelectedDate != null) ? dpkCampaignStartDate.SelectedDate.Value : (DateTime?)null; }
+            get { return (dpkCampaignStartDate.SelectedDate.HasValue) ? dpkCampaignStartDate.SelectedDate.Value : (DateTime?)null; }
         }
         public DateTime? _endDate
         {
-            get { return (dpkCampaignEndDate.SelectedDate != null) ? dpkCampaignEndDate.SelectedDate.Value : (DateTime?)null; }
+            get { return (dpkCampaignEndDate.SelectedDate.HasValue) ? dpkCampaignEndDate.SelectedDate.Value : (DateTime?)null; }
         }
         public decimal? _expectedRevenue
         {
@@ -179,8 +179,8 @@ namespace OpenCRM.Views.Objects.Campaigns
                         Active = _active,
                         CampaignTypeId = _campaignTypeId,
                         CampaignStatusId = _campaignStatusId,
-                        StartDate = _startDate.Value,
-                        EndDate = _endDate.Value,
+                        StartDate = (_startDate.HasValue) ?_startDate.Value : (DateTime?)null,
+                        EndDate = (_endDate.HasValue) ? _endDate.Value : (DateTime?)null,
                         ExpectedRevenue = _expectedRevenue,
                         BudgetedCost = _budgetedCost,
                         ActualCost = _actualCost,
