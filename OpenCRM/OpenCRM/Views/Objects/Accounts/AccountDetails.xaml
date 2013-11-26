@@ -1,0 +1,655 @@
+﻿<Page x:Class="OpenCRM.Views.Objects.Accounts.AccountDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+
+	  Title="AccountDetails">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                    <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0"
+              Grid.Column="1">
+
+            <Label Content="Account" 
+                   FontSize="12px"
+                   Margin="81,20,577,63"/>
+
+            <TextBlock  Name="lblTitleAccount"
+                        TextWrapping="Wrap"
+                        FontSize="20px"
+                        Margin="81,47,0,10" 
+                        HorizontalAlignment="Left" 
+                        Width="189"/>
+
+            <Button Style="{DynamicResource NoChromeButton}" 
+                    HorizontalAlignment="Left">
+                <Image Source="/Assets/Img/Icons/Accounts.png" 
+                        HorizontalAlignment="Left"
+                        Height="69"
+                        VerticalAlignment="Top"
+                        Width="66"/>
+            </Button>
+
+            <Button Name="btnCancelAccount"
+                    Content="Cancel"
+                    Margin="618,20,43,31" 
+                    Click="btnCancelAccount_Click"/>
+
+            <Button Name="btnEditAccount"
+                    Content="Edit"
+                    Margin="322,20,339,31" 
+                    Click="btnEditAccount_Click"/>
+
+            <Button Name="btnDeleteAccount"
+                    Content="Delete"
+                    Margin="472,20,191,31" 
+                    Click="btnDeleteAccount_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="BorderBrush" Value="#A300E3" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="600"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Border>
+                    <Grid Background="#A300E3">
+                        <TextBlock  Text="Account Details"
+                                    VerticalAlignment="Center"
+                                    TextAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontWeight="ExtraBold"
+                                    Foreground="White"
+                                    FontSize="16px"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <ScrollViewer Grid.Row="1"
+                          Height="530" 
+                          VerticalAlignment="Top">
+                <Grid Name="gridOpportunityDetails"
+                  VerticalAlignment="Top" Height="600" >
+
+                    <Label  Name="lblLine"
+                        Content="________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        FontWeight="Thin"
+                        Opacity="0.4"
+                        Margin="10,30,0,0" 
+                        Height="31"/>
+
+                    <Label  Name="lblLine1"
+                        Content="________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        FontWeight="Thin"
+                        Opacity="0.4"
+                        Margin="10,60,10,0" 
+                        Height="31"/>
+
+                    <Label  Name="lblLine2"
+                        Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Opacity="0.4"
+                        Margin="10,91,0,0"/>
+
+                    <Label  Name="lblLine3"
+                        Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Opacity="0.4"
+                        Margin="10,121,0,0"/>
+
+                    <Label  Name="lblLine4"
+                        Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Opacity="0.4"
+                        Margin="10,151,0,0"/>
+
+                    <Label  Name="lblLine5"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,181,0,0"/>
+
+
+                    <Label  Name="lblLine7"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,241,0,0"/>
+
+                    <Label  Name="lblLine8"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,309,0,0"/>
+
+                    <Label  Name="lblLine9"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,339,0,0"/>
+
+                    <Label  Name="lblLine10"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,369,0,0"/>
+
+                    <Label  Name="lblLine11"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,399,0,0"/>
+
+                    <Label  Name="lblLine12"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,466,0,0"/>
+
+                    <TextBlock  Text="Account Owner"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px" 
+                            FontWeight="SemiBold"
+                            Margin="32,30,591,0" 
+                            Height="25" />
+
+                    <TextBlock  Text="Account Name"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            FontWeight="SemiBold"
+                            Margin="38,60,0,0" 
+                            Height="22" 
+                            HorizontalAlignment="Left" 
+                            Width="154" />
+
+                    <TextBlock  Text="Parent Account"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="32,90,591,0" 
+                            FontWeight="SemiBold"
+                            Height="24" />
+
+                    <TextBlock  Text="Account Site" 
+                            FontSize="15px"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            Margin="32,120,591,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                    <TextBlock  Text="Type" 
+                            FontSize="15px"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            Margin="32,150,591,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                    <TextBlock  Text="Industry" 
+                	        FontSize="15px"
+                	        FontWeight="SemiBold"
+                	        TextAlignment="Right"
+                	        Margin="70,179,591,0" 
+                            Height="26" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Anual Revenue" 
+                            FontSize="15px"
+                            TextAlignment="Right"
+                            FontWeight="SemiBold"
+                            Margin="70,210,591,0" Height="27" VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Rating"
+                            TextAlignment="Right"
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="405,30,242,0" 
+                            FontWeight="SemiBold"
+                            Height="22"/>
+
+                    <TextBlock  Text="Phone Number"
+                            TextAlignment="Right"
+                            VerticalAlignment="Top"
+                            FontSize="15px" 
+                            Margin="405,60,242,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                    <TextBlock  Text="Fax Number"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="405,90,242,0" 
+                            FontWeight="SemiBold"
+                            Height="20" />
+
+                    <TextBlock  Text="Website" 
+                            FontSize="15px"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            Margin="405,120,242,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                    <TextBlock  Text="Ticker Symbol"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="405,150,242,0" 
+                            FontWeight="SemiBold"
+                            Height="24" />
+
+                    <TextBlock  Text="Ownership"
+                	        VerticalAlignment="Top"
+                	        TextAlignment="Right"
+                	        FontSize="15px"
+                	        Margin="405,180,242,0" 
+                	        FontWeight="SemiBold"
+                	        Height="24" />
+
+                    <TextBlock  Text="Employee"
+                	        VerticalAlignment="Top"
+                	        TextAlignment="Right"
+                	        FontSize="15px"
+                	        Margin="405,208,242,0" 
+                	        FontWeight="SemiBold"
+                	        Height="24" />
+
+                    <TextBlock  Text="Billing Address" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="70,272,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Shipping Address" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="57,300,590,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Customer Priority" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,339,591,0" 
+                            Height="22"
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="SLA Expiration Date" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,369,591,0" 
+                            Height="24" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Number of Locations" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,399,591,0" 
+                	        Height="24" 
+                	        VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Active" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,428,591,0" 
+                	        Height="24" 
+                	        VerticalAlignment="Top" />
+
+                    <TextBlock  Text="SLA" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="405,339,242,0" 
+                            Height="22" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="SLA Serial Number" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="405,369,242,0" 
+                	        Height="24" 
+                	        VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Upsell Opportunity" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="405,398,242,0" 
+                	        Height="24" 
+                	        VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Description" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,461,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Created By" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,494,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Updated By" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,529,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                    <Label  Name="lblAccountOwner"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="200,22,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="209"/>
+
+                    <Label  Name="lblAccountName"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="200,52,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="209"/>
+
+                    <Label  Name="lblParentAccount"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="200,84,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="209"/>
+
+                    <Label  Name="lblAccountSite"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="200,114,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="215"/>
+
+                    <Label  Name="lblAccountType"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="200,144,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="215"/>
+
+                    <Label  Name="lblIndustry"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="200,174,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="215"/>
+
+                    <Label  Name="lblAnnualRevenue"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="200,205,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="215"/>
+
+                    <Label  Name="lblRating"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="546,22,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="207"/>
+
+                    <Label  Name="lblPhone"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="546,52,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="207" />
+
+                    <Label  Name="lblFax"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="546,84,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="207" />
+
+                    <Label  Name="lblWebsite"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="546,114,0,0" 
+                        HorizontalAlignment="Left"
+                        Width="207" />
+
+                    <Label  Name="lblTickerSymbol"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="546,144,0,0" 
+                        HorizontalAlignment="Left"
+                        Width="207" />
+
+                    <Label  Name="lblOwnership"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="546,174,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="207" />
+
+                    <Label  Name="lblEmployee"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="546,202,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="207" />
+
+                    <TextBlock  Name="lblBilling"
+                	            FontSize="12px"
+                                TextWrapping="Wrap"
+                	            Margin="200,271,0,0" 
+                                HorizontalAlignment="Left" 
+                                Width="553" 
+                                Height="29" VerticalAlignment="Top"/>
+
+                    <TextBlock  Name="lblShipping"
+                	            VerticalAlignment="Top"
+                	            FontSize="12px"
+                                TextWrapping="Wrap"
+                	            Margin="200,300,0,0" 
+                                HorizontalAlignment="Left" 
+                                Width="553" 
+                                Height="28"/>
+
+                    <Label  Name="lblCustomerPriority"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="200,333,0,0" 
+                            HorizontalAlignment="Left" 
+                            Width="215"/>
+
+                    <Label  Name="lblSLAExpirationDate"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="200,363,0,0" 
+                            HorizontalAlignment="Left" 
+                            Width="215"/>
+
+                    <Label  Name="lblNumberofLocations"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="200,393,0,0" 
+                            HorizontalAlignment="Left" Width="215"/>
+
+                    <CheckBox  Name="lblActive"
+                               IsEnabled="False"
+                	           Content=""
+                	           VerticalAlignment="Top"
+                	           FontSize="15px"
+                	           Margin="209,432,0,0" 
+                               HorizontalAlignment="Left" 
+                               Width="14" 
+                               Height="14"/>
+
+                    <Label  Name="lblSLA"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="546,333,0,0" 
+                            HorizontalAlignment="Left" 
+                            Width="207"/>
+
+                    <Label  Name="lblSLASerialNumber"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="546,363,0,0" 
+                            HorizontalAlignment="Left" 
+                            Width="207"/>
+
+                    <Label  Name="lblUpsellOpportunity"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="546,392,0,0" 
+                            HorizontalAlignment="Left" 
+                            Width="207"/>
+
+                    <Label  Name="lblDescription"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="200,459,0,0" HorizontalAlignment="Left" Width="562"/>
+
+                    <Label  Name="lblCreateBy"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="200,492,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                    <Label  Name="lblCreateDate"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="414,492,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                    <Label  Name="lblUpdateBy"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="200,527,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                    <Label  Name="lblUpdateDate"
+                	        Content=""
+                	        VerticalAlignment="Top"
+                	        FontSize="15px"
+                	        Margin="414,527,0,0" 
+                            HorizontalAlignment="Left" 
+                            Width="215"/>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
