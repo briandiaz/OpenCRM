@@ -28,8 +28,8 @@ namespace OpenCRM.Models.Objects.Campaigns
         public Boolean Active { get; set; }
         public int? CampaignTypeId { get; set; }
         public int? CampaignStatusId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public decimal? ExpectedRevenue { get; set; }
         public decimal? BudgetedCost { get; set; }
         public decimal? ActualCost { get; set; }
@@ -99,8 +99,8 @@ namespace OpenCRM.Models.Objects.Campaigns
                     _campaign.Active = this.Active;
                     _campaign.CampaignTypeId = this.CampaignTypeId;
                     _campaign.CampaignStatusId = this.CampaignStatusId;
-                    _campaign.StartDate = this.StartDate;
-                    _campaign.EndDate = this.EndDate;
+                    _campaign.StartDate = (this.StartDate.HasValue) ? this.StartDate.Value : (DateTime?)null;
+                    _campaign.EndDate = (this.EndDate.HasValue) ? this.EndDate.Value : (DateTime?)null;
                     _campaign.ExpectedRevenue = this.ExpectedRevenue;
                     _campaign.BudgetedCost = this.BudgetedCost;
                     _campaign.ActualCost = this.ActualCost;
@@ -134,15 +134,14 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    MessageBox.Show(_campaignID.ToString());
                     Campaign _campaign = _db.Campaign.First(x => x.CampaignId == _campaignID);
                     _campaign.UserId = this.UserId;
                     _campaign.Name = this.Name;
                     _campaign.Active = this.Active;
                     _campaign.CampaignTypeId = this.CampaignTypeId;
                     _campaign.CampaignStatusId = this.CampaignStatusId;
-                    _campaign.StartDate = this.StartDate;
-                    _campaign.EndDate = this.EndDate;
+                    _campaign.StartDate = (this.StartDate.HasValue) ? this.StartDate.Value : (DateTime?)null;
+                    _campaign.EndDate = (this.EndDate.HasValue) ? this.EndDate.Value : (DateTime?)null;
                     _campaign.ExpectedRevenue = this.ExpectedRevenue;
                     _campaign.BudgetedCost = this.BudgetedCost;
                     _campaign.ActualCost = this.ActualCost;

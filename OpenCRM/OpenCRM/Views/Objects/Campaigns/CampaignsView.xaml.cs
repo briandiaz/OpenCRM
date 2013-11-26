@@ -51,7 +51,8 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             List<SearchAttribute> _keyTypes = new List<SearchAttribute>();
 
-            SearchAttribute keyType = new SearchAttribute(1, "Type");
+            SearchAttribute keyType;
+            keyType = new SearchAttribute(1, "Type");
             _keyTypes.Add(keyType);
             
             keyType = new SearchAttribute(2, "Status");
