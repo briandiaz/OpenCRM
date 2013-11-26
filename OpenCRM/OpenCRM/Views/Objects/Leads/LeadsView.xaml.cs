@@ -22,11 +22,17 @@ namespace OpenCRM.Views.Objects.Leads
     /// </summary>
     public partial class LeadsView : Page
     {
+        LeadsModel _leadsModel;
         public LeadsView()
         {
             InitializeComponent();
-            LeadsModel _leadsModel = new LeadsModel();
-            _leadsModel.LoadRecentLeads(this.DataGridRecentLeads);
+            _leadsModel = new LeadsModel();
+            cmbSearchTypeLeads.Items.Add("Recent Leads");
+            cmbSearchTypeLeads.Items.Add("Converted Leads");
+            cmbSearchTypeLeads.Items.Add("Today's Leads");
+            cmbSearchTypeLeads.Items.Add("All Leads");
+            cmbSearchTypeLeads.SelectedValue = "Recent Leads";
+            _leadsModel.LoadLeads(this.DataGridRecentLeads, "Recent Leads");
             LeadsController.FromCampaign = false;
         }
 
@@ -42,7 +48,6 @@ namespace OpenCRM.Views.Objects.Leads
         {
             if (this.DataGridRecentLeads.SelectedIndex == -1)
                 return;
-
 
             LeadsModel.IsNew = false;
 
@@ -60,7 +65,7 @@ namespace OpenCRM.Views.Objects.Leads
             {
                 if (this.DataGridRecentLeads.SelectedIndex == -1)
                     return;
-
+                
                 LeadsModel.IsNew = false;
 
                 var selectedItem = this.DataGridRecentLeads.SelectedItem;
@@ -74,6 +79,12 @@ namespace OpenCRM.Views.Objects.Leads
         private void LeadImage_OnClick(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");            
+        }
+
+        private void cmbSearchTypeLeads_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            _leadsModel.LoadLeads(this.DataGridRecentLeads, combo.SelectedItem.ToString());
         }
     }
 }
