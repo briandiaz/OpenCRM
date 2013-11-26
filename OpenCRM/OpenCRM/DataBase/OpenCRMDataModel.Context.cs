@@ -71,5 +71,6 @@ namespace OpenCRM.DataBase
         public DbSet<Salutation> Salutation { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<User> User { get; set; }
+
     }
 }

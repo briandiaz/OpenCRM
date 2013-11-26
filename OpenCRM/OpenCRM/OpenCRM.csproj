@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -134,6 +134,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\Campaign\CampaignController.cs" />
+    <Compile Include="Controllers\Lead\LeadsController.cs" />
     <Compile Include="DataBase\Account.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
@@ -309,6 +310,12 @@
     <Compile Include="Views\Objects\Accounts\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Accounts\CreateEditAccount.xaml.cs">
+      <DependentUpon>CreateEditAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Accounts\SearchAccounts.xaml.cs">
+      <DependentUpon>SearchAccounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Campaigns\CampaignsView.xaml.cs">
       <DependentUpon>CampaignsView.xaml</DependentUpon>
     </Compile>
@@ -318,11 +325,20 @@
     <Compile Include="Views\Objects\Campaigns\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Campaigns\Leads\LeadsView.xaml.cs">
+      <DependentUpon>LeadsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Cases\CasesView.xaml.cs">
       <DependentUpon>CasesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Contacts\ContactsView.xaml.cs">
       <DependentUpon>ContactsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Contacts\CreateContact.xaml.cs">
+      <DependentUpon>CreateContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Contacts\EditContacts.xaml.cs">
+      <DependentUpon>EditContacts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Leads\LeadConvertion.xaml.cs">
       <DependentUpon>LeadConvertion.xaml</DependentUpon>
@@ -347,6 +363,9 @@
     </Compile>
     <Compile Include="Views\Objects\Products\CreateProduct.xaml.cs">
       <DependentUpon>CreateProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Products\EditProductView.xaml.cs">
+      <DependentUpon>EditProductView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Products\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
@@ -386,6 +405,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Objects\Accounts\CreateEditAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Accounts\SearchAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Objects\Campaigns\CampaignsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -398,11 +425,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Objects\Campaigns\Leads\LeadsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Objects\Cases\CasesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Contacts\ContactsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Contacts\CreateContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Contacts\EditContacts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -435,6 +474,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Products\CreateProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Products\EditProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -999,7 +1042,464 @@
     <Resource Include="Assets\Img\Refresh.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\Products\" />
     <Folder Include="Views\Home\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Icons\32px-White\accessibility.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\address-book.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\aid.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\airplane.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\alarm.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\alarm2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\android.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\angry.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\angry2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\apple.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down-left.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down-left2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down-left3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down-right.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down-right2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down-right3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-down3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-left.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-left2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-left3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-right.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-right2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-right3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up-left.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up-left2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up-left3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up-right.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up-right2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up-right3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\arrow-up3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\attachment.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\backward.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\backward2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\barcode.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bars.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bars2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bell.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\binoculars.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\blocked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\blog.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\blogger.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\blogger2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bold.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\book.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bookmark.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bookmarks.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\books.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\box-add.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\box-remove.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\briefcase.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\brightness-contrast.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\brightness-medium.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bubble.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bubble2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bubbles.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bubbles2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bubbles3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bubbles4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bug.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\bullhorn.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\busy.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cabinet.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\calculate.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\calendar.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\calendar2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\camera.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\camera2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cancel-circle.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cart.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cart2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cart3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\checkbox-checked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\checkbox-partial.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\checkbox-unchecked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\checkmark-circle.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\checkmark.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\checkmark2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\chrome.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\clock.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\clock2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\close.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cloud-download.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cloud-upload.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cloud.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\clubs.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\code.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cog.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cog2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cogs.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\coin.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\compass.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\confused.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\confused2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\connection.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\console.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\contract.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\contract2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\contrast.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cool.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\cool2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\copy.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\copy2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\copy3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\credit.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\crop.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\css3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\dashboard.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\delicious.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\deviantart.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\deviantart2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\diamonds.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\dice.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\disk.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\download.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\download2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\download3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\drawer.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\drawer2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\drawer3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\dribbble.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\dribbble2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\dribbble3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\droplet.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\earth.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\eject.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\embed.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\enter.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\envelop.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\equalizer.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\evil.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\evil2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\exit.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\expand.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\expand2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\eye-blocked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\eye.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\eye2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\facebook.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\facebook2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\facebook3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\feed.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\feed2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\feed3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\feed4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-css.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-excel.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-openoffice.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-pdf.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-powerpoint.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-word.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-xml.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file-zip.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\file4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\film.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\filter.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\filter2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\finder.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\fire.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\firefox.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\first.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flag.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flattr.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flickr.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flickr2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flickr3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flickr4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flip.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\flip2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\folder-open.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\folder.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\font.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\food.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\forrst.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\forrst2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\forward.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\forward2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\forward3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\foursquare.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\foursquare2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\gift.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\github.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\github2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\github3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\github4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\github5.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\glass.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\globe.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\google plus.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\google plus2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\google plus3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\google plus4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\google-drive.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\google.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\grin.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\grin2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\hammer.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\hammer2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\happy.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\happy2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\headphones.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\heart-broken.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\heart.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\heart2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\history.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\home.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\home2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\home3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\html5.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\html52.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\IcoMoon.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\IE.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\image.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\image2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\images.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\indent-decrease.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\indent-increase.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\info.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\info2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\insert-template.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\instagram.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\italic.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\joomla.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\key.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\key2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\keyboard.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\lab.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\lanyrd.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\laptop.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\last.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\lastfm.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\lastfm2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\leaf.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\left to right.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\library.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\libreoffice.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\lightning.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\link.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\linkedin.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\list.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\list2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\location.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\location2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\lock.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\lock2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\loop.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\loop2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\loop3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\magnet.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\mail.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\mail2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\mail3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\mail4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\map.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\map2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\menu.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\menu2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\meter.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\meter2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\minus.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\mobile.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\mobile2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\mug.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\music.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\neutral.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\neutral2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\new tab.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\newspaper.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\next.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\notebook.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\notification.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\numbered-list.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\office.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\omega.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\opera.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pacman.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paint-format.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-center.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-center2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-justify.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-justify2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-left.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-left2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-right.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paragraph-right2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paste.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paste2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paste3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pause.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pause2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pawn.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paypal.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paypal2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\paypal3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pen.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pencil.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pencil2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\phone-hang-up.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\phone.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\picassa.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\picassa2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pie.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pilcrow.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pinterest.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pinterest2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\play.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\play2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\play3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\plus.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\podcast.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\point-down.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\point-left.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\point-right.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\point-up.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\power cord.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\previous.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\print.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\profile.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\pushpin.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\qrcode.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\question.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\quill.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\quotes-left.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\radio-checked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\radio-unchecked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\reddit.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\redo.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\redo2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\remove.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\remove2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\reply.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\right to left.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\road.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\rocket.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\sad.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\sad2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\safari.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\scissors.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\screen.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\search.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\settings.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\share.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\shield.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\shocked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\shocked2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\shuffle.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\sigma.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\signup.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\skype.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\smiley.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\smiley2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\soundcloud.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\soundcloud2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spades.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spam.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spell-check.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spinner.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spinner2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spinner3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spinner4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spinner5.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\spinner6.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stack.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stackoverflow.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\star.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\star2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\star3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stats.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\steam.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\steam2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stop.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stop2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stopwatch.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\storage.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\strikethrough.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stumbleupon.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\stumbleupon2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\support.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\switch.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tab.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\table.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\table2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tablet.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tag.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tags.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\target.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\text-height.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\text-width.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\thumbs-up.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\thumbs-up2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\ticket.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tongue.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tongue2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tree.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\trophy.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\truck.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tumblr.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tumblr2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tux.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\tv.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\twitter.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\twitter2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\twitter3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\underline.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\undo.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\undo2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\unlocked.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\upload.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\upload2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\upload3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\user.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\user2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\user3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\user4.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\users.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\users2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\vimeo.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\vimeo2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\vimeo3.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\volume-decrease.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\volume-high.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\volume-increase.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\volume-low.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\volume-medium.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\volume-mute.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\volume-mute2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wand.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\warning.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\windows.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\windows8.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wink.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wink2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wondering.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wondering2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wordpress.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wordpress2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\wrench.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\xing.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\xing2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\yahoo.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\yelp.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\youtube.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\youtube2.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\zoom in.png" />
+    <Resource Include="Assets\Img\Icons\32px-White\zoom out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Icons\32px\info3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCRM.DataBase;
 using OpenCRM.Controllers.Session;
+using OpenCRM.Models.Objects.Products;
 
 namespace OpenCRM.Views.Objects.Products
 {
@@ -23,66 +24,104 @@ namespace OpenCRM.Views.Objects.Products
     /// </summary>
     public partial class CreateProduct : Page
     {
+        ProductsModel _productModel;
+
         public CreateProduct()
         {
             InitializeComponent();
+            _productModel = new ProductsModel();
+
+            if (ProductsModel.IsNew)
+            {
+                
+            }
+
+            if(ProductsModel.IsEditing)
+            {
+                
+            }
+            
+        }
+
+        private bool canSaveProduct()
+        {
+            var canSave = true;
+            if(this.TxtBoxName.Text == String.Empty )
+            {
+                canSave = false;
+                MessageBox.Show("Debe expesificar el nombre del producto");
+            }
+
+            return canSave;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
-            var name = TxtBoxName.Text.ToString();
-            var code = TxtBoxCodigo.Text.ToString();
-            var precio = Convert.ToDecimal(TxtBoxPrecio.Text);
-            var descripcion = TxtBoxDescripcion.Text.ToString();
-            var quantity = Convert.ToInt32(TxtBoxQuantity.Text); 
+            #region Guardar viejo
+            //var name = TxtBoxName.Text.ToString();
+            //var code = TxtBoxCodigo.Text.ToString();
+            //var precio = Convert.ToDecimal(TxtBoxPrecio.Text);
+            //var descripcion = TxtBoxDescripcion.Text.ToString();
+            //var quantity = Convert.ToInt32(TxtBoxQuantity.Text);
 
-            try
+            //try
+            //{
+            //    using (var _db = new OpenCRMEntities())
+            //    {
+            //        var product = _db.Products.Create();
+
+            //        product.Name = name;
+            //        product.Code = code;
+            //        product.Price = precio;
+            //        product.Description = descripcion;
+            //        product.Quantity = quantity;
+            //        product.CreateBy = Session.UserId;
+            //        product.UpdateBy = Session.UserId;
+            //        product.CreateDate = DateTime.Now;
+            //        product.UpdateDate = DateTime.Now;
+
+            //        if (cbxCampaignActive.IsEnabled)
+            //            product.Active = true;
+            //        else
+            //            product.Active = false;
+
+            //        _db.Products.Add(product);
+            //        _db.SaveChanges();
+
+            //        TxtBoxCodigo.Text = "";
+            //        TxtBoxDescripcion.Text = "";
+            //        TxtBoxName.Text = "";
+            //        TxtBoxPrecio.Text = "";
+            //        TxtBoxQuantity.Text = "";
+
+            //        MessageBox.Show("Producto ingresado con Exito");
+            //        PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
+            //    }
+
+
+            //}
+
+            //catch (SqlException)
+            //{
+            //    throw;
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
+            #endregion
+
+            if (canSaveProduct())
             {
-                using (var _db = new OpenCRMEntities())
-                {
-                    var product = _db.Products.Create();
-
-                    product.Name = name;
-                    product.Code = code;
-                    product.Price = precio;
-                    product.Description = descripcion;
-                    product.Quantity = quantity;
-                    product.CreateBy = Session.UserId;
-                    product.UpdateBy = Session.UserId;
-                    product.CreateDate = DateTime.Now;
-                    product.UpdateDate = DateTime.Now;
-
-                    if (cbxCampaignActive.IsEnabled)
-                        product.Active = true;
-                    else
-                        product.Active = false;
-
-                    _db.Products.Add(product);
-                    _db.SaveChanges();
-
-                    TxtBoxCodigo.Text = "";
-                    TxtBoxDescripcion.Text = "";
-                    TxtBoxName.Text = "";
-                    TxtBoxPrecio.Text = "";
-                    TxtBoxQuantity.Text = "";
-
-                    MessageBox.Show("Producto ingresado con Exito");
-                    PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
-                }
-
-
-            }
-
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
+                ProductsModel.IsEditing = false;
+                ProductsModel.IsNew = true;
+                ProductsModel.IsSearching = false;
+                _productModel.Save(this);
                 
-                throw;
             }
+           
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

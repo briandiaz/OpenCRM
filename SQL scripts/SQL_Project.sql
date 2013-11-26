@@ -71,7 +71,7 @@ create table [dbo].[Industry](
 create table [dbo].[Rating](
 	RatingId int IDENTITY(1, 1),
 	Name nvarchar(50),
-	Value numeric(2,2),
+	Value int,
 	Constraint [PK Rating] Primary Key(RatingId)
 );
 
@@ -152,11 +152,11 @@ create table [dbo].[Account_Priority](
 create table [dbo].[Account_SLA](
 	AccountSLAId int IDENTITY(1, 1),
 	Name nvarchar(50),
-	Value numeric(2,2),
+	Value int,
 	Constraint [PK Account_SLA] Primary Key(AccountSLAId)
 );
 
-create table [dbo].[Account_Parentype](
+create table [dbo].[Account_Type](
 	AccountTypeId int IDENTITY(1, 1),
 	Name nvarchar(50),
 	Constraint [PK Account_Type] Primary Key(AccountTypeId)

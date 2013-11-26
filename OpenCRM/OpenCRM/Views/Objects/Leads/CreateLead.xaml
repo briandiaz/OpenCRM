@@ -63,6 +63,20 @@
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
 
+        <Button Name="btnGoBack"
+                Width="50"
+                Height="50"
+                Grid.Column="0"
+                Grid.Row="0"
+                Cursor="Hand"
+                VerticalAlignment="Center"
+                Style="{DynamicResource MetroCircleButtonStyle}"
+                Click="btnGoBack_Click"
+                >
+            <StackPanel Orientation="Vertical">
+                <Image Source="/Assets/Img/Icons/32px/arrow-left2.png" Width="32px" Height="32px"/>
+            </StackPanel>
+        </Button>
         <Grid Grid.Row="0"
               Grid.Column="1">
             <Label Content="Lead Edit" 

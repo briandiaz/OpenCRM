@@ -232,7 +232,7 @@
                         Width="200"
                       FontSize="16px"
                         Cursor="Hand"
-                      SelectedValue="{Binding CampaignTypeId}"
+                      SelectedValue="{Binding CampaignTypeId}" SelectionChanged="cmbCampaignType_SelectionChanged"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
@@ -438,7 +438,7 @@
                     Height="30"
                     Width="200"
                     Cursor="Hand"
-                    SelectedValue="{Binding CampaignStatusId}"
+                    SelectedValue="{Binding CampaignStatusId}" SelectionChanged="cmbCampaignStatus_SelectionChanged"
                 >
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">

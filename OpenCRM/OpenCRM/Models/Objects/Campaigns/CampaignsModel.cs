@@ -8,6 +8,7 @@ using OpenCRM.DataBase;
 using System.Windows;
 using OpenCRM.Controllers.Session;
 using System.Data.SqlClient;
+using OpenCRM.Controllers.Campaign;
 
 namespace OpenCRM.Models.Objects.Campaigns
 {
@@ -48,6 +49,10 @@ namespace OpenCRM.Models.Objects.Campaigns
         public CampaignsModel()
         {
 
+        }
+        public CampaignsModel(int id)
+        {
+            this.CampaignId = id;
         }
         /*
         public CampaignsModel(int CampaignID, int UserID, String Name, Boolean Active, int CampaignTypeID, int CampaignStatusID,
@@ -129,6 +134,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 using (var _db = new OpenCRMEntities())
                 {
+                    MessageBox.Show(_campaignID.ToString());
                     Campaign _campaign = _db.Campaign.First(x => x.CampaignId == _campaignID);
                     _campaign.UserId = this.UserId;
                     _campaign.Name = this.Name;
@@ -258,7 +264,100 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         }
 
-
+        public static List<OpenCRM.DataBase.Leads> getAllCampaignLeads()
+        {
+            var _campaignLeads = new List<OpenCRM.DataBase.Leads>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == CampaignController.CurrentCampaignId && x.Converted != true).ToList();
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _campaignLeads;
+        }
+        public static List<OpenCRM.DataBase.Leads> getAvailableLeads()
+        {
+            var _campaignLeads = new List<OpenCRM.DataBase.Leads>();
+            try {
+                using (var _db = new OpenCRMEntities())
+                { 
+                    _campaignLeads = _db.Leads.Where(x => x.UserId == Session.UserId && x.CampaignId == null && x.Converted != true).ToList();
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _campaignLeads;
+        }
+        public Boolean AddLeadsToCampaign(List<Lead> Leads)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var Campaign = _db.Campaign.FirstOrDefault(x => x.CampaignId == this.CampaignId);
+                    foreach (Lead Lead in Leads)
+                    {
+                        var _currentLead = _db.Leads.FirstOrDefault(x => x.LeadId == Lead.ID);
+                        Campaign.Leads.Add(_currentLead);
+                    }
+                    _db.SaveChanges();
+                    MessageBox.Show("Leads Added", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
+        public Boolean RemoveCampaignLeads(List<Lead> Leads)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var Campaign = _db.Campaign.FirstOrDefault(x => x.CampaignId == this.CampaignId);
+                    foreach (Lead Lead in Leads)
+                    {
+                        var _currentLead = _db.Leads.FirstOrDefault(x => x.LeadId == Lead.ID);
+                        Campaign.Leads.Remove(_currentLead);
+                        _currentLead.Campaign = null;
+                    }
+                    _db.SaveChanges();
+                    MessageBox.Show("Leads Removed", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
         public List<CampaignsModel> getAllCampaignsFromUser(int UserID)
         {
             var _campaignsModel = new List<CampaignsModel>();
@@ -391,10 +490,24 @@ namespace OpenCRM.Models.Objects.Campaigns
             Grid.DataContext = listCampaigns;
 
         }
+        public override string ToString()
+        {
+            return this.CampaignStatusId + " - " + this.CampaignTypeId;
+        }
 
         #endregion
 
     }
+    public class Lead
+    {
+        public int ID { get; set; }
+        public Lead() { }
+        public Lead(int id) 
+        {
+            this.ID = id;
+        }
+    }
+
     public class AccountOwner
     {
         #region Properties
@@ -418,13 +531,14 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         #endregion
 
-        public List<AccountOwner> getCampaignOwner()
+        public static List<User> getCampaignOwner()
         {
-            var _users = new List<AccountOwner>();
+            var _owners = new List<User>();
             try
             {
                 using (var _db = new OpenCRMEntities())
                 {
+                    /*
                     var _actualUser = (
                                         from user in _db.User
                                         where
@@ -437,7 +551,10 @@ namespace OpenCRM.Models.Objects.Campaigns
                                              Name = user.Name
                                          }
                     );
-                    _users.Add((AccountOwner)_actualUser.ToList()[0]);
+                    _users.Add((AccountOwner)_actualUser.ToList()[0]);*/
+                    _owners.Add( _db.User.FirstOrDefault(
+                        x => x.UserId == Session.UserId
+                    ));
 
                 }
 
@@ -450,7 +567,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 MessageBox.Show(ex.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            return _users;
+            return _owners;
         }
     }
     public class CampaignType
