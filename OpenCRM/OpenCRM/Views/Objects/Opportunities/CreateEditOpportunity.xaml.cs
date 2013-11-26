@@ -46,10 +46,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             {
                 this.LoadEditOpportunity();
                 this._opportunitiesModel.Data.OpportunityId = OpportunitiesModel.EditOpportunityId;
-                this._opportunitiesModel.Data.ViewDate = DateTime.Now;
                 OpportunitiesModel.EditOpportunityId = 0;
-
-                _opportunitiesModel.SaveViewDate();
             }
         }
 
