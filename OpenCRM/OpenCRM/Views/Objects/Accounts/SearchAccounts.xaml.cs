@@ -31,9 +31,10 @@ namespace OpenCRM.Views.Objects.Accounts
             InitializeComponent();
 
             _accountModel = new AccountsModel();
+            _allAccounts = _accountModel.getAllAccounts();
 
             _accountModel.LoadViewsAccount(this.cmbViewsAccount);
-            _allAccounts = _accountModel.getAllAccounts();
+
         }
 
         private void LoadSearchAccount()
@@ -56,19 +57,33 @@ namespace OpenCRM.Views.Objects.Accounts
             }
             else if (SelectedItemName == "New Last Week")
             {
-                filterData = _allAccounts.FindAll(
-                    x => WeekYear(x.CreateDate).Equals(WeekYear(DateTime.Now) == 1 ? 52 : WeekYear(DateTime.Now) - 1)
+                filterData = (
+                    from opportunity in _allAccounts
+                    where opportunity.CreateDate.HasValue
+                    select opportunity
+                ).ToList().FindAll(
+                    x => WeekYear(x.CreateDate.Value).Equals(WeekYear(DateTime.Now) == 1 ? 52 : WeekYear(DateTime.Now) - 1)
                 );
             }
             else if (SelectedItemName == "New This Week")
             {
-                filterData = _allAccounts.FindAll(
-                    x => WeekYear(x.CreateDate).Equals(WeekYear(DateTime.Now))
+                filterData = (
+                     from opportunity in _allAccounts
+                     where opportunity.CreateDate.HasValue
+                     select opportunity
+                 ).ToList().FindAll(
+                    x => WeekYear(x.CreateDate.Value).Equals(WeekYear(DateTime.Now))
                 );
             }
-            else if (SelectedItemName == "Recently Viewed Opportunities")
+            else if (SelectedItemName == "Recently Viewed Accounts")
             {
-                filterData = _allAccounts.OrderByDescending(x => x.ViewDate.Date).ToList();
+                filterData = (
+                    from opportunity in _allAccounts
+                    where opportunity.ViewDate.HasValue
+                    orderby opportunity.ViewDate descending
+                    select
+                        opportunity
+                ).ToList();
             }
             else if (SelectedItemName == "SLA Costumers")
             {
@@ -98,7 +113,7 @@ namespace OpenCRM.Views.Objects.Accounts
             AccountsModel.IsNew = false;
             AccountsModel.IsSearching = true;
 
-            PageSwitcher.Switch("/Views/Objects/Accounts/CreateEditAccount.xaml");
+            PageSwitcher.Switch("/Views/Objects/Accounts/AccountDetails.xaml");
         }
 
         private void btnNewAccount_Click(object sender, RoutedEventArgs e)
@@ -123,7 +138,7 @@ namespace OpenCRM.Views.Objects.Accounts
         {
             if (!this.tbxSearchAccount.Text.Equals(string.Empty))
             {
-                var listOpportunities = this.DataGridAccount.ItemsSource as List<SearchAccounts>;
+                var listOpportunities = this.DataGridAccount.ItemsSource as List<SearchAccountsData>;
 
                 var filterData = listOpportunities.FindAll(x => x.Name.Contains(this.tbxSearchAccount.Text));
 

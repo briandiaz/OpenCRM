@@ -310,6 +310,9 @@
     <Compile Include="Views\Login\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Accounts\AccountDetails.xaml.cs">
+      <DependentUpon>AccountDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Accounts\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
@@ -361,6 +364,9 @@
     <Compile Include="Views\Objects\Opportunities\CreateEditOpportunity.xaml.cs">
       <DependentUpon>CreateEditOpportunity.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Opportunities\OpportunitiesDetails.xaml.cs">
+      <DependentUpon>OpportunitiesDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Opportunities\OpportunitiesView.xaml.cs">
       <DependentUpon>OpportunitiesView.xaml</DependentUpon>
     </Compile>
@@ -372,6 +378,9 @@
     </Compile>
     <Compile Include="Views\Objects\Products\EditProductView.xaml.cs">
       <DependentUpon>EditProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Objects\Products\ProductDetails.xaml.cs">
+      <DependentUpon>ProductDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Products\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
@@ -404,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Login\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Accounts\AccountDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -475,6 +488,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Objects\Opportunities\OpportunitiesDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Objects\Opportunities\OpportunitiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -488,6 +505,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Products\EditProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Objects\Products\ProductDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1053,7 +1074,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Products\" />
-    <Folder Include="Views\Home\images\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Img\Icons\32px-White\accessibility.png" />

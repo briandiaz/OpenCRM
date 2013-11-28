@@ -47,6 +47,7 @@ namespace OpenCRM.Models.Objects.Leads
                         lead.Address = address;
                         lead.CreateDate = createDate;
                         lead.CreateBy = createBy;
+
                         _db.SaveChanges();
                         MessageBox.Show("Lead updated.");
                     }
@@ -285,6 +286,7 @@ namespace OpenCRM.Models.Objects.Leads
 
             return rating;
         }
+
         public void LoadEditLead(CreateLead EditLeads)
         {
             try

@@ -51,10 +51,7 @@
 
 
 
-            <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_Products" FontSize="20px">
-                </TabItem>
-            </TabControl>
+            <TabControl Grid.Row="0" Grid.Column="0"/>
 
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"/>
 
@@ -92,7 +89,6 @@
                      Background="#1179BE" />
 
             <TextBox Name="TxtBoxName"
-                    Text="{Binding Name}"
                    controls:TextboxHelper.Watermark="Enter Product Name"
                     controls:TextboxHelper.ClearTextButton="True"
                     
@@ -128,7 +124,6 @@
                    Width="56"/>
 
             <TextBox Name="TxtBoxCodigo"
-                    Text="{Binding ID}"
                     controls:TextboxHelper.Watermark="Enter Product ID"
                     controls:TextboxHelper.ClearTextButton="True"
                     
@@ -157,7 +152,6 @@
                     Name="TxtBoxDescripcion"
                    controls:TextboxHelper.Watermark="Enter Product Description"
                    controls:TextboxHelper.ClearTextButton="True"
-                    Text="{Binding Description}"
                      Height="98"
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
@@ -169,7 +163,6 @@
                 Name="TxtBoxPrecio"
                 controls:TextboxHelper.Watermark="Enter Product Price "
                 controls:TextboxHelper.ClearTextButton="True"
-                    Text="{Binding Price}"
                     Grid.Column="1"
                      HorizontalAlignment="Left"
                      Height="14"
@@ -255,8 +248,7 @@
             	Height="25"
             	Width="56"/>
             
-            <TextBox x:Name="TxtBoxCantidad"
-            	Text="{Binding ID}"
+            <TextBox Name="TxtBoxCantidad"
                     
             	Grid.Column="1"
             	HorizontalAlignment="Left"
@@ -267,6 +259,16 @@
             	Width="220" RenderTransformOrigin="0.482,2.154" 
                 controls:TextboxHelper.ClearTextButton="True" 
                 controls:TextboxHelper.Watermark="Enter Product Quantity" />
+
+            <Label Content="Edit Product"
+                   Grid.Column="1"
+                   FontSize="15px"
+                   HorizontalAlignment="Left"
+                   Margin="105,15,0,0"
+                   Grid.Row="1"
+                   VerticalAlignment="Top"/>
+            <Label Content="Products" 
+                  FontSize="30px" Grid.Column="1" HorizontalAlignment="Left" Margin="105,46,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         </Grid>
     </controls:MetroContentControl>

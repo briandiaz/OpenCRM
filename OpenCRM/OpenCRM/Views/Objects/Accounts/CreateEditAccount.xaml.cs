@@ -45,9 +45,6 @@ namespace OpenCRM.Views.Objects.Accounts
                 this._accountModel.Data.AccountId = AccountsModel.EditingAccountId;
                 AccountsModel.EditingAccountId = 0;
                 LoadEditing();
-                this._accountModel.Data.ViewDate = DateTime.Now;
-
-                _accountModel.SaveViewDate();
             }
         }
 

@@ -16,26 +16,34 @@ using OpenCRM.Models.Objects.Products;
 
 namespace OpenCRM.Views.Objects.Products
 {
+   
     /// <summary>
-    /// Interaction logic for EditProductView.xaml
+    /// Interaction logic for ProductDetails.xaml
     /// </summary>
-    public partial class EditProductView : Page
+    public partial class ProductDetails : Page
     {
-        ProductsModel _productModel;
+        private ProductsModel _productModel;
 
-        public EditProductView()
+        public ProductDetails()
         {
             InitializeComponent();
             _productModel = new ProductsModel();
-            //_productModel.LoadEditProduct(this);
+            _productModel.LoadProductDetails(this);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void btnEditLead_OnClick(object sender, RoutedEventArgs e)
         {
-            //_productModel.Save(
+           // var ProductId = ProductsModel.EditProductId;
+
+            ProductsModel.IsEditing = true;
+            ProductsModel.IsNew = false;
+            ProductsModel.IsSearching = false;
+            
+
+            PageSwitcher.Switch("/Views/Objects/Products/CreateProduct.xaml");
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void btnEditProductCancel_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Products/ProductsView.xaml");
         }

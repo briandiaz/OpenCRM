@@ -9,8 +9,7 @@
                       mc:Ignorable="d"
                       Title="Products" 
                       MinHeight="1024" 
-                      MinWidth="768"
-                      >
+                      MinWidth="768">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -27,7 +26,14 @@
 
     <controls:MetroContentControl>
         <Grid>
-
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="#1179BE" />
+                    <Setter Property="BorderThickness" Value="5" />
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Grid.Resources>
+            
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
             </Grid.Background>
@@ -46,11 +52,9 @@
                 <ColumnDefinition Width="200*"/>
             </Grid.ColumnDefinitions>
 
-
-
-            <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_Products" FontSize="20px" RenderTransformOrigin="0.487,0.778" Margin="1,6,-1,-6"/>
-            </TabControl>
+            <TabControl 
+                Grid.Row="0"
+                Grid.Column="0"/>
 
             <Grid Grid.Row="2" 
                   Grid.Column="1"
@@ -67,9 +71,11 @@
                            Margin="188,0,173,6"/>
            
             <ComboBox 
-                          Name="cmbSearchTypeOpportunities"
-                          VerticalAlignment="Bottom"
-                          Margin="239,4,173,5" Height="20"/>
+                Name="cmbSearchProducts"
+                VerticalAlignment="Bottom"
+                Margin="239,4,173,5" 
+                Height="20"
+                SelectionChanged="cmbSearchProducts_SelectionChanged"/>
                 </Grid>
 
             <StackPanel Grid.Row="1" 
@@ -78,9 +84,9 @@
                         HorizontalAlignment="Right">
                 <Button 
                     Name="btnEdit"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Bottom"
                     Margin="2"
-                    Width="75"
+                    Width="75" Click="btnEdit_Click"
                >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"></Image>
@@ -91,7 +97,7 @@
 
                 <Button 
                     Name="btnCreate"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Bottom"
                     Margin="2"
                     Width="75" 
                     Click="Button_Click_1"
@@ -102,20 +108,19 @@
                     </StackPanel>
                     </Button>
             </StackPanel>
+            
             <Grid Grid.Row="3" 
                   Grid.Column="1"
                   Background="#349CE2"
                   Margin="0,20,0,0">
                 
-                <TextBlock Text="Recent Products"
+                <TextBlock Text="Products"
                            TextAlignment="Center"
         		           FontSize="22"
                            Foreground="White"
-                           Margin="217,25,263,390"/>
-                
-                
-            <DataGrid 
-                
+                           />
+
+                <DataGrid 
                 IsReadOnly="True"
                 SelectionMode="Single"
                 Name="RecentProductsGrid"
@@ -125,46 +130,26 @@
                 HorizontalAlignment="Left"
                 Grid.Row="3" 
                 VerticalAlignment="Top"
-                MinWidth="1000"
-                MinHeight="400" SelectionChanged="RecentProductsGrid_SelectionChanged">
-           <!-- <DataGrid.Columns>
-                <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
-                    <DataGridHyperlinkColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <EventSetter Event="Hyperlink.Click" Handler="OpportunityNameHyperlink_Click" />
-                            <Setter Property="Tag" Value="{Binding Path=Id}"/>
-                        </Style>
-                    </DataGridHyperlinkColumn.ElementStyle>
-                </DataGridHyperlinkColumn>
-                        <DataGridTextColumn Header="Product Name" Width="*" Binding="{Binding Nombre}"/>
-                        <DataGridTextColumn Header="Product Code" Width="*" Binding="{Binding Codigo}" />
-                        <DataGridTextColumn Header="Descripcion Code" Width="*" Binding="{Binding Descripcion}" />
-                    </DataGrid.Columns>-->
-            
-            </DataGrid>
+                MinWidth="700"
+                AutoGenerateColumns="False"
+                MinHeight="400"
+                SelectionChanged="RecentProductsGrid_SelectionChanged">
 
-                <!-- <DataGrid Name="DataGridRecentOpportunities"
-                              Height="300"
-                              ScrollViewer.CanContentScroll="True"  
-                              Style="{DynamicResource MetroDataGrid}"
-                              HorizontalContentAlignment="Center"
-                              VerticalContentAlignment="Center"
-                              Margin="10,72,10,10">
-                        <DataGrid.Columns>
-                            <DataGridHyperlinkColumn Header="Opportunity Name" Width="*" Binding="{Binding Opportunity}">
-                                <DataGridHyperlinkColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <EventSetter Event="Hyperlink.Click" Handler="OpportunityNameHyperlink_Click" />
-                                        <Setter Property="Tag" Value="{Binding Path=Id}"/>
-                                    </Style>
-                                </DataGridHyperlinkColumn.ElementStyle>
-                            </DataGridHyperlinkColumn>
-                            <DataGridTextColumn Header="Account Name" Width="*" Binding="{Binding Account}"/>                             
-                            <DataGridTextColumn Header="Close Date" Width="*" Binding="{Binding CloseDate}" />
-                        </DataGrid.Columns>
-                    </DataGrid>-->
-                
+                    <DataGrid.Columns>
+                        <DataGridHyperlinkColumn Header="Product Name" Width="*" Binding="{Binding Nombre}">
+                            <DataGridHyperlinkColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <EventSetter Event="Hyperlink.Click" Handler="ProdutNameHyperlink_Click" />
+                                    <Setter Property="Tag" Value="{Binding Path=ProductId}"/>
+                                </Style>
+                            </DataGridHyperlinkColumn.ElementStyle>
+                        </DataGridHyperlinkColumn>
+                        <DataGridTextColumn Header="Product Code" Width="*" Binding="{Binding Codigo}" />
+                        <DataGridTextColumn Header="Descripcion" Width="*" Binding="{Binding Description}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
+            
             <Image Source="/Assets/Img/Icons/Products.png" 
                Grid.Column="1"
                HorizontalAlignment="Left"
@@ -172,6 +157,22 @@
                Grid.Row="1"
                VerticalAlignment="Top"
                Width="100"/>
+            
+            <Label Content="Recent Products" 
+                   FontSize="15"
+                   Grid.Column="1" 
+                   HorizontalAlignment="Left" 
+                   Margin="113,20,0,0" 
+                   Grid.Row="1" 
+                   VerticalAlignment="Top"/>
+            
+            <Label Content="Products"
+                   FontSize="30px"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left" 
+                   Margin="113,48,0,0"
+                   Grid.Row="1" 
+                   VerticalAlignment="Top"/>
 
         </Grid>
     </controls:MetroContentControl>

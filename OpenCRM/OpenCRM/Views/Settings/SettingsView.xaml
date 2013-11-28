@@ -177,8 +177,8 @@
                                                     FontSize="20px"
                                                     IsEnabled="False"
                                                     ItemsSource="{Binding Path=Name}" Margin="5,8,-380,3" Height="36" />
-                                        
-                                        
+
+
 
                                         <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="7" Click="btnSave_Click" Cursor="Hand" >
                                             <StackPanel>
@@ -194,7 +194,7 @@
                                 <Grid Margin="100,50">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
-                                        
+
                                     </Grid.ColumnDefinitions>
                                     <Grid Name="gridSettingsProfile2">
                                         <Grid.RowDefinitions>
@@ -234,7 +234,7 @@
                                                 <Image Source="/Assets/Img/Search.png"  Width="20"/>
                                             </StackPanel>
                                         </Button>
-                                        
+
                                         <StackPanel Grid.Row="7" Grid.Column="2" Margin="390,8,-380,4">
                                             <Image Name ="ImagePassword" Source="/Assets/Img/Correct.png"  Width="20" Visibility="Hidden"/>
                                         </StackPanel>
@@ -242,7 +242,7 @@
                                         <StackPanel Grid.Row="8" Grid.Column="2" Margin="390,8,-380,4">
                                             <Image Name ="ImagePasswordConfirm" Source="/Assets/Img/Correct.png"  Width="20" Visibility="Hidden"/>
                                         </StackPanel>
-                                       
+
                                         <StackPanel Grid.Row="9" Grid.Column="2" Margin="390,25,-380,0">
                                             <Image Name ="ImageProfile" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
                                         </StackPanel>
@@ -334,7 +334,7 @@
                                                         FontSize="20px"
                                                         Name="tbxUserConfirmPassword"
                                                         LostFocus="TbxUserConfirmPassword_OnLostFocus"/>
-                                        
+
                                         <Label  Content="User Profile"
                                                 Grid.Row="9"
                                                 VerticalAlignment="Center"
@@ -348,7 +348,7 @@
                                                     ItemsSource="{Binding Path=Name}" Margin="10,15,-385,14" Height="36"
                                                     SelectionChanged="CmbUserProfile2_OnSelectionChanged" />
 
-                                       
+
                                         <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="9" Click="btnSave2_Click" Cursor="Hand" >
                                             <StackPanel>
                                                 <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
@@ -369,19 +369,14 @@
                                         <RowDefinition Height="50*" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100*" />
                                         <ColumnDefinition Width="400*" />
-                                        <ColumnDefinition Width="100*" />
                                     </Grid.ColumnDefinitions>
                                     <Button Click="BtnPermissionSave_OnClick" 
-                                            Cursor="Hand" 
-                                            Width="80"
+                                            Cursor="Hand"
                                             Height="45"
                                             Visibility="Visible"
-                                            Grid.Column="1"
                                             Grid.Row="1"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Top"
+                                            VerticalAlignment="Top" Margin="698,0,0,0" HorizontalAlignment="Left" Width="80"
                                             >
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Image HorizontalAlignment="Right" Source="/Assets/Img/Icons/System-Save-icon.png" Width="32" Height="32" />
@@ -391,20 +386,16 @@
                                     <Label Content="Profile" 
                                            HorizontalAlignment="Left" 
                                            VerticalAlignment="Top" 
-                                           Grid.Column="1" 
                                            Grid.Row="1" 
-                                           Height="45"
+                                           Height="45" Margin="34,0,0,0"
                                            />
                                     <ComboBox Name="ProfilesComboBox"  
                                               VerticalAlignment="Top" 
-                                              Grid.Column="1" 
-                                              Grid.Row="1"
-                                              Width="442" 
+                                              Grid.Row="1" 
                                               Height="45"
-                                              SelectionChanged="ProfilesComboBox_OnSelectionChanged"
+                                              SelectionChanged="ProfilesComboBox_OnSelectionChanged" Margin="183,0,0,0" HorizontalAlignment="Left" Width="442"
                                               />
                                     <Grid Name="gridAccessRights" 
-                                          Grid.Column="1" 
                                           Grid.Row="3">
                                         <TabControl     Name="permissionTapControl" 
                                                         TabStripPlacement="Top" 
@@ -416,7 +407,7 @@
                                                         Grid.Row="3"
                                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                                                         ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                            
+
                                             <TabControl.Resources>
                                                 <Style TargetType="{x:Type TabItem}">
                                                     <Setter Property="Template">

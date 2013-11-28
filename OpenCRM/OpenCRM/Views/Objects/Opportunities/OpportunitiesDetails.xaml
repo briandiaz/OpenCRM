@@ -1,0 +1,529 @@
+﻿<Page x:Class="OpenCRM.Views.Objects.Opportunities.OpportunitiesDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      Width="auto"
+      Height="auto"
+	  Title="OpportunitiesDetails">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                    <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0"
+              Grid.Column="1">
+
+            <Label Content="Opportunity" 
+                   FontSize="12px"
+                   Margin="81,20,577,63"/>
+
+            <TextBlock  Name="lblTitleOpportunity"
+                        TextWrapping="Wrap"
+                        FontSize="20px"
+                        Margin="81,47,0,10" HorizontalAlignment="Left" Width="189"/>
+
+            <Button Style="{DynamicResource NoChromeButton}" 
+                    HorizontalAlignment="Left">
+                <Image Source="/Assets/Img/Icons/Opportunities.png" 
+                        HorizontalAlignment="Left"
+                        Height="69"
+                        VerticalAlignment="Top"
+                        Width="66"/>
+            </Button>
+
+            <Button Name="btnCancelOpportunity"
+                    Content="Cancel"
+                    Margin="618,20,43,31" 
+                    Click="btnCancelOpportunity_Click"/>
+
+            <Button Name="btnEditOpportunity"
+                    Content="Edit"
+                    Margin="322,20,339,31" 
+                    Click="btnEditOpportunity_Click"/>
+
+            <Button Name="btnDeleteOpportunity"
+                    Content="Delete"
+                    Margin="472,20,191,31" 
+                    Click="btnDeleteOpportunity_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="550"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Border BorderBrush="#1179BE">
+                    <Grid Background="#1179BE">
+                        <TextBlock  Text="Opportunity Details"
+                                    VerticalAlignment="Center"
+                                    TextAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontWeight="ExtraBold"
+                                    Foreground="White"
+                                    FontSize="16px"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Name="gridOpportunityDetails"
+                  VerticalAlignment="Top" Height="550" >
+
+                <Label  Name="lblLine"
+                        Content="________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        FontWeight="Thin"
+                        Opacity="0.4"
+                        Margin="10,30,0,0" 
+                        Height="31"/>
+
+                <Label  Name="lblLine1"
+                        Content="________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        FontWeight="Thin"
+                        Opacity="0.4"
+                        Margin="10,60,10,0" 
+                        Height="31"/>
+
+                <Label  Name="lblLine2"
+                        Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Opacity="0.4"
+                        Margin="10,91,0,0"/>
+
+                <Label  Name="lblLine3"
+                        Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Opacity="0.4"
+                        Margin="10,121,0,0"/>
+
+                <Label  Name="lblLine4"
+                        Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Opacity="0.4"
+                        Margin="10,151,0,0"/>
+
+                <Label  Name="lblLine7"
+                        Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Opacity="0.4"
+                        Margin="10,241,0,0"/>
+
+                <Label  Name="lblLine8"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,329,0,0"/>
+                <Label  Name="lblLine9"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,361,0,0"/>
+
+                <Label  Name="lblLine10"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,391,0,0"/>
+
+                <Label  Name="lblLine11"
+                	    Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Opacity="0.4"
+                	    Margin="10,426,0,0"/>
+
+                <TextBlock  Text="Opportunity Owner"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px" 
+                            FontWeight="SemiBold"
+                            Margin="32,30,591,0" 
+                            Height="25" />
+
+                <TextBlock  Text="Private"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            FontWeight="SemiBold"
+                            Margin="32,60,0,0" 
+                            Height="22" 
+                            HorizontalAlignment="Left" 
+                            Width="154" />
+
+                <TextBlock  Text="Opportunity Name"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="32,90,591,0" 
+                            FontWeight="SemiBold"
+                            Height="24" />
+
+                <TextBlock  Text="Account Name"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="32,120,591,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                <TextBlock  Text="Type" 
+                            FontSize="15px"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            Margin="32,150,591,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                <TextBlock  Text="Lead Source" 
+                            FontSize="15px"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            Margin="32,180,591,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                <TextBlock  Text="Product" 
+                            FontSize="15px"
+                            FontWeight="SemiBold"
+                            TextAlignment="Right"
+                            Margin="70,240,591,0" Height="26" VerticalAlignment="Top" />
+
+                <TextBlock  Text="Amount" 
+                            FontSize="15px"
+                            TextAlignment="Right"
+                            FontWeight="SemiBold"
+                            Margin="70,270,591,0" Height="27" VerticalAlignment="Top" />
+
+                <TextBlock  Text="Campaign Source"
+                            TextAlignment="Right"
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="405,30,242,0" 
+                            FontWeight="SemiBold"
+                            Height="22"/>
+
+                <TextBlock  Text="Close Date"
+                            TextAlignment="Right"
+                            VerticalAlignment="Top"
+                            FontSize="15px" 
+                            Margin="405,60,242,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                <TextBlock  Text="Next Step"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="405,90,242,0" 
+                            FontWeight="SemiBold"
+                            Height="20" />
+
+                <TextBlock  Text="Stage" 
+                            FontSize="15px"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            Margin="405,120,242,0" 
+                            FontWeight="SemiBold"
+                            Height="22" />
+
+                <TextBlock  Text="Probability"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="405,150,242,0" 
+                            FontWeight="SemiBold"
+                            Height="24" />
+
+                <TextBlock  Text="Quantity"
+                	        VerticalAlignment="Top"
+                	        TextAlignment="Right"
+                	        FontSize="15px"
+                	        Margin="405,239,242,0" 
+                	        FontWeight="SemiBold"
+                	        Height="23" />
+
+                <TextBlock  Text="Order Number" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="70,329,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                <TextBlock  Text="Current Generator" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,360,591,0" 
+                            Height="28"
+                            VerticalAlignment="Top" />
+
+                <TextBlock  Text="Tracking Number" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,388,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                <TextBlock  Text="Main Competidor" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="405,327,242,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                <TextBlock  Text="Service Status" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="405,359,242,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                <TextBlock  Text="Description" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,421,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                <TextBlock  Text="Created By" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,454,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                <TextBlock  Text="Updated By" 
+                	        FontSize="15px"
+                	        TextAlignment="Right"
+                	        FontWeight="SemiBold"
+                	        Margin="48,489,591,0" 
+                            Height="28" 
+                            VerticalAlignment="Top" />
+
+                <Label  Name="lblOpportunityOwner"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="197,22,0,0" 
+                        HorizontalAlignment="Left" 
+                        Width="209"/>
+
+                <CheckBox  Name="ckbPrivate"
+                           VerticalAlignment="Top"
+                           Margin="200,64,563,0" 
+                           Height="14"/>
+
+                <Label  Name="lblOpportunityName"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="191,84,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblAccountName"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="191,115,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblOpportunityType"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="191,145,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblLeadSource"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="191,175,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblCampaignSource"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="540,22,0,0" HorizontalAlignment="Left" Width="213"/>
+
+                <Label  Name="lblCloseDate"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="540,52,0,0" HorizontalAlignment="Left" Width="213" />
+
+                <Label  Name="lblNextStep"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="540,84,0,0" HorizontalAlignment="Left" Width="213" />
+
+                <Label  Name="lblOpportunityStage"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="540,114,0,0" HorizontalAlignment="Left" Width="213" />
+
+                <Label  Name="lblProbability"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="540,144,0,0" HorizontalAlignment="Left" Width="213" />
+
+                <Label  Name="lblProduct"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="191,235,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblAmount"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="191,265,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblQuantity"
+                        Content=""
+                        VerticalAlignment="Top"
+                        FontSize="15px"
+                        Margin="540,234,0,0" HorizontalAlignment="Left" Width="213" />
+
+                <Label  Name="lblOrderNumber"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="191,322,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblCurrentGenerator"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="191,352,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblTrackingNumber"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="191,382,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblMainCompetidor"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="540,322,0,0" HorizontalAlignment="Left" Width="213"/>
+
+                <Label  Name="lblServiceStatus"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="540,352,0,0" HorizontalAlignment="Left" Width="213"/>
+
+                <Label  Name="lblDescription"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="191,419,0,0" HorizontalAlignment="Left" Width="562"/>
+
+                <Label  Name="lblCreateBy"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="191,452,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblCreateDate"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="405,452,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblUpdateBy"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="191,487,0,0" HorizontalAlignment="Left" Width="215"/>
+
+                <Label  Name="lblUpdateDate"
+                	    Content=""
+                	    VerticalAlignment="Top"
+                	    FontSize="15px"
+                	    Margin="405,487,0,0" HorizontalAlignment="Left" Width="215"/>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>
+

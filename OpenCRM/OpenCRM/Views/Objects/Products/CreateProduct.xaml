@@ -51,12 +51,12 @@
 
 
 
-            <TabControl Grid.Row="0" Grid.Column="0">
-                <TabItem Header="_Products" FontSize="20px">
-                </TabItem>
-            </TabControl>
+            <TabControl Grid.Row="0" Grid.Column="0"/>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Row="1" 
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"/>
 
             <Image Source="/Assets/Img/Icons/Products.png" 
                Grid.Column="1"
@@ -147,10 +147,11 @@
                      VerticalAlignment="Top"
                      Width="220" RenderTransformOrigin="0.482,2.154" />
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="0,30,0,0"
-                        HorizontalAlignment="Center"
-                        Grid.Column="2" Grid.Row="3">
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0,30,0,0"
+                HorizontalAlignment="Center"
+                Grid.Column="2" Grid.Row="3">
 
 
                 <Label Content="Description"
@@ -163,25 +164,25 @@
                    controls:TextboxHelper.Watermark="Enter Product Description"
                    controls:TextboxHelper.ClearTextButton="True"
                     Name="TxtBoxDescripcion"
-                     Height="98"
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top"
-                     Width="317"
+                    Height="98"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Top"
+                    Width="317"
                     />
             </StackPanel>
 
             <TextBox
                 controls:TextboxHelper.Watermark="Enter Product Price "
                 controls:TextboxHelper.ClearTextButton="True"
-                    Name="TxtBoxPrecio"
-                    Grid.Column="1"
-                     HorizontalAlignment="Left"
-                     Height="14"
-                     Margin="105,111,0,0"
-                     Grid.Row="3"
-                     TextWrapping="Wrap"
-                     VerticalAlignment="Top"
-                     Width="220"/>
+                Name="TxtBoxPrecio"
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Height="14"
+                Margin="105,111,0,0"
+                Grid.Row="3"
+                TextWrapping="Wrap"
+                VerticalAlignment="Top"
+                Width="220"/>
 
             <Button 
                     Grid.Column="2"
@@ -196,24 +197,25 @@
                 </StackPanel>
             </Button>
 
-            <Grid Grid.Column="1"
-                  Grid.Row="3" 
-                  Name="gridObligationCloseDate"
-                          Background="#DA3232"
-            	          Margin="94,35,691,305"
-                          Width="6"
-                          Visibility="Visible" />
+            <Grid 
+                Grid.Column="1"
+                Grid.Row="3" 
+                Name="gridObligationCloseDate"
+                Background="#DA3232"
+            	Margin="94,35,691,305"
+                Width="6"
+                Visibility="Visible" />
 
             <controls:ToggleSwitch 
-                        Name="cbxCampaignActive"
-                        OnLabel="Yes" 
-                        OffLabel="No"
-                        Grid.Row="3"
-                        Width="100"
-                        Grid.Column="1"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center" Margin="368,39,0,292" Grid.ColumnSpan="2"
-                                   />
+                    Name="cbxCampaignActive"
+                    OnLabel="Yes" 
+                    OffLabel="No"
+                    Grid.Row="3"
+                    Width="100"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center" Margin="368,39,0,292" Grid.ColumnSpan="2"
+                                />
 
             <Label Content="Name" 
                    Grid.Column="1" 
@@ -228,20 +230,27 @@
             	HorizontalAlignment="Right"
             	Grid.Row="1"
             	VerticalAlignment="Top"
-            	Width="75" Click="Button_Click_2" Margin="0,46,5,0"
+            	Width="75" 
+                Click="Button_Click_2" 
+                Margin="0,46,5,0"
                     >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/OpenCRM;component/Assets/Img/Icons/32px/cancel-circle.png" Width="32" Height="32px"/>
                     <TextBlock VerticalAlignment="Center"><Run Text="Cancel"/></TextBlock>
                 </StackPanel>
             </Button>
-            <Label Content="Active"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   Margin="415,27,0,0"
-                   Grid.Row="3"
-                   VerticalAlignment="Top"
-                   Grid.ColumnSpan="2"/>
+            
+            
+            
+            <Label 
+                Content="Active"
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Margin="415,27,0,0"
+                Grid.Row="3"
+                VerticalAlignment="Top"
+                Grid.ColumnSpan="2"/>
+            
             <Label Content="Quantity"
             	Grid.Column="1"
             	HorizontalAlignment="Left"
@@ -251,6 +260,7 @@
             	RenderTransformOrigin="0.508,-0.467"
             	Height="25"
             	Width="56"/>
+            
             <TextBox
             	controls:TextboxHelper.Watermark="Enter Product Quantity "
             	controls:TextboxHelper.ClearTextButton="True"
@@ -271,13 +281,30 @@
             	Margin="94,35,691,305"
             	Width="6"
             	Visibility="Visible" />
+            
             <Grid Grid.Column="2"
             	Grid.Row="2" 
-            	x:Name="gridProductObligation_Copy"
+            	Name="gridProductObligation_Copy"
             	Background="#DA3232"
             	Margin="154,12,230,10"
             	Width="6"
             	Visibility="Visible" />
+            
+            <Label Content="Create Product"
+                  FontSize="15px"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left" 
+                   Margin="105,20,0,0"
+                   Grid.Row="1" 
+                   VerticalAlignment="Top"/>
+            
+            <Label Content="Products"
+                   FontSize="30px"
+                   Grid.Column="1" 
+                   HorizontalAlignment="Left" 
+                   Margin="105,49,0,0"
+                   Grid.Row="1" 
+                   VerticalAlignment="Top"/>
 
 
         </Grid>

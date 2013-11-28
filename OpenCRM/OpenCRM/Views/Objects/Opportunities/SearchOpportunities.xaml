@@ -91,6 +91,8 @@
 
                     <ComboBox Name="cmbViewsOpportunities"
                               VerticalAlignment="Center"
+                              DisplayMemberPath = "Name"
+                              SelectedValuePath = "Id"
                               Margin="71,7,569,7" 
                               Height="20"
                               SelectionChanged="cmbViewsOpportunities_SelectionChanged"/>
@@ -149,6 +151,7 @@
                     <DataGrid Name="DataGridOpportunities"
                               IsReadOnly="True"
                               ScrollViewer.CanContentScroll="True"
+                              AutoGenerateColumns="False"
                               Height="300"
                               Style="{DynamicResource MetroDataGrid}" 
                               Margin="34,72,0,40" 
