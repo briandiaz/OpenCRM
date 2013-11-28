@@ -32,6 +32,7 @@
         <Controls:WindowCommands>
             <Button Content="Home" Name="btnHome" Visibility="Hidden" Click="btnHome_Click" DataContext="null" Cursor="Hand" />
             <Button Content="Settings" Name="btnSettings" Visibility="Hidden" Click="btnSettings_Click" DataContext="null" Cursor="Hand" />
+            <Button Content="Chat" Name="btnChat" Visibility="Hidden" Click="btnChat_Click" Cursor="Hand" DataContext="null" />
             <Button Content="LogOut" Name="btnLogOut" Visibility="Hidden" Click="btnLogOut_Click" DataContext="null" Cursor="Hand" />
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>

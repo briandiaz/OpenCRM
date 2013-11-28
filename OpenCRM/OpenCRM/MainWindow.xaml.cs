@@ -16,6 +16,7 @@ using MahApps.Metro;
 using OpenCRM.Views.Home;
 using OpenCRM.DataBase;
 using System.Data.SqlClient;
+using OpenCRM.Views.Chat;
 
 
 namespace OpenCRM
@@ -68,6 +69,12 @@ namespace OpenCRM
         {
             OpenCRM.Controllers.Session.Session.DestroySession();
             PageSwitcher.Switch("/Views/Login/LoginView.xaml");
+        }
+
+        private void btnChat_Click(object sender, RoutedEventArgs e)
+        {
+            ChatView chat = new ChatView();
+            chat.Show();
         }
     }
 }

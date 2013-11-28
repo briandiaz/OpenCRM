@@ -1,0 +1,141 @@
+﻿<Controls:MetroWindow x:Class="OpenCRM.Views.Chat.ChatView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        Title="CHAT - OpenCRM" 
+        Height="500" 
+        Width="450" 
+        WindowStartupLocation="CenterOwner"
+        ShowTitleBar="True" 
+        ShowIconOnTitleBar="True"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <i:Interaction.Behaviors>
+        <Behaviours:BorderlessWindowBehavior/>
+    </i:Interaction.Behaviors>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Home" Name="btnHome" DataContext="null" Cursor="Hand" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+
+    <Grid Name="gridMain">
+        <Grid Name="gridChat">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="7*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" 
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        >
+                <Image Source="/Assets/Img/Icons/32px/user.png" />
+                <TextBlock Text="UserName" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="16" HorizontalAlignment="Left" Margin="15,0,0,0"/>
+                <Button Name="btnAddUsers"
+                        Cursor="Hand"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        Width="45"
+                        Height="45"
+                        Margin="20,0,0,0" Click="btnAddUsers_Click"
+                        >
+                    <Image Source="/Assets/Img/Icons/32px/users.png" Width="28" />
+                </Button>
+                <Button Name="btnVolume"
+                        Cursor="Hand"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        Width="45"
+                        Height="45"
+                        Margin="20,0,0,0" Click="btnVolume_Click"
+                        >
+                    <Image Source="/Assets/Img/Icons/32px/volume-high.png" Width="28" />
+                </Button>
+                <Button Name="btnStartConference"
+                        Cursor="Hand"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        Width="45"
+                        Height="45"
+                        Margin="20,2,0,0" VerticalAlignment="Top" Click="btnStartConference_Click"
+                        >
+                    <Image Source="/Assets/Img/Icons/32px/headphones.png" Width="25" />
+                </Button>
+                <Button Name="btnSettings"
+                        Cursor="Hand"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        Width="45"
+                        Height="45"
+                        Margin="20,2,0,0" VerticalAlignment="Top" Click="btnSettings_Click"
+                        >
+                    <Image Source="/Assets/Img/Icons/32px/cogs.png" Width="28" />
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Row="1" 
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        Background="Gray">
+                <TextBox Name="tbxMessages"
+                         IsManipulationEnabled="False"
+                           Width="420"
+                           Height="270"
+                           HorizontalAlignment="Center"
+                           Margin="10,0,0,0"
+                           TextWrapping="Wrap"
+                           AcceptsReturn="True"
+                            IsEnabled="False"
+                           VerticalScrollBarVisibility="Visible"
+                           Background="White"
+                           />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" 
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        Background="Gray">
+                <TextBox Name="tbxSendMessage"
+                           Width="300"
+                           Height="110"
+                           HorizontalAlignment="Center"
+                           Margin="10,0,0,0"
+                           TextWrapping="Wrap"
+                           AcceptsReturn="True"
+                           VerticalScrollBarVisibility="Visible"
+                           Background="White"
+                           Controls:TextboxHelper.ClearTextButton="True"                           
+                           />
+                <Button Name="btnSend"
+                        Cursor="Hand"
+                        Style="{DynamicResource SquareButtonStyle}"
+                        Width="120"
+                        Height="110"
+                        Margin="5,0,0,0" Click="btnSend_Click"
+                        >
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Assets/Img/Icons/32px/bubbles.png" Width="60" />
+                        <TextBlock Text="Send" FontFamily="Segoe WP" FontSize="26" />
+                    </StackPanel>
+                </Button>
+                    
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Controls:MetroWindow>

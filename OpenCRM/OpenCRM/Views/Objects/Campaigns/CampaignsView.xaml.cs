@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using OpenCRM.DataBase;
 using OpenCRM.Controllers.Session;
 using OpenCRM.Controllers.Campaign;
+using OpenCRM.Views.Chat;
 
 
 namespace OpenCRM.Views.Objects.Campaigns
