@@ -216,7 +216,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                                 ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                                 BudgetedCost = _campaign.BudgetedCost.Value,
                                 ActualCost = _campaign.ActualCost.Value,
-                                ExpectedResponse = _campaign.ExpectedResponse.Value,
+                                ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                                 NumberSent = _campaign.NumberSent.Value,
                                 CampaignParent = _campaign.CampaignParent.Value,
                                 Description = _campaign.Description,
@@ -262,7 +262,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                                 ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                                 BudgetedCost = _campaign.BudgetedCost.Value,
                                 ActualCost = _campaign.ActualCost.Value,
-                                ExpectedResponse = _campaign.ExpectedResponse.Value,
+                                ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                                 NumberSent = _campaign.NumberSent.Value,
                                 CampaignParent = _campaign.CampaignParent.Value,
                                 Description = _campaign.Description,
@@ -294,6 +294,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                 using (var _db = new OpenCRMEntities())
                 {
                     var query = (from _campaign in _db.Campaign
+                                 where _campaign.UserId == Session.UserId
                                  group _campaign by new
                                  {
                                     _campaign.Campaign_Status.Name
@@ -326,6 +327,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                 using (var _db = new OpenCRMEntities())
                 {
                     var query = (from _campaign in _db.Campaign
+                                 where _campaign.UserId == Session.UserId
                                  group _campaign by new
                                  {
                                      _campaign.Campaign_Type.Name
@@ -358,6 +360,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                 using (var _db = new OpenCRMEntities())
                 {
                     var query = (from _campaign in _db.Campaign
+                                 where _campaign.UserId == Session.UserId
                                  group _campaign by _campaign.ExpectedRevenue
                                  into campaign
                                  select new ChartObject()
@@ -389,7 +392,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                 {
                     var ranges = new[] { 10000, 100000, 1000000, 2000000, 40000000 };
                     
-                    var RevenueGroups = _db.Campaign.GroupBy(x => ranges.FirstOrDefault(y => y > x.ExpectedRevenue))
+                    var RevenueGroups = _db.Campaign.GroupBy(x => ranges.FirstOrDefault(y => y > x.ExpectedRevenue && x.UserId == Session.UserId))
                                                             .Select(g => new ChartObjectPrice { 
                                                                 Price = g.Key, 
                                                                 Quantity = (int)g.Count() 
@@ -568,14 +571,15 @@ namespace OpenCRM.Models.Objects.Campaigns
         #endregion
 
         #region SearchQueries
-        
+
         public List<CampaignsModel> SearchCampaignsByName(String Name)
         {
             listCampaigns = new List<CampaignsModel>();
-            try {
+            try
+            {
                 using (var _db = new OpenCRMEntities())
-                { 
-                    var query = 
+                {
+                    var query =
                         (
                          from _campaign in _db.Campaign
                          where _campaign.Name.Contains(Name)
@@ -592,7 +596,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -639,7 +643,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -686,7 +690,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -733,7 +737,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -780,7 +784,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -827,7 +831,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -860,7 +864,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                     var query =
                         (
                          from _campaign in _db.Campaign
-                         where  _campaign.BudgetedCost == Number
+                         where _campaign.BudgetedCost == Number
                          select new CampaignsModel()
                          {
                              CampaignId = _campaign.CampaignId,
@@ -874,7 +878,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -922,7 +926,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -969,7 +973,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -1016,7 +1020,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -1063,7 +1067,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -1110,7 +1114,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -1158,7 +1162,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,
@@ -1206,7 +1210,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                              ExpectedRevenue = _campaign.ExpectedRevenue.Value,
                              BudgetedCost = _campaign.BudgetedCost.Value,
                              ActualCost = _campaign.ActualCost.Value,
-                             ExpectedResponse = _campaign.ExpectedResponse.Value,
+                             ExpectedResponse = _campaign.ExpectedResponse.Value * 100,
                              NumberSent = _campaign.NumberSent.Value,
                              CampaignParent = _campaign.CampaignParent.Value,
                              Description = _campaign.Description,

@@ -249,6 +249,8 @@ namespace OpenCRM.Views.Objects.Campaigns
             {
                 CampaignController.currentCampaignIndex = 0;
                 gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
+                if (_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.HasValue)
+                    pgrbExpectedResponse.Value = Convert.ToInt32(_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.Value) * 100;
                 //lblExpectedResponse.Text = (Decimal.Parse(_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.Value.ToString()) * 100).ToString();
             }
             else
