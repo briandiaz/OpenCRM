@@ -303,6 +303,9 @@
     <Compile Include="Page\PageSwitcher.cs" />
     <Compile Include="Controllers\Session\Session.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
+    <Compile Include="Views\Chat\ChatView.xaml.cs">
+      <DependentUpon>ChatView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -407,6 +410,10 @@
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Chat\ChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Home\HomeView.xaml">
       <SubType>Designer</SubType>
