@@ -39,7 +39,6 @@ create table [dbo].[Profile_Object_Fields](
 	ObjectFieldsId int,
 	[Read] bit,
 	[Modify] bit,
-	[Create] bit,
 	Constraint [PK Profile_Object_Fields] Primary Key(ProfileObjectFieldsId),
 	Constraint [FK Profile_Object_Fields Profile_Object] Foreign Key(ProfileObjectId) References [dbo].[Profile_Object](ProfileObjectId),
 	Constraint [FK Profile_Object_Fields Object_Fields] Foreign Key(ObjectFieldsId) References [dbo].[Object_Fields](ObjectFieldsId)
@@ -413,6 +412,7 @@ create table [dbo].[Opportunities](
 	OpportunityStatusId int,
 	CompetidorId int,
 	ProductId int,
+	Quantity int,
 	CreateBy int,
 	CreateDate datetime,
 	UpdateBy int,

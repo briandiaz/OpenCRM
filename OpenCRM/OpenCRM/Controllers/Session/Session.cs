@@ -68,15 +68,12 @@ namespace OpenCRM.Controllers.Session
                             ObjectFielId = fields.ObjectFieldsId,
                             ObjectFieldName = fields.Name, 
                             Read = profileObjectsFields.Read.Value,
-                            Create = profileObjectsFields.Create.Value,
                             Modify = profileObjectsFields.Modify.Value
                         }
                 );
-                return query.ToList();
-                ///data = query.ToList();
-            }
 
-           // return data;
+                return query.ToList();
+            }
         }
 
         /// <summary>
@@ -119,6 +116,17 @@ namespace OpenCRM.Controllers.Session
         #endregion
     }
 
+    enum ObjectsName
+    {
+        Account = 1,
+        Opportunities,
+        Contacts,
+        Campaigns,
+        Leads,
+        Cases,
+        Products
+    }
+
     public class AccessRights
     {
         #region "Properties"
@@ -128,7 +136,6 @@ namespace OpenCRM.Controllers.Session
         public int ObjectFielId { get; set; }
         public bool Read { get; set; }
         public bool Modify { get; set; }
-        public bool Create { get; set; }
 
         #endregion
     }

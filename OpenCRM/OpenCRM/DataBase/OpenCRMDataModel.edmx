@@ -844,7 +844,6 @@
           <Property Name="ObjectFieldsId" Type="int" />
           <Property Name="Read" Type="bit" />
           <Property Name="Modify" Type="bit" />
-          <Property Name="Create" Type="bit" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -2852,7 +2851,6 @@
           <Property Name="ObjectFieldsId" Type="Int32" />
           <Property Name="Read" Type="Boolean" />
           <Property Name="Modify" Type="Boolean" />
-          <Property Name="Create" Type="Boolean" />
           <NavigationProperty Name="Object_Fields" Relationship="OpenCRMModel.FK_Profile_Object_Fields_Object_Fields" FromRole="Profile_Object_Fields" ToRole="Object_Fields" />
           <NavigationProperty Name="Profile_Object" Relationship="OpenCRMModel.FK_Profile_Object_Fields_Profile_Object" FromRole="Profile_Object_Fields" ToRole="Profile_Object" />
         </EntityType>
@@ -4435,7 +4433,6 @@
                 <ScalarProperty Name="ObjectFieldsId" ColumnName="ObjectFieldsId" />
                 <ScalarProperty Name="Read" ColumnName="Read" />
                 <ScalarProperty Name="Modify" ColumnName="Modify" />
-                <ScalarProperty Name="Create" ColumnName="Create" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

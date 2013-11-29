@@ -19,7 +19,6 @@ namespace OpenCRM.DataBase
         public Nullable<int> ObjectFieldsId { get; set; }
         public Nullable<bool> Read { get; set; }
         public Nullable<bool> Modify { get; set; }
-        public Nullable<bool> Create { get; set; }
     
         public virtual Object_Fields Object_Fields { get; set; }
         public virtual Profile_Object Profile_Object { get; set; }
