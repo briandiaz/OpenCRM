@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenCRM.Controllers.Session;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace OpenCRM.Views.Chat
         {
             InitializeComponent();
             Messages = new List<String>();
+            tbxUserName.Text = Session.UserName;
         }
 
         private void btnAddUsers_Click(object sender, RoutedEventArgs e)

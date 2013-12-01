@@ -352,24 +352,31 @@ namespace OpenCRM.Models.Objects.Campaigns
             return _chartObjects;
         }
 
-        public List<ChartObject> GroupCampaignsByExpectedRevenue()
+        public List<ChartObjectPrice> GroupCampaignsByExpectedRevenue()
         {
-            List<ChartObject> _chartObjects = new List<ChartObject>();
+            List<ChartObjectPrice> _chartObjects = new List<ChartObjectPrice>();
             try
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    var query = (from _campaign in _db.Campaign
-                                 where _campaign.UserId == Session.UserId
-                                 group _campaign by _campaign.ExpectedRevenue
-                                 into campaign
-                                 select new ChartObject()
-                                 {
-                                     Quantity = (int)campaign.Average(x=>x.ExpectedRevenue),
-                                     Name = campaign.Key + ""
-                                 }
+                    var ranges = new[] { 10000, 100000, 1000000, 2000000, 40000000 };
+
+                    var RevenueGroups = _db.Campaign.GroupBy(x => ranges.FirstOrDefault(y => y > x.ExpectedRevenue && x.UserId == Session.UserId))
+                                                            .Select(g => new ChartObjectPrice
+                                                            {
+                                                                Price = g.Key,
+                                                                Quantity = (int)g.Count()
+                                                            }
+                      ).ToList();
+
+                    var groupedPrizes = ranges.Select(obj => new
+                                            ChartObjectPrice
+                    {
+                        Price = obj,
+                        Quantity = (int)RevenueGroups.Where(ord => ord.Price > obj || ord.Price == 0).Sum(g => g.Quantity)
+                    }
                     ).ToList();
-                    _chartObjects = query;
+                    _chartObjects = groupedPrizes;
                 }
             }
             catch (SqlException ex)
@@ -383,30 +390,27 @@ namespace OpenCRM.Models.Objects.Campaigns
             return _chartObjects;
         }
 
-        public List<ChartObjectPrice> GroupCampaignsByLeads()
+        public List<ChartObject> GroupCampaignsByLeads()
         {
-            List<ChartObjectPrice> _chartObjects = new List<ChartObjectPrice>();
+            List<ChartObject> _chartObjects = new List<ChartObject>();
             try
             {
+
                 using (var _db = new OpenCRMEntities())
                 {
-                    var ranges = new[] { 10000, 100000, 1000000, 2000000, 40000000 };
-                    
-                    var RevenueGroups = _db.Campaign.GroupBy(x => ranges.FirstOrDefault(y => y > x.ExpectedRevenue && x.UserId == Session.UserId))
-                                                            .Select(g => new ChartObjectPrice { 
-                                                                Price = g.Key, 
-                                                                Quantity = (int)g.Count() 
-                                                            }
-                      ).ToList();
-                    
-                    var groupedPrizes = ranges.Select(obj => new
-                                            ChartObjectPrice
-                                            {
-                                                Price = obj,
-                                                Quantity = (int)RevenueGroups.Where(ord => ord.Price > obj || ord.Price == 0).Sum(g => g.Quantity)
-                                            }
+                    var query = (from _campaign in _db.Campaign
+                                 where _campaign.UserId == Session.UserId
+                                 group _campaign by new
+                                 {
+                                     _campaign.Leads
+                                 } into campaign
+                                 select new ChartObject()
+                                 {
+                                     Quantity = campaign.Count(),
+                                     Name = campaign.ToString()
+                                 }
                     ).ToList();
-                    _chartObjects = groupedPrizes;
+                    _chartObjects = query;
                 }
             }
             catch (SqlException ex)
@@ -1258,17 +1262,22 @@ namespace OpenCRM.Models.Objects.Campaigns
     {
         public int Quantity { get; set; }
         public String Name { get; set; }
-        
+
         public ChartObject()
-        { 
-        
-        }
-        public ChartObject(int quantity, String name)
         {
-            this.Quantity = quantity;
-            this.Name = name;
+
         }
 
+        public ChartObject(int Quantity, String Name)
+        {
+            this.Name = Name;
+            this.Quantity = Quantity;
+        }
+        public ChartObject(String Name, int Quantity)
+        {
+            this.Name = Name;
+            this.Quantity = Quantity;
+        }
     }
 
     public class ChartObjectPrice

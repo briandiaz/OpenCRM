@@ -28,9 +28,63 @@ namespace OpenCRM.Views.Objects.Campaigns.Dashboard
             InitializeComponent();
 
             CampaignsModel campaign = new CampaignsModel();
-            chartStatus.ItemsSource = campaign.GroupCampaignsByStatus();
-            chartType.ItemsSource = campaign.GroupCampaignsByType();
-            chartExpectedRevenue.ItemsSource = campaign.GroupCampaignsByLeads();
+            chartStatus.ItemsSource = ReplaceBlank(campaign.GroupCampaignsByStatus());
+            chartType.ItemsSource = ReplaceBlank(campaign.GroupCampaignsByType());
+            
+            
+            chartExpectedRevenue.ItemsSource = ReplaceBlank(campaign.GroupCampaignsByExpectedRevenue());
+            tbcntrolDashboard.SelectedIndex = 2;
+        }
+        private List<ChartObject> ReplaceBlank(List<ChartObject> Objects)
+        {
+            for (int i = 0; i < Objects.Count; i++ )
+            {
+                if (Objects[i].Name == null)
+                    Objects[i].Name = "None";
+            }
+
+            return Objects;
+        }
+        private List<ChartObjectPrice> ReplaceBlank(List<ChartObjectPrice> Objects)
+        {
+            for (int i = 0; i < Objects.Count; i++)
+            {
+                if (Objects[i].Price == null)
+                    Objects[i].Price = 0;
+            }
+
+            return Objects;
+        }
+
+
+
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            PageSwitcher.Switch("/Views/Home/HomeView.xaml");
+        }
+        private List<ObjChart> getObj()
+        {
+            List<ObjChart> obj = new List<ObjChart>();
+            obj.Add(new ObjChart(19, "C#"));
+            obj.Add(new ObjChart(25, "C++"));
+            obj.Add(new ObjChart(14, "Java"));
+            obj.Add(new ObjChart(9, "Ruby"));
+            obj.Add(new ObjChart(12, "Python"));
+            return obj;
+        }
+    }
+    class ObjChart
+    {
+        public int Cant { get; set; }
+        public String Desc { get; set; }
+        public ObjChart()
+        { 
+        
+        }
+        public ObjChart(int cant, String desc)
+        {
+            this.Cant = cant;
+            this.Desc = desc;
         }
     }
 }

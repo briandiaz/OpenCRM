@@ -6,68 +6,173 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
-      mc:Ignorable="d" 
-      Title="Campaigns" 
-      MinHeight="1024" 
-      MinWidth="768">
+      xmlns:chartingToolkit="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+        mc:Ignorable="d" 
+      Height="Auto" 
+      Width="Auto"
+  Title="Dashboard">
 
-        <Page.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                </ResourceDictionary.MergedDictionaries>
+    <Page.Resources>
 
-            </ResourceDictionary>
-        </Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
 
     <controls:MetroContentControl FontFamily="Segoe WP Light">
-        <ScrollViewer HorizontalScrollBarVisibility="Auto">
-            <Grid Height="1000">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="400">
-                    <chartingToolkit:Chart  Name="pieChart" 
-                                            Title="Campaigns Statuses" 
-                                            HorizontalAlignment="Left"
-                                            BorderBrush="Transparent"
-		                                    VerticalAlignment="Top" 
-                                            Height="350" 
-                                            Width="350">
-                        <chartingToolkit:PieSeries  Name="chartStatus"  
-                                                    DependentValuePath="Quantity" 
-		                                            IndependentValuePath="Name" 
-		                                            IsSelectionEnabled="True" />
-                    </chartingToolkit:Chart>
 
-                    <chartingToolkit:Chart  Title="Campaigns Types" 
-		                                    VerticalAlignment="Top"
-                                            Height="350" 
-                                            Width="350" 
-                                            BorderBrush="Transparent"
-                                            Margin="30,0,0,0"
-                                            HorizontalAlignment="Right"
-                                       >
-                        <chartingToolkit:PieSeries Name="chartType"  DependentValuePath="Quantity" 
-		                IndependentValuePath="Name" 
-		                IsSelectionEnabled="True" />
-                    </chartingToolkit:Chart>
+        <Grid>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Height="100" Margin="50,0,0,0">
+                    <Button Name="btnGoBack"
+                        Width="50"
+                        Height="50"
+                        Cursor="Hand"
+                        Click="btnGoBack_Click"
+                        Style="{DynamicResource MetroCircleButtonStyle}" 
+                        >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/Img/Icons/32px/arrow-left2.png" Width="32px" Height="32px"/>
+                        </StackPanel>
+                    </Button>
+                    <Image Source="/Assets/Img/Icons/Dashboard.png" 
+                   HorizontalAlignment="Left" 
+                   Height="100"
+                       Margin="100,0,0,0"
+                   VerticalAlignment="Top" 
+                   Width="100" 
+                   />
+
+                    <TabControl VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <TabItem Header="_Dashboard">
+                        </TabItem>
+                    </TabControl>
                 </StackPanel>
+                <Grid Background="#2E9AFE" Width="Auto" Height="30" />
+            </StackPanel>
+            <controls:MetroContentControl Margin="0,130,0,0">
+                <TabControl TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900" BorderBrush="#2E9AFE" BorderThickness="2" Name="tbcntrolDashboard">
+                    <TabControl.Resources>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TabItem}">
+                                        <Grid>
+                                            <Border Name="Border" Margin="0,0,0,0" Background="Transparent" CornerRadius="5">
+                                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True" Margin="10" />
+                                            </Border>
 
-                <chartingToolkit:Chart  Name="areaChart" Title="Expected Revenue" 
-		                                    VerticalAlignment="Center" 
-                                            Height="350"
-                                            Width="600"
-                                        BorderBrush="Transparent"
-                                            >
-                    <chartingToolkit:AreaSeries Name="chartExpectedRevenue"
-                                                DependentValuePath="Quantity" 
-		                                        IndependentValuePath="Price"
-		                                        IsSelectionEnabled="True"/>
-                </chartingToolkit:Chart>
-            </Grid>
-        </ScrollViewer>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Panel.ZIndex" Value="100" />
+                                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                                <Setter Property="FontSize" Value="24" />
+                                                <Setter Property="BorderBrush" Value="#2E9AFE"/>
+                                                <Setter Property="Cursor" Value="Hand" />
+                                                <Setter Property="BorderThickness" Value="2" />
+                                                <Setter Property="FontFamily" Value="Segoe WP" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="False">
+                                                <Setter Property="Panel.ZIndex" Value="100" />
+                                                <Setter TargetName="Border" Property="Background" Value="#2E9AFE" />
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="FontFamily" Value="Segoe WP" />
+                                                <Setter Property="Cursor" Value="Hand" />
+                                                <Setter Property="FontSize" Value="24" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="Height" Value="7" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Padding" Value="14"/>
+                        </Style>
+                    </TabControl.Resources>
+                    <TabItem IsEnabled="False"></TabItem>
+                    <TabItem IsEnabled="False"></TabItem>
+                    <TabItem Header="Campaigns">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+
+                            <Grid Height="1000">
+                                <StackPanel                             Orientation="Horizontal" 
+                                                        HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Top">
+
+                                    <chartingToolkit:PieChart           Style="{StaticResource MinimalChartStyle}"
+                                                        ChartTitle="Campaigns By Status"
+                                                        ChartSubTitle="Group Campaigns by its status.">
+
+                                        <chartingToolkit:PieChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartStatus"/>
+                                        </chartingToolkit:PieChart.Series>
+                                    </chartingToolkit:PieChart>
+
+                                    <chartingToolkit:PieChart           Style="{StaticResource MinimalChartStyle}"
+                                                        ChartTitle="Campaigns By Type"
+                                                        ChartSubTitle="Group Campaigns by its type.">
+                                        <chartingToolkit:PieChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartType"/>
+                                        </chartingToolkit:PieChart.Series>
+                                    </chartingToolkit:PieChart>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+
+
+                                    <chartingToolkit:ClusteredColumnChart  Style="{StaticResource MinimalChartStyle}"
+                                                        ChartTitle="Campaigns By Expected Revenue"
+                                                        ChartSubTitle="Group Campaigns by its Expected Revenue.">
+                                        <chartingToolkit:ClusteredColumnChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Price"
+                                                        ValueMember="Quantity"
+                                                        Name="chartExpectedRevenue"/>
+                                        </chartingToolkit:ClusteredColumnChart.Series>
+                                    </chartingToolkit:ClusteredColumnChart>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem IsEnabled="False"></TabItem>
+                    <TabItem Header="Leads">
+
+                    </TabItem>
+                    <TabItem IsEnabled="False"></TabItem>
+                    <TabItem Header="Oportunities">
+
+                    </TabItem>
+
+                    <TabItem IsEnabled="False"></TabItem>
+                    <TabItem Header="Products">
+
+                    </TabItem>
+                </TabControl>
+            </controls:MetroContentControl>
+        </Grid>
     </controls:MetroContentControl>
 </Page>
