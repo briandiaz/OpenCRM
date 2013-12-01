@@ -359,7 +359,7 @@ namespace OpenCRM.Views.Objects.Campaigns
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            PageSwitcher.Switch("/Views/Objects/Campaigns/Dashboard/Dashboard.xaml");
+            PageSwitcher.Switch("/Views/Objects/Dashboard/Dashboard.xaml");
         }
 
 

@@ -164,7 +164,67 @@
                     </TabItem>
                     <TabItem IsEnabled="False"></TabItem>
                     <TabItem Header="Oportunities">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
+                            <Grid Height="1000">
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Center" 
+                                           VerticalAlignment="Top">
+
+                                    <chartingToolkit:RadialGaugeChart   Style="{StaticResource MinimalChartStyle}"
+                                                                ChartTitle="Oportunities By Stage"
+                                                                ChartSubTitle="Group Oportunities by its stage."
+                                                                ScrollViewer.CanContentScroll="True"
+                                                                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                                                Width="Auto"
+                                                                Height="350">
+
+                                        <chartingToolkit:RadialGaugeChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartOportunitiesStage"/>
+                                        </chartingToolkit:RadialGaugeChart.Series>
+                                    </chartingToolkit:RadialGaugeChart>
+
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                                    <chartingToolkit:PieChart   Style="{StaticResource MinimalChartStyle}"
+                                                                ChartTitle="Oportunities By Status"
+                                                                ChartSubTitle="Group Oportunities by its status."
+                                                                Width="400"
+                                                                Height="400"
+                                                                >
+
+                                        <chartingToolkit:PieChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartOportunitiesStatus"/>
+                                        </chartingToolkit:PieChart.Series>
+                                    </chartingToolkit:PieChart>
+                                    <chartingToolkit:PieChart   Style="{StaticResource MinimalChartStyle}"
+                                                                ChartTitle="Oportunities By Leads Source"
+                                                                ChartSubTitle="Group Oportunities by its Lead Source."
+                                                                Width="400"
+                                                                Height="400"
+                                                                >
+
+                                        <chartingToolkit:PieChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartOportunitiesLeadsSource"/>
+                                        </chartingToolkit:PieChart.Series>
+                                    </chartingToolkit:PieChart>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
                     </TabItem>
 
                     <TabItem IsEnabled="False"></TabItem>

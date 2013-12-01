@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using OpenCRM.DataBase;
 using OpenCRM.Models.Objects.Campaigns;
 using OpenCRM.Controllers.Campaign;
+using OpenCRM.Models.Dashboard;
 
 namespace OpenCRM.Views.Objects.Campaigns.Dashboard
 {
@@ -27,33 +28,15 @@ namespace OpenCRM.Views.Objects.Campaigns.Dashboard
         {
             InitializeComponent();
 
-            CampaignsModel campaign = new CampaignsModel();
-            chartStatus.ItemsSource = ReplaceBlank(campaign.GroupCampaignsByStatus());
-            chartType.ItemsSource = ReplaceBlank(campaign.GroupCampaignsByType());
-            
-            
-            chartExpectedRevenue.ItemsSource = ReplaceBlank(campaign.GroupCampaignsByExpectedRevenue());
+            DashboardModel dashboard = new DashboardModel();
+            chartStatus.ItemsSource = dashboard.GroupCampaignsByStatus();
+            chartType.ItemsSource = dashboard.GroupCampaignsByType();
+            chartExpectedRevenue.ItemsSource = dashboard.GroupCampaignsByExpectedRevenue();
+            chartOportunitiesStatus.ItemsSource = dashboard.GroupOportunitiesByStatus();
+            chartOportunitiesStage.ItemsSource = dashboard.GroupOportunitiesByStage();
+            chartOportunitiesLeadsSource.ItemsSource = dashboard.GroupOportunitiesByLeadSource();
+
             tbcntrolDashboard.SelectedIndex = 2;
-        }
-        private List<ChartObject> ReplaceBlank(List<ChartObject> Objects)
-        {
-            for (int i = 0; i < Objects.Count; i++ )
-            {
-                if (Objects[i].Name == null)
-                    Objects[i].Name = "None";
-            }
-
-            return Objects;
-        }
-        private List<ChartObjectPrice> ReplaceBlank(List<ChartObjectPrice> Objects)
-        {
-            for (int i = 0; i < Objects.Count; i++)
-            {
-                if (Objects[i].Price == null)
-                    Objects[i].Price = 0;
-            }
-
-            return Objects;
         }
 
 
