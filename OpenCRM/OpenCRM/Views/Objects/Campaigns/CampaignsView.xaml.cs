@@ -31,13 +31,25 @@ namespace OpenCRM.Views.Objects.Campaigns
         List<CampaignsModel> _listCampaigns;
         CampaignsModel Campaign;
         SearchAttribute thisTarget;
-
+        
         public CampaignsView()
         {
             InitializeComponent();
             LoadSearchAttributes();
+            Campaign.ControlAccess(getButtons());
         }
-
+        private List<Button> getButtons()
+        { 
+            List<Button> Buttons = new List<Button>();
+            Buttons.Add(btnAddLeads);
+            Buttons.Add(btnDashboard);
+            Buttons.Add(btnEdit);
+            Buttons.Add(btnGoBack);
+            Buttons.Add(btnViewDetails);
+            btnViewDetails.IsEnabled = false;
+            btnEdit.IsEnabled = false;
+            return Buttons;
+        }
         private void bntCreate_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Campaigns/Create.xaml");

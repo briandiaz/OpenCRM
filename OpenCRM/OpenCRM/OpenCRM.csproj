@@ -298,6 +298,7 @@
     <Compile Include="Models\Dashboard\DashboardModel.cs" />
     <Compile Include="Models\Objects\Accounts\AccountsModel.cs" />
     <Compile Include="Models\Objects\Campaigns\CampaignsModel.cs" />
+    <Compile Include="Models\Objects\Campaigns\Permission.cs" />
     <Compile Include="Models\Objects\Cases\CasesModel.cs" />
     <Compile Include="Models\Objects\Contacts\ContactsModel.cs" />
     <Compile Include="Models\Objects\Leads\LeadsModel.cs" />

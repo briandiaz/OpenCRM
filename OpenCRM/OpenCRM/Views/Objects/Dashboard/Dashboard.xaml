@@ -160,7 +160,31 @@
                     </TabItem>
                     <TabItem IsEnabled="False"></TabItem>
                     <TabItem Header="Leads">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
+                            <Grid Height="1000">
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Center" 
+                                           VerticalAlignment="Top">
+
+                                    <chartingToolkit:PieChart   Style="{StaticResource MinimalChartStyle}"
+                                                                ChartTitle="Leads By Status"
+                                                                ChartSubTitle="Group Leads by its status."
+                                                                Width="400"
+                                                                Height="400"
+                                                                >
+
+                                        <chartingToolkit:PieChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartLeadsStatus"/>
+                                        </chartingToolkit:PieChart.Series>
+                                    </chartingToolkit:PieChart>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
                     </TabItem>
                     <TabItem IsEnabled="False"></TabItem>
                     <TabItem Header="Oportunities">

@@ -1103,7 +1103,56 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         #endregion
 
-        
+        #region "AccessRights"
+
+        public void ControlAccess(List<System.Windows.Controls.Button> Buttons)
+        {
+            try {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _user in _db.User
+                                 from _object in _db.Objects
+                                 from _profile_object in _db.Profile_Object
+                                 from _profile_object_field in _db.Profile_Object_Fields
+                                 where _profile_object.ObjectId == _profile_object_field.ProfileObjectId
+                                 && _object.ObjectId == _profile_object.ObjectId && _object.ObjectId == _profile_object_field.ProfileObjectId
+                                 && _object.ObjectId == 4 && _profile_object.ProfileId == _user.ProfileId && _user.UserId == Session.UserId
+                                 select new Permission()
+                                 {
+                                     Modify = (_profile_object_field.Modify.HasValue) ? _profile_object_field.Modify.Value : false,
+                                     Read = (_profile_object_field.Read.HasValue) ? _profile_object_field.Read.Value : false
+                                 }
+                    ).ToList();
+
+                    foreach(System.Windows.Controls.Button Button in Buttons)
+                    {
+                        if (Button.Name.Contains("Edit") || Button.Name.Contains("Add"))
+                        {
+                            Button.IsEnabled = query[0].Modify;
+                        }
+                        else if (Button.Name.Contains("View"))
+                        {
+                            Button.IsEnabled = query[0].Read;
+                        }
+                        else
+                        {
+                            Button.IsEnabled = true;
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
         public override string ToString()
         {
             return this.CampaignStatusId + " - " + this.CampaignTypeId;
@@ -1184,6 +1233,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             return _owners;
         }
     }
+
     public class CampaignType
     {
         #region Properties
@@ -1237,6 +1287,7 @@ namespace OpenCRM.Models.Objects.Campaigns
         }
 
     }
+
     public class CampaignStatus
     {
         #region Properties
@@ -1290,5 +1341,16 @@ namespace OpenCRM.Models.Objects.Campaigns
         }
 
 
+    }
+
+    public class Permission
+    {
+        public Boolean Modify { get; set; }
+        public Boolean Read { get; set; }
+
+        public Permission()
+        { 
+        
+        }
     }
 }

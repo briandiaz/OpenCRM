@@ -301,11 +301,42 @@ namespace OpenCRM.Models.Dashboard
         #endregion
 
         #region "Leads"
-
+        public List<ChartObject> GroupLeadsByStatus()
+        {
+            _chartObjects = new List<ChartObject>();
+            try {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _leads in _db.Leads
+                                 where _leads.UserId == Session.UserId
+                                 group _leads by new
+                                 {
+                                     _leads.Lead_Status.Name
+                                 } into leads
+                                 select new ChartObject()
+                                 {
+                                     Quantity = leads.Count(),
+                                     Name = leads.Key.Name
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
         #endregion
         #region "Contacts"
 
         #endregion
+
     }
 
     public class ChartObject

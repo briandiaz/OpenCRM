@@ -35,6 +35,7 @@ namespace OpenCRM.Views.Objects.Campaigns.Dashboard
             chartOportunitiesStatus.ItemsSource = dashboard.GroupOportunitiesByStatus();
             chartOportunitiesStage.ItemsSource = dashboard.GroupOportunitiesByStage();
             chartOportunitiesLeadsSource.ItemsSource = dashboard.GroupOportunitiesByLeadSource();
+            chartLeadsStatus.ItemsSource = dashboard.GroupLeadsByStatus();
 
             tbcntrolDashboard.SelectedIndex = 2;
         }
@@ -44,16 +45,6 @@ namespace OpenCRM.Views.Objects.Campaigns.Dashboard
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Home/HomeView.xaml");
-        }
-        private List<ObjChart> getObj()
-        {
-            List<ObjChart> obj = new List<ObjChart>();
-            obj.Add(new ObjChart(19, "C#"));
-            obj.Add(new ObjChart(25, "C++"));
-            obj.Add(new ObjChart(14, "Java"));
-            obj.Add(new ObjChart(9, "Ruby"));
-            obj.Add(new ObjChart(12, "Python"));
-            return obj;
         }
     }
     class ObjChart
