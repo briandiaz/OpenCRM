@@ -80,7 +80,7 @@
                       Height="600"
                       Width="Auto">
 
-            <Grid>
+            <Grid  Name="MainGrid">
                 <Grid.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="Background" Value="#A300E3" />

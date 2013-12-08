@@ -46,6 +46,8 @@ namespace OpenCRM.Views.Objects.Accounts
                 AccountsModel.EditingAccountId = 0;
                 LoadEditing();
             }
+
+            Session.ModuleAccessRights(this, ObjectsName.Accounts);
         }
 
         private bool CanSave()
