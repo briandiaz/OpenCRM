@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using OpenCRM.Models.Settings;
 using OpenCRM.Controllers.Session;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace OpenCRM.Views.Settings
 {
@@ -28,37 +30,43 @@ namespace OpenCRM.Views.Settings
         public SettingsView()
         {
             InitializeComponent();
-            _settingsModel = new SettingsModel(Session.UserId, Session.RightAccess);
+            _settingsModel = new SettingsModel();
 
-            //Edit Profile 
+            //Edit Profile
             gridSettingsProfile.DataContext = _settingsModel.getUserData();
             cmbUserProfile.ItemsSource = _settingsModel.Profiles;
             cmbUserProfile.DisplayMemberPath = "Name";
             cmbUserProfile.SelectedValuePath = "ProfileId";
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
+            cmbUserProfile.IsEnabled = false;
+
+            if (_settingsModel.HasAccessRightsTo("EditUserProfile"))
+            {
+                cmbUserProfile2.IsEnabled = true;
+            } 
 
             //Create New User
-            //if (_settingsModel.HasAccessRightsTo("Create New User"))
-            //{
+            if (_settingsModel.HasAccessRightsTo("Create New User"))
+            {
                 cmbUserProfile2.ItemsSource = _settingsModel.Profiles;
                 cmbUserProfile2.DisplayMemberPath = "Name";
-            //}
-            /*else 
+            }
+            else 
             {
                 _settingsModel.DisableTabItem(this.settingsTabControl, "Create New User");
-            }*/
+            }
 
             //Permission
-            //if (_settingsModel.HasAccessRightsTo("Permission"))
-            //{
+            if (_settingsModel.HasAccessRightsTo("Permissions"))
+            {
                 ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
                 ProfilesComboBox.DisplayMemberPath = "Name";
                 ProfilesComboBox.SelectedValuePath = "ProfileId";
-            /*}
+            }
             else
             {
                 _settingsModel.DisableTabItem(this.settingsTabControl,"Permission");
-            }*/
+            }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

@@ -28,7 +28,7 @@
             </Grid.Background>
 
             <Grid>
-                <Grid Name="gridSettings" Margin="0,0,0,0">
+                <Grid Name="gridSettings">
                     <Controls:MetroContentControl Margin="4,0,-4,0">
                         <TabControl Name="settingsTabControl" TabStripPlacement="Left"  Background="White" Margin="50,20,20,20" FontFamily="Segoe WP Light"  MinHeight="600" MinWidth="900">
                             <TabControl.Resources>
@@ -190,7 +190,7 @@
                                 </Grid>
                             </TabItem>
 
-                            <TabItem Header="New User" Margin="-1,0,1,0">
+                            <TabItem Header="New User">
                                 <Grid Margin="100,50">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -449,6 +449,7 @@
                                     </Grid>
                                 </Grid>
                             </TabItem>
+                        
                         </TabControl>
                     </Controls:MetroContentControl>
                 </Grid>
