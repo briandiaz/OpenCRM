@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using OpenCRM.DataBase;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace OpenCRM.Controllers.Session
 {
@@ -18,7 +20,7 @@ namespace OpenCRM.Controllers.Session
         #endregion
 
         #region "Properties"
-        public static List<AccessRights> RightAccess 
+        public static List<AccessRights> AccessRights 
         {
             get { return _rightAccess; }
         } 
@@ -39,7 +41,7 @@ namespace OpenCRM.Controllers.Session
         /// the created user
         /// </summary>
         /// <returns></returns>
-        private static List<AccessRights> getUserRightAccess() 
+        private static List<AccessRights> getUserAccessRights() 
         {
             var data = new List<AccessRights>();
 
@@ -63,6 +65,7 @@ namespace OpenCRM.Controllers.Session
                     select
                         new AccessRights()
                         {
+                            ProfileObjectFieldId = profileObjectsFields.ProfileObjectFieldsId,
                             ObjectId = objects.ObjectId,
                             ObjectName = objects.Name,
                             ObjectFielId = fields.ObjectFieldsId,
@@ -83,7 +86,7 @@ namespace OpenCRM.Controllers.Session
         public static void CreateSession(int UserId, string UserName)
         {
             _userId = UserId;
-            _rightAccess = getUserRightAccess();
+            _rightAccess = getUserAccessRights();
             _userName = UserName;
         }
 
@@ -96,6 +99,10 @@ namespace OpenCRM.Controllers.Session
             _rightAccess = null;    
         }
 
+        /// <summary>
+        /// This method can obtain the current User
+        /// </summary>
+        /// <returns>The User's Data of Database </returns>
         public static User getUserSession()
         {
             User userSession = null;
@@ -113,12 +120,61 @@ namespace OpenCRM.Controllers.Session
             return userSession;
         }
 
+        /// <summary>
+        /// This method refresh the Session access rights
+        /// </summary>
+        public static void RefreshUserAccessRights()
+        {
+            _rightAccess = getUserAccessRights();
+        }
+
+        /// <summary>
+        /// This method can apply the restriction of User's profile in specifics Modules 
+        /// </summary>
+        /// <param name="View">The View's Object</param>
+        /// <param name="ObjectName">Name of the Module</param>
+        public static void ModuleAccessRights(FrameworkElement View, ObjectsName ObjectName)
+        {
+            var moduleAccessRights = AccessRights.FindAll(x => x.ObjectId == Convert.ToInt32(ObjectName));
+
+            var listPrefix = new List<string>() { "tbx", "btn", "ckb", "lbl", "cmb" };
+
+            var MainGrid = View.FindName("MainGrid") as Grid;
+
+            foreach (var access in moduleAccessRights)
+            {
+                foreach (var item in listPrefix)
+                {
+                    var objectElement = MainGrid.FindName(item + access.ObjectFieldName);
+
+                    if (objectElement == null)
+                        continue;
+
+                    var element = (Control)objectElement;
+
+                    if (access.Modify == true)
+                    {
+                        element.Visibility = Visibility.Visible;
+                    }
+                    else if (access.Read == true)
+                    {
+                        element.Visibility = Visibility.Visible;
+                        element.IsEnabled = false;
+                    }
+                    else
+                    {
+                        element.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 
-    enum ObjectsName
+    public enum ObjectsName
     {
-        Account = 1,
+        Accounts = 1,
         Opportunities,
         Contacts,
         Campaigns,
@@ -130,6 +186,7 @@ namespace OpenCRM.Controllers.Session
     public class AccessRights
     {
         #region "Properties"
+        public int ProfileObjectFieldId { get; set; }
         public int ObjectId { get; set; }
         public string ObjectName { get; set; }
         public string ObjectFieldName { get; set; }
