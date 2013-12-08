@@ -292,6 +292,7 @@
     <Compile Include="DataBase\User.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Calendar\CalendarModel.cs" />
     <Compile Include="Models\Objects\Accounts\AccountsModel.cs" />
     <Compile Include="Models\Objects\Campaigns\CampaignsModel.cs" />
     <Compile Include="Models\Objects\Cases\CasesModel.cs" />
@@ -303,6 +304,21 @@
     <Compile Include="Page\PageSwitcher.cs" />
     <Compile Include="Controllers\Session\Session.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
+    <Compile Include="Views\Calendar\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\DayBoxAppointmentControl.xaml.cs">
+      <DependentUpon>DayBoxAppointmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\DayBoxControl.xaml.cs">
+      <DependentUpon>DayBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\MonthCalendarControl.xaml.cs">
+      <DependentUpon>MonthCalendarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\WeekOfDaysControl.xaml.cs">
+      <DependentUpon>WeekOfDaysControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Chat\ChatView.xaml.cs">
       <DependentUpon>ChatView.xaml</DependentUpon>
     </Compile>
@@ -410,6 +426,26 @@
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Calendar\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\DayBoxAppointmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\DayBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\MonthCalendarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\WeekOfDaysControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Chat\ChatView.xaml">
       <SubType>Designer</SubType>
@@ -1540,6 +1576,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Icons\Calendar.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
