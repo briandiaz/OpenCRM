@@ -56,22 +56,20 @@ namespace OpenCRM.Models.Home
 
             using (var _db = new OpenCRMEntities()){
                 var objetos = (
-                    from x in Session.RightAccess
+                    from x in Session.AccessRights
+                    where x.ObjectName != "Settings"
                     join url in _db.Objects_ImgURL on x.ObjectId equals url.Objectid
                     group x by new { x.ObjectName, x.ObjectId, url.ImgUrl } into temp
-                    select new {
-                        temp.Key
-                    }
+                    select new { temp.Key }
                 ).ToList();
                       
-                objetos.ForEach(
-                    x => data.Add(new HomeData()
+                objetos.ForEach(x => 
+                    data.Add(new HomeData()
                     {
                         Name = x.Key.ObjectName,
                         ImgUrl = @"..\..\"+x.Key.ImgUrl,
                         ObjectId = x.Key.ObjectId
-                    }
-                    )
+                    })
                 );
             }         
 
@@ -79,8 +77,6 @@ namespace OpenCRM.Models.Home
         }
 
         #endregion
-
-
     }
 
     public class HomeData
