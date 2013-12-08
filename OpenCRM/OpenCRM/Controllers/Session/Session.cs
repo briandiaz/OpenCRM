@@ -180,7 +180,9 @@ namespace OpenCRM.Controllers.Session
         Campaigns,
         Leads,
         Cases,
-        Products
+        Products,
+        Calendar,
+        Dashboard
     }
 
     public class AccessRights

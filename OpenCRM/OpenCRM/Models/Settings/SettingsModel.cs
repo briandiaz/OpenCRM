@@ -480,7 +480,7 @@ namespace OpenCRM.Models.Settings
                 var profileDataGrid = itemGrid.ItemsSource as List<DataGridProfileData>;
 
                 foreach (var item in profileDataGrid)
-                {
+                {   
                     newListAccessRights.Add(
                         new AccessRights() 
                         {

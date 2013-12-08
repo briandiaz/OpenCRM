@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>De.TorstenMandelkow.MetroChart</id>
+    <version>1.0.0</version>
+    <title>Modern UI (Metro) Charts for Windows 8, WPF, Silverlight</title>
+    <authors>Torsten Mandelkow</authors>
+    <owners>Torsten Mandelkow</owners>
+    <projectUrl>http://modernuicharts.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This project provides a small library to display charts in Modern UI Style (formerly known as Metro) in WPF, Silverlight and Windows 8 applications. You can check the charts with the Silverlight test application here: http://www.tetracon.de/charts</description>
+    <releaseNotes />
+    <copyright>2012 Torsten Mandelkow</copyright>
+    <language>en-US</language>
+  </metadata>
+</package>

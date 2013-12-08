@@ -26,7 +26,7 @@
     </Page.Resources>
 
     <controls:MetroContentControl FontFamily="Segoe WP Light">
-        <Grid>
+        <Grid Name="maingridCampaign">
 
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
@@ -215,7 +215,7 @@
                     </StackPanel>
                     <TextBox Visibility="Hidden" Text="{Binding CampaignId}" Name="tbxCampaignId" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,20,130">
-                        <Button Name="btnDetails"
+                        <Button Name="btnViewDetails"
                                 
                                 Width="50"
                                 Height="50"

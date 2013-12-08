@@ -58,6 +58,9 @@ namespace OpenCRM.Views.Home
                 case "Calendar":
                     PageSwitcher.Switch("/Views/Calendar/CalendarView.xaml");
                     break;
+                case "Dashboard":
+                    PageSwitcher.Switch("/Views/Objects/Dashboard/Dashboard.xaml");
+                    break;
             }
         }
     }
