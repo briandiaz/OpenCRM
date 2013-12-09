@@ -31,6 +31,9 @@ namespace OpenCRM.DataBase
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<bool> HiddenCase { get; set; }
         public Nullable<System.DateTime> ViewDate { get; set; }
+        public string Subject { get; set; }
+        public string SolutionTitle { get; set; }
+        public string SolutionDescription { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Case_Origin Case_Origin { get; set; }
