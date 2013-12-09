@@ -568,6 +568,9 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="HiddenCase" Type="bit" />
           <Property Name="ViewDate" Type="datetime" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="SolutionTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="SolutionDescription" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Competidors">
           <Key>
@@ -2505,6 +2508,9 @@
           <NavigationProperty Name="User1" Relationship="OpenCRMModel.FK_Cases_User_Creator" FromRole="Cases" ToRole="User" />
           <NavigationProperty Name="User2" Relationship="OpenCRMModel.FK_Cases_User_Modificator" FromRole="Cases" ToRole="User" />
           <Property Type="DateTime" Name="ViewDate" Precision="3" />
+          <Property Type="String" Name="Subject" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SolutionTitle" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SolutionDescription" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Competidors">
           <Key>
@@ -4124,6 +4130,9 @@
           <EntitySetMapping Name="Cases">
             <EntityTypeMapping TypeName="OpenCRMModel.Cases">
               <MappingFragment StoreEntitySet="Cases">
+                <ScalarProperty Name="SolutionDescription" ColumnName="SolutionDescription" />
+                <ScalarProperty Name="SolutionTitle" ColumnName="SolutionTitle" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

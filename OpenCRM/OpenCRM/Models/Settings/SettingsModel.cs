@@ -326,7 +326,6 @@ namespace OpenCRM.Models.Settings
                             ObjectFielId = fields.ObjectFieldsId,
                             ObjectFieldName = fields.Name,
                             Read = profileObjectsFields.Read.Value,
-                            Create = profileObjectsFields.Create.Value,
                             Modify = profileObjectsFields.Modify.Value
                         }
                     );
@@ -433,7 +432,6 @@ namespace OpenCRM.Models.Settings
                     labelsObjectsFields.Add(value.ObjectFieldName);
                     
                     var checkBoxes = new List<bool>(3);
-                    checkBoxes.Add(value.Create);
                     checkBoxes.Add(value.Modify);
                     checkBoxes.Add(value.Read);
 
@@ -498,7 +496,6 @@ namespace OpenCRM.Models.Settings
                     newListAccessRights.Add(
                         new AccessRights() 
                         {
-                            Create = item.Create,
                             Modify = item.Modify,
                             Read = item.Read,
                             ObjectFieldName = item.Fields,
@@ -537,10 +534,9 @@ namespace OpenCRM.Models.Settings
                                 x.Object_Fields.Objects.Name == item.ObjectName
                         );
 
-                        if (!(selectedRow.Modify == item.Modify && selectedRow.Create == item.Create && selectedRow.Read == item.Read))
+                        if (!(selectedRow.Modify == item.Modify && selectedRow.Read == item.Read))
                         {
                             selectedRow.Modify = item.Modify;
-                            selectedRow.Create = item.Create;
                             selectedRow.Read = item.Read;
 
                             db.SaveChanges();
