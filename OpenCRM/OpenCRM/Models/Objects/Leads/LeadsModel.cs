@@ -15,7 +15,7 @@ namespace OpenCRM.Models.Objects.Leads
     public class LeadsModel
     {
         public List<SearchCampaignData> leadsCampaign;
-         public static int LeadIdforEdit { get; set; }
+        public static int LeadIdforEdit { get; set; }
         public static bool IsNew { get; set; }
 
         public void SaveLead(DataBase.Leads leadData)
@@ -24,33 +24,11 @@ namespace OpenCRM.Models.Objects.Leads
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    DataBase.Leads lead = null;
-
-                    if (IsNew)
-                    {
-                        lead = _db.Leads.Create();
-                        lead = leadData;
-                        _db.Leads.Add(lead);
-                        _db.SaveChanges();
-                        MessageBox.Show("Lead created.");
-                    }
-                    else
-                    {
-                        lead = _db.Leads.FirstOrDefault(
-                            x => x.LeadId == LeadIdforEdit
-                        );
-                        Address address = lead.Address;
-                        int createBy = (int)lead.CreateBy;
-                        DateTime createDate = (DateTime)lead.CreateDate;
-                       // lead = leadData;
-                        lead.Email = "mike@.com";
-                        lead.Address = address;
-                        lead.CreateDate = createDate;
-                        lead.CreateBy = createBy;
-
-                        _db.SaveChanges();
-                        MessageBox.Show("Lead updated.");
-                    }
+                    DataBase.Leads lead = _db.Leads.Create();
+                    lead = leadData;
+                    _db.Leads.Add(lead);
+                    _db.SaveChanges();
+                    MessageBox.Show("Lead created.");
                     PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");                
                 }
             }
@@ -63,7 +41,8 @@ namespace OpenCRM.Models.Objects.Leads
                 MessageBox.Show(ex.ToString());
             }
         }
-        public void SaveLead(CreateLead view)
+
+        public void UpdateLead(CreateLead view)
         {
             try
             {
@@ -90,13 +69,16 @@ namespace OpenCRM.Models.Objects.Leads
                     lead.UpdateDate = DateTime.Now;
                     lead.UpdateBy = userId;
                     lead.Converted = false;
-                    lead.Employees = Int32.Parse(view.tbxNoEmployees.Text);
+                    if(view.tbxNoEmployees.Text != "")
+                        lead.Employees = Int32.Parse(view.tbxNoEmployees.Text);
                     lead.ViewDate = DateTime.Now;
                     if (lead.Address != null)
                     {
                         lead.Address.Street = view.tbxStreet.Text;
                         lead.Address.City = view.tbxCity.Text;
                         lead.Address.ZipCode = view.tbxZipPostalCode.Text;
+                        if (view.cmbStateProvince.SelectedValue != null)
+                            lead.Address.StateId = (int)view.cmbStateProvince.SelectedValue;
                     }
                     
                     _db.SaveChanges();
@@ -259,6 +241,63 @@ namespace OpenCRM.Models.Objects.Leads
             return industry;
         }
 
+        public List<Country> getCountry()
+        {
+            var country = new List<Country>();
+
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from ctry in db.Country
+                        select ctry
+                    ).ToList();
+
+                    country = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return country;
+        }
+
+        public List<State> getStates(int countryId)
+        {
+            var states = new List<State>();
+
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from state in db.State
+                        where state.CountryId == countryId
+                        select state
+                    ).ToList();
+
+                    states = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return states;
+        }
+
         public List<DataBase.Rating> getRating()
         {
             var rating = new List<DataBase.Rating>();
@@ -308,12 +347,13 @@ namespace OpenCRM.Models.Objects.Leads
                     EditLeads.tbxLeadCampaign.Text = (selectedLead.Campaign != null) ? selectedLead.Campaign.Name : "";
                     EditLeads.tbxLeadDescription.Text = selectedLead.Description;
                     EditLeads.tbxMobile.Text = selectedLead.MobileNumber;
-                    EditLeads.tbxNoEmployees.Text = selectedLead.Employees.HasValue ? selectedLead.Employees.ToString() : "0";
+                    EditLeads.tbxNoEmployees.Text = selectedLead.Employees.HasValue ? selectedLead.Employees.ToString() : "";
                     EditLeads.tbxPhone.Text = selectedLead.PhoneNumber;
-                    EditLeads.tbxStateProvince.Text = (selectedLead.Address != null) ? ((selectedLead.Address.State != null) ? selectedLead.Address.State.Name : "" ) : "";
                     EditLeads.tbxStreet.Text = (selectedLead.Address != null) ? selectedLead.Address.Street : "";
                     EditLeads.tbxTitle.Text = selectedLead.Title;
                     EditLeads.tbxZipPostalCode.Text = (selectedLead.Address != null) ? selectedLead.Address.ZipCode : "";
+                    EditLeads.cmbCountry.SelectedValue = selectedLead.AddressId.HasValue ? (selectedLead.Address.StateId.HasValue ? selectedLead.Address.State.CountryId : null) : null;
+                    EditLeads.cmbStateProvince.SelectedValue = selectedLead.AddressId.HasValue ? (selectedLead.Address.StateId.HasValue ? selectedLead.Address.StateId : null) : null;
                     EditLeads.cmbIndustry.SelectedValue = selectedLead.IndustryId.HasValue ? selectedLead.IndustryId.Value : 1;
                     EditLeads.cmbLeadSource.SelectedValue = selectedLead.LeadSourceId.HasValue ? selectedLead.LeadSourceId.Value : 1;
                     EditLeads.cmbLeadStatus.SelectedValue = selectedLead.LeadStatusId.HasValue ? selectedLead.LeadStatusId.Value : 1;
@@ -353,10 +393,14 @@ namespace OpenCRM.Models.Objects.Leads
                     leadDetails.lblMobile.Content = selectedLead.MobileNumber;
                     leadDetails.lblEmployees.Content = selectedLead.Employees.HasValue ? selectedLead.Employees.ToString() : "";
                     leadDetails.lblPhone.Content = selectedLead.PhoneNumber;
-                    //leadDetails.lblStateProvince.Content = (selectedLead.Address.State != null) ? selectedLead.Address.State.Name : "";
-                    //leadDetails.lblStreet.Content = selectedLead.Address.Street;
+                    if (selectedLead.AddressId.HasValue)
+                    {
+                        leadDetails.lblAddress.Content =
+                            ((selectedLead.Address.Street != "") ? selectedLead.Address.Street + " " : "")
+                            + ((selectedLead.Address.City != "") ? selectedLead.Address.City + " " : "")
+                            + (selectedLead.Address.StateId.HasValue ? (selectedLead.Address.State.Name + " " + selectedLead.Address.State.Country.Name) : "");
+                    }
                     leadDetails.lblTitle.Content = selectedLead.Title;
-                    //leadDetails.lblZipPostalCode.Content = selectedLead.Address.ZipCode;
                     leadDetails.lblIndustry.Content = selectedLead.IndustryId.HasValue ? selectedLead.Industry.Name : "";
                     leadDetails.lblLeadSource.Content = selectedLead.LeadSourceId.HasValue ? selectedLead.Lead_Source.Name : "";
                     leadDetails.lblLeadStatus.Content = selectedLead.LeadStatusId.HasValue ? selectedLead.Lead_Status.Name : "";
@@ -567,7 +611,6 @@ namespace OpenCRM.Models.Objects.Leads
                 MessageBox.Show(ex.ToString());
             }
         }
-
 
     }
     public class SearchCampaignData

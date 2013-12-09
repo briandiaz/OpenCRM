@@ -456,11 +456,12 @@
                                 Margin="394,68,241,240" 
                                 Height="22" />
 
-                    <TextBox Name="tbxStateProvince"
-                        Controls:TextboxHelper.ClearTextButton="True"
-        	                 RenderTransformOrigin="-5.28,-12.3" 
-        	                 Margin="180,159,417,135" />
-
+                    <ComboBox x:Name="cmbStateProvince"
+                    	Margin="180,159,417,135" Height="33" VerticalAlignment="Top" 
+                        DisplayMemberPath="Name"
+                        IsEnabled="False"
+                        IsTextSearchEnabled="True"
+                        SelectedValuePath="StateId"/>
 
                     <TextBlock  Text="Country" 
         	                    FontSize="15px"
@@ -474,10 +475,14 @@
                         Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
                     	Margin="180,61,417,233" />
-                    <TextBox x:Name="tbxCountry"
-                        Controls:TextboxHelper.ClearTextButton="True"
-                    	RenderTransformOrigin="-5.28,-12.3" 
-                    	Margin="560,113,37,183" />
+                    
+                    <ComboBox x:Name="cmbCountry"
+                    	Margin="560,113,37,183" Height="33" VerticalAlignment="Top" 
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="CountryId"
+                        IsTextSearchEnabled="True"
+                        SelectionChanged="cmbCountry_SelectionChanged"/>
+                    
                     <TextBox Name="tbxZipPostalCode"
                         Controls:TextboxHelper.ClearTextButton="True"
                     	RenderTransformOrigin="-5.28,-12.3" 
