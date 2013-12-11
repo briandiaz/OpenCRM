@@ -17,16 +17,13 @@ namespace OpenCRM.Models.Objects.Accounts
     public class AccountsModel
     {
         #region "Properties"
+
         public static bool IsNew { get; set; }
         public static bool IsEditing { get; set; }
         public static bool IsSearching { get; set; }
-
         public static int EditingAccountId { get; set; }
-
         public AccountData Data { get; set; }
-
         public List<AccountParent> AccountParent { get; set; }
-
         #endregion
 
         #region "Constructors"
