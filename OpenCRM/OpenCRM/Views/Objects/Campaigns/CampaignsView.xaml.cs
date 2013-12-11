@@ -37,6 +37,8 @@ namespace OpenCRM.Views.Objects.Campaigns
             InitializeComponent();
             LoadSearchAttributes();
             Campaign.ControlAccess(getButtons());
+            Session.ModuleAccessRights(this, ObjectsName.Campaigns);
+            cmbTargetKeyCampaign.Visibility = System.Windows.Visibility.Visible;
         }
         private List<Button> getButtons()
         { 
@@ -372,6 +374,13 @@ namespace OpenCRM.Views.Objects.Campaigns
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Dashboard/Dashboard.xaml");
+        }
+
+        private void btnViewDetails_Click(object sender, RoutedEventArgs e)
+        {
+            CampaignController.CurrentCampaignId = _listCampaigns[CampaignController.currentCampaignIndex].CampaignId;
+            CampaignController.CurrentCampaignName = _listCampaigns[CampaignController.currentCampaignIndex].Name;
+            PageSwitcher.Switch("/Views/Objects/Campaigns/Details.xaml");
         }
 
 

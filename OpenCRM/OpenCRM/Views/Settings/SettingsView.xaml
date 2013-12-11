@@ -70,34 +70,34 @@
                             </TabControl.Resources>
 
                             <TabItem Header="Edit Profile">
-                                <Grid Margin="100,50">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Name="gridSettingsProfile">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
+                                    <Grid Margin="100,50">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
+                                        <Grid Name="gridSettingsProfile">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <Label  Content="Username"
+                                            <Label  Content="Username"
                                                 VerticalAlignment="Center"
                                                 Grid.Row="2"
                                                 HorizontalAlignment="Right" />
 
-                                        <TextBox    Controls:TextboxHelper.Watermark="UserName"
+                                            <TextBox    Controls:TextboxHelper.Watermark="UserName"
                                                     Controls:TextboxHelper.ClearTextButton="True"
                                                     Text="{Binding Path=UserName}"
                                                     Margin="5,5,-380,5"
@@ -107,12 +107,12 @@
                                                     Name="tbxUserUsername"
                                                     IsEnabled="False" />
 
-                                        <Label  Content="Name"
+                                            <Label  Content="Name"
                                                 VerticalAlignment="Center"
                                                 Grid.Row="3"
                                                 HorizontalAlignment="Right" />
 
-                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your Name"
+                                            <TextBox    Controls:TextboxHelper.Watermark="Insert Your Name"
                                                     Controls:TextboxHelper.ClearTextButton="True"
                                                     Text="{Binding Path=Name}"
                                                     Margin="5,5,-380,5"
@@ -121,12 +121,12 @@
                                                     FontSize="20px"
                                                     Name="tbxUserName" />
 
-                                        <Label  Content="Last Name"
+                                            <Label  Content="Last Name"
                                                 Grid.Row="4"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Right"  />
 
-                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your LastName"
+                                            <TextBox    Controls:TextboxHelper.Watermark="Insert Your LastName"
                                                     Controls:TextboxHelper.ClearTextButton="True"
                                                     Text="{Binding Path=LastName}"
                                                     Margin="5,5,-380,5"
@@ -135,24 +135,24 @@
                                                     FontSize="20px"
                                                     Name="tbxUserLastName" />
 
-                                        <Label  Content="Birthdate"
+                                            <Label  Content="Birthdate"
                                                 Grid.Row="5"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Right" />
 
-                                        <DatePicker Text="{Binding Path=BirthDate}"
+                                            <DatePicker Text="{Binding Path=BirthDate}"
                                                     Margin="5,5,-380,5"
                                                     Grid.Row="5"
                                                     Grid.Column="1"
                                                     FontSize="20px"
                                                     Name="tbxUserBirthDate" />
 
-                                        <Label  Content="Email"
+                                            <Label  Content="Email"
                                                 Grid.Row="6"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Right" />
 
-                                        <TextBox    Controls:TextboxHelper.Watermark="Insert Your Email"
+                                            <TextBox    Controls:TextboxHelper.Watermark="Insert Your Email"
                                                     Controls:TextboxHelper.ClearTextButton="True"
                                                     Text="{Binding Path=Email}"
                                                     Margin="5,5,-380,5"
@@ -161,16 +161,16 @@
                                                     FontSize="20px"
                                                     Name="tbxUserEmail" />
 
-                                        <StackPanel Grid.Row="6" Grid.Column="2" Margin="390,13,-380,0">
-                                            <Image Name ="ImageEmailEdit" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
-                                        </StackPanel>
+                                            <StackPanel Grid.Row="6" Grid.Column="2" Margin="390,13,-380,0">
+                                                <Image Name ="ImageEmailEdit" Source="/Assets/Img/Wrong.png"  Width="20" Visibility="Hidden"/>
+                                            </StackPanel>
 
-                                        <Label  Content="User Profile"
+                                            <Label  Content="User Profile"
                                                 Grid.Row="7"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Right" />
 
-                                        <ComboBox   Name="cmbUserProfile"
+                                            <ComboBox   Name="cmbUserProfile"
                                                     Grid.Row="7" 
                                                     Grid.Column="1"
                                                     VerticalAlignment="Center"
@@ -180,14 +180,14 @@
 
 
 
-                                        <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="7" Click="btnSave_Click" Cursor="Hand" >
-                                            <StackPanel>
-                                                <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
-                                                <TextBlock>Save</TextBlock>
-                                            </StackPanel>
-                                        </Button>
+                                            <Button Grid.Column="1" Margin="249,91,-380,-84" Grid.Row="7" Click="btnSave_Click" Cursor="Hand" >
+                                                <StackPanel>
+                                                    <Image Source="../../Assets/Img/Icons/System-Save-icon.png"/>
+                                                    <TextBlock>Save</TextBlock>
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
                             </TabItem>
 
                             <TabItem Header="New User">

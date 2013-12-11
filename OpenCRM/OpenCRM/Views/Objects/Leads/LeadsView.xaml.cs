@@ -28,8 +28,11 @@ namespace OpenCRM.Views.Objects.Leads
             InitializeComponent();
             _leadsModel = new LeadsModel();
             cmbSearchTypeLeads.Items.Add("Recent Leads");
-            cmbSearchTypeLeads.Items.Add("Converted Leads");
             cmbSearchTypeLeads.Items.Add("Today's Leads");
+            cmbSearchTypeLeads.Items.Add("This Week's Leads");
+            cmbSearchTypeLeads.Items.Add("This Month's Leads");
+            cmbSearchTypeLeads.Items.Add("Converted Leads");
+            cmbSearchTypeLeads.Items.Add("Lost Leads");
             cmbSearchTypeLeads.Items.Add("All Leads");
             cmbSearchTypeLeads.SelectedValue = "Recent Leads";
             _leadsModel.LoadLeads(this.DataGridRecentLeads, "Recent Leads");
@@ -43,7 +46,6 @@ namespace OpenCRM.Views.Objects.Leads
             LeadsController.GoBackPage = "/Views/Objects/Leads/LeadsView.xaml";
         }
         
-
         private void btn_EditLead_OnClick(object sender, RoutedEventArgs e)
         {
             if (this.DataGridRecentLeads.SelectedIndex == -1)

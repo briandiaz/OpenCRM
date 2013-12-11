@@ -7,10 +7,9 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       mc:Ignorable="d"
-                      Title="Campaigns" 
-                      MinHeight="1024" 
-                      MinWidth="768"
-                      >
+                      Title="Cases" 
+                      Height="Auto" 
+                      Width="Auto" >
 
     <Page.Resources>
         <ResourceDictionary>
@@ -20,42 +19,123 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridViewAzure.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
+            <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                    <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid>
+    <controls:MetroContentControl>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+            </Grid.Background>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
-        </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="300*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="700*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" 
+                  Grid.Column="1">
+                <Grid Margin="0,0,356,0">
 
-        <controls:MetroContentControl>
-            <TabControl>
-                <TabItem Header="_Cases" FontSize="20px">
+                    <Button Style="{DynamicResource NoChromeButton}" Cursor="Hand" HorizontalAlignment="Left" Click="CaseImage_OnClick" >
+                        <Image Source="/Assets/Img/Icons/Cases.png" 
+                            Margin="0,10,0,25" 
+                            RenderTransformOrigin="-0.92,0.73" 
+                            HorizontalAlignment="Left" 
+                            Width="117"/>
+                    </Button>
 
+                    <TabControl Margin="122,64,0,41" HorizontalAlignment="Left" Width="178">
+                        <TabItem Header="_Cases" FontSize="20px" Margin="-6,-2,-3,2"/>
+                    </TabControl>
 
-                </TabItem>
-            </TabControl>
+                    <TextBlock Text="Home"
+                               FontSize="24" 
+                               Margin="124,34,0,85" HorizontalAlignment="Left" Width="77" />
+                </Grid>
 
-        </controls:MetroContentControl>
-    </Grid>
+                <Button Content="Edit"
+            		    Margin="560,36,34,59"
+            		    Width="75"
+                        Click="btn_EditCase_OnClick"/>
+
+                <Button Name="btnNewCase"
+                        Content="New" 
+                	    Margin="469,36,125,59"
+                	    Width="75" 
+                        Click="btn_NewCase_OnClick"/>
+            </Grid>
+
+            <Grid Grid.Row="3" 
+                  Grid.Column="1"
+                  Background="#349CE2">
+                <TextBlock Text="View:"
+                           FontSize="20"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="188,2,434,6"/>
+                <ComboBox Name="cmbCasesType"
+                          VerticalAlignment="Center"
+                          SelectionChanged="cmbSearchTypeCases_SelectionChanged"
+                          Margin="239,4,173,5" Height="20"/>
+            </Grid>
+
+            <Grid Grid.Row="5" 
+                  Grid.Column="1" 
+                  Background="#349CE2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Name="tblType"
+                           Text="Cases"
+        		           FontSize="22"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="271,20,51,250"/>
+
+                <DataGrid Name="DataGridCases"
+                          Style="{DynamicResource MetroDataGrid}" 
+                          Margin="10,72,10,10"
+                          MouseDoubleClick="DataGridCases_MouseDoubleClick" Grid.ColumnSpan="2"/>
+            </Grid>
+        </Grid>
+    </controls:MetroContentControl>
 </Page>

@@ -15,6 +15,7 @@ namespace OpenCRM.Models.Dashboard
         List<ChartObject> _chartObjects;
         public DashboardModel()
         { 
+
         
         }
 
@@ -316,9 +317,147 @@ namespace OpenCRM.Models.Dashboard
                                  select new ChartObject()
                                  {
                                      Quantity = leads.Count(),
-                                     Name = leads.Key.Name
+                                     Name = leads.Key.Name != "--None--" ? leads.Key.Name : "None"
                                  }
                     ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupLeadsBySource()
+        {
+            _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _leads in _db.Leads
+                                 where _leads.UserId == Session.UserId
+                                 group _leads by new
+                                 {
+                                     _leads.Lead_Source.Name
+                                 } into leads
+                                 select new ChartObject()
+                                 {
+                                     Quantity = leads.Count(),
+                                     Name = leads.Key.Name != "--None--" ? leads.Key.Name : "None"
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupLeadsByConvertion()
+        {
+            _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _leads in _db.Leads
+                                 where _leads.UserId == Session.UserId
+                                 group _leads by new
+                                 {
+                                     _leads.Lead_Source.Name,
+                                     _leads.Converted.Value
+                                 } into leads
+                                 select new ChartObject()
+                                 {
+                                     Quantity = leads.Count(),
+                                     Name = leads.Key.Name != "--None--" ? leads.Key.Name : "None"
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupLeadsdByConvertionSource(string status)
+        {
+            _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _leads in _db.Leads
+                                 where _leads.UserId == Session.UserId where _leads.Lead_Status.Name == status
+                                 group _leads by new
+                                 {
+                                     _leads.Lead_Source.Name,
+                                 } into leads
+                                 select new ChartObject()
+                                 {
+                                     Quantity = leads.Count(),
+                                     Name = leads.Key.Name != "--None--" ? leads.Key.Name : "None"
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> GroupLeadsdByIndustry()
+        {
+            _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _leads in _db.Leads
+                                 where _leads.UserId == Session.UserId
+                                 group _leads by new
+                                 {
+                                     _leads.Industry.Name,
+                                 } into leads
+                                 select new ChartObject()
+                                 {
+                                     Quantity = leads.Count(),
+                                     Name = leads.Key.Name != "--None--" ? leads.Key.Name : "None"
+                                 }
+                    ).ToList();
+                    int total = 0;
+                    foreach (var item in query)
+                        total += (int)item.Quantity;
+                    foreach (var item in query)
+                        item.Quantity = (item.Quantity / total) * 100;
                     _chartObjects = query;
                 }
             }
@@ -341,7 +480,7 @@ namespace OpenCRM.Models.Dashboard
 
     public class ChartObject
     {
-        public int Quantity { get; set; }
+        public float Quantity { get; set; }
         public String Name { get; set; }
 
         public ChartObject()

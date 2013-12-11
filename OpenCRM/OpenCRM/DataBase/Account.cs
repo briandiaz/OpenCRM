@@ -17,6 +17,7 @@ namespace OpenCRM.DataBase
         public Account()
         {
             this.Account1 = new HashSet<Account>();
+            this.Campaign_Customer = new HashSet<Campaign_Customer>();
             this.Cases = new HashSet<Cases>();
             this.Contact = new HashSet<Contact>();
             this.Opportunities = new HashSet<Opportunities>();
@@ -42,7 +43,6 @@ namespace OpenCRM.DataBase
         public Nullable<int> IndustryId { get; set; }
         public Nullable<int> NumberOfLocation { get; set; }
         public string PhoneNumber { get; set; }
-        public string SlaSerialNumber { get; set; }
         public Nullable<int> RatingId { get; set; }
         public string TickerSymbol { get; set; }
         public string WebSite { get; set; }
@@ -53,6 +53,7 @@ namespace OpenCRM.DataBase
         public Nullable<bool> HiddenAccount { get; set; }
         public Nullable<System.DateTime> ViewDate { get; set; }
         public string Code { get; set; }
+        public string SlaSerialNumber { get; set; }
         public Nullable<System.DateTime> SLAExpiration { get; set; }
     
         public virtual Account_Ownership Account_Ownership { get; set; }
@@ -69,6 +70,7 @@ namespace OpenCRM.DataBase
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
+        public virtual ICollection<Campaign_Customer> Campaign_Customer { get; set; }
         public virtual ICollection<Cases> Cases { get; set; }
         public virtual ICollection<Contact> Contact { get; set; }
         public virtual ICollection<Opportunities> Opportunities { get; set; }

@@ -49,21 +49,28 @@ namespace OpenCRM.Models.Login
                         SHA1 sha1 = SHA1CryptoServiceProvider.Create();
                         var textInBytes = ASCIIEncoding.Default.GetBytes(password);
                         var hashpassword = BitConverter.ToString(sha1.ComputeHash(textInBytes)).Replace("-", "");
-                        //var hashpassword = password;
+                        
                         var query = (
                             from user in db.User
-                            where user.UserName == username && user.HashPassword == hashpassword
+                            where user.UserName.Equals(username, StringComparison.Ordinal) && user.HashPassword == hashpassword
                             select user
                         );
 
-                        if (query.Any())
+                        List<User> result = new List<User>();
+                        foreach (var item in query)
+                        {
+                            if (item.UserName.Equals(username, StringComparison.Ordinal))
+                                result.Add(item);
+                        }
+
+                        if (result.Any())
                         {
                             var User = query.First();
                             Session.CreateSession(User.UserId, User.UserName);
                             ErrorLabel.Content = "";
                             return true;
                         }
-                        ErrorLabel.Content = "Username or password are incorrect.";
+                        ErrorLabel.Content = "Username and/or password are incorrect.";
                     }
                 }
             }

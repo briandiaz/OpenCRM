@@ -44,13 +44,13 @@ namespace OpenCRM.DataBase
         public virtual Account Account { get; set; }
         public virtual Campaign Campaign { get; set; }
         public virtual Competidors Competidors { get; set; }
+        public virtual Lead_Source Lead_Source { get; set; }
         public virtual Opportunities_Stage Opportunities_Stage { get; set; }
         public virtual Opportunities_Status Opportunities_Status { get; set; }
         public virtual Opportunities_Type Opportunities_Type { get; set; }
+        public virtual Products Products { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
-        public virtual Lead_Source Lead_Source { get; set; }
-        public virtual Products Product { get; set; }
     }
 }

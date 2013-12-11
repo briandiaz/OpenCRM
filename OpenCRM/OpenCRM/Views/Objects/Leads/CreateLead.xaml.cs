@@ -43,12 +43,14 @@ namespace OpenCRM.Views.Objects.Leads
             LoadNewLead();
             _leadsModel.LoadEditLead(this);
         }
+
         private void LoadNewLead()
         {
             this.cmbLeadStatus.ItemsSource = _leadsModel.getLeadsStatus();
             this.cmbLeadSource.ItemsSource = _leadsModel.getLeadsSource();
             this.cmbRating.ItemsSource = _leadsModel.getRating();
             this.cmbIndustry.ItemsSource = _leadsModel.getIndustry();
+            this.cmbCountry.ItemsSource = _leadsModel.getCountry();
         }
 
         private void btnCancelNewLead_Click(object sender, RoutedEventArgs e)
@@ -58,6 +60,11 @@ namespace OpenCRM.Views.Objects.Leads
 
         private void btnSaveNewLead_OnClick(object sender, RoutedEventArgs e)
         {
+            if (tbxLastName.Text == "" || tbxCompany.Text == "" || (int)cmbLeadStatus.SelectedValue == 1)
+            {
+                MessageBox.Show("Please, fill all the red labeled fields.");
+                return;
+            }
             if (LeadsModel.IsNew)
             {
                 OpenCRMEntities dbo = new OpenCRMEntities();
@@ -82,23 +89,34 @@ namespace OpenCRM.Views.Objects.Leads
                 lead.UpdateDate = DateTime.Now;
                 lead.UpdateBy = userId;
                 lead.Converted = false;
-                lead.Employees = Int32.Parse(tbxNoEmployees.Text);
+                tbxNoEmployees.Text = "";
+                if (this.tbxNoEmployees.Text != "")
+                {
+                    int value = 0;
+                    Int32.TryParse(this.tbxNoEmployees.Text, out value);
+                    lead.Employees = value;
+                }
                 lead.ViewDate = DateTime.Now;
 
                 lead.CreateBy = userId;
                 lead.CreateDate = DateTime.Now;
+
                 DataBase.Address address = new DataBase.Address();
                 DataBase.Address_Type type = new DataBase.Address_Type();
                 address.Street = tbxStreet.Text;
                 address.City = tbxCity.Text;
                 address.ZipCode = tbxZipPostalCode.Text;
-
+                if (cmbStateProvince.SelectedValue != null)
+                    address.StateId = (int)cmbStateProvince.SelectedValue;
                 dbo.Address.Add(address);
                 dbo.SaveChanges();
                 lead.Address = address;
                 _leadsModel.SaveLead(lead);
             }
-            _leadsModel.SaveLead(this);
+            else
+            {
+                _leadsModel.UpdateLead(this);
+            }
         }
 
         private void btnSearchCampaign_OnClick(object sender, RoutedEventArgs e)
@@ -142,7 +160,7 @@ namespace OpenCRM.Views.Objects.Leads
 
         private void btnClearCampaingLookUp_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            tbxSearchCampaign.Text = String.Empty;
         }
 
         private void LeadImage_OnClick(object sender, RoutedEventArgs e)
@@ -159,6 +177,16 @@ namespace OpenCRM.Views.Objects.Leads
             else
             {
                 PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
+            }
+        }
+
+        private void cmbCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox country = sender as ComboBox;
+            if (country.SelectedValue != null)
+            {
+                cmbStateProvince.IsEnabled = true;
+                cmbStateProvince.ItemsSource = _leadsModel.getStates((int)country.SelectedValue);
             }
         }
     }

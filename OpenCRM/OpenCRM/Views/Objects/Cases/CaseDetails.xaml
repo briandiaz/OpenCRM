@@ -1,4 +1,4 @@
-﻿<Page   x:Class="OpenCRM.Views.Objects.Leads.LeadDetails"
+﻿<Page   x:Class="OpenCRM.Views.Objects.Cases.CaseDetails"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Height="Auto" 
         Width="Auto"
-        Title="Lead Details">
+        Title="Case Details">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -79,15 +79,15 @@
         </Button>
         <Grid Grid.Row="0"
               Grid.Column="1" Margin="-2,0,2,0">
-            <Label Content="Leads" 
+            <Label Content="Cases" 
                    FontSize="12px"
                    Margin="81,20,577,63"/>
 
-            <Label Content="Lead Details" 
+            <Label Content="Case Details" 
                    FontSize="20px"
                    Margin="81,47,513,26"/>
-            <Button Style="{DynamicResource NoChromeButton}" Cursor="Hand" HorizontalAlignment="Left" Click="LeadImage_OnClick" >
-                <Image Source="/Assets/Img/Icons/Leads.png" 
+            <Button Style="{DynamicResource NoChromeButton}" Cursor="Hand" HorizontalAlignment="Left" Click="CaseImage_OnClick" >
+                <Image Source="/Assets/Img/Icons/Cases.png" 
                         HorizontalAlignment="Left"
                         Height="69"
                         VerticalAlignment="Top"
@@ -95,17 +95,23 @@
                         Margin="10,0,0,0"/>
             </Button>
 
-            <Button Name="btnConvert"
-                    Content="Convert"
+            <Button Name="btnSolution"
+                    Content="Solution"
                     RenderTransformOrigin="3.322,0.756"
                     Margin="605,20,43,31" 
-                    Click="btnConvert_OnClick"/>
+                    Click="btnSolution_OnClick"/>
 
-            <Button x:Name="btnEditLead"
+            <Button x:Name="btnDeleteCase"
+                Content="Delete"
+                RenderTransformOrigin="3.322,0.756"
+                Margin="505,20,144,31" 
+                Click="btnDelete_OnClick"/>
+
+            <Button x:Name="btnEditCase"
                 Content="Edit"
                 RenderTransformOrigin="3.322,0.756"
-                Margin="492,20,157,31" 
-                Click="btnEditLead_OnClick"/>
+                Margin="405,20,244,31" 
+                Click="btnEditCase_OnClick"/>
         </Grid>
 
         <Grid Grid.Row="1"
@@ -131,7 +137,7 @@
                       Grid.Column="0">
                 <Border BorderBrush="#1179BE">
                     <Grid Background="#1179BE">
-                        <TextBlock  Text="Lead Details"
+                        <TextBlock  Text="Case Details"
                                         VerticalAlignment="Center"
                                         TextAlignment="Center"
                                         HorizontalAlignment="Center"
@@ -155,49 +161,49 @@
                 </Grid.RowDefinitions>
 
 
-                <Label  Name="lblLeadOwner"
+                <Label  Name="lblCaseOwner"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="104,25,310,0" Grid.Column="1"/>
 
-                <Label  Name="lblFirstName"
+                <Label  Name="lblContactName"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="104,55,310,0" Grid.Column="1"/>
 
-                <Label  Name="lblLastName"
+                <Label  Name="lblAccountName"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="104,85,310,0" Grid.Column="1"/>
 
-                <Label  Name="lblCompany"
+                <Label  Name="lblType"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="104,115,310,0" Grid.Column="1"/>
 
-                <Label  Name="lblLeadSource"
+                <Label  Name="lblDateOpened"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="104,145,310,0" Grid.Column="1"/>
 
-                <Label  Name="lblTitle"
+                <Label  Name="lblCaseReason"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="104,175,310,0" Grid.Column="1"/>
 
-                <Label  Name="lblIndustry"
+                <Label  Name="lblProduct"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="104,205,310,0" Grid.Column="1"/>
 
-                <Label  Name="lblCampaign"
+                <Label  Name="lblCreatedBy"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
@@ -207,80 +213,80 @@
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
-                            Margin="104,265,310,0" Grid.Column="1"/>
+                            Margin="104,265,166,0" Grid.Column="1" Height="88"/>
 
-                <Label  Name="lblPhone"
+                <Label  Name="lblSubject"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,25,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblMobile"
+                <Label  Name="lblCaseStatus"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,55,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblFax"
+                <Label  Name="lblCasePriority"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,85,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblEmail"
+                <Label  Name="lblContactPhone"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,115,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblLeadStatus"
+                <Label  Name="lblContactEmail"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,145,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblRating"
+                <Label  Name="lblCaseOrigin"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,175,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblEmployees"
+                <Label  Name="lblDateClosed"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,205,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblAddress"
+                <Label  Name="lblUpdatedBy"
                             Content=""
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Margin="484,235,30,0" Grid.Column="1"/>
 
-                <Label  Name="lblEmployes"
+                <Label  Name="lblLine0"
                             Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
                             VerticalAlignment="Top"
                             FontSize="15px"
                             Opacity="0.4"
                             Margin="10,31,-35,0" Grid.ColumnSpan="2"/>
 
-                <TextBlock  Text="First Name"
+                <TextBlock  Text="Contact Name"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px"
                                 FontWeight="SemiBold"
                                 Margin="15,60,620,410" Height="22" Grid.ColumnSpan="2" />
 
-                <TextBlock
+                <TextBlock Text="Case Owner"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px" 
                                 FontWeight="SemiBold"
                                 Margin="15,31,620,0" 
                                 Height="20" 
-                                Grid.ColumnSpan="2" ><Run Text="Lead Own"/><Run Text="er"/></TextBlock>
+                                Grid.ColumnSpan="2" />
 
-                <TextBlock  Text="Last Name"
+                <TextBlock  Text="Account Name"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px"
@@ -288,7 +294,7 @@
                                 FontWeight="SemiBold"
                                 Height="24" Grid.ColumnSpan="2" />
 
-                <TextBlock  Text="Company"
+                <TextBlock  Text="Case Type"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px"
@@ -296,7 +302,7 @@
                                 FontWeight="SemiBold"
                                 Height="22" Grid.ColumnSpan="2" />
 
-                <TextBlock  Text="Title" 
+                <TextBlock  Text="Case Reason" 
                                 FontSize="15px"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
@@ -304,19 +310,19 @@
                                 FontWeight="SemiBold"
                                 Height="22" Grid.ColumnSpan="2" />
 
-                <TextBlock  Text="Lead Source" 
+                <TextBlock  Text="Date Opened" 
                                 FontSize="15px"
                                 FontWeight="SemiBold"
                                 TextAlignment="Right"
                                 Margin="15,150,620,446" Grid.ColumnSpan="2" />
 
-                <TextBlock  Text="Industry" 
+                <TextBlock  Text="Product" 
                                 FontSize="15px"
                                 TextAlignment="Right"
                                 FontWeight="SemiBold"
                                 Margin="15,210,620,437" Grid.Column="1" />
 
-                <TextBlock  Text="Campaign" 
+                <TextBlock  Text="Created By" 
                                 FontSize="15px"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
@@ -332,7 +338,7 @@
                                 FontWeight="SemiBold"
                                 Height="22" Grid.ColumnSpan="2" />
 
-                <TextBlock  Text="Phone"
+                <TextBlock  Text="Subject"
                                 TextAlignment="Right"
                                 VerticalAlignment="Top"
                                 FontSize="15px"
@@ -340,7 +346,7 @@
                                 FontWeight="SemiBold"
                                 Height="20" Grid.Column="1" />
 
-                <TextBlock  Text="Mobile"
+                <TextBlock  Text="Case Status"
                                 TextAlignment="Right"
                                 VerticalAlignment="Top"
                                 FontSize="15px" 
@@ -348,7 +354,7 @@
                                 FontWeight="SemiBold"
                                 Height="24" Grid.Column="1" />
 
-                <TextBlock  Text="Fax"
+                <TextBlock  Text="Case Priority"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px"
@@ -356,7 +362,7 @@
                                 FontWeight="SemiBold"
                                 Height="26" Grid.Column="1" />
 
-                <TextBlock  Text="Email" 
+                <TextBlock  Text="Contact Phone" 
                                 FontSize="15px"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
@@ -364,7 +370,7 @@
                                 FontWeight="SemiBold"
                                 Height="26" Grid.Column="1" />
 
-                <TextBlock  Text="Lead Status"
+                <TextBlock  Text="Contact Email"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px"
@@ -372,7 +378,7 @@
                                 FontWeight="SemiBold"
                                 Height="28" Grid.Column="1" />
 
-                <TextBlock  Text="Rating"
+                <TextBlock  Text="Case Origin"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px" 
@@ -380,7 +386,7 @@
                                 Margin="327,180,242,0" 
                                 Height="22" Grid.Column="1" />
 
-                <TextBlock  Text="No. of Employees"
+                <TextBlock  Text="Date Closed"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px" 
@@ -388,7 +394,7 @@
                                 Margin="327,210,242,0" 
                                 Height="22" Grid.Column="1" />
 
-                <TextBlock  Text="Address"
+                <TextBlock  Text="Updated By"
                                 VerticalAlignment="Top"
                                 TextAlignment="Right"
                                 FontSize="15px" 
@@ -451,4 +457,5 @@
         </Grid>
     </Grid>
 </Page>
+
 

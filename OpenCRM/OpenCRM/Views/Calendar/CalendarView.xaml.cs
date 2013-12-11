@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using OpenCRM.Models.Objects.Opportunities;
 using OpenCRM.Models.Calendar;
 using OpenCRM.Models.Objects.Campaigns;
+using OpenCRM.Controllers.Campaign;
 
 namespace OpenCRM.Views.Calendar
 {
@@ -58,7 +59,8 @@ namespace OpenCRM.Views.Calendar
             }
             else if (AppointmentType.Campaign == Type)
             {
-                
+                CampaignController.CurrentCampaignId = Appointment_Id;
+                PageSwitcher.Switch("/Views/Objects/Campaigns/Edit.xaml");
             }
         }
 

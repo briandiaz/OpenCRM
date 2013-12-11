@@ -31,7 +31,7 @@ namespace OpenCRM.Models.Calendar
                             Title = opportunity.Name,
                             Account = (opportunity.AccountId.HasValue) ? opportunity.Account.Name : string.Empty,
                             Campaign = (opportunity.CampaignPrimarySourceId.HasValue) ? opportunity.Campaign.Name : string.Empty,
-                            Product = (opportunity.ProductId.HasValue) ? opportunity.Product.Name : string.Empty,
+                            Product = (opportunity.ProductId.HasValue) ? opportunity.Products.Name : string.Empty,
                             EndTime = opportunity.CloseDate
                         }
                     ).ToList().AsParallel().Select(x =>
