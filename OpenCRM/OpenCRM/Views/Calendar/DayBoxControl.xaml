@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="OpenCRM.Views.Calendar.DayBoxControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             MinWidth="100" 
+             MinHeight="100"
+             BorderThickness="2">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="BlueGradientBrush" EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                <GradientStop Color="#FFC4DDFF" Offset="0.987"/>
+                <GradientStop Color="#FFDEECFF" Offset="0.535"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="GrayGradientBrush" EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FFFFFF" Offset="0"/>
+                <GradientStop Color="#D7D7D7" Offset="0.535"/>
+                <GradientStop Color="#B4B3B5" Offset="0.987"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="OrangeGradientBrush" EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#FFFFFFDC" Offset="0"/>
+                <GradientStop Color="#FFFADC96" Offset="0.525"/>
+                <GradientStop Color="#FFF9D07D" Offset="0.732"/>
+                <GradientStop Color="#FFF7BE57" Offset="1"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Border BorderBrush="LightGray"
+            BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Name="DayLabelRowBorder" CornerRadius="2" Grid.Row="0" BorderBrush="{x:Null}" 
+                    Background="{DynamicResource BlueGradientBrush}">
+                <Label x:Name="DayNumberLabel" Content="1" FontWeight="Bold" FontFamily="Arial"/>
+            </Border>
+        
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Hidden">
+                <StackPanel Name="DayAppointmentsStack" HorizontalAlignment="Stretch" Background="White" 
+                            VerticalAlignment="Stretch">
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>

@@ -37,6 +37,9 @@
     <ApplicationIcon>OpenCRM.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="De.TorstenMandelkow.MetroChart">
+      <HintPath>..\packages\De.TorstenMandelkow.MetroChart.1.0.0\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -292,8 +295,11 @@
     <Compile Include="DataBase\User.cs">
       <DependentUpon>OpenCRMDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Calendar\CalendarModel.cs" />
+    <Compile Include="Models\Dashboard\DashboardModel.cs" />
     <Compile Include="Models\Objects\Accounts\AccountsModel.cs" />
     <Compile Include="Models\Objects\Campaigns\CampaignsModel.cs" />
+    <Compile Include="Models\Objects\Campaigns\Permission.cs" />
     <Compile Include="Models\Objects\Cases\CasesModel.cs" />
     <Compile Include="Models\Objects\Contacts\ContactsModel.cs" />
     <Compile Include="Models\Objects\Leads\LeadsModel.cs" />
@@ -303,6 +309,21 @@
     <Compile Include="Page\PageSwitcher.cs" />
     <Compile Include="Controllers\Session\Session.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
+    <Compile Include="Views\Calendar\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\DayBoxAppointmentControl.xaml.cs">
+      <DependentUpon>DayBoxAppointmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\DayBoxControl.xaml.cs">
+      <DependentUpon>DayBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\MonthCalendarControl.xaml.cs">
+      <DependentUpon>MonthCalendarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendar\WeekOfDaysControl.xaml.cs">
+      <DependentUpon>WeekOfDaysControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Chat\ChatView.xaml.cs">
       <DependentUpon>ChatView.xaml</DependentUpon>
     </Compile>
@@ -331,7 +352,7 @@
     <Compile Include="Views\Objects\Campaigns\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Objects\Campaigns\Dashboard\Dashboard.xaml.cs">
+    <Compile Include="Views\Objects\Dashboard\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Campaigns\Edit.xaml.cs">
@@ -420,6 +441,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Calendar\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\DayBoxAppointmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\DayBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\MonthCalendarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendar\WeekOfDaysControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Chat\ChatView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -456,7 +497,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Objects\Campaigns\Dashboard\Dashboard.xaml">
+    <Page Include="Views\Objects\Dashboard\Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1561,6 +1602,10 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Img\Icons\Calendar.ico" />
+    <Resource Include="Assets\Img\Icons\Dashboard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

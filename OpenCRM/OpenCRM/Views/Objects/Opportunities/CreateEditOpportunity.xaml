@@ -80,9 +80,10 @@
         <ScrollViewer Grid.Row="1"
                       Grid.Column="1"
                       Visibility="Visible"
-                      Height="600"
+                      Height="Auto"
                       Width="Auto">
-            <Grid>
+            
+            <Grid Name="MainGrid">
                 <Grid.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="Background" Value="#1179BE" />
@@ -117,13 +118,6 @@
                 <Grid Grid.Row="1" Name="gridOpportunityInformation"
                       Visibility="Visible">
 
-                    <TextBlock  Text="Private"
-        	                    VerticalAlignment="Top"
-        	                    TextAlignment="Right"
-        	                    FontSize="15px"
-                                Margin="33,67,629,0" 
-                                Height="20" />
-
                     <TextBlock Text="Opportunity Owner"
         	                   VerticalAlignment="Top"
         	                   TextAlignment="Right"
@@ -131,13 +125,24 @@
                                Margin="33,34,629,0" 
                                Height="26" />
 
-                    <Label  Name="lblOpportunityOwner"
+                    <Label  Name="lblOwner"
                             Content=""
         	                FontSize="15px"
-                            Margin="198,28,0,0" HorizontalAlignment="Left" Width="202" Height="31" VerticalAlignment="Top" />
+                            Margin="198,28,0,0" 
+                            HorizontalAlignment="Left" 
+                            Width="202" 
+                            Height="31" 
+                            VerticalAlignment="Top" />
+
+                    <TextBlock  Text="Private"
+        	                    VerticalAlignment="Top"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+                                Margin="33,67,629,0" 
+                                Height="20" />
 
                     <controls:ToggleSwitch 
-                            Name="ckbOpportunityPrivate"
+                            Name="ckbPrivate"
                             Width="71"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -167,12 +172,12 @@
                             Background="Transparent" 
                             HorizontalAlignment="Left" 
                             Width="204" Height="32" VerticalAlignment="Top">
-
-                        <TextBox Name="tbxOpportunityName"
-                                 Margin="4,3"
-                                 TextWrapping="Wrap"
-                                 controls:TextboxHelper.ClearTextButton="True"
-                                 controls:TextboxHelper.Watermark="" />
+                        <Grid>
+                            <TextBox Name="tbxName"
+                                     Margin="4,3"
+                                     controls:TextboxHelper.ClearTextButton="True"
+                                     controls:TextboxHelper.Watermark="" />
+                        </Grid>
                     </Border>
 
                     <TextBlock  Text="Account Name"
@@ -182,7 +187,7 @@
                                 Margin="33,137,629,0" 
                                 Height="24" />
 
-                    <TextBox Name="tbxAccountName"
+                    <TextBox Name="tbxAccount"
                              IsEnabled="False" 
         	                 Margin="198,135,0,0"
                              Height="23" 
@@ -190,7 +195,7 @@
                              HorizontalAlignment="Left" 
                              Width="197" />
 
-                    <Button Name="btnSearchAccount"
+                    <Button Name="btnAccount"
                             Margin="400,135,387,0"
                             Click="btnSearchAccount_Click" 
                             Height="26" 
@@ -208,7 +213,7 @@
         	                    Margin="33,166,629,0" 
                                 Height="26" />
 
-                    <ComboBox Name="cmbOpportunityType"
+                    <ComboBox Name="cmbType"
                               Margin="198,166,0,0" 
                               DisplayMemberPath="Name"
                               SelectedValuePath="OpportunityTypeId"
@@ -235,6 +240,32 @@
                               Height="26" 
                               VerticalAlignment="Top" />
 
+                    <TextBlock  Text="Campaign Source"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px" 
+        	                    Margin="432,39,258,0" 
+                                Height="23" 
+                                VerticalAlignment="Top" />
+
+                    <TextBox Name="tbxCampaign"
+                             IsEnabled="False"
+        	                 Margin="570,36,0,0" 
+                             Height="26" 
+                             VerticalAlignment="Top" 
+                             HorizontalAlignment="Left" 
+                             Width="203" />
+
+                    <Button Name="btnCampaign"
+                    	Margin="777,36,10,0"
+                    	Click="btnSearchCampaign_Click" 
+                    	Height="26" 
+                    	VerticalAlignment="Top">
+                        <StackPanel>
+                            <Image Source="/OpenCRM;component/Assets/Img/Search.png" 
+                    			   Width="13"/>
+                        </StackPanel>
+                    </Button>
+
                     <TextBlock  Text="Close Date"
                                 TextAlignment="Right"
         	                    FontSize="15px" 
@@ -256,9 +287,10 @@
                             Background="Transparent" 
                             HorizontalAlignment="Left" 
                             Width="203">
-
-                        <DatePicker Name="tbxOpportunityCloseDate"
-                                    FontSize="18px" />
+                        <Grid>
+                            <DatePicker Name="tbxCloseDate"
+                                        FontSize="18px" />
+                        </Grid>
                     </Border>
 
                     <TextBlock  Text="Next Step"
@@ -268,9 +300,19 @@
                                 Margin="435,104,255,0" 
                                 Height="26" />
 
-                    <TextBox Name="tbxOpportunityNextStep"
+                    <TextBox Name="tbxNextStep"
         	                 Margin="570,104,0,0" 
                              Height="25"
+                             controls:TextboxHelper.ClearTextButton="True"
+                             VerticalAlignment="Top" 
+                             HorizontalAlignment="Left" 
+                             Width="203" />
+
+                    <TextBox Name="tbxModifyReadNextStep"
+        	                 Margin="570,104,0,0" 
+                             Height="25"
+                             IsEnabled="False"
+                             Visibility="Collapsed"
                              controls:TextboxHelper.ClearTextButton="True"
                              VerticalAlignment="Top" 
                              HorizontalAlignment="Left" 
@@ -292,13 +334,14 @@
                             Width="211" 
                             Height="32" 
                             VerticalAlignment="Top">
-
-                        <ComboBox Name="cmbOpportunityStage"
-        	                      Margin="4,3" 
-                                  SelectionChanged="cmbOpportunityStage_SelectionChanged"
-                                  DisplayMemberPath="Name"
-                                  SelectedValuePath="OpportunityStageId"
-                                  SelectedValue="1"/>
+                        <Grid>
+                            <ComboBox Name="cmbStage"
+        	                          Margin="4,3" 
+                                      SelectionChanged="cmbOpportunityStage_SelectionChanged"
+                                      DisplayMemberPath="Name"
+                                      SelectedValuePath="OpportunityStageId"
+                                      SelectedValue="1"/>
+                        </Grid>
                     </Border>
 
                     <TextBlock  Text="Probability (%)"
@@ -308,39 +351,13 @@
                                 Height="22" 
                                 VerticalAlignment="Top" />
 
-                    <TextBox Name="tbxOpportunityProbability"
+                    <TextBox Name="tbxProbability"
                              IsEnabled="False"
         	                 Margin="570,166,0,0" 
                              Height="26" 
                              VerticalAlignment="Top" 
                              HorizontalAlignment="Left" 
                              Width="203" />
-
-                    <TextBlock  Text="Campaign Source"
-        	                    TextAlignment="Right"
-        	                    FontSize="15px" 
-        	                    Margin="432,39,258,0" 
-                                Height="23" 
-                                VerticalAlignment="Top" />
-
-                    <TextBox Name="tbxOpportunityCampaign"
-                             IsEnabled="False"
-        	                 Margin="570,36,0,0" 
-                             Height="26" 
-                             VerticalAlignment="Top" 
-                             HorizontalAlignment="Left" 
-                             Width="203" />
-
-                    <Button Name="btnSearchCampaign"
-                    	Margin="777,36,10,0"
-                    	Click="btnSearchCampaign_Click" 
-                    	Height="26" 
-                    	VerticalAlignment="Top">
-                        <StackPanel>
-                            <Image Source="/OpenCRM;component/Assets/Img/Search.png" 
-                    			   Width="13"/>
-                        </StackPanel>
-                    </Button>
                 </Grid>
 
                 <Grid Grid.Row="1" Name="gridSearchAccount"
@@ -495,14 +512,16 @@
                                 Height="20" 
                                 VerticalAlignment="Top" />
 
-                    <TextBox Name="tbxOpportunityProduct"
+                    <TextBox Name="tbxProduct"
                              IsEnabled="False"
         	                 Margin="198,35,0,0" 
                              TextChanged="tbxOpportunityProduct_TextChanged" 
                              Height="21" 
-                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="186"/>
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left" 
+                             Width="186"/>
 
-                    <Button Name="btnSearchProduct"
+                    <Button Name="btnProduct"
                             Margin="389,35,398,0"
                             Click="btnSearchProduct_Click" 
                             Height="25" 
@@ -520,11 +539,13 @@
                                 Height="20" 
                                 VerticalAlignment="Top" />
 
-                    <TextBox Name="tbxOpportunityAmount"
+                    <TextBox Name="tbxAmount"
                              IsEnabled="False"
         	                 Margin="198,66,0,40"
                              FontSize="15"
-                             Height="20" HorizontalAlignment="Left" Width="186"/>
+                             Height="20" 
+                             HorizontalAlignment="Left" 
+                             Width="186"/>
 
                     <TextBlock  Text="Quantity"
                     	        TextAlignment="Right"
@@ -533,7 +554,7 @@
                                 Height="20" 
                                 VerticalAlignment="Top" />
 
-                    <TextBox Name="tbxOpportunityQuantity"
+                    <TextBox Name="tbxQuantity"
                     	     Margin="570,35,0,0" 
                              TextChanged="tbxOpportunityQuantity_TextChanged" 
                              controls:TextboxHelper.ClearTextButton="True"
@@ -544,7 +565,7 @@
                              HorizontalAlignment="Left" 
                              Width="160"/>
 
-                    <Button Name="btnCalculateQuantityProduct"
+                    <Button Name="btnAmount"
                             Content="Calcute"
                             Margin="389,66,360,0"
                             Click="btnCalculateQuantityProduct_Click" 
@@ -558,7 +579,7 @@
                                 Height="25" 
                                 VerticalAlignment="Top" />
 
-                    <Label Name="lblOpportunityLeft"
+                    <Label Name="lblRemaining"
                            Content=""
                            TextBlock.FontSize="18px"
                            TextBlock.Foreground="Red"
@@ -569,7 +590,6 @@
                            VerticalAlignment="Top" 
                            HorizontalAlignment="Left" 
                            Width="160"/>
-
                 </Grid>
 
                 <Grid Grid.Row="3" Name="gridSearchProduct"
@@ -656,12 +676,11 @@
                                 Margin="43,32,621,0" 
                                 Height="26" />
 
-                    <TextBox Name="tbxOpportunityOrderNumber"
+                    <TextBox Name="tbxOrderNumber"
         	                 Margin="198,32,0,0"
                              controls:TextboxHelper.ClearTextButton="True"
                              Height="26" 
-                             VerticalAlignment="Top" 
-                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top"  
                              HorizontalAlignment="Left" 
                              Width="199"/>
 
@@ -680,13 +699,6 @@
                              HorizontalAlignment="Left" 
                              Width="199" />
 
-                    <TextBlock  Text="Main Competidor"
-        	                    VerticalAlignment="Top"
-        	                    TextAlignment="Right"
-        	                    FontSize="15px"
-        	                    Margin="421,32,258,0" 
-                                Height="20" />
-
                     <TextBlock  Text="Tracking Number"
         	                    VerticalAlignment="Top"
         	                    TextAlignment="Right"
@@ -694,34 +706,28 @@
         	                    Margin="43,96,621,0" 
                                 Height="24" />
 
-                    <TextBox Name="tbxOpportunityTrackingNumber"
+                    <TextBox Name="tbxTrackingNumber"
                              controls:TextboxHelper.ClearTextButton="True"
         	                 Margin="199,94,0,40" 
                              HorizontalAlignment="Left" 
                              Width="199" />
 
-                    <TextBox Name="tbxOpportunityMainCompetidor"
+                    <TextBlock  Text="Main Competidor"
+        	                    VerticalAlignment="Top"
+        	                    TextAlignment="Right"
+        	                    FontSize="15px"
+        	                    Margin="421,32,258,0" 
+                                Height="20" />
+
+                    <TextBox Name="tbxCompetidor"
                              IsEnabled="False"
         	                 Margin="566,32,0,0" 
                              Height="26" 
-                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="193" />
+                             VerticalAlignment="Top" 
+                             HorizontalAlignment="Left" 
+                             Width="193" />
 
-                    <TextBlock  Text="Service Status" 
-        	                    FontSize="15px"
-        	                    VerticalAlignment="Top"
-        	                    TextAlignment="Right"
-        	                    Margin="421,63,250,0" 
-                                Height="26" />
-
-                    <ComboBox   Name="cmbOpportunityServiceStatus"
-        	                    DisplayMemberPath="Name"
-                                SelectedValuePath="OpportunityStatusId"
-                                SelectedValue="1"
-                                Margin="566,63,0,0" 
-                                Height="26" 
-                                VerticalAlignment="Top" HorizontalAlignment="Left" Width="193" />
-
-                    <Button Name="btnSearchCompetidor"
+                    <Button Name="btnCompetidor"
                             Margin="764,32,23,0"
                             Click="btnSearchCompetidor_Click" 
                             Height="26" 
@@ -731,6 +737,23 @@
                         		   Width="13"/>
                         </StackPanel>
                     </Button>
+
+                    <TextBlock  Text="Service Status" 
+        	                    FontSize="15px"
+        	                    VerticalAlignment="Top"
+        	                    TextAlignment="Right"
+        	                    Margin="421,63,250,0" 
+                                Height="26" />
+
+                    <ComboBox   Name="cmbStatus"
+        	                    DisplayMemberPath="Name"
+                                SelectedValuePath="OpportunityStatusId"
+                                SelectedValue="1"
+                                Margin="566,63,0,0" 
+                                Height="26" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left" 
+                                Width="193" />
 
                 </Grid>
 
@@ -896,7 +919,7 @@
             	                Margin="34,29,652,166" 
             	                Height="20" />
 
-                    <TextBox Name="tbxOpportunityDescription"
+                    <TextBox Name="tbxDescription"
             	             Margin="175,24,0,62" 
                              VerticalAlignment="Center"
                              Height="129"
@@ -904,7 +927,6 @@
                              HorizontalAlignment="Left" 
                              Width="500"/>
                 </Grid>
-
             </Grid>
         </ScrollViewer>
     </Grid>

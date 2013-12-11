@@ -50,7 +50,7 @@
                         Orientation="Horizontal"
                         >
                 <Image Source="/Assets/Img/Icons/32px/user.png" />
-                <TextBlock Text="UserName" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="16" HorizontalAlignment="Left" Margin="15,0,0,0"/>
+                <TextBlock Text="UserName" Name="tbxUserName"  VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="16" HorizontalAlignment="Left" Margin="15,0,0,0"/>
                 <Button Name="btnAddUsers"
                         Cursor="Hand"
                         Style="{DynamicResource MetroCircleButtonStyle}"
@@ -129,7 +129,7 @@
                         Margin="5,0,0,0" Click="btnSend_Click"
                         >
                     <StackPanel Orientation="Vertical">
-                        <Image Source="/Assets/Img/Icons/32px/bubbles.png" Width="60" />
+                        <Image Source="/Assets/Img/Icons/32px/bubbles.png" Width="32" />
                         <TextBlock Text="Send" FontFamily="Segoe WP" FontSize="26" />
                     </StackPanel>
                 </Button>

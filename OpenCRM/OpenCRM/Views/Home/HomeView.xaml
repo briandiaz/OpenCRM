@@ -27,13 +27,7 @@
 
             <DataTemplate DataType="{x:Type home:HomeData}">
                 <controls:Tile Title="{Binding Name}" Width="160" Height="160" Cursor="Hand" Click="Tile_Click_1">
-                    <Image Source="{Binding ImgUrl}"  Opacity="0.8"  Stretch="UniformToFill">
-                        <!--
-                        <Image.Effect>
-                            <effect:GrayscaleEffect x:Name="grayscaleEffect"/>
-                        </Image.Effect>
-                        -->
-                    </Image>
+                    <Image Source="{Binding ImgUrl}"  Opacity="0.8"  Stretch="UniformToFill"/>
                 </controls:Tile>
             </DataTemplate>            
 

@@ -101,16 +101,10 @@
                     Margin="605,20,43,31" 
                     Click="btnConvert_OnClick"/>
 
-            <Button x:Name="btnDeleteLead"
-                Content="Delete"
-                RenderTransformOrigin="3.322,0.756"
-                Margin="505,20,144,31" 
-                Click="btnDelete_OnClick"/>
-
             <Button x:Name="btnEditLead"
                 Content="Edit"
                 RenderTransformOrigin="3.322,0.756"
-                Margin="405,20,244,31" 
+                Margin="492,20,157,31" 
                 Click="btnEditLead_OnClick"/>
         </Grid>
 

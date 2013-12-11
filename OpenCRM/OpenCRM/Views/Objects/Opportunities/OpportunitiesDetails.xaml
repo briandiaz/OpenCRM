@@ -127,7 +127,7 @@
                 </Border>
             </Grid>
 
-            <Grid Grid.Row="1" Name="gridOpportunityDetails"
+            <Grid Grid.Row="1" Name="MainGrid"
                   VerticalAlignment="Top" Height="550" >
 
                 <Label  Name="lblLine"
@@ -377,7 +377,7 @@
                             Height="28" 
                             VerticalAlignment="Top" />
 
-                <Label  Name="lblOpportunityOwner"
+                <Label  Name="lblOwner"
                         Content=""
                         VerticalAlignment="Top"
                         FontSize="15px"
@@ -386,23 +386,24 @@
                         Width="209"/>
 
                 <CheckBox  Name="ckbPrivate"
+                           IsEnabled="False"
                            VerticalAlignment="Top"
                            Margin="200,64,563,0" 
                            Height="14"/>
 
-                <Label  Name="lblOpportunityName"
+                <Label  Name="lblName"
                         Content=""
                         VerticalAlignment="Top"
                         FontSize="15px"
                         Margin="191,84,0,0" HorizontalAlignment="Left" Width="215"/>
 
-                <Label  Name="lblAccountName"
+                <Label  Name="lblAccount"
                         Content=""
                         VerticalAlignment="Top"
                         FontSize="15px"
                         Margin="191,115,0,0" HorizontalAlignment="Left" Width="215"/>
 
-                <Label  Name="lblOpportunityType"
+                <Label  Name="lblType"
                         Content=""
                         VerticalAlignment="Top"
                         FontSize="15px"
@@ -414,7 +415,7 @@
                         FontSize="15px"
                         Margin="191,175,0,0" HorizontalAlignment="Left" Width="215"/>
 
-                <Label  Name="lblCampaignSource"
+                <Label  Name="lblCampaign"
                         Content=""
                         VerticalAlignment="Top"
                         FontSize="15px"
@@ -432,7 +433,7 @@
                         FontSize="15px"
                         Margin="540,84,0,0" HorizontalAlignment="Left" Width="213" />
 
-                <Label  Name="lblOpportunityStage"
+                <Label  Name="lblStage"
                         Content=""
                         VerticalAlignment="Top"
                         FontSize="15px"
@@ -480,13 +481,13 @@
                 	    FontSize="15px"
                 	    Margin="191,382,0,0" HorizontalAlignment="Left" Width="215"/>
 
-                <Label  Name="lblMainCompetidor"
+                <Label  Name="lblCompetidor"
                 	    Content=""
                 	    VerticalAlignment="Top"
                 	    FontSize="15px"
                 	    Margin="540,322,0,0" HorizontalAlignment="Left" Width="213"/>
 
-                <Label  Name="lblServiceStatus"
+                <Label  Name="lblStatus"
                 	    Content=""
                 	    VerticalAlignment="Top"
                 	    FontSize="15px"

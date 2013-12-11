@@ -20,12 +20,6 @@ namespace OpenCRM.Models.Settings
 {
     public class SettingsModel
     {
-        #region "Values"
-        int _userId;
-        List<AccessRights> _userAccessRights;
-        
-        #endregion
-
         #region "Properties"
 
         public List<Profile> Profiles { get; set; }
@@ -35,13 +29,6 @@ namespace OpenCRM.Models.Settings
         #region "Constructor"
         public SettingsModel()
         {
-
-        }
-
-        public SettingsModel(int UserId, List<AccessRights> RightsAccess)
-        {
-            this._userId = UserId;
-            this._userAccessRights = RightsAccess;
             this.Profiles = getAllProfiles();
         }
 
@@ -53,8 +40,10 @@ namespace OpenCRM.Models.Settings
         {
             bool hasRights = false;
 
-            hasRights = _userAccessRights.Any(
-                x => x.ObjectName == "Settings" && x.ObjectFieldName == itemHeader
+            hasRights = Session.AccessRights.Any(
+                x => x.ObjectName == "Settings" && 
+                     x.ObjectFieldName == itemHeader &&
+                     x.Modify == true
             );
 
             return hasRights;
@@ -67,6 +56,7 @@ namespace OpenCRM.Models.Settings
                 if (item.Header.ToString() == ItemName)
                 {
                     item.IsEnabled = false;
+                    item.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -101,39 +91,21 @@ namespace OpenCRM.Models.Settings
 
         public Profile getUserProfile()
         {
-            var userProfile = Profiles.SingleOrDefault(x => x.ProfileId == this._userId);
+            var userProfile = Profiles.SingleOrDefault(x => x.ProfileId == Session.UserId);
             return userProfile;
         }
 
         public UserData getUserData()
         {
-            UserData userData = null;
+            var userSession = Session.getUserSession();
 
-            try
-            {
-                using (var _db = new OpenCRMEntities())
-                {
-                    var user = _db.User.Single(x => x.UserId == this._userId);
-
-                    userData = new UserData(
-                        user.UserName,
-                        user.Name,
-                        user.LastName,
-                        user.BirthDate.Value,
-                        user.Email
-                    );
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            return userData;
+            return new UserData(
+                userSession.UserName,
+                userSession.Name,
+                userSession.LastName,
+                userSession.BirthDate.Value,
+                userSession.Email
+            );
         }
 
         public void SaveEditUser(UserData User)
@@ -142,15 +114,15 @@ namespace OpenCRM.Models.Settings
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    var user = _db.User.SingleOrDefault(x => x.UserId == this._userId);
+                    var user = _db.User.SingleOrDefault(x => x.UserId == Session.UserId);
 
                     user.BirthDate = Convert.ToDateTime(User.BirthDate);
                     user.Email = User.Email;
                     user.LastName = User.LastName;
                     user.Name = User.Name;
                     user.UpdateDate = DateTime.Now;
+                   
                     _db.SaveChanges();
-                    MessageBox.Show("Changes saved correctly.");
                 }
             }
             catch (SqlException ex)
@@ -200,7 +172,19 @@ namespace OpenCRM.Models.Settings
             return System.Text.RegularExpressions.Regex.IsMatch(st, pattern);
         }
 
-        public void SaveNewUser(string userName, string birthDate, string email, string password, string confirmPassword, string name, string lastName, ComboBox profile, Image imageEmail, Image imgProfile, Image imgPassword, Image imgConfirm, Button search)
+        public void SaveNewUser(string userName, 
+                                string birthDate, 
+                                string email, 
+                                string password, 
+                                string confirmPassword, 
+                                string name, 
+                                string lastName, 
+                                ComboBox profile, 
+                                Image imageEmail, 
+                                Image imgProfile, 
+                                Image imgPassword, 
+                                Image imgConfirm, 
+                                Button search)
         {
             #region Validate
             bool complete = true;
@@ -215,7 +199,7 @@ namespace OpenCRM.Models.Settings
                 complete = false;
             }
 
-            if (Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+", password))
+            if (Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$", password))
             {
                 imgPassword.Source = new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute));
             }
@@ -224,7 +208,7 @@ namespace OpenCRM.Models.Settings
                 imgPassword.Source = new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
                 complete = false;
             }
-            if (password == confirmPassword && Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+", confirmPassword))
+            if (password == confirmPassword && Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$", confirmPassword))
             {
                 imgConfirm.Source = new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute));
             }
@@ -286,12 +270,10 @@ namespace OpenCRM.Models.Settings
                     MessageBox.Show(ex.ToString());
                 }
             }
-
-        }
-
-        public void ValidateFields(string us)
-        {
-
+            else
+            {
+                MessageBox.Show("Please, fill all fields mark with an X.");
+            }
         }
 
         #endregion
@@ -318,9 +300,11 @@ namespace OpenCRM.Models.Settings
                         profileObjectsFields.ProfileObjectId == profileObjects.ProfileObjectId &&
                         profileObjectsFields.ObjectFieldsId == fields.ObjectFieldsId &&
                         objects.ObjectId == fields.ObjectId
+                    orderby objects.ObjectId ascending
                     select
                         new AccessRights()
                         {
+                            ProfileObjectFieldId = profileObjectsFields.ProfileObjectFieldsId,
                             ObjectId = objects.ObjectId,
                             ObjectName = objects.Name,
                             ObjectFielId = fields.ObjectFieldsId,
@@ -420,24 +404,27 @@ namespace OpenCRM.Models.Settings
         {
             var ObjectsFieldsNames = new Dictionary<string, List<string>>();
             var ObjectsFieldsCheckBox = new Dictionary<string, List<List<bool>>>();
-
+            var ProfileObjectFieldsId = new Dictionary<string, List<int>>();
 
             foreach (var key in Permission)
             {
                 var labelsObjectsFields = new List<string>();
                 var checkBoxesPermission = new List<List<bool>>();
+                var listId = new List<int>();
 
                 foreach (var value in key.Value)
                 {
                     labelsObjectsFields.Add(value.ObjectFieldName);
-                    
-                    var checkBoxes = new List<bool>(3);
+                    listId.Add(value.ProfileObjectFieldId);
+
+                    var checkBoxes = new List<bool>();
                     checkBoxes.Add(value.Modify);
                     checkBoxes.Add(value.Read);
 
                     checkBoxesPermission.Add(checkBoxes);
                 }
 
+                ProfileObjectFieldsId.Add(key.Key, listId);
                 ObjectsFieldsNames.Add(key.Key, labelsObjectsFields);
                 ObjectsFieldsCheckBox.Add(key.Key, checkBoxesPermission);
             }
@@ -456,15 +443,16 @@ namespace OpenCRM.Models.Settings
                     listProfileData.Add(
                         new DataGridProfileData()
                         {
+                            Id = ProfileObjectFieldsId[itemHeader][i],
                             Fields = ObjectsFieldsNames[itemHeader][i].PadRight(100),
-                            Create = ObjectsFieldsCheckBox[itemHeader][i][0],
-                            Modify = ObjectsFieldsCheckBox[itemHeader][i][1],
-                            Read = ObjectsFieldsCheckBox[itemHeader][i][2]
+                            Modify = ObjectsFieldsCheckBox[itemHeader][i][0],
+                            Read = ObjectsFieldsCheckBox[itemHeader][i][1]
                         }
                     );
                 }
 
                 itemDataGrid.AutoGeneratedColumns += AutoGeneratingColumnDataGrid;
+                itemDataGrid.CanUserAddRows = false;
                 itemDataGrid.ItemsSource = listProfileData;
             }
         }
@@ -477,6 +465,9 @@ namespace OpenCRM.Models.Settings
             {
                 if (item.Header.ToString() == "Fields")
                     item.IsReadOnly = true;
+
+                if (item.Header.ToString() == "Id")
+                    item.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -492,10 +483,11 @@ namespace OpenCRM.Models.Settings
                 var profileDataGrid = itemGrid.ItemsSource as List<DataGridProfileData>;
 
                 foreach (var item in profileDataGrid)
-                {
+                {   
                     newListAccessRights.Add(
                         new AccessRights() 
                         {
+                            ProfileObjectFieldId = item.Id,
                             Modify = item.Modify,
                             Read = item.Read,
                             ObjectFieldName = item.Fields,
@@ -507,42 +499,25 @@ namespace OpenCRM.Models.Settings
 
             try
             {
-                using (var db = new OpenCRMEntities())
+                //Parellel Programming
+                Parallel.ForEach(newListAccessRights, item =>
                 {
-                    var query = (
-                        from objects in db.Objects
-                        from fields in db.Object_Fields
-                        from profile in db.Profile
-                        from profileObjects in db.Profile_Object
-                        from profileObjectsFields in db.Profile_Object_Fields
-                        where
-                            SelectedProfileId == profile.ProfileId &&
-                            profile.ProfileId == profileObjects.ProfileId &&
-                            profileObjects.ObjectId == objects.ObjectId &&
-                            profileObjectsFields.ProfileObjectId == profileObjects.ProfileObjectId &&
-                            profileObjectsFields.ObjectFieldsId == fields.ObjectFieldsId &&
-                            objects.ObjectId == fields.ObjectId
-                        select
-                            profileObjectsFields
-                    );
-
-                    foreach (var item in newListAccessRights)
+                    using (var db = new OpenCRMEntities())
                     {
-                        Profile_Object_Fields selectedRow = query.SingleOrDefault(
-                            x =>
-                                x.Object_Fields.Name == item.ObjectFieldName &&
-                                x.Object_Fields.Objects.Name == item.ObjectName
+
+                        Profile_Object_Fields selectedRow = db.Profile_Object_Fields.SingleOrDefault(
+                            x => x.ProfileObjectFieldsId == item.ProfileObjectFieldId
                         );
 
                         if (!(selectedRow.Modify == item.Modify && selectedRow.Read == item.Read))
                         {
                             selectedRow.Modify = item.Modify;
                             selectedRow.Read = item.Read;
-
-                            db.SaveChanges();
                         }
+
+                        db.SaveChanges();
                     }
-                }
+                });
             }
             catch (SqlException ex)
             {
@@ -552,6 +527,9 @@ namespace OpenCRM.Models.Settings
             {
                 MessageBox.Show(ex.ToString());
             }
+
+            //New Thread
+            Task.Factory.StartNew(() => Session.RefreshUserAccessRights());
         }
 
         #endregion
@@ -587,18 +565,16 @@ namespace OpenCRM.Models.Settings
         }
 
         #endregion
-
     }
 
     public class DataGridProfileData
     {
         #region "Properties"
+        public int Id { get; set; }
         public string Fields { get; set; }
-        public bool Create { get; set; }
         public bool Modify { get; set; }
         public bool Read { get; set; }
 
         #endregion
     }
-
 }

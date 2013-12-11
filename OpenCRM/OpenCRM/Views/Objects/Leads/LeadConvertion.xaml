@@ -172,6 +172,17 @@
                             RenderTransformOrigin="-5.28,-12.3" 
                             Margin="200,122,397,173" />
 
+                <TextBlock  Text="Close Date"
+                            VerticalAlignment="Top"
+                            TextAlignment="Right"
+                            FontSize="15px"
+                            Margin="363,128,273,0" 
+                            Height="22" />
+
+                <DatePicker Name="dtCloseDate"
+                            RenderTransformOrigin="-5.28,-12.3" 
+                            Margin="542,122,55,173"/>
+
                 <TextBlock  Text="Converted Status"
                             VerticalAlignment="Top"
                             TextAlignment="Right"
@@ -179,7 +190,7 @@
                             Margin="15,184,620,0" 
                             Height="22" />
 
-                <TextBox x:Name="tbxRecordOwner"
+                <Label x:Name="lblRecordOwner"
                     Controls:TextboxHelper.ClearTextButton="True"
                 	RenderTransformOrigin="-5.28,-12.3" 
                 	Margin="200,22,397,269" />
@@ -198,7 +209,9 @@
                 	Margin="184,73,608,221" />
                 <Grid Background="#DA3232"
                 	Margin="184,24,608,269" />
-
+                <Grid Name="RedCloseDate"
+                    Background="#DA3232"
+                    Margin="530,121,262,173" />
                 <CheckBox Name="checkOpportunity"
                           Content="Do not create opportunity upon convertion." 
                           HorizontalAlignment="Left" 

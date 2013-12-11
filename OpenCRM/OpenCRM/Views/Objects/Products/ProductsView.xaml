@@ -124,7 +124,7 @@
                 IsReadOnly="True"
                 SelectionMode="Single"
                 Name="RecentProductsGrid"
-                Margin="0,60,0,0"    
+                Margin="20,45,20,20"    
                 Style="{DynamicResource MetroDataGrid}"
                 Grid.Column="1" 
                 HorizontalAlignment="Left"

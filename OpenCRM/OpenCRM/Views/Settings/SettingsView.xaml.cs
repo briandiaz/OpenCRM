@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using OpenCRM.Models.Settings;
 using OpenCRM.Controllers.Session;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace OpenCRM.Views.Settings
 {
@@ -28,37 +30,43 @@ namespace OpenCRM.Views.Settings
         public SettingsView()
         {
             InitializeComponent();
-            _settingsModel = new SettingsModel(Session.UserId, Session.RightAccess);
+            _settingsModel = new SettingsModel();
 
-            //Edit Profile 
+            //Edit Profile
             gridSettingsProfile.DataContext = _settingsModel.getUserData();
             cmbUserProfile.ItemsSource = _settingsModel.Profiles;
             cmbUserProfile.DisplayMemberPath = "Name";
             cmbUserProfile.SelectedValuePath = "ProfileId";
             cmbUserProfile.SelectedValue = _settingsModel.getUserProfile().ProfileId;
+            cmbUserProfile.IsEnabled = false;
+
+            if (_settingsModel.HasAccessRightsTo("EditUserProfile"))
+            {
+                cmbUserProfile2.IsEnabled = true;
+            } 
 
             //Create New User
-            //if (_settingsModel.HasAccessRightsTo("Create New User"))
-            //{
+            if (_settingsModel.HasAccessRightsTo("Create New User"))
+            {
                 cmbUserProfile2.ItemsSource = _settingsModel.Profiles;
                 cmbUserProfile2.DisplayMemberPath = "Name";
-            //}
-            /*else 
+            }
+            else 
             {
                 _settingsModel.DisableTabItem(this.settingsTabControl, "Create New User");
-            }*/
+            }
 
             //Permission
-            //if (_settingsModel.HasAccessRightsTo("Permission"))
-            //{
+            if (_settingsModel.HasAccessRightsTo("Permissions"))
+            {
                 ProfilesComboBox.ItemsSource = _settingsModel.Profiles;
                 ProfilesComboBox.DisplayMemberPath = "Name";
                 ProfilesComboBox.SelectedValuePath = "ProfileId";
-            /*}
+            }
             else
             {
                 _settingsModel.DisableTabItem(this.settingsTabControl,"Permission");
-            }*/
+            }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -116,7 +124,7 @@ namespace OpenCRM.Views.Settings
         {
             if (this.tbxUserHashPassword2.Password != "")
             {
-                ImagePassword.Source = _settingsModel.Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+",
+                ImagePassword.Source = _settingsModel.Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$",
                     tbxUserHashPassword2.Password) ? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
                 ImagePassword.Visibility = Visibility.Visible;
             }
@@ -130,7 +138,7 @@ namespace OpenCRM.Views.Settings
         {
             if (this.tbxUserHashPassword2.Password != "")
             {
-                ImagePasswordConfirm.Source = this.tbxUserConfirmPassword.Password == this.tbxUserHashPassword2.Password ? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+                ImagePasswordConfirm.Source = (this.tbxUserConfirmPassword.Password == this.tbxUserHashPassword2.Password && _settingsModel.Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$", this.tbxUserHashPassword2.Password))? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
                 ImagePasswordConfirm.Visibility = Visibility.Visible;
             }
             else

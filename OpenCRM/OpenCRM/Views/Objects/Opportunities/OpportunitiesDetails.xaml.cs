@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCRM.Models.Objects.Opportunities;
+using OpenCRM.Controllers.Session;
 
 namespace OpenCRM.Views.Objects.Opportunities
 {
@@ -29,19 +30,27 @@ namespace OpenCRM.Views.Objects.Opportunities
             _opportunityModel = new OpportunitiesModel();
 
             _opportunityModel.LoadOpportunityDetails(this);
+            
+            Session.ModuleAccessRights(this, ObjectsName.Opportunities);
 
-            _opportunityModel.SaveViewDate();
+            Task.Factory.StartNew(() => _opportunityModel.SaveViewDate());
         }
 
         private void btnCancelOpportunity_Click(object sender, RoutedEventArgs e)
         {
+            OpportunitiesModel.EditOpportunityId = 0;
+
             if (OpportunitiesModel.IsSearching)
             {
                 PageSwitcher.Switch("/Views/Objects/Opportunities/SearchOpportunities.xaml");
             }
-            else
+            else if (OpportunitiesModel.IsNew)
             {
                 PageSwitcher.Switch("/Views/Objects/Opportunities/OpportunitiesView.xaml");
+            }
+            else if (OpportunitiesModel.IsViewingCalendar)
+            {
+                PageSwitcher.Switch("/Views/Calendar/CalendarView.xaml");
             }
         }
 
@@ -52,9 +61,7 @@ namespace OpenCRM.Views.Objects.Opportunities
 
         private void btnDeleteOpportunity_Click(object sender, RoutedEventArgs e)
         {
-
+            //_opportunityModel.DeleteOpportunity();
         }
-
-
     }
 }

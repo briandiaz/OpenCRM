@@ -1,4 +1,5 @@
-﻿using OpenCRM.Models.Objects.Accounts;
+﻿using OpenCRM.Controllers.Session;
+using OpenCRM.Models.Objects.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace OpenCRM.Views.Objects.Accounts
             _accountModel = new AccountsModel();
 
             _accountModel.LoadAccountDetails(this);
+
+            Session.ModuleAccessRights(this, ObjectsName.Accounts);
 
             _accountModel.SaveViewDate();
         }

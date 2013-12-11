@@ -38,7 +38,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             if (OpportunitiesModel.IsNew)
             {
                 this.LoadNewOpportunity();
-                this.lblOpportunityOwner.Content = Session.UserName;
+                this.lblOwner.Content = Session.UserName;
                 this._opportunitiesModel.Data.ViewDate = DateTime.Now;
             }
 
@@ -48,6 +48,8 @@ namespace OpenCRM.Views.Objects.Opportunities
                 this._opportunitiesModel.Data.OpportunityId = OpportunitiesModel.EditOpportunityId;
                 OpportunitiesModel.EditOpportunityId = 0;
             }
+
+            Session.ModuleAccessRights(this, ObjectsName.Opportunities);
         }
 
         private void LoadEditOpportunity()
@@ -55,15 +57,15 @@ namespace OpenCRM.Views.Objects.Opportunities
             this.LoadNewOpportunity();
             _opportunitiesModel.LoadEditOpportunity(this);
 
-            this.txtTitleOpportunity.Text = this.tbxOpportunityName.Text;
+            this.txtTitleOpportunity.Text = this.tbxName.Text;
         }
 
         private void LoadNewOpportunity()
         {
-            this.cmbOpportunityType.ItemsSource = _opportunitiesModel.getOpportunityType();
-            this.cmbOpportunityStage.ItemsSource = _opportunitiesModel.getOpportunityStages();
+            this.cmbType.ItemsSource = _opportunitiesModel.getOpportunityType();
+            this.cmbStage.ItemsSource = _opportunitiesModel.getOpportunityStages();
             this.cmbLeadSource.ItemsSource = _opportunitiesModel.getLeadsSource();
-            this.cmbOpportunityServiceStatus.ItemsSource = _opportunitiesModel.getOpportunityStatus();
+            this.cmbStatus.ItemsSource = _opportunitiesModel.getOpportunityStatus();
 
             var industry =  _opportunitiesModel.getIndustry();
 
@@ -80,25 +82,25 @@ namespace OpenCRM.Views.Objects.Opportunities
         {
             var canSave = true;
 
-            if (this.tbxOpportunityCloseDate.Text == String.Empty)
+            if (this.tbxCloseDate.Text == String.Empty)
             {
                 canSave = false;
                 this.gridObligationCloseDate.Visibility = Visibility.Hidden;
                 this.borderObligationCloseDate.Background = gridObligationCloseDate.Background;
             }
 
-            if (this.tbxOpportunityName.Text == String.Empty)
+            if (this.tbxName.Text == String.Empty)
             {
                 canSave = false;
-                TextboxHelper.SetWatermark(this.tbxOpportunityName, "Must Enter Opportunity Name");
+                TextboxHelper.SetWatermark(this.tbxName, "Must Enter Opportunity Name");
                 this.gridObligationName.Visibility = Visibility.Hidden;
                 this.borderObligationName.Background = this.gridObligationName.Background;
             }
 
-            if (this.tbxOpportunityProduct.Text != String.Empty)
+            if (this.tbxProduct.Text != String.Empty)
             {                
                 int valueRemaining = 0;
-                if (Int32.TryParse(this.lblOpportunityLeft.Content.ToString(), out valueRemaining))
+                if (Int32.TryParse(this.lblRemaining.Content.ToString(), out valueRemaining))
                 {
                     if (valueRemaining < 0)
                         canSave = false;
@@ -142,21 +144,21 @@ namespace OpenCRM.Views.Objects.Opportunities
         private void ClearCreateEditOpportunity()
         {
             //Clear textbox
-            this.tbxAccountName.Text = string.Empty;
+            this.tbxAccount.Text = string.Empty;
             this.tbxCurrentGenerator.Text = string.Empty;
             this.tbxNewCompetidorsName.Text = string.Empty;
-            this.tbxOpportunityAmount.Text = string.Empty;
-            this.tbxOpportunityCampaign.Text = string.Empty;
-            this.tbxOpportunityCloseDate.Text = string.Empty;
-            this.tbxOpportunityDescription.Text = string.Empty;
-            this.tbxOpportunityMainCompetidor.Text = string.Empty;
-            this.tbxOpportunityName.Text = string.Empty;
-            this.tbxOpportunityNextStep.Text = string.Empty;
-            this.tbxOpportunityOrderNumber.Text = string.Empty;
-            this.tbxOpportunityProbability.Text = string.Empty;
-            this.tbxOpportunityProduct.Text = string.Empty;
-            this.tbxOpportunityQuantity.Text = string.Empty;
-            this.tbxOpportunityTrackingNumber.Text = string.Empty;
+            this.tbxAmount.Text = string.Empty;
+            this.tbxCampaign.Text = string.Empty;
+            this.tbxCloseDate.Text = string.Empty;
+            this.tbxDescription.Text = string.Empty;
+            this.tbxCompetidor.Text = string.Empty;
+            this.tbxName.Text = string.Empty;
+            this.tbxNextStep.Text = string.Empty;
+            this.tbxOrderNumber.Text = string.Empty;
+            this.tbxProbability.Text = string.Empty;
+            this.tbxProduct.Text = string.Empty;
+            this.tbxQuantity.Text = string.Empty;
+            this.tbxTrackingNumber.Text = string.Empty;
             this.tbxSearchAccount.Text = string.Empty;
             this.tbxSearchCampaign.Text = string.Empty;
             this.tbxSearchCompetidors.Text = string.Empty;
@@ -166,9 +168,9 @@ namespace OpenCRM.Views.Objects.Opportunities
             this.cmbLeadSource.SelectedValue = 1;
             this.cmbNewCompetidorsStrenghts.SelectedValue = 1;
             this.cmbNewCompetidorsWeakness.SelectedValue = 1;
-            this.cmbOpportunityServiceStatus.SelectedValue = 1;
-            this.cmbOpportunityStage.SelectedValue = 1;
-            this.cmbOpportunityType.SelectedValue = 1;
+            this.cmbStatus.SelectedValue = 1;
+            this.cmbStage.SelectedValue = 1;
+            this.cmbType.SelectedValue = 1;
         }
         
         private void btnCancelOpportunity_Click(object sender, RoutedEventArgs e)
@@ -197,7 +199,7 @@ namespace OpenCRM.Views.Objects.Opportunities
 
         private void cmbOpportunityStage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.tbxOpportunityProbability.Text = Convert.ToString((this.cmbOpportunityStage.SelectedItem as Opportunities_Stage).Probability);
+            this.tbxProbability.Text = Convert.ToString((this.cmbStage.SelectedItem as Opportunities_Stage).Probability);
         }
 
         private void btnSearchAccount_Click(object sender, RoutedEventArgs e)
@@ -246,7 +248,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             };
 
             this._opportunitiesModel.Data.AccountId = data.Id;
-            this.tbxAccountName.Text = data.Name;
+            this.tbxAccount.Text = data.Name;
 
             this.DataGridAccount.ItemsSource = null;
 
@@ -293,7 +295,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             };
 
             this._opportunitiesModel.Data.CampaignPrimarySourceId = data.Id;
-            this.tbxOpportunityCampaign.Text = data.Name;
+            this.tbxCampaign.Text = data.Name;
 
             this.DataGridCampaign.ItemsSource = null;
 
@@ -326,40 +328,40 @@ namespace OpenCRM.Views.Objects.Opportunities
 
         private void tbxOpportunityQuantity_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!this.tbxOpportunityProduct.Text.Equals(String.Empty))
+            if (!this.tbxProduct.Text.Equals(String.Empty))
             {
                 if (OpportunitiesModel.IsNew)
                 {
-                    var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxOpportunityProduct.Text);
+                    var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxProduct.Text);
                     int value;
 
-                    if (Int32.TryParse(this.tbxOpportunityQuantity.Text, out value))
-                        this.lblOpportunityLeft.Content = Convert.ToString(selectItem.Quantity - value);
+                    if (Int32.TryParse(this.tbxQuantity.Text, out value))
+                        this.lblRemaining.Content = Convert.ToString(selectItem.Quantity - value);
                     else
-                        this.lblOpportunityLeft.Content = selectItem.Quantity.ToString();
+                        this.lblRemaining.Content = selectItem.Quantity.ToString();
                 }
                 else
                 {
                     int value;
-                    if (Int32.TryParse(this.tbxOpportunityQuantity.Text, out value))
-                        this.lblOpportunityLeft.Content = Convert.ToString(_opportunitiesModel.Data.ProductQuantity - value);
+                    if (Int32.TryParse(this.tbxQuantity.Text, out value))
+                        this.lblRemaining.Content = Convert.ToString(_opportunitiesModel.Data.ProductQuantity - value);
                     else
-                        this.lblOpportunityLeft.Content = _opportunitiesModel.Data.ProductQuantity.ToString();
+                        this.lblRemaining.Content = _opportunitiesModel.Data.ProductQuantity.ToString();
                 }
             }
         }
 
         private void btnCalculateQuantityProduct_Click(object sender, RoutedEventArgs e)
         {
-            if (!this.tbxOpportunityProduct.Text.Equals(String.Empty))
+            if (!this.tbxProduct.Text.Equals(String.Empty))
             {
-                var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxOpportunityProduct.Text);
+                var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxProduct.Text);
                 int value;
 
-                if (Int32.TryParse(this.tbxOpportunityQuantity.Text, out value))
-                    this.tbxOpportunityAmount.Text = Convert.ToString(value * selectItem.Price);
+                if (Int32.TryParse(this.tbxQuantity.Text, out value))
+                    this.tbxAmount.Text = Convert.ToString(value * selectItem.Price);
                 else
-                    this.tbxOpportunityAmount.Text = string.Empty;
+                    this.tbxAmount.Text = string.Empty;
             }
         }
 
@@ -367,12 +369,12 @@ namespace OpenCRM.Views.Objects.Opportunities
         {
             if (OpportunitiesModel.IsNew)
             {
-                var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxOpportunityProduct.Text);
-                this.lblOpportunityLeft.Content = selectItem.Quantity.ToString();
+                var selectItem = this._opportunitiesModel.Products.Find(x => x.Name == this.tbxProduct.Text);
+                this.lblRemaining.Content = selectItem.Quantity.ToString();
             }
             else
             {
-                this.lblOpportunityLeft.Content = _opportunitiesModel.Data.ProductQuantity;
+                this.lblRemaining.Content = _opportunitiesModel.Data.ProductQuantity;
             }
         }
         
@@ -408,7 +410,7 @@ namespace OpenCRM.Views.Objects.Opportunities
 
             this._opportunitiesModel.Data.ProductId = data.Id;
             this._opportunitiesModel.Data.ProductQuantity = data.Quantity;
-            this.tbxOpportunityProduct.Text = data.Name;
+            this.tbxProduct.Text = data.Name;
 
             this.DataGridProducts.ItemsSource = null;
 
@@ -465,7 +467,7 @@ namespace OpenCRM.Views.Objects.Opportunities
             };
 
             this._opportunitiesModel.Data.CompetidorId = data.Id;
-            this.tbxOpportunityMainCompetidor.Text = data.Name;
+            this.tbxCompetidor.Text = data.Name;
 
             this.DataGridCompetidors.ItemsSource = null;
 
@@ -527,6 +529,5 @@ namespace OpenCRM.Views.Objects.Opportunities
         #endregion
 
         #endregion
-
     }
 }

@@ -150,7 +150,7 @@ namespace OpenCRM.Views.Objects.Cases
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
-
+            PageSwitcher.Switch("/Views/Objects/Cases/CasesView.xaml");
         }
 
         private void btnSearchLookUp_Click(object sender, RoutedEventArgs e)

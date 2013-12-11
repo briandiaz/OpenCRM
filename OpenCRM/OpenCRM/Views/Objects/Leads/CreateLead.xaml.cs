@@ -183,8 +183,11 @@ namespace OpenCRM.Views.Objects.Leads
         private void cmbCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox country = sender as ComboBox;
-            cmbStateProvince.IsEnabled = true;
-            cmbStateProvince.ItemsSource = _leadsModel.getStates((int)country.SelectedValue);
+            if (country.SelectedValue != null)
+            {
+                cmbStateProvince.IsEnabled = true;
+                cmbStateProvince.ItemsSource = _leadsModel.getStates((int)country.SelectedValue);
+            }
         }
     }
 }
