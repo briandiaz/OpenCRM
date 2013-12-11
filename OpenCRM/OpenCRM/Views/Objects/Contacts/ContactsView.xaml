@@ -77,8 +77,9 @@
                 </Border>
                 <ComboBox 
                           Name="cmbSearchTypeContacts"
+                          
                           VerticalAlignment="Bottom"
-                          Margin="159,0,46,5" Height="20"/>
+                          Margin="159,0,46,5" Height="20" SelectionChanged="cmbSearchTypeContacts_SelectionChanged"/>
             </Grid>
 
             <StackPanel Grid.Row="1" 
@@ -128,8 +129,8 @@
                 IsReadOnly="True"
                 Name="RecentContactsGrid"
                 Margin="20,45,20,20"    
-                AutoGenerateColumns="False"
                 Grid.Column="1" 
+                AutoGenerateColumns="False"
                 HorizontalAlignment="Left"
                 Grid.Row="3" 
                 VerticalAlignment="Top"
@@ -145,6 +146,7 @@
                                 </Style>
                             </DataGridHyperlinkColumn.ElementStyle>
                         </DataGridHyperlinkColumn>
+                        <DataGridTextColumn Header="Last Name" Width="*" Binding="{Binding LastName}" />
                         <DataGridTextColumn Header="Account Id" Width="*" Binding="{Binding AccountId}" />
                         <DataGridTextColumn Header="Phone" Width="*" Binding="{Binding Phone}" />
                     </DataGrid.Columns>

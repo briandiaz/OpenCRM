@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCRM.Models.Objects.Contacts;
 
 namespace OpenCRM.Views.Objects.Contacts
 {
@@ -20,14 +21,20 @@ namespace OpenCRM.Views.Objects.Contacts
     /// </summary>
     public partial class ContactsDetails : Page
     {
+        ContactsModel _contactModel;
         public ContactsDetails()
         {
             InitializeComponent();
+            _contactModel = new ContactsModel();
+            _contactModel.LoadContactsDetails(this);
         }
 
         private void btnEditLead_OnClick(object sender, RoutedEventArgs e)
         {
+            ContactsModel.IsEditing = true;
+            ContactsModel.IsNew = false;
 
+            PageSwitcher.Switch("/Views/Objects/Contacts/CreateContact.xaml");
         }
 
         private void btnDelete_OnClick(object sender, RoutedEventArgs e)
