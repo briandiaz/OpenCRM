@@ -278,9 +278,9 @@
             	Grid.Row="3" 
             	Name="gridProductObligation"
             	Background="#DA3232"
-            	Margin="94,35,691,305"
+            	Margin="94,35,0,305"
             	Width="6"
-            	Visibility="Visible" />
+            	Visibility="Visible" HorizontalAlignment="Left" />
             
             <Grid Grid.Column="2"
             	Grid.Row="2" 
