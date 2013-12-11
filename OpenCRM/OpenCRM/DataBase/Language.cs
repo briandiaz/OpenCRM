@@ -17,11 +17,14 @@ namespace OpenCRM.DataBase
         public Language()
         {
             this.Contact_Level_Languages = new HashSet<Contact_Level_Languages>();
+            this.Users = new HashSet<User>();
         }
     
         public int LanguageId { get; set; }
         public string Name { get; set; }
+        public string LanguageAbbreviation { get; set; }
     
         public virtual ICollection<Contact_Level_Languages> Contact_Level_Languages { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

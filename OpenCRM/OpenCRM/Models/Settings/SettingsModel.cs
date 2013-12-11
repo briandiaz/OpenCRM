@@ -199,7 +199,7 @@ namespace OpenCRM.Models.Settings
                 complete = false;
             }
 
-            if (Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+", password))
+            if (Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$", password))
             {
                 imgPassword.Source = new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute));
             }
@@ -208,7 +208,7 @@ namespace OpenCRM.Models.Settings
                 imgPassword.Source = new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
                 complete = false;
             }
-            if (password == confirmPassword && Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+", confirmPassword))
+            if (password == confirmPassword && Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$", confirmPassword))
             {
                 imgConfirm.Source = new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute));
             }
@@ -270,7 +270,10 @@ namespace OpenCRM.Models.Settings
                     MessageBox.Show(ex.ToString());
                 }
             }
-
+            else
+            {
+                MessageBox.Show("Please, fill all fields mark with an X.");
+            }
         }
 
         #endregion

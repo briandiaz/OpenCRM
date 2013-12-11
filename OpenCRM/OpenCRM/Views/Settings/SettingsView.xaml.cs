@@ -124,7 +124,7 @@ namespace OpenCRM.Views.Settings
         {
             if (this.tbxUserHashPassword2.Password != "")
             {
-                ImagePassword.Source = _settingsModel.Validate("(?=.{8,})[a-zA-Z]+[^a-zA-Z]+|[^a-zA-Z]+[a-zA-Z]+",
+                ImagePassword.Source = _settingsModel.Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$",
                     tbxUserHashPassword2.Password) ? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
                 ImagePassword.Visibility = Visibility.Visible;
             }
@@ -138,7 +138,7 @@ namespace OpenCRM.Views.Settings
         {
             if (this.tbxUserHashPassword2.Password != "")
             {
-                ImagePasswordConfirm.Source = this.tbxUserConfirmPassword.Password == this.tbxUserHashPassword2.Password ? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
+                ImagePasswordConfirm.Source = (this.tbxUserConfirmPassword.Password == this.tbxUserHashPassword2.Password && _settingsModel.Validate(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{7,}$", this.tbxUserHashPassword2.Password))? new BitmapImage(new Uri("/Assets/Img/Correct.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri("/Assets/Img/Wrong.png", UriKind.RelativeOrAbsolute));
                 ImagePasswordConfirm.Visibility = Visibility.Visible;
             }
             else

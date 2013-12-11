@@ -31,7 +31,8 @@ namespace OpenCRM.Views.Objects.Leads
 
         private void btnSaveConvertion_OnClick(object sender, RoutedEventArgs e)
         {
-            _leadsModel.SaveConvertion(this);
+            if(this.tbxAccountName.Text != null && this.tbxOpportunityName.Text != null )
+                _leadsModel.SaveConvertion(this);
         }
 
         private void btnCancelConvertion_OnClick(object sender, RoutedEventArgs e)
@@ -45,12 +46,16 @@ namespace OpenCRM.Views.Objects.Leads
             if (checkBox.IsChecked == true)
             {
                 this.tbxOpportunityName.IsEnabled = false;
+                this.dtCloseDate.IsEnabled = false;
                 RedOpportunity.Visibility = Visibility.Collapsed;
+                RedCloseDate.Visibility = Visibility.Collapsed;
             }
             else
             {
                 this.tbxOpportunityName.IsEnabled = true;
+                this.dtCloseDate.IsEnabled = true;
                 RedOpportunity.Visibility = Visibility.Visible;
+                RedCloseDate.Visibility = Visibility.Visible;
             }
         }
 
@@ -69,6 +74,11 @@ namespace OpenCRM.Views.Objects.Leads
             {
                 PageSwitcher.Switch("/Views/Objects/Leads/LeadsView.xaml");
             }
+        }
+
+        private void s_Initialized(object sender, EventArgs e)
+        {
+
         }
     }
 }

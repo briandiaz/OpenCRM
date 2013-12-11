@@ -28,19 +28,40 @@ namespace OpenCRM.Views.Objects.Contacts
             InitializeComponent();
             _contactModel = new ContactsModel();
             LoadPAge();
+            loadSaludations();
+            loadLeadSources();
             
             if (ContactsModel.IsNew)
-            { 
+            {
+ 
             }
             if (ContactsModel.IsEditing)
-            { 
+            {
+                this._contactModel.Data.contactID = ContactsModel.EditingContatctId;
+                ContactsModel.EditingContatctId = 0;
+                _contactModel.LoadEditContacts(this);
             }
+        }
+
+        private void LoadEditing()
+        {
+            _contactModel.LoadEditContacts(this);
         }
 
         private void LoadPAge()
         {
             this.cmbBoxOtherCountry.ItemsSource = _contactModel.getCountries();
             this.cmbMailinCountry.ItemsSource = _contactModel.getCountries();
+        }
+
+        private void loadSaludations()
+        {
+            this.cmbSaludation.ItemsSource = _contactModel.getSaludations();
+        }
+
+        private void loadLeadSources()
+        {
+            this.cmbConctactLeadSource.ItemsSource = _contactModel.getLeadSources();
         }
 
         private bool canSaveContact()
@@ -64,9 +85,6 @@ namespace OpenCRM.Views.Objects.Contacts
         {
             if (canSaveContact())
             {
-                ContactsModel.IsEditing = false;
-                ContactsModel.IsNew = true;
-                ContactsModel.IsSearching = false;
                 _contactModel.Save(this);
             }
         }
@@ -75,6 +93,10 @@ namespace OpenCRM.Views.Objects.Contacts
         {
             this.ContactInfo.Visibility = System.Windows.Visibility.Collapsed;
             this.gridSearchAccount.Visibility = System.Windows.Visibility.Visible;
+            this.StackButtons.Visibility = System.Windows.Visibility.Collapsed;
+           
+            this.DataGridAccount.ItemsSource = _contactModel.getAccountInfo();
+
         }
 
         private void cmbMailinCountry_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -149,13 +171,23 @@ namespace OpenCRM.Views.Objects.Contacts
 
         private void btnCancelAccountLookUp_Click(object sender, RoutedEventArgs e)
         {
+            this.StackButtons.Visibility = System.Windows.Visibility.Visible;
             this.gridSearchAccount.Visibility = System.Windows.Visibility.Collapsed;
             this.ContactInfo.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void btnAcceptAccountLookUp_Click(object sender, RoutedEventArgs e)
         {
+            var selectedItem = this.DataGridAccount.SelectedItem as AccountInfo;
 
+            this._contactModel.Data.accountId = selectedItem.Id;
+            this.TxtBoxConctactAccountName.Text = selectedItem.Name;
+
+            this.StackButtons.Visibility = System.Windows.Visibility.Visible;
+
+            this.gridSearchAccount.Visibility = System.Windows.Visibility.Collapsed;
+            this.ContactInfo.Visibility = System.Windows.Visibility.Visible;
+           
         }
 
         private void btnClearAccountLookUp_Click(object sender, RoutedEventArgs e)
@@ -170,12 +202,29 @@ namespace OpenCRM.Views.Objects.Contacts
 
         private void btnSearchContact(object sender, RoutedEventArgs e)
         {
+            this.ContactInfo.Visibility = System.Windows.Visibility.Hidden;
             this.gridSearchReportTo.Visibility = System.Windows.Visibility.Visible;
+
+
+            this.DataGridContact.ItemsSource = _contactModel.getContactInfo();
         }
 
         private void btnCancelContactLookUp_Click_1(object sender, RoutedEventArgs e)
         {
             this.gridSearchReportTo.Visibility = System.Windows.Visibility.Collapsed;
+            this.ContactInfo.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void btnAcceptContactLookUp_Click_1(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = this.DataGridContact.SelectedItem as ContactInfo;
+            this._contactModel.Data.contactReportId = selectedItem.Id;
+
+            this.TxtBoxConctactReportsTo.Text = selectedItem.Name;
+            this.StackButtons.Visibility = System.Windows.Visibility.Visible;
+
+            this.gridSearchReportTo.Visibility = System.Windows.Visibility.Collapsed;
+            this.ContactInfo.Visibility = System.Windows.Visibility.Visible;
         }
 
       

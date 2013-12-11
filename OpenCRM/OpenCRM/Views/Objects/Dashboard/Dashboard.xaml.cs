@@ -36,7 +36,12 @@ namespace OpenCRM.Views.Objects.Campaigns.Dashboard
             chartOportunitiesStage.ItemsSource = dashboard.GroupOportunitiesByStage();
             chartOportunitiesLeadsSource.ItemsSource = dashboard.GroupOportunitiesByLeadSource();
             chartLeadsStatus.ItemsSource = dashboard.GroupLeadsByStatus();
-
+            chartLeadsSource.ItemsSource = dashboard.GroupLeadsBySource();
+            chartLeadsConverted.ItemsSource = dashboard.GroupLeadsdByConvertionSource("Closed - Converted");
+            chartLeadsNotConverted.ItemsSource = dashboard.GroupLeadsdByConvertionSource("Closed - Not Converted");
+            chartLeadIndustry.ItemsSource = dashboard.GroupLeadsdByIndustry();
+            chartProductQuantity.ItemsSource = dashboard.ProductsQuantity();
+            chartOportunitiesProducts.ItemsSource = dashboard.ProdutsByOportunites();
             tbcntrolDashboard.SelectedIndex = 2;
         }
 

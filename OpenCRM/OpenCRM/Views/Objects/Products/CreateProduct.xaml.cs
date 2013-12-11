@@ -111,10 +111,7 @@ namespace OpenCRM.Views.Objects.Products
 
             if (canSaveProduct())
             {
-
-                 ProductsModel.IsEditing = false;
                 _productModel.Save(this);
-                
             }
            
         }

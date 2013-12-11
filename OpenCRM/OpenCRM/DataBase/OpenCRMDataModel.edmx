@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OpenCRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="OpenCRMModelStoreContainer">
           <EntitySet Name="Account" EntityType="OpenCRMModel.Store.Account" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Account_Ownership" EntityType="OpenCRMModel.Store.Account_Ownership" store:Type="Tables" Schema="dbo" />
@@ -389,6 +389,10 @@
             <End Role="Lead_Status" EntitySet="Lead_Status" />
             <End Role="Leads" EntitySet="Leads" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Language" Association="OpenCRMModel.Store.FK_User_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
           <AssociationSet Name="PK User Profile" Association="OpenCRMModel.Store.PK User Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="User" EntitySet="User" />
@@ -688,6 +692,7 @@
           </Key>
           <Property Name="LanguageId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="LanguageAbbreviation" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Lead_Source">
           <Key>
@@ -917,6 +922,7 @@
           <Property Name="ProfileId" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="LanguageId" Type="int" />
         </EntityType>
         <Association Name="FK Account Account_Ownership">
           <End Role="Account_Ownership" Type="OpenCRMModel.Store.Account_Ownership" Multiplicity="0..1" />
@@ -1926,6 +1932,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Language">
+          <End Role="Language" Type="OpenCRMModel.Store.Language" Multiplicity="0..1" />
+          <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PK User Profile">
           <End Role="Profile" Type="OpenCRMModel.Store.Profile" Multiplicity="0..1" />
           <End Role="User" Type="OpenCRMModel.Store.User" Multiplicity="*" />
@@ -1938,8 +1956,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OpenCRMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2331,6 +2348,10 @@
             <End Role="Profile_Object" EntitySet="Profile_Object" />
             <End Role="Profile_Object_Fields" EntitySet="Profile_Object_Fields" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Language" Association="OpenCRMModel.FK_User_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -2580,10 +2601,6 @@
           <Property Name="UpdateBy" Type="Int32" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="HiddenCase" Type="Boolean" />
-          <Property Name="ViewDate" Type="DateTime" Precision="3" />
-          <Property Name="Subject" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="SolutionTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="SolutionDescription" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Account" Relationship="OpenCRMModel.FK_Cases_Account" FromRole="Cases" ToRole="Account" />
           <NavigationProperty Name="Case_Origin" Relationship="OpenCRMModel.FK_Cases_Case_Origin" FromRole="Cases" ToRole="Case_Origin" />
           <NavigationProperty Name="Case_Priority" Relationship="OpenCRMModel.FK_Cases_Case_Priority" FromRole="Cases" ToRole="Case_Priority" />
@@ -2595,6 +2612,10 @@
           <NavigationProperty Name="User" Relationship="OpenCRMModel.FK_Cases_User" FromRole="Cases" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="OpenCRMModel.FK_Cases_User_Creator" FromRole="Cases" ToRole="User" />
           <NavigationProperty Name="User2" Relationship="OpenCRMModel.FK_Cases_User_Modificator" FromRole="Cases" ToRole="User" />
+          <Property Type="String" Name="SolutionTitle" Nullable="false" />
+          <Property Type="String" Name="SolutionDescription" Nullable="false" />
+          <Property Type="DateTime" Name="ViewDate" Nullable="false" />
+          <Property Type="String" Name="Subject" Nullable="false" />
         </EntityType>
         <EntityType Name="Competidors">
           <Key>
@@ -2720,6 +2741,8 @@
           <Property Name="LanguageId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Contact_Level_Languages" Relationship="OpenCRMModel.FK_Contact_Level_Languages_Language" FromRole="Language" ToRole="Contact_Level_Languages" />
+          <Property Type="String" Name="LanguageAbbreviation" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="OpenCRMModel.FK_User_Language" FromRole="Language" ToRole="User" />
         </EntityType>
         <EntityType Name="Lead_Source">
           <Key>
@@ -3025,6 +3048,8 @@
           <NavigationProperty Name="Products" Relationship="OpenCRMModel.FK_Products_User_Creator" FromRole="User" ToRole="Products" />
           <NavigationProperty Name="Products1" Relationship="OpenCRMModel.FK_Products_User_Modificator" FromRole="User" ToRole="Products" />
           <NavigationProperty Name="Profile" Relationship="OpenCRMModel.PK_User_Profile" FromRole="User" ToRole="Profile" />
+          <Property Type="Int32" Name="LanguageId" />
+          <NavigationProperty Name="Language" Relationship="OpenCRMModel.FK_User_Language" FromRole="User" ToRole="Language" />
         </EntityType>
         <Association Name="FK_Account_Account_Ownership">
           <End Role="Account_Ownership" Type="OpenCRMModel.Account_Ownership" Multiplicity="0..1" />
@@ -4046,6 +4071,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Language">
+          <End Type="OpenCRMModel.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="OpenCRMModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4248,6 +4285,10 @@
           <EntitySetMapping Name="Cases">
             <EntityTypeMapping TypeName="OpenCRMModel.Cases">
               <MappingFragment StoreEntitySet="Cases">
+                <ScalarProperty Name="SolutionDescription" ColumnName="SolutionDescription" />
+                <ScalarProperty Name="SolutionTitle" ColumnName="SolutionTitle" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
@@ -4264,10 +4305,6 @@
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="HiddenCase" ColumnName="HiddenCase" />
-                <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="SolutionTitle" ColumnName="SolutionTitle" />
-                <ScalarProperty Name="SolutionDescription" ColumnName="SolutionDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4368,6 +4405,7 @@
           <EntitySetMapping Name="Language">
             <EntityTypeMapping TypeName="OpenCRMModel.Language">
               <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageAbbreviation" ColumnName="LanguageAbbreviation" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -4610,6 +4648,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="OpenCRMModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
