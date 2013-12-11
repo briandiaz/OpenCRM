@@ -578,3 +578,15 @@ create table [dbo].[Records](
 	[Date] datetime,
 	Constraint [PK Bitacora] Primary Key(RecordId)
 );
+
+create table [dbo].[Campaign_Contacts](
+	CampaignContactsId int IDENTITY(1,1),
+	ContactId int,
+	AccountId int,
+	CampaignId int,
+	OpportunityId int,
+	constraint [PK Campaign_Contacts] Primary Key(CampaignContactsId),
+	constraint [FK Campaign_Contacts Contact] Foreign Key(ContactId) References [dbo].[Contact](ContactId),
+	constraint [FK Campaign_Contacts Account] Foreign Key(AccountId) References [dbo].[Account](AccountId),
+	constraint [FK Campaign_Contacts Campaign] Foreign Key(CampaignId) References [dbo].[Campaign](CampaignId)
+);

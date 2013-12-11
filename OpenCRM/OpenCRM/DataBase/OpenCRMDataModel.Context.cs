@@ -34,6 +34,7 @@ namespace OpenCRM.DataBase
         public DbSet<Address> Address { get; set; }
         public DbSet<Address_Type> Address_Type { get; set; }
         public DbSet<Campaign> Campaign { get; set; }
+        public DbSet<Campaign_Customer> Campaign_Customer { get; set; }
         public DbSet<Campaign_Status> Campaign_Status { get; set; }
         public DbSet<Campaign_Type> Campaign_Type { get; set; }
         public DbSet<Case_Origin> Case_Origin { get; set; }
@@ -51,6 +52,7 @@ namespace OpenCRM.DataBase
         public DbSet<Inventory_Products> Inventory_Products { get; set; }
         public DbSet<Language> Language { get; set; }
         public DbSet<Lead_Source> Lead_Source { get; set; }
+        public DbSet<Lead_Status> Lead_Status { get; set; }
         public DbSet<Leads> Leads { get; set; }
         public DbSet<Level_Language> Level_Language { get; set; }
         public DbSet<Object_Fields> Object_Fields { get; set; }
@@ -70,6 +72,5 @@ namespace OpenCRM.DataBase
         public DbSet<Salutation> Salutation { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Lead_Status> Lead_Status { get; set; }
     }
 }

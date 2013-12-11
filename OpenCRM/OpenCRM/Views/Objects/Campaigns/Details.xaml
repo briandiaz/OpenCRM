@@ -1,4 +1,4 @@
-﻿<Page x:Class="OpenCRM.Views.Objects.Campaigns.Edit" 
+﻿<Page x:Class="OpenCRM.Views.Objects.Campaigns.Details" 
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -7,7 +7,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" 
-      Title="Edit Campaign" 
+      Title="Details Campaign" 
       MinHeight="1024" 
       MinWidth="768">
 
@@ -68,10 +68,9 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button Name="btnGoBack"
-                        Click="btnGoBack_Click"
                         Width="118"
                         Height="45"
-                        Cursor="Hand"
+                        Cursor="Hand" Click="btnGoBack_Click"
                         >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/Img/Icons/32px/arrow-left3.png" Width="32px" Height="32px"/>
@@ -89,7 +88,7 @@
                    />
 
                 <TabControl VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TabItem Header="_Edit">
+                    <TabItem Header="_Details">
                     </TabItem>
                 </TabControl>
 
@@ -111,39 +110,14 @@
                         Grid.Column="3" 
                         Orientation="Horizontal" 
                         HorizontalAlignment="Right">
-                <Button Name="btnSave"
+                <Button Name="btnEdit"
                         VerticalAlignment="Center" 
                         Margin="2" 
-                        Click="btnSave_Click"
-                        Cursor="Hand"
+                        Cursor="Hand" Click="btnEdit_Click"
                         >
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Save</TextBlock>
-                    </StackPanel>
-                </Button>
-
-                <Button Name="btnDelete" 
-                        VerticalAlignment="Center" 
-                        Margin="2" 
-                        Click="btnDelete_Click"
-                        Cursor="Hand"
-                        >
-                    <StackPanel Orientation="Horizontal" >
-                        <Image Source="/Assets/Img/Icons/32px/close.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Delete</TextBlock>
-                    </StackPanel>
-                </Button>
-
-                <Button Name="btnCancel"
-                        VerticalAlignment="Center" 
-                        Margin="2" 
-                        Click="btnCancel_Click"
-                        Cursor="Hand"
-                        >
-                    <StackPanel Orientation="Horizontal" >
-                        <Image Source="/Assets/Img/Icons/32px/cancel-circle.png" Width="15" Height="15" />
-                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Cancel</TextBlock>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe WP Light">Edit</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -156,17 +130,19 @@
                 Height="30"
                 >Campaign Owner
             </TextBlock>
-            <ComboBox 
-                Name="cmbCampaignOwner"
-                FontSize="16px"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Grid.Column="2"
-                IsEnabled="False"
-                Margin="10,0,0,0"
-                Grid.Row="3"
-                Width="200"
-                Height="30"
+            <Label 
+                        Name="lblOwner"
+                        FontSize="16px"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Grid.Column="2"
+                        IsEnabled="False"
+                        Margin="10,0,0,0"
+                        Grid.Row="3"
+                        Width="200"
+                        Height="30"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                 />
 
             <TextBlock
@@ -179,17 +155,19 @@
                 >Campaign Name *
             </TextBlock>
 
-            <TextBox Name="tbxName"
+            <Label  Name="lblName"
                         controls:TextboxHelper.ClearTextButton="True"
                         controls:TextboxHelper.Watermark="Campaign Name"
                         HorizontalAlignment="Left"
-                        Text="{Binding Name}"
+                        Content="{Binding Name}"
                         Margin="10,0,0,0"
                         Grid.Row="4"
                         Grid.Column="2"
                         Height="30"
                         Width="200"
-                      FontSize="16px"
+                        FontSize="16px"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
 
             <TextBlock
@@ -223,8 +201,8 @@
                 >Type
             </TextBlock>
 
-            <ComboBox Name="cmbType"
-                      VerticalAlignment="Center"
+            <Label      Name="lblType"
+                        VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         Margin="10,0,0,0"
                         Grid.Row="6"
@@ -232,22 +210,10 @@
                         Height="30"
                         Width="200"
                         FontSize="16px"
-                        SelectedValue="{Binding CampaignTypeId}"
-                        Cursor="Hand" SelectionChanged="cmbCampaignType_SelectionChanged"
-                >
-                <ComboBox.Style>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="IsEditable" Value="True" />
-                        <Setter Property="IsReadOnly" Value="True" />
-
-                        <Style.Triggers>
-                            <Trigger Property="SelectedIndex" Value="-1">
-                                <Setter Property="Text" Value="-- Select Item --" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ComboBox.Style>
-            </ComboBox>
+                        Content="{Binding CampaignTypeName}"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
+                />
             <TextBlock
                 FontSize="16px"
                 VerticalAlignment="Center"
@@ -258,17 +224,19 @@
                 >Expected Revenue
             </TextBlock>
 
-            <TextBox Name="tbxExpectedRevenue"
+            <Label Name="lblCampaignExpectedRevenue"
                         controls:TextboxHelper.ClearTextButton="True"
                         controls:TextboxHelper.Watermark="Expected Revenue"
                         HorizontalAlignment="Left"
-                      Text="{Binding ExpectedRevenue}"
+                        Content="{Binding ExpectedRevenue}"
                         Margin="10,0,0,0"
                         Grid.Row="7"
                         Grid.Column="2"
                         Height="30"
                         Width="200"
-                      FontSize="16px"
+                        FontSize="16px"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
 
             <TextBlock
@@ -281,7 +249,7 @@
                 >Budgeted Cost
             </TextBlock>
 
-            <TextBox Name="tbxBudgetedCost"
+            <Label Name="lblBudgetedCost"
                         controls:TextboxHelper.ClearTextButton="True"
                         controls:TextboxHelper.Watermark="Budgeted Cost"
                         HorizontalAlignment="Left"
@@ -289,9 +257,11 @@
                         Grid.Row="8"
                         Grid.Column="2"
                         Height="30"
-                        Text="{Binding BudgetedCost}"
+                        Content="{Binding BudgetedCost}"
                         Width="200"
-                      FontSize="16px"
+                        FontSize="16px"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
 
             <TextBlock
@@ -304,17 +274,19 @@
                 >Actual Cost
             </TextBlock>
 
-            <TextBox Name="tbxActualCost"
+            <Label Name="tbxActualCost"
                         controls:TextboxHelper.ClearTextButton="True"
                         controls:TextboxHelper.Watermark="Actual Cost"
                         HorizontalAlignment="Left"
                         Margin="10,0,0,0"
                         Grid.Row="9"
                         Grid.Column="2"
-                        Text="{Binding ActualCost}"
+                        Content="{Binding ActualCost}"
                         Height="30"
                         Width="200"
-                      FontSize="16px"
+                        FontSize="16px"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
 
             <TextBlock
@@ -326,7 +298,7 @@
                 Height="30"
                 >Expected Response
             </TextBlock>
-            <Slider     Name="tbxExpectedResponse"
+            <Slider     Name="lblExpectedResponse"
                         Margin="10,0,0,0"
                         Grid.Row="10"
                         Grid.Column="2"
@@ -334,6 +306,7 @@
                         HorizontalAlignment="Left"
                         Maximum="100"
                         Minimum="0"
+                        IsEnabled="False"
                         Value="{Binding ExpectedResponse}"
                         SmallChange="1"
                         Cursor="Hand"
@@ -349,7 +322,7 @@
                 >Num Sent
             </TextBlock>
 
-            <TextBox Name="tbxNumSent"
+            <Label      Name="lblNumSent"
                         controls:TextboxHelper.ClearTextButton="True"
                         controls:TextboxHelper.Watermark="Num Sent"
                         HorizontalAlignment="Left"
@@ -358,8 +331,10 @@
                         Grid.Column="2"
                         Height="30"
                         Width="200"
-                        Text="{Binding NumberSent}"
-                      FontSize="16px"
+                        Content="{Binding NumberSent}"
+                        FontSize="16px"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
             <TextBlock
                 FontSize="16px"
@@ -372,21 +347,21 @@
                 >Description *
             </TextBlock>
 
-            <TextBox Name="tbxDescription"
+            <TextBox    Name="tbxDescription"
                         controls:TextboxHelper.ClearTextButton="True"
                         controls:TextboxHelper.Watermark="Description"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         TextWrapping="Wrap"
-                        AcceptsReturn="True"
-                        VerticalScrollBarVisibility="Visible"
                         Margin="10,10,0,0"
                         Grid.Row="13"
                         Grid.Column="2"
                         Height="Auto"
                         Width="Auto"
                         Text="{Binding Description}"
-                      FontSize="16px"
+                        FontSize="16px"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
 
             <TextBlock
@@ -406,6 +381,9 @@
                         FontSize="16px"
                         SelectedDate="{Binding StartDate}"
                         Grid.Column="3" Grid.Row="4"
+                        IsEnabled="False"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
 
 
@@ -427,6 +405,9 @@
                         Width="200"
                         SelectedDate="{Binding EndDate}"
                         FontSize="16px"
+                        IsEnabled="False"
+                        FontWeight="Bold"
+                        FontFamily="Segoe Ui"
                        />
 
 
@@ -441,7 +422,7 @@
             </TextBlock>
             <TextBox Visibility="Hidden" Name="tbxCreatedby" Text="{Binding CreateBy}" />
             <DatePicker Visibility="Hidden" Name="tbxCreatedDate" SelectedDate="{Binding CreateDate}" />
-            <ComboBox 
+            <TextBlock 
                     Name="cmbStatus"
                     FontSize="16px"
                     VerticalAlignment="Center"
@@ -450,22 +431,10 @@
                     Height="30"
                     Width="200"
                     Cursor="Hand"
-                    SelectedValue="{Binding CampaignStatusId}" SelectionChanged="cmbCampaignStatus_SelectionChanged"
-                >
-                <ComboBox.Style>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="IsEditable" Value="True" />
-                        <Setter Property="IsReadOnly" Value="True" />
-
-                        <Style.Triggers>
-                            <Trigger Property="SelectedIndex" Value="-1">
-                                <Setter Property="Text" Value="-- Select Item --" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ComboBox.Style>
-            </ComboBox>
-
+                    Text="{Binding CampaignStatusName}" 
+                    FontFamily="Segoe Ui"
+                    FontWeight="Black"
+                />
 
             <TextBlock
                     FontSize="16px"
@@ -475,8 +444,8 @@
                     Grid.Column="3" Grid.Row="3"
                     >Campaign Parent
             </TextBlock>
-            <ComboBox 
-                    Name="cmbParent"
+            <Label 
+                    Name="lblParent"
                     FontSize="16px"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
@@ -484,22 +453,10 @@
                     Width="200"
                     Height="30"
                     Cursor="Hand"
-                    SelectedValue="{Binding CampaignParent}" SelectionChanged="cmbCampaignParent_SelectionChanged"
-                >
-                <ComboBox.Style>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="IsEditable" Value="True" />
-                        <Setter Property="IsReadOnly" Value="True" />
-
-                        <Style.Triggers>
-                            <Trigger Property="SelectedIndex" Value="-1">
-                                <Setter Property="Text" Value="-- Select Item --" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ComboBox.Style>
-            </ComboBox>
-            <TextBlock Grid.Row="14" Grid.Column="2" Foreground="Red" FontSize="17" VerticalAlignment="Center">* Obligatory Fields</TextBlock>
+                    Content="{Binding CampaignParentName}"
+                    FontFamily="Segoe Ui"
+                    FontWeight="Bold"
+                />
         </Grid>
     </controls:MetroContentControl>
 </Page>

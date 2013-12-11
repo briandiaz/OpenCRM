@@ -239,6 +239,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return _campaignModel;
         }
+
         public List<CampaignsModel> getAllCampaignsFromUser()
         {
             var _campaignsModel = new List<CampaignsModel>();
@@ -437,6 +438,320 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         #endregion
 
+        #region CampaignContacts
+        
+        public static List<OpenCRM.DataBase.Contact> getAllCampaignContacts()
+        {
+            var _campaignContacts = new List<OpenCRM.DataBase.Contact>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var customers = _db.Campaign_Customer.Where(x => x.CampaignId == CampaignController.CurrentCampaignId).ToList();
+                    foreach (var customer in customers)
+                    {
+                        var contact = _db.Contact.First(x => x.ContactId == customer.ContactId);
+                        _campaignContacts.Add(contact);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                //System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                //System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _campaignContacts;
+        }
+
+        public static List<OpenCRM.DataBase.Contact> getAvailableContacts()
+        {
+            var _campaignContacts = new List<OpenCRM.DataBase.Contact>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+
+                    var contactSelection = (
+                        from contact in _db.Contact
+                        where contact.UserId == Session.UserId
+                        join customer in _db.Campaign_Customer
+                        on contact.ContactId equals customer.ContactId into LeftOuterJoin
+                        from temp in LeftOuterJoin.DefaultIfEmpty()
+                        select new
+                        {
+                            CurrentContact = contact,
+                            CampaignContacto = temp
+                        }
+                    ).ToList();
+
+                    var query = (
+                        from contact in contactSelection
+                        where contact.CampaignContacto == null
+                        select contact.CurrentContact
+                    ).ToList();
+
+                     
+                    _campaignContacts = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _campaignContacts;
+        }
+        
+        public Boolean AddContactsToCampaign(List<CampaignCustomer> Contacts)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var Campaign = _db.Campaign.FirstOrDefault(x => x.CampaignId == this.CampaignId);
+
+                    foreach (CampaignCustomer Customer in Contacts)   
+                    {
+                        // Creating the Opportunity for the Customer
+                        var opportunity = _db.Opportunities.Create();
+                        opportunity.Name = Campaign.Name + " - " + Customer.ContactName;
+                        _db.Opportunities.Add(opportunity);
+                        _db.SaveChanges();
+                        
+                        // Creating the Customer Campaign
+                        var customerCampaign = _db.Campaign_Customer.Create();
+                        customerCampaign.CampaignId = Campaign.CampaignId;
+                        customerCampaign.ContactId = Customer.ContactID;
+                        customerCampaign.AccountId = Customer.AccountID;
+                        customerCampaign.OpportunityId = opportunity.OpportunityId;
+                        _db.Campaign_Customer.Add(customerCampaign);
+                        _db.SaveChanges();
+
+                    }
+                    MessageBox.Show("Contacts Added", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
+        
+        public Boolean RemoveCampaignContacts(List<CampaignCustomer> Contacts)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var customers = _db.Campaign_Customer.Where(x => x.CampaignId == CampaignController.CurrentCampaignId).ToList();
+
+                    foreach (CampaignCustomer contact in Contacts)
+                    {
+                        var _currentCampaignCustomer = _db.Campaign_Customer.FirstOrDefault(x => x.ContactId == contact.ContactID && x.CampaignId == CampaignController.CurrentCampaignId);
+                        _db.Campaign_Customer.Remove(_currentCampaignCustomer);
+                        _db.SaveChanges();
+                    }
+                    
+                    MessageBox.Show("Contacts Removed", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        } 
+         
+        #endregion
+
+        #region CampaignAccounts
+
+        public static List<CampaignAccount> getAllCampaignAccounts()
+        {
+            var _campaignAccounts = new List<CampaignAccount>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from account in _db.Account
+                        from customer in _db.Campaign_Customer
+                        from campaign in _db.Campaign
+                        from accounttype in _db.Account_Type
+                        from industry in _db.Industry
+                        where account.UserId == Session.UserId
+                        && account.AccountId == customer.AccountId
+                        && campaign.CampaignId == customer.CampaignId
+                        && accounttype.AccountTypeId == account.AccountTypeId
+                        && industry.IndustryId == account.IndustryId
+                        && campaign.CampaignId == CampaignController.CurrentCampaignId
+                        && customer.CampaignId == CampaignController.CurrentCampaignId
+                        select new CampaignAccount()
+                        {
+                            ID = account.AccountId,
+                            Name = account.Name,
+                            Type = accounttype.Name,
+                            Industry = industry.Name,
+                            PhoneNumber = account.PhoneNumber,
+                            Website = account.WebSite
+                        }
+                    ).ToList();
+                    _campaignAccounts = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _campaignAccounts;
+        }
+
+        public static List<CampaignAccount> getAvailableAccounts()
+        {
+            var _campaignAccounts = new List<CampaignAccount>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var accountSelection = (
+                        from account in _db.Account
+                        where account.UserId == Session.UserId
+                        join customer in _db.Campaign_Customer
+                        on account.AccountId equals customer.AccountId into LeftOuterJoin
+                        from temp in LeftOuterJoin.DefaultIfEmpty()
+                        select new
+                        {
+                            CurrentAccount = account,
+                            CampaignAccount = temp
+                        }
+                    ).ToList();
+
+                    var query = (
+                        from account in accountSelection
+                        from accountdb in _db.Account
+                        where account.CampaignAccount == null && accountdb.AccountId == account.CurrentAccount.AccountId
+                        select new CampaignAccount()
+                        {
+                            ID = accountdb.AccountId,
+                            Name = accountdb.Name,
+                            Industry = accountdb.Industry.Name,
+                            Type = accountdb.Account_Type.Name,
+                            PhoneNumber = accountdb.PhoneNumber,
+                            Website = accountdb.WebSite
+                        }
+                    ).ToList();
+                    _campaignAccounts = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _campaignAccounts;
+        }
+
+
+        public Boolean AddAccountsToCampaign(List<CampaignAccount> Accounts)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var Campaign = _db.Campaign.FirstOrDefault(x => x.CampaignId == this.CampaignId);
+
+                    foreach (CampaignAccount Customer in Accounts)
+                    {
+                        var _currentAccount = _db.Account.FirstOrDefault(x => x.AccountId == Customer.ID);
+
+                        // Creating the Opportunity for the Customer
+                        var opportunity = _db.Opportunities.Create();
+                        opportunity.Name = Campaign.Name + " - " + _currentAccount.Name;
+                        _db.Opportunities.Add(opportunity);
+                        _db.SaveChanges();
+
+                        // Creating the Customer Campaign
+                        var customerCampaign = _db.Campaign_Customer.Create();
+                        customerCampaign.CampaignId = Campaign.CampaignId;
+                        customerCampaign.ContactId = Customer.ContactId;
+                        customerCampaign.AccountId = Customer.ID;
+                        customerCampaign.OpportunityId = opportunity.OpportunityId;
+                        _db.Campaign_Customer.Add(customerCampaign);
+                        _db.SaveChanges();
+
+                    }
+                    MessageBox.Show("Accounts Added", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
+
+
+        public Boolean RemoveCampaignAccounts(List<CampaignAccount> Accounts)
+        {
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var customers = _db.Campaign_Customer.Where(x => x.CampaignId == CampaignController.CurrentCampaignId).ToList();
+
+                    foreach (CampaignAccount account in Accounts)
+                    {
+                        var _currentCampaignCustomer = _db.Campaign_Customer.FirstOrDefault(x => x.AccountId == account.ID && x.CampaignId == CampaignController.CurrentCampaignId);
+                        _db.Campaign_Customer.Remove(_currentCampaignCustomer);
+                        _db.SaveChanges();
+                    }
+
+                    MessageBox.Show("Accounts Removed", "Good Job!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return false;
+        }
+
+        #endregion
+
         #region SearchQueries
 
         public List<CampaignsModel> SearchCampaignsByName(String Name)
@@ -486,6 +801,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByActive(bool Active)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -533,6 +849,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByDescription(String Description)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -580,6 +897,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByNumberSent(int NumberSent)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -627,6 +945,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByActualCost(Decimal Number)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -674,6 +993,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByExpectedResponse(Decimal Number)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -721,6 +1041,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByBudgetedCost(Decimal Number)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -816,6 +1137,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByStartDate(DateTime Date)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -863,6 +1185,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByEndDate(DateTime Date)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -910,6 +1233,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByCreateDate(DateTime Date)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -957,6 +1281,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return listCampaigns;
         }
+
         public List<CampaignsModel> SearchCampaignsByUpdateDate(DateTime Date)
         {
             listCampaigns = new List<CampaignsModel>();
@@ -1153,6 +1478,32 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         #endregion
 
+        public static List<Contact> getAllContacts()
+        {
+            var _contacts = new List<Contact>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from contact in _db.Contact
+                        where contact.UserId == Session.UserId
+                        select contact
+                        ).ToList();
+                    _contacts = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return _contacts;
+        }
+
         public override string ToString()
         {
             return this.CampaignStatusId + " - " + this.CampaignTypeId;
@@ -1161,6 +1512,7 @@ namespace OpenCRM.Models.Objects.Campaigns
         #endregion
 
     }
+
     public class Lead
     {
         public int ID { get; set; }
@@ -1169,6 +1521,24 @@ namespace OpenCRM.Models.Objects.Campaigns
         {
             this.ID = id;
         }
+    }
+
+    public class CampaignCustomer
+    {
+
+        public Nullable<int> ContactID { get; set; }
+        public Nullable<int> AccountID { get; set; }
+        public String ContactName { get; set; }
+        
+        public CampaignCustomer(){}
+
+        public CampaignCustomer(Nullable<int> contactid, String contactname, Nullable<int> accountid)
+        {
+            this.ContactID = contactid.Value;
+            this.AccountID = accountid.Value;
+            this.ContactName = contactname;
+        }
+
     }
 
     public class AccountOwner
@@ -1201,20 +1571,6 @@ namespace OpenCRM.Models.Objects.Campaigns
             {
                 using (var _db = new OpenCRMEntities())
                 {
-                    /*
-                    var _actualUser = (
-                                        from user in _db.User
-                                        where
-                                           Session.UserId == user.UserId
-                                        select
-                                         new AccountOwner()
-                                         {
-                                             OwnerID = user.UserId,
-                                             UserName = user.UserName,
-                                             Name = user.Name
-                                         }
-                    );
-                    _users.Add((AccountOwner)_actualUser.ToList()[0]);*/
                     _owners.Add( _db.User.FirstOrDefault(
                         x => x.UserId == Session.UserId
                     ));
@@ -1231,6 +1587,30 @@ namespace OpenCRM.Models.Objects.Campaigns
                 MessageBox.Show(ex.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return _owners;
+        }
+
+        public static User getCampaignOwner(int id)
+        {
+            User _owner = new User();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var data = _db.User.FirstOrDefault(
+                        x => x.UserId == id
+                    );
+                    _owner = data;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return _owner;
         }
     }
 
@@ -1254,7 +1634,6 @@ namespace OpenCRM.Models.Objects.Campaigns
         }
 
         #endregion
-
 
         public List<CampaignType> getAllCampaignType()
         {
@@ -1343,6 +1722,37 @@ namespace OpenCRM.Models.Objects.Campaigns
 
     }
 
+    public class CampaignAccount
+    {
+        #region Properties
+
+        public int ID { get; set; }
+        public String Name { get; set; }
+        public String Type { get; set; }
+        public String Industry { get; set; }
+        public String Website { get; set; }
+        public String PhoneNumber { get; set; }
+        public int? ContactId { get; set; }
+
+        #endregion
+
+        #region Constructor
+        
+        public CampaignAccount() { }
+
+        public CampaignAccount(int id, String Name, String Type, String Industry, String Website, String PhoneNumber, int? contact) 
+        {
+            this.ID = id;
+            this.Name = Name;
+            this.Type = Type;
+            this.Industry = Industry;
+            this.Website = Website;
+            this.PhoneNumber = PhoneNumber;
+            this.ContactId = contact;
+        }
+
+        #endregion
+    }
     public class Permission
     {
         public Boolean Modify { get; set; }
@@ -1352,5 +1762,37 @@ namespace OpenCRM.Models.Objects.Campaigns
         { 
         
         }
+    }
+
+    public class CampaignContact
+    {
+        public int ID { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public String Title { get; set; }
+        public String Department { get; set; }
+        public String PhoneNumber { get; set; }
+        public String Email { get; set; }
+        public int? AccountId { get; set; }
+        public CampaignContact()
+        { 
+            
+        }
+        public CampaignContact(int id, String firstname, String lastname, String title, String department, String phonenumber, String email, int? accountid)
+        {
+            this.ID = id;
+            this.FirstName = firstname;
+            this.LastName = lastname;
+            this.Title = title;
+            this.Department = department;
+            this.PhoneNumber = phonenumber;
+            this.Email = email;
+            this.AccountId = accountid;
+        }
+    }
+    public class SearchFilter
+    {
+        public int ID { get; set; }
+        public String Name { get; set; }
     }
 }

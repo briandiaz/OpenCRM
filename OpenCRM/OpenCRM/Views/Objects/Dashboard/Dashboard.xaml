@@ -127,17 +127,17 @@
                                         </chartingToolkit:PieChart.Series>
                                     </chartingToolkit:PieChart>
 
-                                    <chartingToolkit:PieChart           Style="{StaticResource MinimalChartStyle}"
+                                    <chartingToolkit:DoughnutChart           Style="{StaticResource MinimalChartStyle}"
                                                         ChartTitle="Campaigns By Type"
                                                         ChartSubTitle="Group Campaigns by its type.">
-                                        <chartingToolkit:PieChart.Series>
+                                        <chartingToolkit:DoughnutChart.Series>
                                             <chartingToolkit:ChartSeries
                                                         SeriesTitle="Quantity"
                                                         DisplayMember="Name"
                                                         ValueMember="Quantity"
                                                         Name="chartType"/>
-                                        </chartingToolkit:PieChart.Series>
-                                    </chartingToolkit:PieChart>
+                                        </chartingToolkit:DoughnutChart.Series>
+                                    </chartingToolkit:DoughnutChart>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">

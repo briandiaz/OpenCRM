@@ -235,9 +235,9 @@
                                 <RowDefinition Height="66" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="400*" />
-                                <ColumnDefinition Width="60*" />
-                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="317*" />
+                                <ColumnDefinition Width="143" />
+                                <ColumnDefinition Width="8*" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal" Margin="0,15,0,0" Grid.Row="0" Grid.Column="0">
                                 <TextBox Controls:TextboxHelper.ClearTextButton="True" 
@@ -262,6 +262,13 @@
                                         <Image Source="/Assets/Img/Icons/32px/Search.png"  Width="32" Height="32" />
                                     </StackPanel>
                                 </Button>
+                                <Label Margin="80,0,0,0" Content="Filter By" />
+                                <ComboBox Name="cmbFilterLeads"
+                                          Margin="20,0,0,0"
+                                          Width="200"
+                                          ItemBindingGroup="{Binding Filter}" SelectionChanged="cmbFilterLeads_SelectionChanged"
+                                          />
+
                             </StackPanel>
                             <DataGrid HorizontalAlignment="Left"
                                   Grid.Column="0"
@@ -314,18 +321,6 @@
                                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >View</TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button Name="btnRemoveAddLead"
-                                        Width="130"
-                                        Height="50"
-                                        BorderBrush="Red"
-                                        Background="White"
-                                        BorderThickness="2"
-                                        >
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Assets/Img/Icons/32px/close.png" Height="28" />
-                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Remove</TextBlock>
-                                    </StackPanel>
-                                </Button>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
 
@@ -335,6 +330,503 @@
                                         BorderBrush="Green"
                                         Background="White"
                                         BorderThickness="2" Click="btnAddLeads_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/checkmark.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Existing Contacts" Width="210" Height="50" Cursor="Hand">
+                    <Grid>
+                        <Grid Width="Auto" Height="Auto" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="335" />
+                                <RowDefinition Height="66" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="400*" />
+                                <ColumnDefinition Width="60*" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0" Grid.Row="0" Grid.Column="0">
+                                <TextBox Controls:TextboxHelper.ClearTextButton="True" 
+                                         Controls:TextboxHelper.Watermark="Search" Name="tbxSearchContact" 
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Left" 
+                                         HorizontalContentAlignment="Center" 
+                                         FontSize="28px" 
+                                         FontFamily="Segoe WP Light"
+                                         Height="50" 
+                                         Width="400" 
+                                         TextChanged="tbxSearchContact_TextChanged" 
+                                 />
+
+                                <Button VerticalAlignment="Top" 
+                                HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center"
+                                Height="50"
+                                Name="btnSearchContact"
+                                Width="50" Click="btnSearchContact_Click"
+                                >
+
+                                    <StackPanel>
+                                        <Image Source="/Assets/Img/Icons/32px/Search.png"  Width="32" Height="32" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <DataGrid HorizontalAlignment="Left"
+                                  Grid.Column="0"
+                                  Grid.Row="2"
+                                  VerticalAlignment="Top"
+                                  Height="300" 
+                                  Width="Auto"
+                                  Name="dgContactData"
+                                  IsReadOnly="True"
+                                  FontSize="20"
+                                  AutoGenerateColumns="False"
+                                  Foreground="Black"
+                                  ScrollViewer.CanContentScroll="True" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  >
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="FirstName" Width="*" Binding="{Binding FirstName}"/>
+                                    <DataGridTextColumn Header="LastName" Width="*" Binding="{Binding LastName}" />
+                                    <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}" />
+                                    <DataGridTextColumn Header="Department" Width="*" Binding="{Binding Department}" />
+                                    <DataGridTextColumn Header="PhoneNumber" Width="*" Binding="{Binding PhoneNumber}" />
+                                    <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Label Grid.Row="0" Margin="2">
+                                    <Label.Content>
+                                        <Binding Path="CurrentPage">
+                                            <Binding.StringFormat>Current Page: {0}</Binding.StringFormat>
+                                        </Binding>
+                                    </Label.Content>
+                                </Label>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Button Name="btnEditContact"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Blue"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnEditContact_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/loop.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Edit</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnViewContact"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Orange"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnViewContact_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/info.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >View</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnRemoveContact"
+                                        Width="130"
+                                        Height="50"
+                                        BorderBrush="Red"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnRemoveContact_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/close.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Remove</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="3" Grid.Column="0"/>
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Add Contacts" Width="200" Height="50" Cursor="Hand">
+                    <Grid>
+                        <Grid Width="Auto" Height="Auto" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="335" />
+                                <RowDefinition Height="66" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="400*" />
+                                <ColumnDefinition Width="60*" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0" Grid.Row="0" Grid.Column="0">
+                                <TextBox Controls:TextboxHelper.ClearTextButton="True" 
+                                 Controls:TextboxHelper.Watermark="Search" Name="tbxSearchAddContact" 
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Left" 
+                                 HorizontalContentAlignment="Center" 
+                                 FontSize="28px" 
+                                         Height="50" 
+                                         Width="400" 
+                                 />
+
+                                <Button VerticalAlignment="Top" 
+                                HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center"
+                                Height="50"
+                                Name="btnSearchAddContact"
+                                Width="50"
+                                >
+
+                                    <StackPanel>
+                                        <Image Source="/Assets/Img/Icons/32px/Search.png"  Width="32" Height="32" />
+                                    </StackPanel>
+                                </Button>
+                                <Label Margin="80,0,0,0" Content="Filter By" />
+                                <ComboBox Name="cmbFilterContacts"
+                                          Margin="20,0,0,0"
+                                          Width="200"
+                                          ItemBindingGroup="{Binding Filter}" SelectionChanged="cmbFilterContacts_SelectionChanged"
+                                          />
+                                          
+                            </StackPanel>
+                            <DataGrid HorizontalAlignment="Left"
+                                  Grid.Column="0"
+                                  Grid.Row="2"
+                                  VerticalAlignment="Top"
+                                  Height="300" 
+                                  Width="Auto"
+                                  Name="dgAddContactData"
+                                  IsReadOnly="True"
+                                  FontSize="20"
+                                  AutoGenerateColumns="False"
+                                  Foreground="Black"
+                                  ScrollViewer.CanContentScroll="True" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  >
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="FirstName" Width="*" Binding="{Binding FirstName}"/>
+                                    <DataGridTextColumn Header="LastName" Width="*" Binding="{Binding LastName}" />
+                                    <DataGridTextColumn Header="Title" Width="*" Binding="{Binding Title}" />
+                                    <DataGridTextColumn Header="Department" Width="*" Binding="{Binding Department}" />
+                                    <DataGridTextColumn Header="PhoneNumber" Width="*" Binding="{Binding PhoneNumber}" />
+                                    <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Label Grid.Row="0" Margin="2">
+                                    <Label.Content>
+                                        <Binding Path="CurrentPage">
+                                            <Binding.StringFormat>Current Page: {0}</Binding.StringFormat>
+                                        </Binding>
+                                    </Label.Content>
+                                </Label>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Button Name="btnEditAddContact"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Blue"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnEditAddContact_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/loop.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Edit</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnViewAddContact"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Orange"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnViewAddContact_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/info.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >View</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+
+                                <Button Name="btnAddContacts"
+                                        Width="130"
+                                        Height="50"
+                                        BorderBrush="Green"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnAddContacts_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/checkmark.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Existing Accounts" Width="210" Height="50" Cursor="Hand">
+                    <Grid>
+                        <Grid Width="Auto" Height="Auto" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="335" />
+                                <RowDefinition Height="66" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="400*" />
+                                <ColumnDefinition Width="60*" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0" Grid.Row="0" Grid.Column="0">
+                                <TextBox Controls:TextboxHelper.ClearTextButton="True" 
+                                         Controls:TextboxHelper.Watermark="Search" Name="tbxSearchAccount" 
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Left" 
+                                         HorizontalContentAlignment="Center" 
+                                         FontSize="28px" 
+                                         FontFamily="Segoe WP Light"
+                                         Height="50" 
+                                         Width="400" 
+                                 />
+
+                                <Button VerticalAlignment="Top" 
+                                HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center"
+                                Height="50"
+                                Name="btnSearchAccount"
+                                Width="50"
+                                >
+
+                                    <StackPanel>
+                                        <Image Source="/Assets/Img/Icons/32px/Search.png"  Width="32" Height="32" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <DataGrid HorizontalAlignment="Left"
+                                  Grid.Column="0"
+                                  Grid.Row="2"
+                                  VerticalAlignment="Top"
+                                  Height="300" 
+                                  Width="Auto"
+                                  Name="dgAccountData"
+                                  IsReadOnly="True"
+                                  FontSize="20"
+                                  AutoGenerateColumns="False"
+                                  Foreground="Black"
+                                  ScrollViewer.CanContentScroll="True" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  >
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Account Type" Width="*" Binding="{Binding Type}" />
+                                    <DataGridTextColumn Header="Industry" Width="*" Binding="{Binding Industry}" />
+                                    <DataGridTextColumn Header="PhoneNumber" Width="*" Binding="{Binding PhoneNumber}" />
+                                    <DataGridTextColumn Header="Website" Width="*" Binding="{Binding Website}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Label Grid.Row="0" Margin="2">
+                                    <Label.Content>
+                                        <Binding Path="CurrentPage">
+                                            <Binding.StringFormat>Current Page: {0}</Binding.StringFormat>
+                                        </Binding>
+                                    </Label.Content>
+                                </Label>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Button Name="btnEditAccount"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Blue"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnEditAccount_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/loop.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Edit</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnViewAccount"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Orange"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnViewAccount_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/info.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >View</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnRemoveAccount"
+                                        Width="130"
+                                        Height="50"
+                                        BorderBrush="Red"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnRemoveAccount_Click"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/close.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Remove</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="3" Grid.Column="0"/>
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Add Accounts" Width="200" Height="50" Cursor="Hand">
+                    <Grid>
+                        <Grid Width="Auto" Height="Auto" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="335" />
+                                <RowDefinition Height="66" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="400*" />
+                                <ColumnDefinition Width="60*" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0" Grid.Row="0" Grid.Column="0">
+                                <TextBox Controls:TextboxHelper.ClearTextButton="True" 
+                                         Controls:TextboxHelper.Watermark="Search" 
+                                         Name="tbxSearchAddAccount" 
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Left" 
+                                         HorizontalContentAlignment="Center" 
+                                         FontSize="28px" 
+                                         Height="50" 
+                                         Width="400" 
+                                 />
+
+                                <Button VerticalAlignment="Top" 
+                                HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center"
+                                Height="50"
+                                Name="btnSearchAddAccount"
+                                Width="50"
+                                >
+
+                                    <StackPanel>
+                                        <Image Source="/Assets/Img/Icons/32px/Search.png"  Width="32" Height="32" />
+                                    </StackPanel>
+                                </Button>
+                                <Label Margin="80,0,0,0" Content="Filter By" />
+                                <ComboBox Name="cmbFilterAccounts"
+                                          Margin="20,0,0,0"
+                                          Width="200"
+                                          ItemBindingGroup="{Binding Filter}" SelectionChanged="cmbFilterAccounts_SelectionChanged"
+                                          />
+                            </StackPanel>
+                            <DataGrid HorizontalAlignment="Left"
+                                      Grid.Column="0"
+                                      Grid.Row="2"
+                                      VerticalAlignment="Top"
+                                      Height="300" 
+                                      Width="Auto"
+                                      Name="dgAddAccountData"
+                                      IsReadOnly="True"
+                                      FontSize="20"
+                                      AutoGenerateColumns="False"
+                                      Foreground="Black"
+                                      ScrollViewer.CanContentScroll="True" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  >
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Account Type" Width="*" Binding="{Binding Type}" />
+                                    <DataGridTextColumn Header="Industry" Width="*" Binding="{Binding Industry}" />
+                                    <DataGridTextColumn Header="PhoneNumber" Width="*" Binding="{Binding PhoneNumber}" />
+                                    <DataGridTextColumn Header="Website" Width="*" Binding="{Binding Website}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Label Grid.Row="0" Margin="2">
+                                    <Label.Content>
+                                        <Binding Path="CurrentPage">
+                                            <Binding.StringFormat>Current Page: {0}</Binding.StringFormat>
+                                        </Binding>
+                                    </Label.Content>
+                                </Label>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                                <Button Name="btnEditAddAccount"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Blue"
+                                        Background="White"
+                                        BorderThickness="2"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/loop.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >Edit</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnViewAddAccount"
+                                        Width="130"
+                                        Height="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Orange"
+                                        Background="White"
+                                        BorderThickness="2"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Assets/Img/Icons/32px/info.png" Height="28" />
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="22" FontFamily="Segoe WP Light" >View</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+
+                                <Button Name="btnAddAccounts"
+                                        Width="130"
+                                        Height="50"
+                                        BorderBrush="Green"
+                                        Background="White"
+                                        BorderThickness="2" Click="btnAddAccounts_Click"
                                         >
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/Assets/Img/Icons/32px/checkmark.png" Height="28" />

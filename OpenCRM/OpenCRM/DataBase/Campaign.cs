@@ -17,6 +17,7 @@ namespace OpenCRM.DataBase
         public Campaign()
         {
             this.Campaign1 = new HashSet<Campaign>();
+            this.Campaign_Customer = new HashSet<Campaign_Customer>();
             this.Leads = new HashSet<Leads>();
             this.Opportunities = new HashSet<Opportunities>();
         }
@@ -50,6 +51,7 @@ namespace OpenCRM.DataBase
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
+        public virtual ICollection<Campaign_Customer> Campaign_Customer { get; set; }
         public virtual ICollection<Leads> Leads { get; set; }
         public virtual ICollection<Opportunities> Opportunities { get; set; }
     }
