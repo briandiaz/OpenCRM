@@ -299,6 +299,76 @@ namespace OpenCRM.Models.Dashboard
 
         #region "Products"
 
+        public List<ChartObject> ProductsQuantity()
+        {
+
+            _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var total = -_db.Products.Select(x => x.Quantity.Value).Sum();
+                    total *= -1;
+
+                    var query = (from products in _db.Products
+                                 select new ChartObject()
+                                 {
+                                     Quantity = products.Quantity.Value,
+                                     Name = products.Name
+
+                                 }
+                    ).ToList();
+                    query.ForEach(x => { x.Quantity = (x.Quantity / total) * 100; });
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
+        public List<ChartObject> ProdutsByOportunites()
+        {
+            _chartObjects = new List<ChartObject>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (from _opportunites in _db.Opportunities
+                                 from _products in _db.Products
+                                 where _opportunites.UserId == Session.UserId 
+                                 && _opportunites.ProductId == _products.ProductId
+                                 group _opportunites by new
+                                 {
+                                     _products.Name
+
+                                 } into opportunities
+                                 select new ChartObject()
+                                 {
+                                     Quantity = opportunities.Count(),
+                                     Name = opportunities.Key.Name
+                                 }
+                    ).ToList();
+                    _chartObjects = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _chartObjects;
+        }
+
         #endregion
 
         #region "Leads"
@@ -472,6 +542,7 @@ namespace OpenCRM.Models.Dashboard
             return _chartObjects;
         }
         #endregion
+
         #region "Contacts"
 
         #endregion

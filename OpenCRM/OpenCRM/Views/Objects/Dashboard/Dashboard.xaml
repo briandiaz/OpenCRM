@@ -310,7 +310,74 @@
 
                     <TabItem IsEnabled="False"></TabItem>
                     <TabItem Header="Products">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" RenderTransformOrigin="0.5,0.5">
+                            <ScrollViewer.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleY="0.116"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="-0.744"/>
+                                </TransformGroup>
+                            </ScrollViewer.RenderTransform>
 
+                            <Grid Height="1500">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="500"/>
+                                    <RowDefinition Height="500"/>
+                                </Grid.RowDefinitions>
+                                
+                                <StackPanel
+                                    Grid.Row="0"
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" 
+                                     VerticalAlignment="Top">
+                                    
+                                    
+
+                                    <chartingToolkit:PieChart   Style="{StaticResource MinimalChartStyle}"
+                                                                ChartTitle="Products in Stock."
+                                                                ChartSubTitle="Quantity."
+                                                                Width="750"
+                                                                Height="500"
+                                                                >
+
+                                        <chartingToolkit:PieChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartProductQuantity"/>
+                                        </chartingToolkit:PieChart.Series>
+                                    </chartingToolkit:PieChart>
+
+                                    
+                                    
+                                    
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Row="1"
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" 
+                                     VerticalAlignment="Top">
+                                    <chartingToolkit:PieChart   Style="{StaticResource MinimalChartStyle}"
+                                                                ChartTitle="Quantity of Products by Oportunities."
+                                                                ChartSubTitle="Quantity of Products by Oportunities."
+                                                                Width="750"
+                                                                Height="500"
+                                                                >
+
+                                        <chartingToolkit:PieChart.Series>
+                                            <chartingToolkit:ChartSeries
+                                                        SeriesTitle="Quantity"
+                                                        DisplayMember="Name"
+                                                        ValueMember="Quantity"
+                                                        Name="chartOportunitiesProducts"/>
+                                        </chartingToolkit:PieChart.Series>
+                                    </chartingToolkit:PieChart>
+                                </StackPanel>
+                              
+                            </Grid>
+                        </ScrollViewer>
                     </TabItem>
                 </TabControl>
             </controls:MetroContentControl>
