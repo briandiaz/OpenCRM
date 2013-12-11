@@ -193,14 +193,13 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,250">
 
-                        <ProgressBar Name="pgrbExpectedResponse"
+                        <ProgressBar Name="pgrbCampaignProgress"
                                      IsIndeterminate="False"
                                      Width="250"
                                      Height="20"
                                      Maximum="100"
                                      Minimum="0"
-                                     Value="{Binding ExpectedResponse}"
-                                     ToolTip="Expected Response"
+                                     ToolTip="Campaign Progress"
                                      />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,150">

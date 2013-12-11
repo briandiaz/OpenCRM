@@ -223,7 +223,7 @@
                 >Type
             </TextBlock>
 
-            <ComboBox Name="cmbType"
+            <ComboBox Name="cmbCampaignType"
                       VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         Margin="10,0,0,0"
@@ -349,7 +349,7 @@
                 >Num Sent
             </TextBlock>
 
-            <TextBox Name="tbxNumSent"
+            <TextBox Name="tbxNumberSent"
                         controls:TextboxHelper.ClearTextButton="True"
                         controls:TextboxHelper.Watermark="Num Sent"
                         HorizontalAlignment="Left"
@@ -442,7 +442,7 @@
             <TextBox Visibility="Hidden" Name="tbxCreatedby" Text="{Binding CreateBy}" />
             <DatePicker Visibility="Hidden" Name="tbxCreatedDate" SelectedDate="{Binding CreateDate}" />
             <ComboBox 
-                    Name="cmbStatus"
+                    Name="cmbCampaignStatus"
                     FontSize="16px"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
@@ -476,7 +476,7 @@
                     >Campaign Parent
             </TextBlock>
             <ComboBox 
-                    Name="cmbParent"
+                    Name="cmbCampaignParent"
                     FontSize="16px"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"

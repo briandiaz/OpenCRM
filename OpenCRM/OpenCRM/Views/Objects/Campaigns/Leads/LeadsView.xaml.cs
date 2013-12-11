@@ -39,6 +39,11 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
             dgContactData.ItemsSource = CampaignsModel.getAllCampaignContacts();
             dgAddAccountData.ItemsSource = CampaignsModel.getAvailableAccounts();
             dgAccountData.ItemsSource = CampaignsModel.getAllCampaignAccounts();
+            cmbFilterContacts.ItemsSource = SearchFilter.getFilters();
+
+            cmbFilterContacts.DisplayMemberPath = "Name";
+            cmbFilterContacts.SelectedValuePath = "ID";
+
             tbitemHeader.Header = CampaignController.CurrentCampaignName + " Lead's";
         }
 
@@ -367,19 +372,11 @@ namespace OpenCRM.Views.Objects.Campaigns.Leads
             currentGrid.Items.Refresh();
         }
 
-        private void cmbFilterAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void cmbFilterContacts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            dgAddContactData.ItemsSource = CampaignsModel.FilterContacts((SearchFilter)cmbFilterContacts.SelectedItem);
         }
 
-        private void cmbFilterLeads_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
     }
 }

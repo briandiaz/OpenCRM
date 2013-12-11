@@ -42,19 +42,19 @@ namespace OpenCRM.Views.Objects.Campaigns
         }
         public int? _campaignTypeId
         {
-            get { return (cmbType.SelectedItem != null) ? ((CampaignType)cmbType.SelectedItem).CampaignTypeId : (int?)null; }
+            get { return (cmbCampaignType.SelectedItem != null) ? ((CampaignType)cmbCampaignType.SelectedItem).CampaignTypeId : (int?)null; }
             set
             {
-                int? _campaignType = (cmbType.SelectedItem != null) ? ((CampaignType)cmbType.SelectedItem).CampaignTypeId : (int?)null;
+                int? _campaignType = (cmbCampaignType.SelectedItem != null) ? ((CampaignType)cmbCampaignType.SelectedItem).CampaignTypeId : (int?)null;
                 _campaignType = value;
             }
         }
         public int? _campaignStatusId
         {
-            get { return (cmbStatus.SelectedItem != null) ? ((CampaignStatus)cmbStatus.SelectedItem).CampaignStatusID : (int?)null; }
+            get { return (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null; }
             set
             {
-                int? _campaignStatus = (cmbStatus.SelectedItem != null) ? ((CampaignStatus)cmbStatus.SelectedItem).CampaignStatusID : (int?)null;
+                int? _campaignStatus = (cmbCampaignStatus.SelectedItem != null) ? ((CampaignStatus)cmbCampaignStatus.SelectedItem).CampaignStatusID : (int?)null;
                 _campaignStatus = value;
             }
         }
@@ -98,15 +98,15 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             get
             {
-                return (tbxNumSent.Text != "") ? Convert.ToInt32(tbxNumSent.Text) : (int?)null;
+                return (tbxNumberSent.Text != "") ? Convert.ToInt32(tbxNumberSent.Text) : (int?)null;
             }
         }
         public int? _campaignParent
         {
-            get { return (cmbParent.SelectedIndex != -1) ? ((CampaignsModel)cmbParent.SelectedItem).CampaignId : (int?)null; }
+            get { return (cmbCampaignParent.SelectedIndex != -1) ? ((CampaignsModel)cmbCampaignParent.SelectedItem).CampaignId : (int?)null; }
             set
             {
-                int? _campaign = (cmbParent.SelectedIndex != -1) ? ((CampaignsModel)cmbParent.SelectedItem).CampaignId : (int?)null;
+                int? _campaign = (cmbCampaignParent.SelectedIndex != -1) ? ((CampaignsModel)cmbCampaignParent.SelectedItem).CampaignId : (int?)null;
                 _campaign = value;
             }
         }
@@ -241,20 +241,20 @@ namespace OpenCRM.Views.Objects.Campaigns
         {
             List<CampaignType> _CampaignTypes = _campaignType.getAllCampaignType();
 
-            cmbType.ItemsSource = _CampaignTypes;
+            cmbCampaignType.ItemsSource = _CampaignTypes;
 
-            cmbType.DisplayMemberPath = "Name";
-            cmbType.SelectedValuePath = "CampaignTypeId";
+            cmbCampaignType.DisplayMemberPath = "Name";
+            cmbCampaignType.SelectedValuePath = "CampaignTypeId";
 
-            cmbStatus.ItemsSource = _campaignStatus.getAllCampaignStatuses();
+            cmbCampaignStatus.ItemsSource = _campaignStatus.getAllCampaignStatuses();
 
-            cmbStatus.DisplayMemberPath = "Name";
-            cmbStatus.SelectedValuePath = "CampaignStatusID";
+            cmbCampaignStatus.DisplayMemberPath = "Name";
+            cmbCampaignStatus.SelectedValuePath = "CampaignStatusID";
 
-            cmbParent.ItemsSource = _cmp.getAllCampaignsFromUser();
+            cmbCampaignParent.ItemsSource = _cmp.getAllCampaignsFromUser();
 
-            cmbParent.DisplayMemberPath = "Name";
-            cmbParent.SelectedValuePath = "CampaignId";
+            cmbCampaignParent.DisplayMemberPath = "Name";
+            cmbCampaignParent.SelectedValuePath = "CampaignId";
 
         }
 

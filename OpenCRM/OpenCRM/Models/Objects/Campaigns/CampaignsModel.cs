@@ -332,6 +332,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return _campaignLeads;
         }
+
         public Boolean AddLeadsToCampaign(List<Lead> Leads)
         {
             try
@@ -359,6 +360,7 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return false;
         }
+
         public Boolean RemoveCampaignLeads(List<Lead> Leads)
         {
             try
@@ -438,8 +440,238 @@ namespace OpenCRM.Models.Objects.Campaigns
 
         #endregion
 
+        #region CampaignResume
+
+        public int TotalLeads()
+        {
+            int _totalLeads = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from lead in _db.Leads
+                        where lead.CampaignId == CampaignController.CurrentCampaignId
+                        select lead
+                        ).ToList();
+                    _totalLeads = query.Count();
+                }
+                return _totalLeads;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalLeads;
+        }
+
+        public int ConvertedLeads()
+        {
+            int _totalLeads = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from lead in _db.Leads
+                        where lead.CampaignId == CampaignController.CurrentCampaignId
+                        && lead.Converted == true
+                        select lead
+                        ).ToList();
+                    _totalLeads = query.Count();
+                }
+                return _totalLeads;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalLeads;
+        }
+
+        public int TotalContacts()
+        {
+            int _totalContacts = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from contact in _db.Contact
+                        from customer in _db.Campaign_Customer
+                        where customer.CampaignId == CampaignController.CurrentCampaignId
+                        && customer.ContactId == contact.ContactId
+                        select contact
+                        ).ToList();
+                    _totalContacts = query.Count();
+                }
+                return _totalContacts;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalContacts;
+        }
+
+        public int TotalOpportunities()
+        {
+            int _totalOpportunities = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from opportunity in _db.Opportunities
+                        where opportunity.CampaignPrimarySourceId == CampaignController.CurrentCampaignId
+                        select opportunity
+                        ).ToList();
+                    _totalOpportunities = query.Count();
+                }
+                return _totalOpportunities;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalOpportunities;
+        }
+
+        public int TotalWonOpportunities()
+        {
+            int _totalOpportunities = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from opportunity in _db.Opportunities
+                        from stage in _db.Opportunities_Stage
+                        where opportunity.CampaignPrimarySourceId == CampaignController.CurrentCampaignId
+                        && stage.OpportunityStageId == opportunity.OpportunityStageId
+                        && stage.OpportunityStageId == 9
+                        select opportunity
+                        ).ToList();
+                    _totalOpportunities = query.Count();
+                }
+                return _totalOpportunities;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalOpportunities;
+        }
+
+        public decimal TotalValueOpportunities()
+        {
+            decimal _totalOpportunities = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from opportunity in _db.Opportunities
+                        where opportunity.CampaignPrimarySourceId == CampaignController.CurrentCampaignId
+                        select opportunity
+                        ).ToList();
+                    _totalOpportunities = query.Select(x => x.Amount.Value).Sum();
+                }
+                return _totalOpportunities;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalOpportunities;
+        }
+
+        public decimal TotalValueWonOpportunities()
+        {
+            decimal _totalOpportunities = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from opportunity in _db.Opportunities
+                        from stage in _db.Opportunities_Stage
+                        where opportunity.CampaignPrimarySourceId == CampaignController.CurrentCampaignId
+                        && stage.OpportunityStageId == 9
+                        select opportunity
+                        ).ToList();
+                    _totalOpportunities = query.Select(x => x.Amount.Value).Sum();
+                }
+                return _totalOpportunities;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalOpportunities;
+        }
+
+        public decimal TotalValueWonOpportunities(int campaignId)
+        {
+            decimal _totalOpportunities = 0;
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from opportunity in _db.Opportunities
+                        from stage in _db.Opportunities_Stage
+                        where opportunity.CampaignPrimarySourceId == campaignId
+                        && stage.OpportunityStageId == 9
+                        select opportunity
+                        ).ToList();
+                    _totalOpportunities = query.Select(x => x.Amount.Value).Sum();
+                }
+                return _totalOpportunities;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return _totalOpportunities;
+        }
+
+        #endregion
+
         #region CampaignContacts
-        
+
         public static List<OpenCRM.DataBase.Contact> getAllCampaignContacts()
         {
             var _campaignContacts = new List<OpenCRM.DataBase.Contact>();
@@ -521,6 +753,7 @@ namespace OpenCRM.Models.Objects.Campaigns
                         // Creating the Opportunity for the Customer
                         var opportunity = _db.Opportunities.Create();
                         opportunity.Name = Campaign.Name + " - " + Customer.ContactName;
+                        opportunity.CampaignPrimarySourceId = CampaignController.CurrentCampaignId;
                         _db.Opportunities.Add(opportunity);
                         _db.SaveChanges();
                         
@@ -577,7 +810,74 @@ namespace OpenCRM.Models.Objects.Campaigns
                 System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             return false;
-        } 
+        }
+
+        public static List<OpenCRM.DataBase.Contact> FilterContacts(SearchFilter filter)
+        {
+            List<OpenCRM.DataBase.Contact> contacts = new List<Contact>();
+            try
+            {
+                using (var _db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from contact in _db.Contact
+                        select contact
+                    ).ToList();
+
+
+                    switch (filter.ID)
+                    {
+                        case 1:
+
+                            query = (
+                                from contact in _db.Contact
+                                where (DateTime.Now.Year - contact.BirthDate.Value.Year) >= 12 && (DateTime.Now.Year - contact.BirthDate.Value.Year) < 18
+                                select contact
+                            ).ToList();
+                            break;
+                        case 2:
+                            query = (
+                                from contact in _db.Contact
+                                where (DateTime.Now.Year - contact.BirthDate.Value.Year) >= 18 && (DateTime.Now.Year - contact.BirthDate.Value.Year) <= 25
+                                select contact
+                            ).ToList();
+                            break;
+                        case 3:
+                            query = (
+                                from contact in _db.Contact
+                                where (DateTime.Now.Year - contact.BirthDate.Value.Year) >= 26 && (DateTime.Now.Year - contact.BirthDate.Value.Year) <= 40
+                                select contact
+                            ).ToList();
+                            break;
+                        case 4:
+                            query = (
+                                from contact in _db.Contact
+                                where (DateTime.Now.Year - contact.BirthDate.Value.Year) >= 41 && (DateTime.Now.Year - contact.BirthDate.Value.Year) <= 50
+                                select contact
+                            ).ToList();
+                            break;
+                        case 5:
+                            query = (
+                                from contact in _db.Contact
+                                where (DateTime.Now.Year - contact.BirthDate.Value.Year) >= 51
+                                select contact
+                            ).ToList();
+                            break;
+                    }
+                    contacts = query;
+                    return contacts;
+                }
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), "Error!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            return contacts;
+        }
          
         #endregion
 
@@ -674,7 +974,6 @@ namespace OpenCRM.Models.Objects.Campaigns
             }
             return _campaignAccounts;
         }
-
 
         public Boolean AddAccountsToCampaign(List<CampaignAccount> Accounts)
         {
@@ -1794,5 +2093,23 @@ namespace OpenCRM.Models.Objects.Campaigns
     {
         public int ID { get; set; }
         public String Name { get; set; }
+        public SearchFilter() { }
+
+        public SearchFilter(int id, String name)
+        {
+            this.ID = id;
+            this.Name = name;
+        }
+        public static List<SearchFilter> getFilters()
+        {
+            List<SearchFilter> filters = new List<SearchFilter>();
+            filters.Add(new SearchFilter(1," < 18"));
+            filters.Add(new SearchFilter(2, "18-25"));
+            filters.Add(new SearchFilter(3, "26-40"));
+            filters.Add(new SearchFilter(4, "41-50"));
+            filters.Add(new SearchFilter(5, ">50"));
+            return filters;
+        }
+    
     }
 }

@@ -262,12 +262,6 @@
                                         <Image Source="/Assets/Img/Icons/32px/Search.png"  Width="32" Height="32" />
                                     </StackPanel>
                                 </Button>
-                                <Label Margin="80,0,0,0" Content="Filter By" />
-                                <ComboBox Name="cmbFilterLeads"
-                                          Margin="20,0,0,0"
-                                          Width="200"
-                                          ItemBindingGroup="{Binding Filter}" SelectionChanged="cmbFilterLeads_SelectionChanged"
-                                          />
 
                             </StackPanel>
                             <DataGrid HorizontalAlignment="Left"
@@ -749,12 +743,6 @@
                                         <Image Source="/Assets/Img/Icons/32px/Search.png"  Width="32" Height="32" />
                                     </StackPanel>
                                 </Button>
-                                <Label Margin="80,0,0,0" Content="Filter By" />
-                                <ComboBox Name="cmbFilterAccounts"
-                                          Margin="20,0,0,0"
-                                          Width="200"
-                                          ItemBindingGroup="{Binding Filter}" SelectionChanged="cmbFilterAccounts_SelectionChanged"
-                                          />
                             </StackPanel>
                             <DataGrid HorizontalAlignment="Left"
                                       Grid.Column="0"

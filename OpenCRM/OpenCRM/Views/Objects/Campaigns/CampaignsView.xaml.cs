@@ -39,6 +39,7 @@ namespace OpenCRM.Views.Objects.Campaigns
             Campaign.ControlAccess(getButtons());
             Session.ModuleAccessRights(this, ObjectsName.Campaigns);
             cmbTargetKeyCampaign.Visibility = System.Windows.Visibility.Visible;
+            pgrbCampaignProgress.Visibility = System.Windows.Visibility.Visible;
         }
         private List<Button> getButtons()
         { 
@@ -265,8 +266,8 @@ namespace OpenCRM.Views.Objects.Campaigns
                 CampaignController.currentCampaignIndex = 0;
                 gridCampaign.DataContext = _listCampaigns[CampaignController.currentCampaignIndex];
                 if (_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.HasValue)
-                    pgrbExpectedResponse.Value = Convert.ToInt32(_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.Value) * 100;
-                //lblExpectedResponse.Text = (Decimal.Parse(_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.Value.ToString()) * 100).ToString();
+                    //pgrbCampaignProgress.Value = Convert.ToInt32(_listCampaigns[CampaignController.currentCampaignIndex].ExpectedResponse.Value) * 100;
+                    pgrbCampaignProgress.Value = Convert.ToInt32((Campaign.TotalValueWonOpportunities(_listCampaigns[CampaignController.currentCampaignIndex].CampaignId) / _listCampaigns[CampaignController.currentCampaignIndex].ExpectedRevenue) * 100);
             }
             else
             {

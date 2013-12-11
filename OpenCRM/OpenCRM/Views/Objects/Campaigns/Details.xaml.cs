@@ -33,6 +33,18 @@ namespace OpenCRM.Views.Objects.Campaigns
             MainGrid.DataContext = _cmp.getCampaignByID(Convert.ToInt32(Controllers.Campaign.CampaignController.CurrentCampaignId));
             LoadStatusTypeOwner((CampaignsModel)MainGrid.DataContext);
             Session.ModuleAccessRights(this, ObjectsName.Campaigns);
+            LoadCampaignResume();
+        }
+
+        private void LoadCampaignResume()
+        {
+            tbxTotalLeads.Content = _cmp.TotalLeads().ToString();
+            tbxTotalContacts.Content = _cmp.TotalContacts().ToString();
+            tbxConvertedLeads.Content = _cmp.ConvertedLeads().ToString();
+            tbxTotalOpportunities.Content = _cmp.TotalOpportunities().ToString();
+            tbxWonOpportunities.Content = _cmp.TotalWonOpportunities().ToString();
+            tbxTotalValueOpportunities.Content = _cmp.TotalValueOpportunities().ToString();
+            tbxTotalValueWonOpportunities.Content = _cmp.TotalValueWonOpportunities().ToString();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
