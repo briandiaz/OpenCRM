@@ -358,6 +358,9 @@
     <Compile Include="Views\Objects\Campaigns\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Objects\Contacts\ContactsDetails.xaml.cs">
+      <DependentUpon>ContactsDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Objects\Dashboard\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
@@ -375,9 +378,6 @@
     </Compile>
     <Compile Include="Views\Objects\Contacts\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Objects\Contacts\EditContacts.xaml.cs">
-      <DependentUpon>EditContacts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Objects\Leads\LeadConvertion.xaml.cs">
       <DependentUpon>LeadConvertion.xaml</DependentUpon>
@@ -495,6 +495,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Campaigns\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Objects\Contacts\ContactsDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -519,10 +523,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Objects\Contacts\CreateContact.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Objects\Contacts\EditContacts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

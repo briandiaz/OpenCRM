@@ -31,12 +31,17 @@ namespace OpenCRM.Views.Objects.Contacts
 
         private void btnEditContact_Click(object sender, RoutedEventArgs e)
         {
-
+            PageSwitcher.Switch("/Views/Objects/Contacts/ContactsDetails.xaml");
         }
 
         private void btnCreateContact_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Contacts/CreateContact.xaml");
+        }
+
+        public void ProdutNameHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

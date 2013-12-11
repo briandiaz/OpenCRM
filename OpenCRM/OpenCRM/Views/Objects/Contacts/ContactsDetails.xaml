@@ -1,0 +1,448 @@
+﻿<Page   x:Class="OpenCRM.Views.Objects.Contacts.ContactsDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Height="Auto" 
+        Width="Auto"
+        Title="Lead Details">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                    <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Height="805">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+
+       
+        <Grid Grid.Row="0"
+              Grid.Column="1" Margin="-2,0,2,0">
+            <Label Content="Contacts" 
+                   FontSize="12px"
+                   Margin="81,20,577,63"/>
+
+            <Label Content="Contacts Details" 
+                   FontSize="20px"
+                   Margin="81,47,513,26"/>
+            <Button Style="{DynamicResource NoChromeButton}" Cursor="Hand" HorizontalAlignment="Left"  >
+                <Image Source="/Assets/Img/Icons/Contacts.png" 
+                        HorizontalAlignment="Left"
+                        Height="69"
+                        VerticalAlignment="Top"
+                        Width="66"
+                        Margin="10,0,0,0"/>
+            </Button>
+
+            <Button Name="btnDeleteLead"
+                Content="Cancel"
+                RenderTransformOrigin="0.43,0.526"
+                Margin="625,40,24,11" 
+                Click="btnDelete_OnClick"/>
+
+            <Button x:Name="btnEditLead"
+                Content="Edit"
+                RenderTransformOrigin="3.322,0.756"
+                Margin="523,40,126,11" 
+                Click="btnEditLead_OnClick"/>
+        </Grid>
+
+        <Grid Grid.Row="1"
+                  Grid.Column="1" Height="940">
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="420"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="190"/>
+
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                      Grid.Column="0">
+                <Border BorderBrush="#A300E3">
+                    <Grid Background="#A300E3">
+                        <TextBlock  Text="Contacts Details"
+                                        VerticalAlignment="Center"
+                                        TextAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="16px"
+                                        Margin="34,8,0,8" />
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Name="gridDefaultRow2"
+                      Grid.Row="1"
+                      Visibility="Visible" Height="428" VerticalAlignment="Top" Margin="0,0,0,-56" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="91*"/>
+                    <ColumnDefinition Width="695*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Label  Name="lblLeadOwner"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,25,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblFirstName"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,55,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblAccount"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,85,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblTitle"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,115,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblDepartment"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,145,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblBirthDate"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,175,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblContactReportTo"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,205,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblLeadSource"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,235,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblContactMailingAddress"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="104,265,310,0" Grid.Column="1"/>
+
+                <Label  Name="lblPhoneNumber"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,25,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblHomePhoneNumber"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,55,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblMobileNumber"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,85,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblEmail"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,115,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblFaxNumber"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,145,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblAssitant"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,175,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblAssitantPhoneNumber"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,205,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblContactAddress"
+                            Content=""
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Margin="484,235,30,0" Grid.Column="1"/>
+
+                <Label  Name="lblEmployes"
+                            Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                            VerticalAlignment="Top"
+                            FontSize="15px"
+                            Opacity="0.4"
+                            Margin="10,31,-35,0" Grid.ColumnSpan="2"/>
+
+                <TextBlock  Text="Name"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px"
+                                FontWeight="SemiBold"
+                                Margin="15,60,620,410" Height="22" Grid.ColumnSpan="2" />
+
+                <TextBlock
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px" 
+                                FontWeight="SemiBold"
+                                Margin="15,31,620,0" 
+                                Height="20" 
+                                Grid.ColumnSpan="2" ><Run Text="Contact Own"/><Run Text="er"/></TextBlock>
+
+                <TextBlock  Text="Account Name"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px"
+                                Margin="15,90,620,410" 
+                                FontWeight="SemiBold"
+                                Height="24" Grid.ColumnSpan="2" />
+
+                <TextBlock  Text="Title"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px"
+                                Margin="15,120,620,410" 
+                                FontWeight="SemiBold"
+                                Height="22" Grid.ColumnSpan="2" />
+
+                <TextBlock  Text="BirthDate" 
+                                FontSize="15px"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                Margin="15,180,620,410" 
+                                FontWeight="SemiBold"
+                                Height="22" Grid.ColumnSpan="2" />
+
+                <TextBlock  Text="Department" 
+                                FontSize="15px"
+                                FontWeight="SemiBold"
+                                TextAlignment="Right"
+                                Margin="15,150,620,446" Grid.ColumnSpan="2" />
+
+                <TextBlock  Text="Reports To" 
+                                FontSize="15px"
+                                TextAlignment="Right"
+                                FontWeight="SemiBold"
+                                Margin="15,210,620,437" Grid.Column="1" />
+
+                <TextBlock  Text="Lead Source" 
+                                FontSize="15px"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                Margin="15,240,620,0" 
+                                FontWeight="SemiBold"
+                                Height="22" Grid.ColumnSpan="2" />
+
+                <TextBlock  Text="Mailing Address" 
+                                FontSize="15px"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                Margin="15,270,620,0" 
+                                FontWeight="SemiBold"
+                                Height="22" Grid.ColumnSpan="2" />
+
+                <TextBlock  Text="Phone"
+                                TextAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Margin="327,30,242,0" 
+                                FontWeight="SemiBold"
+                                Height="20" Grid.Column="1" />
+
+                <TextBlock  Text="Home Phone"
+                                TextAlignment="Right"
+                                VerticalAlignment="Top"
+                                FontSize="15px" 
+                                Margin="327,60,242,0" 
+                                FontWeight="SemiBold"
+                                Height="24" Grid.Column="1" />
+
+                <TextBlock  Text="Mobile"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px"
+                                Margin="327,90,242,0" 
+                                FontWeight="SemiBold"
+                                Height="26" Grid.Column="1" />
+
+                <TextBlock  Text="Email" 
+                                FontSize="15px"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                Margin="327,120,242,0" 
+                                FontWeight="SemiBold"
+                                Height="26" Grid.Column="1" />
+
+                <TextBlock  Text="Fax"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px"
+                                Margin="327,150,242,0" 
+                                FontWeight="SemiBold"
+                                Height="28" Grid.Column="1" />
+
+                <TextBlock  Text="Assitant"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px" 
+                                FontWeight="SemiBold"
+                                Margin="327,180,242,0" 
+                                Height="22" Grid.Column="1" />
+
+                <TextBlock  Text="Assitant Phone"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px" 
+                                FontWeight="SemiBold"
+                                Margin="327,210,242,0" 
+                                Height="22" Grid.Column="1" />
+
+                <TextBlock  Text="Other Address"
+                                VerticalAlignment="Top"
+                                TextAlignment="Right"
+                                FontSize="15px" 
+                                FontWeight="SemiBold"
+                                Margin="327,240,242,0" 
+                                Height="22" Grid.Column="1"/>
+
+                <Label  x:Name="lblLine"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                FontWeight="Thin"
+                                Opacity="0.4"
+                                Margin="10,61,-35,0" Grid.ColumnSpan="2"/>
+
+                <Label  x:Name="lblLine1"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Opacity="0.4"
+                                Margin="10,91,-35,0" Grid.ColumnSpan="2"/>
+
+                <Label  x:Name="lblLine2"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Opacity="0.4"
+                                Margin="10,121,-35,0" Grid.ColumnSpan="2"/>
+
+                <Label  x:Name="lblLine3"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Opacity="0.4"
+                                Margin="10,151,-35,0" Grid.ColumnSpan="2"/>
+
+                <Label  x:Name="lblLine4"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Opacity="0.4"
+                                Margin="10,181,-35,0" Grid.ColumnSpan="2"/>
+
+                <Label  x:Name="lblLine5"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Opacity="0.4"
+                                Margin="10,211,-35,0" Grid.ColumnSpan="2"/>
+
+                <Label  x:Name="lblLine6"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Opacity="0.4"
+                                Margin="10,241,-35,0" Grid.ColumnSpan="2"/>
+
+                <Label  x:Name="lblLine7"
+                                Content="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
+                                VerticalAlignment="Top"
+                                FontSize="15px"
+                                Opacity="0.4"
+                                Margin="10,271,-35,0" Grid.ColumnSpan="2"/>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>
+

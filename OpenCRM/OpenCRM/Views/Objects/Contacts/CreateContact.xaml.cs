@@ -27,12 +27,20 @@ namespace OpenCRM.Views.Objects.Contacts
         {
             InitializeComponent();
             _contactModel = new ContactsModel();
+            LoadPAge();
+            
             if (ContactsModel.IsNew)
             { 
             }
             if (ContactsModel.IsEditing)
             { 
             }
+        }
+
+        private void LoadPAge()
+        {
+            this.cmbBoxOtherCountry.ItemsSource = _contactModel.getCountries();
+            this.cmbMailinCountry.ItemsSource = _contactModel.getCountries();
         }
 
         private bool canSaveContact()
@@ -46,8 +54,7 @@ namespace OpenCRM.Views.Objects.Contacts
 
             return canSave;
         }
-
-        
+     
         private void btnCreateContact_Click(object sender, RoutedEventArgs e)
         {
             PageSwitcher.Switch("/Views/Objects/Contacts/ContactsView.xaml");
@@ -63,5 +70,115 @@ namespace OpenCRM.Views.Objects.Contacts
                 _contactModel.Save(this);
             }
         }
+
+        private void btnSearchAccount_Click(object sender, RoutedEventArgs e)
+        {
+            this.ContactInfo.Visibility = System.Windows.Visibility.Collapsed;
+            this.gridSearchAccount.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void cmbMailinCountry_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            
+
+            object selectedItem = (sender as ComboBox).SelectedItem;
+
+            if (selectedItem == null)
+                return;
+
+            Type type = selectedItem.GetType();
+
+            var CountryId = Convert.ToInt32(type.GetProperty("CountryId").GetValue(selectedItem, null));
+
+            _contactModel.Data.ContactMailingCountry = CountryId;
+
+            this.cmbMailinState.IsEnabled = true;
+            this.cmbMailinState.ItemsSource = _contactModel.getStatesCountry(CountryId);
+        }
+
+        private void cmbMailinState_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+           
+
+            object selectedItem = (sender as ComboBox).SelectedItem;
+
+            if (selectedItem == null)
+                return;
+
+            Type type = selectedItem.GetType();
+
+            var StateId = Convert.ToInt32(type.GetProperty("StateId").GetValue(selectedItem, null));
+
+            _contactModel.Data.ContactMailingState = StateId;
+        }
+
+        private void cmbBoxOtherCountry_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+           
+
+            object selectedItem = (sender as ComboBox).SelectedItem;
+
+            if (selectedItem == null)
+                return;
+
+            Type type = selectedItem.GetType();
+
+            var CountryId = Convert.ToInt32(type.GetProperty("CountryId").GetValue(selectedItem, null));
+
+            _contactModel.Data.ContactOtherCountry = CountryId;
+
+            this.cmbOtherProvice.IsEnabled = true;
+            this.cmbOtherProvice.ItemsSource = _contactModel.getStatesCountry(CountryId);
+        }
+
+        private void cmbBoxOtherProvice_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+           
+
+            object selectedItem = (sender as ComboBox).SelectedItem;
+
+            if (selectedItem == null)
+                return;
+
+            Type type = selectedItem.GetType();
+
+            var StateId = Convert.ToInt32(type.GetProperty("StateId").GetValue(selectedItem, null));
+
+            _contactModel.Data.ContactOtherState = StateId;
+        }
+
+        private void btnCancelAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridSearchAccount.Visibility = System.Windows.Visibility.Collapsed;
+            this.ContactInfo.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void btnAcceptAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnClearAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSearchAccountLookUp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSearchContact(object sender, RoutedEventArgs e)
+        {
+            this.gridSearchReportTo.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void btnCancelContactLookUp_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.gridSearchReportTo.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+      
+
     }
 }

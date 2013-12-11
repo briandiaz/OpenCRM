@@ -35,6 +35,8 @@ namespace OpenCRM.Views.Objects.Products
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            ProductsModel.IsEditing = false;
+            ProductsModel.IsNew = true;
             PageSwitcher.Switch("/Views/Objects/Products/CreateProduct.xaml");
         }
 

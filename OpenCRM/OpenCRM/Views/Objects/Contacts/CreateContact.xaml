@@ -7,10 +7,8 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       mc:Ignorable="d"
-                      Title="Campaigns" 
-                      MinHeight="1024" 
-                      MinWidth="768"
-                      >
+                      Width="auto"
+                      Title="Campaigns">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -20,6 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="../../../Resources/DataGridViewAzure.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>
@@ -36,17 +35,17 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="117*"/>
-                <ColumnDefinition Width="604*"/>
-                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="400*"/>
+                <ColumnDefinition Width="100*"/>
             </Grid.ColumnDefinitions>
 
-            <TabControl Grid.Row="0" Grid.Column="0"/>
 
             <Grid Grid.Row="0"
                   Grid.Column="1">
 
                 <StackPanel Grid.Row="0" 
+                            Visibility="Collapsed"
                         Grid.Column="0" 
                         Orientation="Horizontal" 
                         HorizontalAlignment="Right" Width="158">
@@ -57,7 +56,7 @@
                     
                 		Width="75" Click="btnCrearContacto_Click"   >
 
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" >
                             <Image Source="/Assets/Img/Icons/32px/checkmark.png" Width="32" Height="32px"/>
                             <TextBlock VerticalAlignment="Center"><Run Text="Create"/></TextBlock>
                         </StackPanel>
@@ -80,33 +79,33 @@
                 </StackPanel>
                 <Label Content="Contacts"
                 	FontSize="25px"
-                	HorizontalAlignment="Left" Margin="115,119,0,0" VerticalAlignment="Top"/>
+                	HorizontalAlignment="Left" Margin="105,36,0,0" VerticalAlignment="Top"/>
                 <Image Source="/Assets/Img/Icons/Contacts.png"
                 	HorizontalAlignment="Left"
                 	Height="100"
                 	VerticalAlignment="Top"
-                	Width="100" Margin="10,62,0,0"/>
+                	Width="100" Margin="0,2,0,0"/>
 
             </Grid>
 
             <ScrollViewer 
                 Grid.Row="2"
                 Grid.Column="1"
-                Height="600"
-                Width="auto"
-                >
+                Height="590">
                 
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="34*" />
-                        <RowDefinition Height="326*"/>
+                        <RowDefinition Height="300*"/>
                         <RowDefinition Height="34*" />
-                        <RowDefinition Height="511*"/>
+                        <RowDefinition Height="300*"/>
                         <RowDefinition Height="34*" />
-                        <RowDefinition Height="400*"/>
+                        <RowDefinition Height="300*"/>
                         <RowDefinition Height="34*" />
-                        <RowDefinition Height="400*"/>
+                        <RowDefinition Height="300*"/>
                     </Grid.RowDefinitions>
+                    
+                    
 
                     <Grid.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -125,8 +124,34 @@
                               Foreground="White"/>
                         </Border>
                     </Grid>
+                    
+                    
 
-                    <Grid Grid.Row="1">
+                    <Grid Name="ContactInfo" Grid.Row="1"
+                          Visibility="Visible">
+                        <Button Name="btnAccount"
+                            Margin="264,105,0,0"
+                            Click="btnSearchAccount_Click" 
+                            Height="26" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left" Width="23">
+                            <StackPanel>
+                                <Image Source="/OpenCRM;component/Assets/Img/Search.png" 
+                        		   Width="13"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Name="btnReportsTo"
+                            Margin="264,243,0,0"
+                            Click="btnSearchContact" 
+                            Height="26" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left" Width="23">
+                            <StackPanel>
+                                <Image Source="/OpenCRM;component/Assets/Img/Search.png" 
+                        		   Width="13"/>
+                            </StackPanel>
+                        </Button>
 
                         <Label Content="Contact Owner"
                            HorizontalAlignment="Left"
@@ -165,37 +190,37 @@
 
                         <Label Content="BirthDate"
                            HorizontalAlignment="Left"
-                           Margin="66,205,0,0"
+                           Margin="66,208,0,0"
                            VerticalAlignment="Top"
                            RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Reports To"
                            HorizontalAlignment="Left"
-                           Margin="59,237,0,0"
+                           Margin="59,243,0,0"
                            VerticalAlignment="Top"
                            RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Lead Source"
                            HorizontalAlignment="Left"
-                           Margin="54,274,0,0"
+                           Margin="51,278,0,0"
                            VerticalAlignment="Top"
                            RenderTransformOrigin="-2.967,-0.025"/>
 
                         <TextBox
                             Name="TxtBoxContactName"
                             HorizontalAlignment="Left"
-                            Height="23" Margin="164,38,0,0"
+                            Height="23" Margin="177,38,0,0"
                             TextWrapping="Wrap"
                             controls:TextboxHelper.Watermark="Contact Name"
                             controls:TextboxHelper.ClearTextButton="True"
                             VerticalAlignment="Top"
-                            Width="120"/>
+                            Width="120" RenderTransformOrigin="0.733,0.654"/>
 
                         <TextBox
                 	        Name="TxtBoxContactLastName"
                 	        HorizontalAlignment="Left"
                             Height="23"
-                            Margin="164,72,0,0"
+                            Margin="139,72,0,0"
                             TextWrapping="Wrap"
                             controls:TextboxHelper.Watermark="Last Name"
                             controls:TextboxHelper.ClearTextButton="True"
@@ -205,7 +230,7 @@
                         <TextBox 
                             Name="TxtBoxConctactAccountName"
                             HorizontalAlignment="Left" 
-                            Height="23" Margin="164,105,0,0" 
+                            Height="23" Margin="139,105,0,0" 
                             TextWrapping="Wrap" 
                             controls:TextboxHelper.Watermark="Account Name"
                             controls:TextboxHelper.ClearTextButton="True"
@@ -216,7 +241,7 @@
                             Name="TxtBoxConctactTitle"
                             HorizontalAlignment="Left"
                             Height="23"
-                            Margin="164,140,0,0"
+                            Margin="139,140,0,0"
                             TextWrapping="Wrap"
                             controls:TextboxHelper.Watermark="Conctact Title"
                             controls:TextboxHelper.ClearTextButton="True"
@@ -227,29 +252,28 @@
                             Name="TxtBoxConctactDepartment"
                             HorizontalAlignment="Left"
                             Height="23"
-                            Margin="164,173,0,0"
+                            Margin="139,173,0,0"
                             TextWrapping="Wrap"
                             controls:TextboxHelper.Watermark="Department"
                             controls:TextboxHelper.ClearTextButton="True"
                             VerticalAlignment="Top"
                             Width="120"/>
 
-                        <TextBox
-                            Name="TxtBoxConctactBirthDate"
+                        <DatePicker
+                            Name="datePickerConctactBirthDate"
                             HorizontalAlignment="Left"
-                            Height="23"
-                            Margin="164,205,0,0"
-                            TextWrapping="Wrap"
+                            Height="26"
+                            Margin="139,208,0,0"
                             controls:TextboxHelper.Watermark="Birth Date"
                             controls:TextboxHelper.ClearTextButton="True"
                             VerticalAlignment="Top"
-                            Width="120"/>
+                            Width="131"/>
 
                         <TextBox
                             Name="TxtBoxConctactReportsTo"
                             HorizontalAlignment="Left"
                             Height="23"
-                            Margin="164,237,0,0"
+                            Margin="139,243,0,0"
                             TextWrapping="Wrap"
                             controls:TextboxHelper.Watermark="Reports To"
                             controls:TextboxHelper.ClearTextButton="True"
@@ -257,153 +281,251 @@
                             Width="120"/>
 
                         <ComboBox 
-                            Name="TxtBoxConctactLeadSource"
+                            Name="cmbConctactLeadSource"
                             HorizontalAlignment="Left"
-                            Margin="164,274,0,0"
-                            VerticalAlignment="Top"
-                            Width="120"/>
+                            Margin="139,278,0,16"
+                            Width="120" RenderTransformOrigin="0.492,0.462"/>
 
                         <Label Content="Phone"
                 	        HorizontalAlignment="Left"
-                	        Margin="378,10,0,0" 
+                	        Margin="367,5,0,0" 
                 	        VerticalAlignment="Top"
-                	        RenderTransformOrigin="-2.967,-0.025"/>
+                	        RenderTransformOrigin="0.455,0.5"/>
 
                         <Label Content="Home Phone"
                 	        HorizontalAlignment="Left"
-                	        Margin="343,40,0,0" 
+                	        Margin="332,38,0,0" 
                 	        VerticalAlignment="Top"
                 	        RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Mobile"
                 	        HorizontalAlignment="Left"
-                	        Margin="375,72,0,0" 
+                	        Margin="364,72,0,0" 
                 	        VerticalAlignment="Top"
                 	        RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Other Phone"
                 	        HorizontalAlignment="Left"
-                	        Margin="345,105,0,0" 
+                	        Margin="334,104,0,0" 
                 	        VerticalAlignment="Top"
                 	        RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Fax"
                 	        HorizontalAlignment="Left"
-                	        Margin="395,140,0,0" 
+                	        Margin="384,142,0,0" 
                 	        VerticalAlignment="Top"
                 	        RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Email"
                 	        HorizontalAlignment="Left"
-                	        Margin="384,173,0,0" 
+                	        Margin="374,173,0,0" 
                 	        VerticalAlignment="Top"
                 	        RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Assistant"
                 	        HorizontalAlignment="Left"
-                	        Margin="365,210,0,0" 
+                	        Margin="354,208,0,0" 
                 	        VerticalAlignment="Top"
                 	        RenderTransformOrigin="-2.967,-0.025"/>
 
                         <Label Content="Assistant Phone"
                 	        HorizontalAlignment="Left"
-                	        Margin="328,241,0,0" 
+                	        Margin="317,246,0,0" 
                 	        VerticalAlignment="Top"
                 	        RenderTransformOrigin="-2.967,-0.025"/>
 
                         <TextBox
                              Name="TxtBoxPhone"
-                             HorizontalAlignment="Left"
                              Height="23"
-                             Margin="447,10,0,0"
+                             Margin="425,5,40,0"
                              TextWrapping="Wrap"
                              controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
-                             VerticalAlignment="Top"
-                             Width="120"/>
+                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="121"/>
 
                         <TextBox
                 	        Name="TxtBoxHomePhone"
                 	        HorizontalAlignment="Left"
                 	        Height="23"
-                	        Margin="447,40,0,0"
+                	        Margin="425,38,40,0"
                 	        TextWrapping="Wrap"
                 	        controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
                 	        VerticalAlignment="Top"
-                	        Width="120"/>
+                	        Width="121"/>
 
                         <TextBox
                 	        Name="TxtBoxMobile"
                 	        HorizontalAlignment="Left"
                 	        Height="23"
-                	        Margin="447,72,0,0"
+                	        Margin="425,72,40,0"
                 	        TextWrapping="Wrap"
                 	        controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
                 	        VerticalAlignment="Top"
-                	        Width="120"/>
+                	        Width="121"/>
 
                         <TextBox
                 	        Name="TxtBoxOtherPhone"
                 	        HorizontalAlignment="Left"
                 	        Height="23"
-                	        Margin="447,105,0,0"
+                	        Margin="425,105,40,0"
                 	        TextWrapping="Wrap"
                 	        controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
                 	        VerticalAlignment="Top"
-                	        Width="120"/>
+                	        Width="121"/>
 
                         <TextBox
                 	        Name="TxtBoxFax"
                 	        HorizontalAlignment="Left"
                 	        Height="23"
-                	        Margin="447,140,0,0"
+                	        Margin="425,140,40,0"
                 	        TextWrapping="Wrap"
                 	        controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
                 	        VerticalAlignment="Top"
-                	        Width="120"/>
+                	        Width="121"/>
 
                         <TextBox
                 	        Name="TxtBoxEmail"
                 	        HorizontalAlignment="Left"
                 	        Height="23"
-                	        Margin="447,173,0,0"
+                	        Margin="425,173,40,0"
                 	        TextWrapping="Wrap"
                 	        controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
                 	        VerticalAlignment="Top"
-                	        Width="120"/>
+                	        Width="121"/>
 
                         <TextBox
                 	        Name="TxtBoxAssistant"
                 	        HorizontalAlignment="Left"
                 	        Height="23"
-                	        Margin="447,208,0,0"
+                	        Margin="425,208,40,0"
                 	        TextWrapping="Wrap"
                 	        controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
                 	        VerticalAlignment="Top"
-                	        Width="120"/>
+                	        Width="121"/>
 
                         <TextBox
                 	        Name="TxtBoxAssistantPhone"
                 	        HorizontalAlignment="Left"
                 	        Height="23"
-                	        Margin="447,244,0,0"
+                	        Margin="425,246,40,0"
                 	        TextWrapping="Wrap"
                 	        controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
                 	        VerticalAlignment="Top"
-                	        Width="120"/>
+                	        Width="121"/>
+                       
+                        <ComboBox
+                        	Name="cmbSaludation"
+                        	HorizontalAlignment="Left"
+                        	Height="23" Margin="131,38,0,0"
+                        	controls:TextboxHelper.Watermark="Contact Name"
+                        	controls:TextboxHelper.ClearTextButton="True"
+                        	VerticalAlignment="Top"
+                        	Width="41" RenderTransformOrigin="0.733,0.654"/>
 
                     </Grid>
 
-                    <Grid Grid.Row="2" 
-                          
-                          Margin="0,5,0,0">
+                    <Grid Grid.Row="1" Name="gridSearchAccount"
+                      Background="#FAFAFA"
+                      Visibility="Collapsed">
+
+                        <Image Source="/Assets/Img/Search.png" 
+                           HorizontalAlignment="Left"
+                           Height="40"
+                           VerticalAlignment="Top"
+                           Width="40" 
+                           Margin="30,20,0,0" />
+
+                        <Label Content="Lookup Accounts"
+                           VerticalAlignment="Top"
+                           FontSize="28px"
+                           Margin="75,13,464,0"/>
+
+                        <Button Name="btnCancelAccountLookUp"
+                            Content="Cancel" 
+                            Margin="698,65,0,0"
+                            Click="btnCancelAccountLookUp_Click" 
+                            Height="26" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Width="59"/>
+
+                        <Button Name="btnAcceptAccountLookUp"
+                            Content="Accept"
+                            Margin="610,65,0,0"
+                            Click="btnAcceptAccountLookUp_Click" 
+                            Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="59"/>
+
+                        <DataGrid Name="DataGridAccount"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              Height="150"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              Style="{DynamicResource MetroDataGrid}" 
+                              Margin="30,122,0,30" 
+                              HorizontalAlignment="Left" 
+                              Width="751">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Account Name" Width="*" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Account Site" Width="*" Binding="{Binding Site}" />
+                                <DataGridTextColumn Header="Account Alias" Width="*" Binding="{Binding Alias}" />
+                                <DataGridTextColumn Header="Account Type" Width="*" Binding="{Binding Type}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Name="gridSearchReportTo"
+                      Background="#FAFAFA"
+                      Visibility="Collapsed">
+
+                        <Image Source="/Assets/Img/Search.png" 
+                           HorizontalAlignment="Left"
+                           Height="40"
+                           VerticalAlignment="Top"
+                           Width="40" 
+                           Margin="30,20,0,0" />
+
+                        <Label Content="Lookup Contacts"
+                           VerticalAlignment="Top"
+                           FontSize="28px"
+                           Margin="75,13,464,0"/>
+
+                        <Button Name="btnCancelContactLookUp"
+                            Content="Cancel" 
+                            Margin="698,65,0,0"
+                            Click="btnCancelContactLookUp_Click_1" 
+                            Height="26" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Width="59"/>
+
+                        <Button Name="btnAcceptContactLookUp"
+                            Content="Accept"
+                            Margin="610,65,0,0"
+                            Click="btnAcceptAccountLookUp_Click" 
+                            Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="59"/>
+
+                        <DataGrid Name="DataGridContact"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              Height="150"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              Margin="30,122,0,30" 
+                              Style="{DynamicResource MetroDataGrid}" 
+                              HorizontalAlignment="Left" 
+                              Width="751">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="First Name" Width="*" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Last Name" Width="*" Binding="{Binding Site}" />
+                                <DataGridTextColumn Header="Phone" Width="*" Binding="{Binding Alias}" />
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
                         <Border>
                             <TextBlock Text="Address Information"
                                TextAlignment="Center"
@@ -416,43 +538,30 @@
 
 
                         <Label Content="Mailing Street"
-                               Grid.Column="1"
-                               HorizontalAlignment="Left"
-                               Margin="50,31,0,0"
-                               Grid.Row="5"
+                               Margin="35,163,467,0"
                                VerticalAlignment="Top"/>
 
                         <Label Content="Mailing City"
-            	            Grid.Column="1"
-            	            HorizontalAlignment="Left"
-            	            Margin="67,67,0,0"
-            	            Grid.Row="5"
+            	            Margin="45,99,468,0"
             	            VerticalAlignment="Top"/>
 
                         <Label Content="Mailing State/Province"
-            	            Grid.Column="1"
-            	            HorizontalAlignment="Left"
-            	            Margin="10,99,0,0"
-            	            Grid.Row="5"
+            	            Margin="0,62,456,0"
             	            VerticalAlignment="Top"/>
 
                         <Label Content="Mailing Zip/PostaCode"
-            	            HorizontalAlignment="Left"
-            	            Margin="296,34,0,0"
+            	            Margin="3,130,452,0"
             	            VerticalAlignment="Top"/>
 
                         <Label Content="Mailing Country"
-            	            HorizontalAlignment="Left"
-            	            Margin="332,70,0,0"
+            	            Margin="39,31,452,0"
             	            VerticalAlignment="Top"/>
 
                         <TextBox
-                            Name="TxtBoxMailinStreet"
-                            Grid.Column="1" 
+                            Name="TxtBoxMailinStreet" 
                              HorizontalAlignment="Left"
                              Height="23"
-                             Margin="141,31,0,0"
-                             Grid.Row="5"
+                             Margin="141,165,0,0"
                              TextWrapping="Wrap"
                              controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
@@ -460,26 +569,26 @@
                              Width="120"/>
 
                         <TextBox
-            	            Name="TxtBoxMailinCity"
-            	            Grid.Column="1" 
+            	            Name="TxtBoxMailinCity" 
             	            HorizontalAlignment="Left"
             	            Height="23"
-            	            Margin="140,67,0,0"
-            	            Grid.Row="5"
+            	            Margin="140,101,0,0"
             	            TextWrapping="Wrap"
             	            controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
             	            VerticalAlignment="Top"
             	            Width="120"/>
 
-                        <TextBox
-                            Name="TxtBoxMailinState"
-            	            Grid.Column="1" 
+                        <ComboBox
+                            Name="cmbMailinState" 
             	            HorizontalAlignment="Left"
+                            IsEnabled="False"
+                            SelectionChanged="cmbMailinState_SelectionChanged_1"
+                            IsTextSearchEnabled="True"
+                            DisplayMemberPath="Name"
+                            SelectedValuePath="StateId"
             	            Height="23"
-            	            Margin="141,100,0,0"
-            	            Grid.Row="5"
-            	            TextWrapping="Wrap"
+            	            Margin="140,66,0,0"
             	            controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
             	            VerticalAlignment="Top"
@@ -489,29 +598,108 @@
             	            Name="TxtBoxMailinPostalCode" 
             	            HorizontalAlignment="Left"
             	            Height="23"
-            	            Margin="445,34,0,0"
+            	            Margin="141,133,0,0"
             	            TextWrapping="Wrap"
             	            controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True" 
             	            VerticalAlignment="Top"
             	            Width="120"/>
 
-                        <TextBox
-            	            Name="TxtBoxMailinCountry" 
+                        <ComboBox
+            	            Name="cmbMailinCountry" 
             	            HorizontalAlignment="Left"
             	            Height="23"
-            	            Margin="445,70,0,0"
-            	            TextWrapping="Wrap"
+                            DisplayMemberPath="Name"
+                            IsTextSearchEnabled="True"
+                            SelectedValuePath="CountryId"
+            	            Margin="141,31,0,169"
+                            SelectionChanged="cmbMailinCountry_SelectionChanged_1"
             	            controls:TextboxHelper.Watermark="First Name"
                             controls:TextboxHelper.ClearTextButton="True"
-            	            VerticalAlignment="Top"
             	            Width="120"/>
+                        
+                        <Label Content="Other Street"
+                        	Margin="311,163,200,0"
+                        	VerticalAlignment="Top"/>
+                        
+                        <Label Content="Other City"
+                        	Margin="322,97,200,0"
+                        	VerticalAlignment="Top"/>
+                        <Label Content="Other State/Province"
+                        	Margin="266,62,200,0"
+                        	VerticalAlignment="Top"/>
+                        <Label Content="Other PostaCode"
+                        	Margin="286,130,200,0"
+                        	VerticalAlignment="Top"/>
+                        <Label Content="Other Country"
+                        	Margin="300,31,200,0"
+                        	VerticalAlignment="Top"/>
+                       
+                        <TextBox
+                        	Name="TxtBoxOtherMailinStreet" 
+                        	HorizontalAlignment="Left"
+                        	Height="23"
+                        	Margin="400,164,0,0"
+                        	TextWrapping="Wrap"
+                        	controls:TextboxHelper.Watermark="First Name"
+                        	controls:TextboxHelper.ClearTextButton="True"
+                        	VerticalAlignment="Top"
+                        	Width="120"/>
+                        
+                        <TextBox
+                        	Name="TxtBoxOtherCity" 
+                        	HorizontalAlignment="Left"
+                        	Height="23"
+                        	Margin="400,99,40,0"
+                        	TextWrapping="Wrap"
+                        	controls:TextboxHelper.Watermark="First Name"
+                        	controls:TextboxHelper.ClearTextButton="True"
+                        	VerticalAlignment="Top"
+                        	Width="120"/>
+                       
+                        <ComboBox
+                        	Name="cmbOtherProvice" 
+                        	HorizontalAlignment="Left"
+                            IsEnabled="False"
+                            SelectionChanged="cmbBoxOtherProvice_SelectionChanged_1"
+                            IsTextSearchEnabled="True"
+                            DisplayMemberPath="Name"
+                            SelectedValuePath="StateId"
+                        	Height="23"
+                        	Margin="400,64,40,0"
+                        	controls:TextboxHelper.Watermark="First Name"
+                        	controls:TextboxHelper.ClearTextButton="True"
+                        	VerticalAlignment="Top"
+                        	Width="120"/>
+                        <TextBox
+                        	x:Name="TxtBoxOtherZipCode" 
+                        	HorizontalAlignment="Left"
+                        	Height="23"
+                        	Margin="400,133,40,0"
+                        	TextWrapping="Wrap"
+                        	controls:TextboxHelper.Watermark="First Name"
+                        	controls:TextboxHelper.ClearTextButton="True"
+                        	VerticalAlignment="Top"
+                        	Width="120"/>
+                        
+                        <ComboBox
+                        	Name="cmbBoxOtherCountry" 
+                        	HorizontalAlignment="Left"
+                            DisplayMemberPath="Name"
+                            IsTextSearchEnabled="True"
+                            SelectedValuePath="CountryId"
+                            SelectionChanged="cmbBoxOtherCountry_SelectionChanged_1"
+                        	Height="23"
+                        	Margin="400,31,0,0"
+                        	controls:TextboxHelper.Watermark="First Name"
+                        	controls:TextboxHelper.ClearTextButton="True"
+                        	VerticalAlignment="Top"
+                        	Width="120"/>
 
 
                     </Grid>
 
-                    <Grid Grid.Row="4" 
-                          Margin="0,5,0,0">
+                    <Grid Grid.Row="4">
                         <Border>
                             <TextBlock Text="Additional Information"
                                TextAlignment="Center"
@@ -529,7 +717,9 @@
                            Grid.Row="7"
                            VerticalAlignment="Top"/>
 
-                        <TextBox Grid.Column="1"
+                        <TextBox 
+                            Name="txtboxlenguaje"
+                            Grid.Column="1"
                              HorizontalAlignment="Left"
                              Height="25" Margin="108,32,0,0"
                              Grid.Row="7" 
@@ -546,7 +736,9 @@
                             Grid.Row="7" 
                             VerticalAlignment="Top"/>
 
-                        <ComboBox Grid.Column="1"
+                        <ComboBox 
+                            Name="cmbNivelLenguaje"  
+                            Grid.Column="1"
                               HorizontalAlignment="Left" 
                               Margin="404,32,0,0"
                               Grid.Row="7" 
@@ -589,10 +781,11 @@
                     </Grid>
                 </Grid>
             </ScrollViewer>
+            
             <Label Content="Create Contact"
             	FontSize="12px"
             	HorizontalAlignment="Left"
-                Margin="136,78,0,0" 
+                Margin="106,10,0,0" 
                 VerticalAlignment="Top" 
                  Grid.Column="1"/>
 

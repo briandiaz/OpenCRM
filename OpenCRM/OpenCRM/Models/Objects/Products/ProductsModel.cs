@@ -50,6 +50,7 @@ namespace OpenCRM.Models.Objects.Products
                     var query =
                     (
                         from products in _db.Products
+                        orderby products.UpdateDate descending
                         select
                          new DataGridRecentProducts()
                          {
@@ -208,9 +209,12 @@ namespace OpenCRM.Models.Objects.Products
                     editProductView.TxtBoxName.Text = selectedproduct.Name;
                     editProductView.TxtBoxCodigo.Text = selectedproduct.Code;
                     editProductView.TxtBoxDescripcion.Text = selectedproduct.Description;
+
                     editProductView.TxtBoxPrecio.Text = Convert.ToString(selectedproduct.Price);
                     editProductView.TxtBoxQuantity.Text = Convert.ToString(selectedproduct.Quantity);
-                    //editProductView.cbxCampaignActive.IsChecked.Value = selectedproduct.Active;
+
+                    if (editProductView.cbxCampaignActive.IsChecked.HasValue)
+                        editProductView.cbxCampaignActive.IsChecked = selectedproduct.Active.Value;
                 }
             }
             catch (SqlException ex)
