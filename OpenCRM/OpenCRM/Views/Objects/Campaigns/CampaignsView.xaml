@@ -26,7 +26,7 @@
     </Page.Resources>
 
     <controls:MetroContentControl FontFamily="Segoe WP Light">
-        <Grid Name="maingridCampaign">
+        <Grid Name="MainGrid">
 
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/Img/Backgrounds/6.png" />
@@ -169,28 +169,32 @@
                     <StackPanel Orientation="Horizontal" Margin="0,50,0,0" Width="650">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Height="80" Width="216"  Background="#0174DF" ToolTip="Start Date">
                             <Image Source="/Assets/Img/Icons/32px-white/calendar.png" Width="32" Height="32" Margin="10" />
-                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Text="{Binding StartDate}" FontSize="20" Foreground="White"></TextBlock>
+                            <Label Name="lblStartDate" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" Content="{Binding StartDate}" FontSize="20" Foreground="White"></Label>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="80"  Width="216" Background="#DF3A01" ToolTip="Stats">
                             <Image Source="/Assets/Img/Icons/32px-white/stats.png" Width="32" Height="32" Margin="10" />
-                            <TextBlock VerticalAlignment="Bottom" Margin="5,0,0,0" Name="lblExpectedResponse" HorizontalAlignment="Center" Text="{Binding ExpectedResponse}" FontSize="20" Foreground="White"></TextBlock>
+                            <Label VerticalAlignment="Bottom" Margin="5,0,0,0" Name="lblExpectedResponse" HorizontalAlignment="Center" Content="{Binding ExpectedResponse}" FontSize="20" Foreground="White"></Label>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="80"  Width="213" Background="#088A08" ToolTip="Expected Revenue">
                             <Image Source="/Assets/Img/Icons/32px-white/lab.png" Margin="10" Width="32" Height="32" />
-                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Text="{Binding ExpectedRevenue}" FontSize="20" Foreground="White"></TextBlock>
+                            <Label Name="lblExpectedRevenue" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Center" Content="{Binding ExpectedRevenue}" FontSize="20" Foreground="White" ></Label>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30">
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,20" Width="400" Height="60" HorizontalAlignment="Center" Text="{Binding Description}" FontSize="16" FontWeight="SemiBold" TextAlignment="Center"></TextBlock>
+                        <TextBox Name="tbxDescription" 
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        VerticalScrollBarVisibility="Visible"
+                                 VerticalAlignment="Center" Margin="5,0,0,20" Width="400" Height="60" HorizontalAlignment="Center" Text="{Binding Description}" FontSize="16" FontWeight="SemiBold" TextAlignment="Center" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,275">
-                        <TextBlock FontWeight="Bold" FontSize="16px" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Segoe UI">Expected Response</TextBlock>
+                        <Label Name="lblsExpectedResponse" FontWeight="Bold" FontSize="16px" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Segoe UI">Expected Response</Label>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,250">
 
                         <ProgressBar Name="pgrbExpectedResponse"
-                                IsIndeterminate="False"
+                                     IsIndeterminate="False"
                                      Width="250"
                                      Height="20"
                                      Maximum="100"
@@ -202,7 +206,7 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,150">
 
                     <controls:ToggleSwitch 
-                        Name="cbxCampaignActive"
+                        Name="cbxActive"
                         OnLabel="Active" 
                         OffLabel="Not Active"
                         Width="150"
@@ -222,6 +226,7 @@
                                 Cursor="Hand"
                                 Style="{DynamicResource MetroCircleButtonStyle}"
                                 ToolTip="Campaign Details"
+                                Click="btnViewDetails_Click"
                             >
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Assets/Img/Icons/32px/info3.png"/>

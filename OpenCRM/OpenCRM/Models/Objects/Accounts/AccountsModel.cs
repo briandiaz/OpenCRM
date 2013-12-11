@@ -609,7 +609,8 @@ namespace OpenCRM.Models.Objects.Accounts
                         }
                         else
                         {
-                            if(this.Data.AccountBillingCountry.Equals(0)) IsEmptyBilling = true;
+                            if(this.Data.AccountBillingCountry.Equals(0)) 
+                                IsEmptyBilling = true;
                         }
 
                         if (!IsEmptyBilling) addressBilling = db.Address.Create();
@@ -651,6 +652,7 @@ namespace OpenCRM.Models.Objects.Accounts
                         addressShipping.State = db.State.FirstOrDefault(x => x.StateId == this.Data.AccountShippingState);
                         addressShipping.ZipCode = this.Data.AccountShippingZipCode;
                     }
+
                     if (IsNew)
                     {
                         db.Address.Add(addressShipping);

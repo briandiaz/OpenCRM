@@ -50,6 +50,7 @@ namespace OpenCRM.DataBase
         public Nullable<int> ProfileId { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<int> LanguageId { get; set; }
     
         public virtual ICollection<Account> Account { get; set; }
         public virtual ICollection<Account> Account1 { get; set; }
@@ -74,5 +75,6 @@ namespace OpenCRM.DataBase
         public virtual ICollection<Products> Products { get; set; }
         public virtual ICollection<Products> Products1 { get; set; }
         public virtual Profile Profile { get; set; }
+        public virtual Language Language { get; set; }
     }
 }

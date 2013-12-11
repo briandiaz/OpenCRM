@@ -127,14 +127,27 @@
                 <DataGrid 
                 IsReadOnly="True"
                 Name="RecentContactsGrid"
-                Margin="0,60,0,0"    
-                
+                Margin="20,45,20,20"    
+                AutoGenerateColumns="False"
                 Grid.Column="1" 
                 HorizontalAlignment="Left"
                 Grid.Row="3" 
                 VerticalAlignment="Top"
                 MinWidth="1000"
                 MinHeight="400">
+
+                    <DataGrid.Columns>
+                        <DataGridHyperlinkColumn Header="Name" Width="*" Binding="{Binding Name}">
+                            <DataGridHyperlinkColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <EventSetter Event="Hyperlink.Click" Handler="ProdutNameHyperlink_Click" />
+                                    <Setter Property="Tag" Value="{Binding Path=AccountId}"/>
+                                </Style>
+                            </DataGridHyperlinkColumn.ElementStyle>
+                        </DataGridHyperlinkColumn>
+                        <DataGridTextColumn Header="Account Id" Width="*" Binding="{Binding AccountId}" />
+                        <DataGridTextColumn Header="Phone" Width="*" Binding="{Binding Phone}" />
+                    </DataGrid.Columns>
 
                 </DataGrid>
             </Grid>

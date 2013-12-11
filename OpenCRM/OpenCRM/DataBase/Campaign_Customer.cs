@@ -12,19 +12,16 @@ namespace OpenCRM.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Language
+    public partial class Campaign_Customer
     {
-        public Language()
-        {
-            this.Contact_Level_Languages = new HashSet<Contact_Level_Languages>();
-            this.Users = new HashSet<User>();
-        }
+        public int CampaignContactsId { get; set; }
+        public Nullable<int> ContactId { get; set; }
+        public Nullable<int> AccountId { get; set; }
+        public Nullable<int> CampaignId { get; set; }
+        public Nullable<int> OpportunityId { get; set; }
     
-        public int LanguageId { get; set; }
-        public string Name { get; set; }
-        public string LanguageAbbreviation { get; set; }
-    
-        public virtual ICollection<Contact_Level_Languages> Contact_Level_Languages { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual Campaign Campaign { get; set; }
+        public virtual Contact Contact { get; set; }
     }
 }

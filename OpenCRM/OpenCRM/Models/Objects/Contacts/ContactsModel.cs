@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace OpenCRM.Models.Objects.Contacts
         #region Methots
 
         #region Load Contacts DataGrid
+
         public void LoadRecentContacts(DataGrid RecentContactsGrid)
         {
             var listContacts = new List<DataGridRecentContacts>();
@@ -71,16 +73,26 @@ namespace OpenCRM.Models.Objects.Contacts
 
         public void Save(CreateContact createContact)
         {
-            //UserId
-            //SalutationID
+
+            if (createContact.cmbSaludation.SelectedIndex != -1)
+                this.Data.salutationId = Convert.ToInt32(createContact.cmbSaludation.SelectedValue);
+            else
+                this.Data.salutationId = null;
+
             this.Data.firstName = createContact.TxtBoxContactName.Text;
             this.Data.lastName = createContact.TxtBoxContactLastName.Text;
             //accountId
+            
             this.Data.title = createContact.TxtBoxConctactTitle.Text;
             this.Data.department = createContact.TxtBoxConctactDepartment.Text;
-            //birthDate
+
+            DateTime fecha;
+            if (DateTime.TryParse(createContact.datePickerConctactBirthDate.Text, out fecha))
+                this.Data.birthDate = fecha;
+            
             //ContactReportID
-            //LeadSourceId
+
+            this.Data.leadSourceID = Convert.ToInt32(createContact.cmbConctactLeadSource.SelectedValue);
             this.Data.phoneNuber = createContact.TxtBoxPhone.Text;
             this.Data.homePhoneNumber = createContact.TxtBoxHomePhone.Text;
             this.Data.mobileNumber = createContact.TxtBoxMobile.Text;
@@ -89,15 +101,32 @@ namespace OpenCRM.Models.Objects.Contacts
             this.Data.email = createContact.TxtBoxEmail.Text;
             this.Data.assitant = createContact.TxtBoxAssistant.Text;
             this.Data.assistantPhone = createContact.TxtBoxAssistantPhone.Text;
-            //contactmailingadrresid
-            //contactactotheradresid
-            //contactlevelinglesid
+
+            //mailing
+            this.Data.ContactMailingCountry = Convert.ToInt32(createContact.cmbMailinCountry.SelectedValue);
+            this.Data.ContactMailingState = Convert.ToInt32(createContact.cmbMailinState.SelectedItem);
+            this.Data.ContactMailingCity = createContact.TxtBoxMailinCity.Text;
+            this.Data.ContactMailingZipCode = createContact.TxtBoxMailinPostalCode.Text;
+            this.Data.ContactMailingStreet = createContact.TxtBoxMailinStreet.Text;
+
+            //other
+            this.Data.ContactOtherCountry = Convert.ToInt32(createContact.cmbBoxOtherCountry.SelectedValue);
+            this.Data.ContactOtherState = Convert.ToInt32(createContact.cmbOtherProvice.SelectedValue);
+            this.Data.ContactOtherCity = createContact.TxtBoxOtherCity.Text;
+            this.Data.ContactOtherZipCode = createContact.TxtBoxOtherZipCode.Text;
+            this.Data.ContactOtherStreet = createContact.TxtBoxOtherMailinStreet.Text;
+
             this.Data.Description = createContact.TxtBoxDescription.Text;
             this.Data.createBy = Session.UserId;
             this.Data.createDate = DateTime.Now;
             this.Data.updateBy = Session.UserId;
             this.Data.updateDate = DateTime.Now;
             this.Data.viewDate = DateTime.Now;
+
+            this.Data.lenguaje = createContact.txtboxlenguaje.Text;
+            this.Data.nivellenguaje = Convert.ToInt32(createContact.cmbNivelLenguaje.SelectedValue);
+
+            
 
             this.Save();
 
@@ -139,8 +168,6 @@ namespace OpenCRM.Models.Objects.Contacts
                     contact.AssitantPhoneNumber = this.Data.assistantPhone;
 
 
-
-
                     contact.Description = this.Data.Description;
                     contact.CreateBy = this.Data.createBy;
                     contact.CreateDate = this.Data.createDate;
@@ -169,9 +196,73 @@ namespace OpenCRM.Models.Objects.Contacts
 
         #endregion
 
+        #region Load Country
+
+        public List<Country> getCountries()
+        {
+            var data = new List<Country>();
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from country in db.Country
+                        select
+                            country
+                    ).ToList();
+
+                    data = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return data;
+        }
+
+        public List<State> getStatesCountry(int CountryId)
+        {
+            var data = new List<State>();
+
+            try
+            {
+                using (var db = new OpenCRMEntities())
+                {
+                    var query = (
+                        from state in db.State
+                        from country in db.Country
+                        where
+                            country.CountryId == CountryId &&
+                            country.CountryId == state.CountryId
+                        select
+                            state
+                    ).ToList();
+
+                    data = query;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return data;
+        }
+        #endregion
 
 
         #endregion
+        
     }
 
     class DataGridRecentContacts
@@ -186,11 +277,11 @@ namespace OpenCRM.Models.Objects.Contacts
 
     public class ContactsData
     {
-    
-    #region Properties
+  
+        #region Properties
 
         public int userId { get; set; }
-        public int salutationId { get; set; }
+        public int? salutationId { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public int accountId { get; set; }
@@ -207,8 +298,6 @@ namespace OpenCRM.Models.Objects.Contacts
         public string email { get; set; }
         public string assitant { get; set; }
         public string assistantPhone { get; set; }
-        public int contactMailinAddresID { get; set; }
-        public int contactOtherAddressID { get; set; }
         public int contactleveEnglisgId { get; set; }
         public string Description { get; set; }
         public int createBy { get; set; }
@@ -217,6 +306,22 @@ namespace OpenCRM.Models.Objects.Contacts
         public DateTime updateDate { get; set; }
         public bool hiddenContact { get; set; }
         public DateTime viewDate { get; set; }
+        public string lenguaje { get; set; }
+        public int? nivellenguaje { get; set; }
+
+        public int contactMailingAddresID { get; set; }
+        public int contactOtherAddressID { get; set; }
+        public string ContactMailingStreet { get; set; }
+        public string ContactMailingCity { get; set; }
+        public int ContactMailingState { get; set; }
+        public int ContactMailingCountry { get; set; }
+        public string ContactMailingZipCode { get; set; }
+        public int ContactOtherId { get; set; }
+        public string ContactOtherStreet { get; set; }
+        public string ContactOtherCity { get; set; }
+        public int ContactOtherState { get; set; }
+        public int ContactOtherCountry { get; set; }
+        public string ContactOtherZipCode { get; set; }
 
   
         #endregion

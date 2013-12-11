@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using OpenCRM.DataBase;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace OpenCRM.Controllers.Session
 {
@@ -128,6 +129,25 @@ namespace OpenCRM.Controllers.Session
             _rightAccess = getUserAccessRights();
         }
 
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
         /// <summary>
         /// This method can apply the restriction of User's profile in specifics Modules 
         /// </summary>
@@ -137,10 +157,21 @@ namespace OpenCRM.Controllers.Session
         {
             var moduleAccessRights = AccessRights.FindAll(x => x.ObjectId == Convert.ToInt32(ObjectName));
 
-            var listPrefix = new List<string>() { "tbx", "btn", "ckb", "lbl", "cmb" };
+            var listPrefix = new List<string>() { "tbx", "ckb", "lbl", "cmb", "dpk", "pgrb" };
 
             var MainGrid = View.FindName("MainGrid") as Grid;
 
+            foreach (Control control in FindVisualChildren<Control>(MainGrid))
+            {
+                foreach (var item in listPrefix)
+                {
+                    if (control.Name.Contains(item))
+                    {
+                        control.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+            listPrefix.Add("btn");
             foreach (var access in moduleAccessRights)
             {
                 foreach (var item in listPrefix)

@@ -279,7 +279,7 @@ namespace OpenCRM.Models.Objects.Opportunities
                     if (selectedOpportunity.ProductId.HasValue)
                     {
 
-                        EditOpportunities.tbxProduct.Text = selectedOpportunity.Product.Name;
+                        EditOpportunities.tbxProduct.Text = selectedOpportunity.Products.Name;
 
                         if(selectedOpportunity.Quantity.HasValue)
                             EditOpportunities.tbxQuantity.Text = selectedOpportunity.Quantity.Value.ToString();
@@ -287,7 +287,7 @@ namespace OpenCRM.Models.Objects.Opportunities
                         if (selectedOpportunity.Amount.HasValue)
                             EditOpportunities.tbxAmount.Text = selectedOpportunity.Amount.Value.ToString();
 
-                        EditOpportunities.lblRemaining.Content = selectedOpportunity.Product.Quantity;
+                        EditOpportunities.lblRemaining.Content = selectedOpportunity.Products.Quantity;
                     }
 
                     EditOpportunities.tbxOrderNumber.Text = selectedOpportunity.OrderNumber;
@@ -424,11 +424,11 @@ namespace OpenCRM.Models.Objects.Opportunities
                     //Product
                     if (this.Data.ProductId != 0)
                     {
-                        opportunity.Product = db.Products.FirstOrDefault(
+                        opportunity.Products = db.Products.FirstOrDefault(
                             x => x.ProductId == this.Data.ProductId
                         );
 
-                        opportunity.Product.Quantity -= this.Data.Quantity;
+                        opportunity.Products.Quantity -= this.Data.Quantity;
 
                         opportunity.Quantity = this.Data.Quantity;
                     }
